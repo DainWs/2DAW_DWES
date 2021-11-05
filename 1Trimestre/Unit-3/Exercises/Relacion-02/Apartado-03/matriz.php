@@ -9,16 +9,16 @@
         <?php
             $file = fopen("Fichero.txt", "r");
             while ($fileInfo = fscanf($file,  "%d %d %d %d")) {
-                echo "$fileInfo";
+                foreach ($fileInfo as $key => $value) {
+                    echo "$value ";
+                }
                 echo "<br/>";
             }
 
             rewind($file);
 
-            while ($fileInfo = fscanf($file, "%d %d %d %d")) {
-                foreach ($fileInfo as $key => $value) {
-                    echo "$value ";
-                }
+            while ($fileInfo = fscanf($file, "%d %d %d %d", $numOne, $numTwo, $numThree, $numFour,)) {
+                echo "$numOne $numTwo $numThree $numFour";
                 echo "<br/>";
             }
 

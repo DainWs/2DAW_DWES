@@ -1,2 +1,6 @@
-# 2. Lectura carácter a carácter
-Recorrer un fichero de texto carácter a carácter y mostrar su contenido. Usa fgetc()
+# 3. Fichero de texto con fscanf()
+Sea el siguiente fichero: `matriz.php`.
+
+Se pide:
+- Recorrer el  fichero con fscanf() de las dos maneras posibles mostrando su contenido
+- Antes de empezar la segunda vuelta sitúa el indicador de posición de nuevo al principio del fichero usando rewind()
