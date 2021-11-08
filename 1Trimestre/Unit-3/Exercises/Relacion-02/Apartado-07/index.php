@@ -32,13 +32,15 @@
                     fclose($fileStream);
                 }
 
-                $handle = opendir('upload');
-                if ($handle) {
+                $gestor = opendir('upload');
+                if ($gestor) {
                     echo "<br/><br/>";
-                    echo "Dir Content:";
+                    echo "<h1>Contenido de la carpeta</h1>";
                     echo "<ul style=\"margin: 0;\">";
-                    while(($entry = readdir($handle)) !== FALSE) {
-                        echo "<li>$entry</li>";
+                    while(($file = readdir($gestor)) !== FALSE) {
+                        if($file != '.' && $file != '..') {
+                            echo "<li>$file</li>";
+                        }
                     }
                     echo "</ul>";
                 }
