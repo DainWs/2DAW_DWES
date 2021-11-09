@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php include("controller/sessionController.php"); ?>
+<?php include("controller/SessionManager.php"); ?>
 <html lang="es">
     <?php $pageTitle="Home"; ?>
     <?php include("views/templates/head.php"); ?>

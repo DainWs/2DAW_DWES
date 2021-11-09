@@ -7,7 +7,6 @@ $password = (isset($_POST['password'])) ? $_POST['password'] : '';
 $err = '';
 if (!empty($username) || !empty($password)) {
     if ($username === 'usuario' && $password === 'usuario') {
-        $token = rand(1000000, 2000000) . "a";
         $_SESSION[$token] = [
             "username" => "$username",
             "password" => "$password"
