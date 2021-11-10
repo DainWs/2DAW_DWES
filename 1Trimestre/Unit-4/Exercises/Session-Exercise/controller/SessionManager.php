@@ -53,11 +53,11 @@ class SessionManager {
 
     private function genToken(): String
     {
-        return rand(1000000, 2000000) . "a";
+        return bin2hex(random_bytes(16));
     }
 }
 
-$SesInstance = SessionManager::getInstance();
-if ($SesInstance->hasSession($_GET['token'])) {
+$sessionManager = SessionManager::getInstance();
+if ($sessionManager->hasSession($_GET['token'])) {
     header("location: views/login.php");
 }

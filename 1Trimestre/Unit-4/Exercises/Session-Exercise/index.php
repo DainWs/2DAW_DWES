@@ -1,6 +1,7 @@
 <!DOCTYPE html>
+<?php include("controller/LangManager.php"); ?>
 <?php include("controller/SessionManager.php"); ?>
-<html lang="es">
+<html lang="<?= $lang ?? 'en' ?>">
     <?php $pageTitle="Home"; ?>
     <?php include("views/templates/head.php"); ?>
     <body>
