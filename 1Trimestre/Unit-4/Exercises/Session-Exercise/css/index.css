@@ -1,0 +1,17 @@
+/* Inputs */
+input:required + label::after,
+input:required + p, .error,
+input:invalid {
+    color: red;
+}
+input[type="submit"] {
+    display:block;
+    margin:0px auto; 
+}
+input:required + p { display: contents; }
+input:required + label::after { content: "*"; }
+input:not([type="submit"]):valid { color: green; }
+input:focus {
+    outline-color: yellow;
+    outline-offset: 1px;
+}

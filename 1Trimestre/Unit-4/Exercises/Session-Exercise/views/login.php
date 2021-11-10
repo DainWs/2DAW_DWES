@@ -27,12 +27,12 @@
     <body>
         <main>
             <?php if (!empty($err)) : ?>
-                <p><?php echo $err ?></p>
+                <p class="error"><?php echo $err ?></p>
             <?php endif; ?>
             <form action="<?= $_SERVER['PHP_SELF']; ?>" method="POST">
                 <label for="username"><?= traduce('Username') ?>:</label><br/>
                 <input type="text" id="username" name="username" value="<?php echo $_POST['username'] ?? ''; ?>"><br/>
-
+                
                 <label for="password"><?= traduce('Password') ?>:</label><br/>
                 <input type="password" id="password" name="password" value="<?php echo $_POST['password'] ?? ''; ?>"><br/><br/>
 
