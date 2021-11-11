@@ -1,22 +1,8 @@
 <!DOCTYPE html>
-<?php include("controller/LangManager.php"); ?>
 <?php
-    session_start();
-    $username = (isset($_POST['username'])) ? $_POST['username'] : '';
-    $password = (isset($_POST['password'])) ? $_POST['password'] : '';
-
-    $err = '';
-    if (!empty($username) || !empty($password)) {
-        if ($username === 'usuario' && $password === 'usuario') {
-            $_SESSION[$token] = [
-                "username" => "$username",
-                "password" => "$password"
-            ];
-            header("Location: ../index.php");
-        } else {
-            $err = traduce('Review username and password');
-        }
-    }
+    include("../controller/MainController.php");
+    beforeLogin();
+    onLogin();
 ?>
 <html lang="<?= $lang ?? 'en' ?>">
     <head>

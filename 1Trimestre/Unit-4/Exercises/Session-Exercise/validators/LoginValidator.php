@@ -1,18 +1,21 @@
 <?php
-include("controller/LangManager.php");
-include("controller/SessionManager.php");
+include("../controller/SessionManager.php");
 
-$username = (isset($_POST['username'])) ? $_POST['username'] : '';
-$password = (isset($_POST['password'])) ? $_POST['password'] : '';
+$username = $_POST['username'] ?? '';
+$password = $_POST['password'] ?? '';
 
 $err = '';
-if (!empty($username) || !empty($password)) {
+
+if (!empty($username) && !empty($password)) {
     $userCredentials = validateUserCredentials($username, $password);
     if ($userCredentials != null) {
-        SessionManager::getInstance()->addSession($userCredentials);
+        $token = SessionManager::getInstance()->addSession($userCredentials);
+        $expeditionDate = date_modify(date_create(), '+5 minute');
+        setcookie('token', $token, $expeditionDate->getTimestamp(), '/', false, false);
         header("Location: ../index.php");
+        exit;
     } else {
-        $err = traduce('Review username and password');
+        $err = 'Review username and password';
     }
 }
 
