@@ -1,6 +1,5 @@
 <?php
-include("../controller/SessionManager.php");
-
+@Deprecated;
 $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
 

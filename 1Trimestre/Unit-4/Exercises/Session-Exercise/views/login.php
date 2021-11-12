@@ -1,13 +1,7 @@
 <!DOCTYPE html>
-<?php
-    include("../controller/MainController.php");
-    beforeLogin();
-    onLogin();
-?>
+<?php include("../controller/LoginController.php"); ?>
 <html lang="<?= $lang ?? 'en' ?>">
     <head>
-        <?php $pageTitle="Login"; ?>
-        <?php $cssFile="../css/index.css"; ?>
         <?php include("templates/head.php"); ?>
     </head>
     <body>
