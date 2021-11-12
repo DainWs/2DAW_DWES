@@ -26,32 +26,13 @@ class SessionManager {
      * Dont lose it!!!
      * @return String the session identifier/token
      */
-    public function addSession(Array $data): String
+    public function addSession(Array $data): void
     {
         session_start();
-        $token = $this->genToken();
+        $token = $this->getToken();
         if (!$this->hasSession($token)) {
             $_SESSION[$token] = $data;
         }
-        return $token;
-    }
-
-    /**
-     * Update a client session data identified by a token
-     * if the token do not exist, we will create the session with
-     * the given data and return the new Token for this one.
-     * Dont lose the token pls!!!
-     * @return String the session identifier/token
-     */
-    public function updateSession(String $token, Array $data): String
-    {
-        session_start();
-        if (!$this->hasSession($token)) {
-            $_SESSION[$token] = $data;
-        } else {
-            $token = $this->addSession($data);
-        }
-        return $token;
     }
 
     /**
@@ -59,19 +40,21 @@ class SessionManager {
      * @return true if exist
      * @return false if not exist
      */
-    public function hasSession(String $token): bool
+    public function hasSession(): bool
     {
         session_start();
-        return (isset($_SESSION[$token]));
+        $token = $this->getToken();
+        return (isset($_SESSION[$token]) && $_SESSION[$token] != null);
     }
 
     /**
      * return the session identified by the given token, if
      * the token does not exist, then return null
      */
-    public function getSession(String $token): Array|null
+    public function getSession(): Array|null
     {
         session_start();
+        $token = $this->getToken();
         $result = null;
         if ($this->hasSession($token)) {
             $result = $_SESSION[$token];
@@ -79,20 +62,21 @@ class SessionManager {
         return $result;
     }
 
-    /**
-     * Generate a random unique token of 16 bytes as hex
-     * @return String the token generated
-     */
-    private function genToken(): String
+    public function getToken(): String
     {
-        return bin2hex(random_bytes(16));
+        return $_COOKIE['PHPSESSID'];
     }
 }
 
+function hasSession(): bool {
+    $sessionManager = SessionManager::getInstance();
+    $result = $sessionManager->hasSession();
+    return $result;
+ }
+
 function doCurrentSessionControl() {
     $sessionManager = SessionManager::getInstance();
-    $hasSession = (isset($_COOKIE['token']) && $sessionManager->hasSession($_COOKIE['token']));
-    if (!$hasSession) {
+    if (!$sessionManager->hasSession()) {
         header("location: views/login.php");
         exit;
     }

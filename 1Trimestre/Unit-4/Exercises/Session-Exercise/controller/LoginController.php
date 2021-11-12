@@ -1,21 +1,17 @@
 <?php
-include("../controller/LangManager.php");
-include("../controller/SessionManager.php");
-include("../validators/LoginValidator.php");
+include("../domain/LangManager.php");
+include("../domain/SessionManager.php");
 
 $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
 
 $err = '';
-
-if (!empty($username) && !empty($password)) {
+if (empty($username) || empty($password)) {
+    $err = 'You have to specify a username and password.';
+} else {
     $userCredentials = validateUserCredentials($username, $password);
     if ($userCredentials != null) {
-        $token = SessionManager::getInstance()->addSession($userCredentials);
-        $expeditionDate = date_modify(date_create(), '+5 minute');
-        setcookie('token', $token, $expeditionDate->getTimestamp(), '/', false, false);
-        header("Location: ../index.php");
-        exit;
+        prepareSession($userCredentials);
     } else {
         $err = 'Review username and password';
     }
@@ -34,7 +30,15 @@ function validateUserCredentials($username, $password) {
     return $result;
 }
 
+
+function prepareSession($userCredentials) {
+    SessionManager::getInstance()->addSession($userCredentials);
+    header("Location: ../index.php");
+    exit;
+}
+
 // PAGE DATA DECLARATION
-const DATA = [];
-DATA['pageTitle'] = 'Login';
-DATA['cssFile'] = '../css/index.css';
+const DATA = [
+    'pageTitle' => "Login",
+    'cssFile' => "../css/index.css"
+];

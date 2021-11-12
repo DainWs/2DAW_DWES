@@ -9,7 +9,7 @@
             <?php if (!empty($err)) : ?>
                 <p class="error"><?php echo $err ?></p>
             <?php endif; ?>
-            <form action="<?= $_SERVER['PHP_SELF']; ?>" method="POST">
+            <form action="<?= $_SERVER['PHP_SELF']; ?>" enctype="application/x-www-form-urlencoded" method="POST" autocomplete="off">
                 <label for="username"><?= traduce('Username') ?>:</label><br/>
                 <input type="text" id="username" name="username" value="<?php echo $_POST['username'] ?? ''; ?>"><br/>
                 

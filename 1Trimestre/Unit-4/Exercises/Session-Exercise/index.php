@@ -1,5 +1,5 @@
 <?php
-include("controller/SessionManager.php");
+include("domain/SessionManager.php");
 doCurrentSessionControl();
 header("location: views/home.php");
 ?>

@@ -18,7 +18,7 @@
     
     include("lang/$lang.php");
 
-    function get($text): String {
+    function traduce($text): String {
         return LANG_TEXT[$text] ?? $text;
     }
 
@@ -42,15 +42,15 @@
             <fieldset>
                 <label for="en">
                     <input id="en" type="radio" name="lang" value="en" <?= ($lang == 'en') ? 'checked' : ''; ?> />
-                    <?= get('English') ?>
+                    <?= traduce('English') ?>
                 </label>
                 <label for="es">
                     <input id="es" type="radio" name="lang" value="es" <?= ($lang == 'es') ? 'checked' : ''; ?> />
-                    <?= get('Spanish') ?>
+                    <?= traduce('Spanish') ?>
                 </label>
-                <input type="submit" value="<?= get('Translate') ?>"/>
+                <input type="submit" value="<?= traduce('Translate') ?>"/>
             </fieldset>
         </form>
-        <p><?= get("Times that you visit this page") ?>: <?= $_COOKIE['visits'] ?? 0 ?></p>
+        <p><?= traduce("Times that you visit this page") ?>: <?= $_COOKIE['visits'] ?? 0 ?></p>
     </body>
 </html>
