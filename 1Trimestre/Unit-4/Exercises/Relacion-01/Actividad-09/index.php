@@ -1,36 +1,17 @@
 <!DOCTYPE html>
-<?php
-    function hasCookie($key): bool {
-        return (isset($_COOKIE[$key]));
-    }
-    
-    $cookieName = "visits";
-    $cookieValue = [];
-    if (hasCookie($cookieName)) {
-        $cookieValue = $_COOKIE[$cookieName];
-    }
-    $cookieDate = date_modify(date_create(), "+1 years");
-    array_push($cookieValue, date("d M y H:i:s", strtotime('now')));
-    
-    foreach ($cookieValue as $key => $value) {
-        setcookie("$cookieName"."[$key]", $value . '', ['expires'=>$cookieDate->getTimestamp()]);
-    }
-?>
+<?php header("refresh: 10; url=./index.php"); ?>
 <html lang="es">
     <head>
-        <title>Cookies</title>
+        <title>Home</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        <p>Times that you visit this page: <?= count($cookieValue) ?? 0 ?></p>
-        <div>
-            <?php 
-                foreach ($cookieValue as $key => $value) {
-                    echo "$key => $value";
-                    echo "<br/>";
-                }
-            ?>
-        </div>
+        <main>
+            <h1 style="text-align: center;">Con la funci&oacute;n header() hemos especificado que esta p&aacute;gina no se guarde en la memoria cach&eacute;, sino que se llame a s&iacute; misma desde la p&aacute;gina original cada 10 segundos. Puede comprobarse dejando la p&aacute;gina sin actualizar 10 segundos o polsando sobre Actualizar.</h1>
+            <p><?= date("d M y H:i:s", strtotime('now'));?></p>
+            <p>Se repite la carga de la p&aacute;gina.</p>
+            <p><?= date("d M y H:i:s", strtotime('now'));?></p>
+        </main>
     </body>
 </html>
