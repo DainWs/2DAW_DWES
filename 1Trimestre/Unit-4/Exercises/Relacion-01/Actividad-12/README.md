@@ -1,0 +1,5 @@
+# 12. Varios usuarios
+En esta práctica tienes que emplear las cookies para conservar información de los usuarios entre diferentes visitas al sitio web. En concreto, tienes que emplear las cookies desde PHP para: 
+
+- Mostrar la opción de "recordarme en este equipo" en el formulario de acceso como usuario registrado en la página principal, para que almacene en una cookie el nombre de usuario y la contraseña y no se tenga que solicitar en próximas visitas. Además, debes incluir un enlace que permita iniciar sesión con otro usuario diferente al que se está recordando, con el texto “Iniciar sesión con otra cuenta”. En la siguiente figura se muestra el empleo de esta opción en el sitio web gmail. 
+- Cuando se esté recordando a un usuario, el formulario de acceso se muestra repintado con el nombre del usuario recordado y la contraseña oculta mediante una cadena de '*'

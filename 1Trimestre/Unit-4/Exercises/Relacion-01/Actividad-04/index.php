@@ -12,6 +12,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
+        <h1 style="text-align: center;">Creacion y destruccion de cookies</h1>
         <?php if(!isset($_COOKIE['cookieAccepted'])): ?>
             <form  action="<?= htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" class="cookies">
                 ¿Acceptas nuestras cookies?
