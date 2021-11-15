@@ -79,11 +79,10 @@ class Coche {
     }
 
     // metodos de informacion
-    public function __toString()
-    {
-        return "Marca: $this->marca\n" +
-            "Modelo: $this->modelo\n" +
-            "Caballos: $this->caballos\n" +
+    public function __toString() {
+        return "Marca: $this->marca\n" .
+            "Modelo: $this->modelo\n" .
+            "Caballos: $this->caballos\n" .
             "Plazas: $this->plazas";   
     }
 }
