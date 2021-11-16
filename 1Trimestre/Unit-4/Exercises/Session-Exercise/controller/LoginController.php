@@ -1,6 +1,6 @@
 <?php
-include("../domain/LangManager.php");
-include("../domain/SessionManager.php");
+require_once("../domain/LangManager.php");
+require_once("../domain/SessionManager.php");
 
 $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
