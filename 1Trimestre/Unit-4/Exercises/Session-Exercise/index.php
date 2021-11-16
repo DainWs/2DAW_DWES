@@ -1,5 +1,10 @@
 <?php
 require_once("domain/SessionManager.php");
-doCurrentSessionControl();
+
+if (!hasSession()) {
+    header("location: views/login.php");
+    exit;
+}
+
 header("location: views/home.php");
 ?>

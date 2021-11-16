@@ -2,7 +2,10 @@
 require_once("../domain/LangManager.php");
 require_once("../domain/SessionManager.php");
 
-doCurrentSessionControl();
+if (!hasSession()) {
+    header("location: views/login.php");
+    exit;
+}
 
 function getArticulos(): Array {
     $articles = [

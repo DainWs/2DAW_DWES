@@ -32,7 +32,7 @@ function validateUserCredentials($username, $password) {
 
 
 function prepareSession($userCredentials) {
-    SessionManager::getInstance()->addSession($userCredentials);
+    addSession($userCredentials);
     header("Location: ../index.php");
     exit;
 }

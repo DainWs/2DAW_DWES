@@ -8,18 +8,15 @@
     <body>
     <?php
         try {
-            include("Perro.php");
+            include("animales/Perro.php");
+            include("animales/Ladrador.php");
         }
         catch(Exception $ex) {
             echo "Se ha producido un error al localizar un fichero, message: $ex->getMessage()";
             exit;
         }
 
-        $labrador = new Perro('Labrador', 'Labrador', 60, 'gray');
-        if (is_string($labrador)) {
-            echo $labrador;
-            exit;
-        }
+        $labrador = new Ladrador('Labrador', 'Labrador', 60, 'gray');
         $labrador->mostrar_propiedades();
 
         $caniche = new Perro('Caniche', 'Caniche', 10, 'brown');
