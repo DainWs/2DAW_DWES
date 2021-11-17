@@ -1,6 +1,7 @@
 <?php
+require_once('../SerVivo.php');
 
-class Animal {
+class Animal extends SerVivo {
     protected String $name;
     protected String $race;
     protected String $weight;
@@ -8,7 +9,7 @@ class Animal {
 
     public function __construct(String $name, $race, $weight, $color) {
         if (strlen($name) > 21) {
-            return 'El nombre del perro tiene que tener un tamanio maximo de 21.';
+            return 'El nombre del animal tiene que tener un tamanio maximo de 21.';
         }
 
         $this->name = $name;
@@ -59,6 +60,19 @@ class Animal {
 
     public function liveInWater(): bool {
         return false;
+    }
+
+    public function nacer(): void {
+        $this->age = 0;
+        $this->isAlive = true;
+    }
+
+    public function crecer(): void {
+        $this->age++;
+    }
+
+    public function morir(): void {
+        $this->isAlive = false;
     }
 
     public function mostrar_propiedades(): void {
