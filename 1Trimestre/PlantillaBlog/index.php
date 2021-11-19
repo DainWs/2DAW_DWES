@@ -6,81 +6,84 @@ const DATA = [
 ];
 
 ?>
-<html class="v2 js" lang="es">
+<html lang="es">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0" name="viewport">
-	<link href="css/main.css" rel="stylesheet" type="text/css">
+	<meta charset="UTF-8"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0" name="viewport"/>
+	<link href="css/main.css" rel="stylesheet" type="text/css"/>
 	<title><?= DATA['title'] ?></title>
 </head>
 
-<body class=" index">
-	<div class="site-wrapper">
+<body>
+	<main class="site-wrapper">
 		<header class="site-header">
-			<div class="header section">
-				<div class="widget Header">
+			<section>
+				<header class="widget">
 					<h1 class="site-title">
 						<a href="index.php" rel="home" title="Ir al inicio">Home</a>
 					</h1>
-				</div>
-			</div>
+				</header>
+			</section>
 		</header>
-		<article class="content-wrapper">
-			<div class="content">
-				<div class="main section">
-					<div class="widget Blog">
-						<div class="blog-posts hfeed">
-							<div class="post-outer post-numero-0">
-								<div class="post hentry">
-									<header class="post-header">
-										<h2 class="post-title entry-title">Seccion 1</h2>
+		<section class="content-wrapper">
+			<article class="content">
+				<section>
+					<!-- Start page content -->
+					<div class="widget">
+						<div>
+							<div class="post-outer">
+								<div>
+									<header>
+										<h2>Seccion 1</h2>
 									</header>
-									<div class="post-body entry-content">
+									<div>
 										
 									</div>
-									<footer class="post-footer">
+									<footer>
 
 									</footer>
 								</div>
 							</div>
-							<div class="post-outer post-numero-1">
-								<div class="post hentry">
-									<header class="post-header">
-										<h2 class="post-title entry-title">Post</h2>
+							<div class="post-outer">
+								<div>
+									<header>
+										<h2>Post</h2>
 									</header>
-									<div class="post-body entry-content">
+									<div>
 										Lorem ipsum dolor sit amet, donec diam urna et wisi aliquam quis, ut habitasse
 										aenean dui amet et. Ullamcorper augue. Et mauris nunc ut morb...
 									</div>
-									<footer class="post-footer">
+									<footer>
 									</footer>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			<aside class="sidebar section">
-				<div class="widget HTML">
+					<!-- End page content -->
+				</section>
+			</article>
+			<aside class="sidebar">
+				<div class="widget">
 					<h2 class="title">Un widget en la sidebar</h2>
-					<div class="widget-content">
+					<div>
 						Esto puede ser cualquier otra cosa.
 					</div>
 				</div>
 			</aside>
-		</article>
+		</section>
 		<footer class="site-footer">
-			<div class="footer section">
-				<div class="widget HTML">
+			<section>
+				<article class="widget">
 					<h2 class="title">Ahora uno en el footer</h2>
-					<div class="widget-content">
+					<div>
 						Cualquier cosa
 					</div>
-				</div>
-			</div>
+				</article>
+			</section>
 		</footer>
-	</div>
+	</main>
 </body>
 
 </html>
