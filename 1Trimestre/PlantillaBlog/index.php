@@ -9,14 +9,22 @@ const DATA = [
 <html lang="es">
 
 <head>
-	<meta charset="UTF-8"/>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0" name="viewport"/>
-	<link href="css/main.css" rel="stylesheet" type="text/css"/>
+	<meta charset="UTF-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0" name="viewport" />
+	<link href="css/main.css" rel="stylesheet" type="text/css" />
 	<title><?= DATA['title'] ?></title>
 </head>
 
 <body>
+	<header>
+		<h1>Blog de Jose Antonio Duarte</h1>
+		<nav>
+			<ul>
+				<li>Home</li>
+			</ul>
+		</nav>
+	</header>
 	<main class="site-wrapper">
 		<header class="site-header">
 			<section>
@@ -39,7 +47,7 @@ const DATA = [
 										<h2>Seccion 1</h2>
 									</header>
 									<div>
-										
+
 									</div>
 									<footer>
 

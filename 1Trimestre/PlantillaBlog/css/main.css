@@ -6,6 +6,63 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
+nav ul,
+h1 {
+    margin: 0;
+}
+
+h1 { 
+    font-size: 20pt; 
+}
+
+body > header > h1 { margin: 20px 0 0 10px; }
+
+nav {
+    background-color: var(--nav-background);
+    border-bottom: 10px solid var(--nav-active-background);
+}
+
+nav ul { 
+    padding: 0;
+}
+nav > ul { padding-inline-start: 10px; }
+nav ul > li { display: inline-block; }
+
+nav li > a {
+    display: block;
+    padding: 15px;
+
+    color: var(--nav-color);
+    text-decoration: none;
+}
+
+nav li:hover, nav li:hover > ul  {
+    background-color: var(--nav-hover-background);
+}
+
+nav li:hover a {
+    color: var(--nav-hover-color);
+}
+
+nav li:hover > ul, li:hover > ul > li {
+    display: block;
+}
+
+nav li:active, nav li.current,
+nav li:hover > ul > li:hover {
+    background-color: var(--nav-active-background);
+}
+
+nav li:active, nav li.current,
+nav li:active > a, nav li.current > a {
+    color: var(--secondary-text-color);
+}
+
+nav li > ul {
+    display: none;
+    position: absolute;
+}
+
 a {
 	opacity: .9;
 	color: #32A1CC;
@@ -19,7 +76,7 @@ a:hover {
 
 .site-wrapper {
 	/* Estático, es un ejemplo */
-	width: 960px;
+	width: 90%;
 	margin: 0 auto;
 	background: #fff;
 	box-shadow: 0 0 5px rgba(0,0,0,.5);
