@@ -1,9 +1,31 @@
+:root {
+    --primary-color: gainsboro;
+    --secondary-color: white;
+    --primary-text-color: black;
+    --secondary-text-color: white;
+    --nav-color: var(--primary-text-color);
+    --nav-background: var(--primary-color);
+    --nav-hover-color: var(--secondary-text-color);
+    --nav-hover-background: gray;
+    --nav-active-color: var(--secondary-text-color);
+    --nav-active-background: rgb(46, 46, 46);
+
+    --aside-width: 300px;
+}
+
+html {
+	height: 100vh;
+}
+
 body {
 	min-height: 100%;
-	margin: 1em 0;
+	margin: 0;
 	background: #eee;
 	color: #333;
 	font-family: Arial, Helvetica, sans-serif;
+
+	display: flex;
+	flex-flow: column;
 }
 
 nav ul,
@@ -15,7 +37,7 @@ h1 {
     font-size: 20pt; 
 }
 
-body > header > h1 { margin: 20px 0 0 10px; }
+body > header > h1 { padding: 20px 0 10px 10px; }
 
 nav {
     background-color: var(--nav-background);
@@ -41,6 +63,7 @@ nav li:hover, nav li:hover > ul  {
 }
 
 nav li:hover a {
+	cursor: pointer;
     color: var(--nav-hover-color);
 }
 
@@ -63,54 +86,33 @@ nav li > ul {
     position: absolute;
 }
 
+nav > ul > li > ul {
+	width: 200px;
+} 
+
 a {
 	opacity: .9;
 	color: #32A1CC;
 	text-decoration: none;
 }
 
-a:hover {
-	opacity: 1;
-	border-bottom: 1px dashed;
-}
-
-.site-wrapper {
+body > section, body > footer {
 	/* Estático, es un ejemplo */
 	width: 90%;
+	height: 100%;
 	margin: 0 auto;
 	background: #fff;
-	box-shadow: 0 0 5px rgba(0,0,0,.5);
+	box-shadow: 5px 5px 5px rgba(0,0,0,.5);
 
 }
-/* Clearfix */
-.content-wrapper:before,
-.content-wrapper:after {
-	content: "";
-	display: table;
-} 
-.content-wrapper:after {
-	clear: both;
-}
-.content-wrapper {
-	zoom: 1; /* For IE 6/7 (trigger hasLayout) */
+
+body > section {
+	display: flex;
+	flex-grow: 1;
 }
 
-/* Distribución entre la columna central y la lateral*/
-.sidebar,
-.content {
-	float: left;
-}
-
-.content {
-	width: 600px;
-	margin-right: 60px;
-}
-
-.sidebar {
-	width: 300px;
-}
-.site-footer {
-	clear: both;
+aside {
+	min-width: 300px;
 }
 
 /* El título */
@@ -136,14 +138,11 @@ a:hover {
 .widget .title {
 	color: #666;
 }
-.sidebar .title {
+aside .title {
 	border-left: 3px solid #aaa;
 	padding-left: 8px;
 }
 
-.site-footer {
-	margin-top: 1.5em;
-}
 .site-footer .title {
 	border-top: 3px solid #aaa;
 	padding-top: 8px;
@@ -171,4 +170,44 @@ a:hover {
 }
 .avatar-image-container {
 	float: left;
+}
+
+.widget form {
+	margin: 0 10px 0;
+}
+
+.widget input {
+    font-size: 11pt;
+} 
+
+.widget input {
+    width: 100%;
+    padding: 6px 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid var(--nav-background);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.widget input[type=submit]:hover {
+	color: var(--nav-hover-color);
+	background-color: var(--nav-hover-background);
+}
+
+.widget input[type=submit]:active {
+	color: var(--nav-hover-color);
+	background-color: var(--nav-active-background);
+}
+  
+body > section input[type=button]:hover {
+    background-color: #45a049;
+}
+
+.widget .on-book-readed {
+    visibility: hidden;
+}
+
+.widget #form-book-isreaded:checked ~ .on-book-readed {
+    visibility: visible;
 }
