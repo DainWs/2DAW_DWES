@@ -1,5 +1,4 @@
 <?php
-
 define('DB_DOMAIN', 'localhost');
 define('DB_NAME', 'BLOG_PROJECT');
 define('DB_USER', 'root');

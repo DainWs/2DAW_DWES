@@ -1,6 +1,4 @@
 <?php
-require_once('../../config/constants.php');
-
 /**
  * Save the sended user data (represented by an Array) in the database
  * @param Array $user The user data represented as Array
