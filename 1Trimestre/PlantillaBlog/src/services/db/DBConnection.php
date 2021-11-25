@@ -6,27 +6,42 @@
  * @return false if it can't be saved.
  */
 function saveUser(Array $user): bool {
-    //Open the connection
-    $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
-    $values = validate($connection, $user);
+    try {
+        //Open the connection
+        $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
+        $values = validate($connection, $user);
 
-    $nombre = $values[USER_NAME];
-    $apellidos = $values[USER_SURNAME];
-    $email = $values[USER_EMAIL];
-    // Password encrypted with MD5
-    $password = md5($values[USER_PASSWORD]);
-    $fecha = $values[USER_DATE] ?? date('Y-m-d H:i:s');
+        $nombre = $values[USER_NAME];
+        $apellidos = $values[USER_SURNAME];
+        $email = $values[USER_EMAIL];
+        // Password encrypted with MD5
+        $password = md5($values[USER_PASSWORD]);
+        $fecha = $values[USER_DATE] ?? date('Y-m-d H:i:s');
 
-    //make INSERT SQL Sentence
-    $sql = "INSERT INTO USUARIOS(".USER_NAME.", ".USER_SURNAME.", ".USER_EMAIL.", ".USER_PASSWORD.", ".USER_DATE.") ".
-            "VALUES ($nombre, $apellidos, $email, $password, $fecha);";
-    
-    // Execute the SQL Sentence
-    $result = (mysqli_query($connection, $sql)) ? true : false;
-
-    //Close the connection
-    $connection->close();
+        //make INSERT SQL Sentence
+        $sql = "INSERT INTO USUARIOS(".USER_NAME.", ".USER_SURNAME.", ".USER_EMAIL.", ".USER_PASSWORD.", ".USER_DATE.") ".
+                "VALUES (\"$nombre\", \"$apellidos\", \"$email\", \"$password\", \"$fecha\");";
+        
+        // Execute the SQL Sentence
+        $result = (mysqli_query($connection, $sql)) ? true : false;
+    }
+    catch(Exception $ex) {}
+    finally {
+        //Close the connection
+        if(isset($connection)) {
+            $connection->close();
+        }
+    }
     return $result;
+}
+
+/**
+ * Check if a user exist
+ * @return true if exist
+ * @return false if not
+ */
+function existUserWithEmail(String $email): bool {
+    return (count(getUserByEmail($email)) > 0);
 }
 
 /**
@@ -35,25 +50,46 @@ function saveUser(Array $user): bool {
  * @return Array the represented user data as array
  */
 function getUserByEmail(String $email): Array {
-    //Open the connection
-    $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
-    $validEmail = mysqli_real_escape_string($connection, $email);
-    
-    //make SQL Sentence
-    $sql = "SELECT * FROM USUARIOS WHERE ".USER_EMAIL."=\"$validEmail\"";
-    
-    // Execute the SQL Sentence
-    $data = mysqli_query($connection, $sql);
+    $user = [];
+    try {
+        //Open the connection
+        $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
+        $validEmail = mysqli_real_escape_string($connection, $email);
+        
+        //make SQL Sentence
+        $sql = "SELECT * FROM USUARIOS WHERE ".USER_EMAIL."=\"$validEmail\"";
+        
+        // Execute the SQL Sentence
+        $data = mysqli_query($connection, $sql);
+        $data = mysqli_fetch_assoc($data);
+        var_dump($data);
 
-    $user = [
-        USER_ID => $data[USER_ID],
-        USER_NAME => $data[USER_NAME],
-        USER_SURNAME => $data[USER_SURNAME],
-        USER_EMAIL => $data[USER_EMAIL],
-        USER_PASSWORD => $data[USER_PASSWORD],
-        USER_DATE => $data[USER_DATE]
-    ];
+        $user = [
+            USER_ID => $data[USER_ID],
+            USER_NAME => $data[USER_NAME],
+            USER_SURNAME => $data[USER_SURNAME],
+            USER_EMAIL => $data[USER_EMAIL],
+            USER_PASSWORD => $data[USER_PASSWORD],
+            USER_DATE => $data[USER_DATE]
+        ];
+    }
+    catch(Exception $ex) {}
+    finally {
+        //Close the connection
+        if(isset($connection)) {
+            $connection->close();
+        }
+    }
     return $user;
+}
+
+/**
+ * Check if a user exist
+ * @return true if exist
+ * @return false if not
+ */
+function existUserWithID(int $id): bool {
+    return (count(getUserByID($id)) > 0);
 }
 
 /**
@@ -65,25 +101,36 @@ function getUserByEmail(String $email): Array {
  * @return Array the represented user data as array
  */
 function getUserByID(int $id): Array {
-    //Open the connection
-    $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
+    $user = [];
+    try {
+        //Open the connection
+        $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
 
-    //make SQL Sentence
-    $sql = "SELECT * FROM USUARIOS WHERE ".USER_ID."=$id";
+        //make SQL Sentence
+        $sql = "SELECT * FROM USUARIOS WHERE ".USER_ID."=$id";
 
-    // Execute the SQL Sentence
-    $data = mysqli_query($connection, $sql);
+        // Execute the SQL Sentence
+        $data = mysqli_query($connection, $sql);
+        $data = mysqli_fetch_assoc($data);
 
-    var_dump($data);
+        var_dump($data);
 
-    $user = [
-        USER_ID => $data[USER_ID],
-        USER_NAME => $data[USER_NAME],
-        USER_SURNAME => $data[USER_SURNAME],
-        USER_EMAIL => $data[USER_EMAIL],
-        USER_PASSWORD => $data[USER_PASSWORD],
-        USER_DATE => $data[USER_DATE]
-    ];
+        $user = [
+            USER_ID => $data[USER_ID],
+            USER_NAME => $data[USER_NAME],
+            USER_SURNAME => $data[USER_SURNAME],
+            USER_EMAIL => $data[USER_EMAIL],
+            USER_PASSWORD => $data[USER_PASSWORD],
+            USER_DATE => $data[USER_DATE]
+        ];
+    }
+    catch(Exception $ex) {}
+    finally {
+        //Close the connection
+        if(isset($connection)) {
+            $connection->close();
+        }
+    }
     return $user;
 }
 

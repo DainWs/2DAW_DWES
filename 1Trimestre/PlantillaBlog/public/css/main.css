@@ -111,7 +111,11 @@ body > section {
 	flex-grow: 1;
 }
 
-aside {
+body > section > article {
+	flex-grow: 1;
+}
+
+body > section > aside {
 	min-width: 300px;
 }
 
@@ -143,13 +147,13 @@ aside .title {
 	padding-left: 8px;
 }
 
-.site-footer .title {
+body > footer .title {
 	border-top: 3px solid #aaa;
 	padding-top: 8px;
 }
 
-.site-footer .title,
-.site-footer .widget {
+body > footer .title,
+body > footer .widget {
 	text-align: center;
 }
 /* Comentarios */
