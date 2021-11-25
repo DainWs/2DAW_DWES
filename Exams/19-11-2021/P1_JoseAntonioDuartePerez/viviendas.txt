@@ -1,0 +1,1 @@
+tipoVivienda="Piso";zona="Centro";direccion="123";nDormitorios="1";precio="123";size="12";extras=[Piscina, Jardin];observaciones="sdfsdfsfd";file=fotos/house-1477041_640.jpg;beneficio=36.9

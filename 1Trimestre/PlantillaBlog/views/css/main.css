@@ -1,0 +1,213 @@
+:root {
+    --primary-color: gainsboro;
+    --secondary-color: white;
+    --primary-text-color: black;
+    --secondary-text-color: white;
+    --nav-color: var(--primary-text-color);
+    --nav-background: var(--primary-color);
+    --nav-hover-color: var(--secondary-text-color);
+    --nav-hover-background: gray;
+    --nav-active-color: var(--secondary-text-color);
+    --nav-active-background: rgb(46, 46, 46);
+
+    --aside-width: 300px;
+}
+
+html {
+	height: 100vh;
+}
+
+body {
+	min-height: 100%;
+	margin: 0;
+	background: #eee;
+	color: #333;
+	font-family: Arial, Helvetica, sans-serif;
+
+	display: flex;
+	flex-flow: column;
+}
+
+nav ul,
+h1 {
+    margin: 0;
+}
+
+h1 { 
+    font-size: 20pt; 
+}
+
+body > header > h1 { padding: 20px 0 10px 10px; }
+
+nav {
+    background-color: var(--nav-background);
+    border-bottom: 10px solid var(--nav-active-background);
+}
+
+nav ul { 
+    padding: 0;
+}
+nav > ul { padding-inline-start: 10px; }
+nav ul > li { display: inline-block; }
+
+nav li > a {
+    display: block;
+    padding: 15px;
+
+    color: var(--nav-color);
+    text-decoration: none;
+}
+
+nav li:hover, nav li:hover > ul  {
+    background-color: var(--nav-hover-background);
+}
+
+nav li:hover a {
+	cursor: pointer;
+    color: var(--nav-hover-color);
+}
+
+nav li:hover > ul, li:hover > ul > li {
+    display: block;
+}
+
+nav li:active, nav li.current,
+nav li:hover > ul > li:hover {
+    background-color: var(--nav-active-background);
+}
+
+nav li:active, nav li.current,
+nav li:active > a, nav li.current > a {
+    color: var(--secondary-text-color);
+}
+
+nav li > ul {
+    display: none;
+    position: absolute;
+}
+
+nav > ul > li > ul {
+	width: 200px;
+} 
+
+a {
+	opacity: .9;
+	color: #32A1CC;
+	text-decoration: none;
+}
+
+body > section, body > footer {
+	/* Estático, es un ejemplo */
+	width: 90%;
+	height: 100%;
+	margin: 0 auto;
+	background: #fff;
+	box-shadow: 5px 5px 5px rgba(0,0,0,.5);
+
+}
+
+body > section {
+	display: flex;
+	flex-grow: 1;
+}
+
+aside {
+	min-width: 300px;
+}
+
+/* El título */
+.site-title {
+	text-align: center;
+	line-height: 2;
+	margin: 0;
+}
+.description {
+	display: none;
+}
+.site-header {
+	border-bottom: 1px dashed #aaa;
+	margin-bottom: 1em;
+}
+
+/* Algunos detallitos para el post */
+.post-outer {
+	padding: 0 1em;
+}
+
+/* Y para los títulos de la sidebar y el footer */
+.widget .title {
+	color: #666;
+}
+aside .title {
+	border-left: 3px solid #aaa;
+	padding-left: 8px;
+}
+
+.site-footer .title {
+	border-top: 3px solid #aaa;
+	padding-top: 8px;
+}
+
+.site-footer .title,
+.site-footer .widget {
+	text-align: center;
+}
+/* Comentarios */
+.comments ol {
+	padding: 0;
+}
+.comment-content {
+	padding-left: 40px; /* 30px de imagen + 10px de margin-right */
+}
+.comment-header {
+	/* Alinear al medio con la imangen */
+	line-height: 30px;
+}
+.avatar-image-container img {
+	/* Reducir la imagen y separarla 10px a la derecha */
+	width: 30px;
+	margin-right: 10px;
+}
+.avatar-image-container {
+	float: left;
+}
+
+.widget form {
+	margin: 0 10px 0;
+}
+
+.widget input {
+    font-size: 11pt;
+} 
+
+.widget input {
+    width: 100%;
+    padding: 6px 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid var(--nav-background);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.widget input[type=submit]:hover {
+	color: var(--nav-hover-color);
+	background-color: var(--nav-hover-background);
+}
+
+.widget input[type=submit]:active {
+	color: var(--nav-hover-color);
+	background-color: var(--nav-active-background);
+}
+  
+body > section input[type=button]:hover {
+    background-color: #45a049;
+}
+
+.widget .on-book-readed {
+    visibility: hidden;
+}
+
+.widget #form-book-isreaded:checked ~ .on-book-readed {
+    visibility: visible;
+}

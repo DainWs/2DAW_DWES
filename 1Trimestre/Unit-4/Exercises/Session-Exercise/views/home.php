@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<?php include("../controller/HomeController.php"); ?>
+<?php require_once("../controller/HomeController.php"); ?>
 <html lang="<?= $lang ?? 'en' ?>">
     <head>
-        <?php include("templates/head.php"); ?>
+        <?php include_once("templates/head.php"); ?>
     </head>
     <body>
         <main>
