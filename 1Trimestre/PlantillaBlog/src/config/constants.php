@@ -13,5 +13,6 @@ define('USER_PASSWORD', 'PASSWORD');
 define('USER_DATE', 'FECHA');
 
 /* SUBMIT TYPES */
+define('SUBMIT_TYPE_LOGOUT', 'LogoutPost');
 define('SUBMIT_TYPE_LOGIN', 'LoginPost');
 define('SUBMIT_TYPE_SIGNIN', 'SigninPost');

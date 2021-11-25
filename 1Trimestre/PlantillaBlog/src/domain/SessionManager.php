@@ -18,6 +18,14 @@ function getSession(): array|null
     return $result;
 }
 
+function clearSession(): void
+{
+    if (hasSession()) {
+        $token = $_COOKIE['PHPSESSID'];
+        $_SESSION[$token] = null;
+    }
+}
+
 function hasSession(): bool
 {
     $token = $_COOKIE['PHPSESSID'];

@@ -3,7 +3,7 @@ require_once("../../src/domain/LangManager.php");
 require_once("../../src/domain/SessionManager.php");
 
 if (!hasSession()) {
-    header("location: views/login.php");
+    //header("location: views/login.php");
     exit;
 }
 

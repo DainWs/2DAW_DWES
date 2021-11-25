@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
 require_once('../../src/config/constants.php');
+require_once("../../src/domain/SessionManager.php");
 require_once('../../src/controllers/LoginPostController.php');
 
 $DATA = [
@@ -8,18 +9,30 @@ $DATA = [
     'showSessionForms' => true
 ];
 
+if (hasSession()) {
+    $DATA['showSessionForms'] = false;
+}
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submitType'])) {
-    echo $_POST['submitType'];
     switch ($_POST['submitType']) {
+        case SUBMIT_TYPE_LOGOUT:
+            if (hasSession()) {
+                clearSession();
+                $DATA['showSessionForms'] = true;
+            }
+            break;
         case SUBMIT_TYPE_SIGNIN:
-            
+            if (!hasSession()) {
+            }
             break;
         case SUBMIT_TYPE_LOGIN:
-            $result = doLoginPost();
-            if (is_string($result)) {
-                $DATA['errors'] = [0=>$result];
-            } else {
-                $DATA['showSessionForms'] = !$result;
+            if (!hasSession()) {
+                $result = doLoginPost();
+                if (is_string($result)) {
+                    $DATA['errors'] = [0=>$result];
+                } else {
+                    $DATA['showSessionForms'] = !$result;
+                }
             }
             break;
     }
@@ -115,6 +128,14 @@ $POSTS = [
 
                         <input id="signin-btn" type="submit" value="Registrarse" />
                         <input type="hidden" name="submitType" value="<?= SUBMIT_TYPE_SIGNIN ?>"/>
+                    </form>
+                </div>
+            <?php else: ?>
+                <div class="widget">
+                    <h2 class="title">Sign out</h2>
+                    <form action="<?= $_SERVER['PHP_SELF']; ?>" method="POST">
+                        <input id="logout-btn" type="submit" value="Cerrar sesi&oacute;n" />
+                        <input type="hidden" name="submitType" value="<?= SUBMIT_TYPE_LOGOUT ?>"/>
                     </form>
                 </div>
             <?php endif; ?>

@@ -62,7 +62,6 @@ function getUserByEmail(String $email): Array {
         // Execute the SQL Sentence
         $data = mysqli_query($connection, $sql);
         $data = mysqli_fetch_assoc($data);
-        var_dump($data);
 
         $user = [
             USER_ID => $data[USER_ID],
@@ -112,8 +111,6 @@ function getUserByID(int $id): Array {
         // Execute the SQL Sentence
         $data = mysqli_query($connection, $sql);
         $data = mysqli_fetch_assoc($data);
-
-        var_dump($data);
 
         $user = [
             USER_ID => $data[USER_ID],
