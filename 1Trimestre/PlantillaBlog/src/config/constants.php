@@ -17,6 +17,14 @@ define('USER_DATE', 'FECHA');
 define('CATEGORY_ID', 'ID');
 define('CATEGORY_NAME', 'NOMBRE');
 
+/* DB ENTRY TABLE */
+define('ENTRY_ID', 'ID');
+define('ENTRY_USER_ID', 'USUARIO_ID');
+define('ENTRY_CATEGORY_ID', 'CATEGORIA_ID');
+define('ENTRY_TITLE', 'TITULO');
+define('ENTRY_DESCRIPTION', 'DESCRIPTION');
+define('ENTRY_DATE', 'FECHA');
+
 /* SUBMIT TYPES */
 define('SUBMIT_TYPE_LOGOUT', 'LogoutPost');
 define('SUBMIT_TYPE_LOGIN', 'LoginPost');
