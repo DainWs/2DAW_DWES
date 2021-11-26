@@ -4,26 +4,30 @@
  * @param Array $user The user data represented as Array
  * @return true if was successfully saved
  * @return false if it can't be saved.
+ * TODO replace the false return to the error string
  */
 function saveUser(Array $user): bool {
+    $result = false;
     try {
-        //Open the connection
-        $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
-        $values = validate($connection, $user);
+        if (!existUserWithEmail($user[USER_EMAIL])) {
+            //Open the connection
+            $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
+            $values = validateUser($connection, $user);
+            
+            $nombre = $values[USER_NAME];
+            $apellidos = $values[USER_SURNAME];
+            $email = $values[USER_EMAIL];
+            // Password encrypted with MD5
+            $password = md5($values[USER_PASSWORD]);
+            $fecha = $values[USER_DATE] ?? date('Y-m-d H:i:s');
 
-        $nombre = $values[USER_NAME];
-        $apellidos = $values[USER_SURNAME];
-        $email = $values[USER_EMAIL];
-        // Password encrypted with MD5
-        $password = md5($values[USER_PASSWORD]);
-        $fecha = $values[USER_DATE] ?? date('Y-m-d H:i:s');
-
-        //make INSERT SQL Sentence
-        $sql = "INSERT INTO USUARIOS(".USER_NAME.", ".USER_SURNAME.", ".USER_EMAIL.", ".USER_PASSWORD.", ".USER_DATE.") ".
-                "VALUES (\"$nombre\", \"$apellidos\", \"$email\", \"$password\", \"$fecha\");";
-        
-        // Execute the SQL Sentence
-        $result = (mysqli_query($connection, $sql)) ? true : false;
+            //make INSERT SQL Sentence
+            $sql = "INSERT INTO USUARIOS(".USER_NAME.", ".USER_SURNAME.", ".USER_EMAIL.", ".USER_PASSWORD.", ".USER_DATE.") ".
+                    "VALUES (\"$nombre\", \"$apellidos\", \"$email\", \"$password\", \"$fecha\");";
+            
+            // Execute the SQL Sentence
+            $result = (mysqli_query($connection, $sql)) ? true : false;
+        }
     }
     catch(Exception $ex) {}
     finally {
@@ -137,7 +141,7 @@ function getUserByID(int $id): Array {
  * @param Array $array the given array
  * @return Array the validated array
  */
-function validate(mysqli $connection, Array $array): Array {
+function validateUser(mysqli $connection, Array $array): Array {
     $result = [];
     foreach ($array as $key => $value) {
         $result[$key] = mysqli_real_escape_string($connection, $value);

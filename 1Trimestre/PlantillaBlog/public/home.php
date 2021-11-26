@@ -54,7 +54,7 @@ $POSTS = [
 	<meta charset="UTF-8" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0" name="viewport" />
-	<link href="../css/main.css?t=1" rel="stylesheet" type="text/css" />
+	<link href="assets/css/main.css" rel="stylesheet" type="text/css" />
 	<title><?= $DATA['title'] ?? '' ?></title>
 </head>
 
