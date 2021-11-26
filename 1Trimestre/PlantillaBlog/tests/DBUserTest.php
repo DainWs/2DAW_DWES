@@ -1,6 +1,6 @@
 <?php
 require_once('../src/config/constants.php');
-require_once('../src/services/db/DBConnection.php');
+require_once('../src/services/db/DBUserConnection.php');
 
 $newUser = [
     USER_NAME => 'Jose Antonio',

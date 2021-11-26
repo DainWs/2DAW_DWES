@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <?php
-require_once('../../src/config/constants.php');
-require_once("../../src/domain/SessionManager.php");
-require_once('../../src/controllers/LoginPostController.php');
+require_once('../src/config/constants.php');
+require_once('../src/domain/SessionManager.php');
+require_once('../src/services/db/DBCategoryConnection.php');
+require_once('../src/services/db/DBEntryConnection.php');
+require_once('../src/controllers/LoginPostController.php');
+require_once('../src/controllers/SigninPostController.php');
 
 $DATA = [
 	'title' => 'Plantilla de blog de jose',
@@ -38,6 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submitType'])) {
     }
 }
 
+$USER_SESSION = getSession();
+
+$CATEGORIAS = getAllCategories();
+
 $POSTS = [
 	0 => [
 		'header' => 'Post 1',
@@ -59,22 +66,7 @@ $POSTS = [
 </head>
 
 <body>
-	<header>
-		<h1>Blog de Jose Antonio Duarte</h1>
-		<nav>
-			<ul>
-				<li><a href="index.php">Home</a></li>
-				<li>
-					<a>Categor&iacute;as</a>
-					<ul>
-						<li><a>Categoria 1</a></li>
-						<li><a>Categoria 2</a></li>
-						<li><a>Categoria 3</a></li>
-					</ul>
-				</li>
-			</ul>
-		</nav>
-	</header>
+    <?php include('templates/header.php'); ?>
 	<section>
 		<article>
 			<section>
@@ -97,60 +89,13 @@ $POSTS = [
 		</article>
 		<aside>
             <?php if (isset($DATA['showSessionForms']) && $DATA['showSessionForms']): ?>
-                <div class="widget">
-                    <h2 class="title">Login</h2>
-                    <form action="<?= $_SERVER['PHP_SELF']; ?>" enctype="application/x-www-form-urlencoded" method="POST">
-                        <label for="login-email">Email:</label><br />
-                        <input id="login-email" type="text" name="email" value="<?= $_POST['email'] ?? '' ?>"/><br/>
-
-                        <label for="login-password">Password:</label><br />
-                        <input id="login-password" type="password" name="password" value="<?= $_POST['password'] ?? '' ?>"/><br/>
-
-                        <input id="login-btn" type="submit" value="Iniciar sesi&oacute;n" />
-                        <input type="hidden" name="submitType" value="<?= SUBMIT_TYPE_LOGIN ?>"/>
-                    </form>
-                </div>
-
-                <div class="widget">
-                    <h2 class="title">Sign in</h2>
-                    <form action="<?= $_SERVER['PHP_SELF']; ?>" enctype="application/x-www-form-urlencoded" method="POST">
-                        <label for="signin-name">Nombre:</label><br />
-                        <input id="signin-name" type="text" name="name" value="<?= $_POST['name'] ?? '' ?>"/><br/>
-
-                        <label for="signin-surname">Apellidos:</label><br />
-                        <input id="signin-surname" type="text" name="surname" value="<?= $_POST['surname'] ?? '' ?>"/><br/>
-
-                        <label for="signin-email">Correo Electr&oacute;nico:</label><br />
-                        <input id="signin-password" type="email" name="email" value="<?= $_POST['email'] ?? '' ?>"/><br/>
-
-                        <label for="signin-password">Contrase&ntilde;a:</label><br />
-                        <input id="signin-password" type="password" name="password" value="<?= $_POST['password'] ?? '' ?>"/><br/>
-
-                        <input id="signin-btn" type="submit" value="Registrarse" />
-                        <input type="hidden" name="submitType" value="<?= SUBMIT_TYPE_SIGNIN ?>"/>
-                    </form>
-                </div>
+                <?php include('templates/widgets/loginWidget.php'); ?>
+                <?php include('templates/widgets/signinWidget.php'); ?>
             <?php else: ?>
-                <div class="widget">
-                    <h2 class="title">Sign out</h2>
-                    <form action="<?= $_SERVER['PHP_SELF']; ?>" method="POST">
-                        <input id="logout-btn" type="submit" value="Cerrar sesi&oacute;n" />
-                        <input type="hidden" name="submitType" value="<?= SUBMIT_TYPE_LOGOUT ?>"/>
-                    </form>
-                </div>
             <?php endif; ?>
 		</aside>
 	</section>
-	<footer>
-		<section>
-			<article class="widget">
-				<h2 class="title">Ahora uno en el footer</h2>
-				<div>
-					Cualquier cosa
-				</div>
-			</article>
-		</section>
-	</footer>
+    <?php include('templates/footer.php'); ?>
 </body>
 
 </html>

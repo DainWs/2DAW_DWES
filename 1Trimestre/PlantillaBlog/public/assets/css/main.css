@@ -40,6 +40,7 @@ h1 {
 body > header > h1 { padding: 20px 0 10px 10px; }
 
 nav {
+	display: flex;
     background-color: var(--nav-background);
     border-bottom: 10px solid var(--nav-active-background);
 }
@@ -49,25 +50,36 @@ nav ul {
 }
 nav > ul { padding-inline-start: 10px; }
 nav ul > li { display: inline-block; }
+nav ul.nav-profile > li {position: relative;}
 
-nav li > a {
-    display: block;
+nav li > a,
+nav ul.nav-profile form input[type="submit"]{
     padding: 15px;
 
     color: var(--nav-color);
     text-decoration: none;
 }
 
+nav ul.nav-profile form input[type="submit"] {
+	background-color: unset;
+	border: unset;
+	font-size: unset;
+}
+
 nav li:hover, nav li:hover > ul  {
     background-color: var(--nav-hover-background);
 }
 
-nav li:hover a {
+nav li:hover a,
+nav ul.nav-profile form input[type="submit"] {
 	cursor: pointer;
     color: var(--nav-hover-color);
 }
 
-nav li:hover > ul, li:hover > ul > li {
+nav li > a,
+nav ul.nav-profile form input[type="submit"],
+nav li:hover > ul,
+li:hover > ul > li {
     display: block;
 }
 
@@ -77,13 +89,19 @@ nav li:hover > ul > li:hover {
 }
 
 nav li:active, nav li.current,
-nav li:active > a, nav li.current > a {
+nav li:active > a, nav li.current > a,
+nav ul.nav-profile form input[type="submit"]{
     color: var(--secondary-text-color);
 }
 
 nav li > ul {
     display: none;
     position: absolute;
+}
+nav ul.nav-menu {flex-grow: 1;}
+nav ul.nav-profile li > ul {
+	right: 0;
+	width: 100%;
 }
 
 nav > ul > li > ul {
@@ -184,7 +202,7 @@ body > footer .widget {
     font-size: 11pt;
 } 
 
-.widget input {
+.widget input:not([type=radio]) {
     width: 100%;
     padding: 6px 12px;
     margin: 8px 0;

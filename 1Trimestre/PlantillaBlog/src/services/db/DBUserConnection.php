@@ -67,14 +67,16 @@ function getUserByEmail(String $email): Array {
         $data = mysqli_query($connection, $sql);
         $data = mysqli_fetch_assoc($data);
 
-        $user = [
-            USER_ID => $data[USER_ID],
-            USER_NAME => $data[USER_NAME],
-            USER_SURNAME => $data[USER_SURNAME],
-            USER_EMAIL => $data[USER_EMAIL],
-            USER_PASSWORD => $data[USER_PASSWORD],
-            USER_DATE => $data[USER_DATE]
-        ];
+        if(isset($data[USER_ID])) {
+            $user = [
+                USER_ID => $data[USER_ID],
+                USER_NAME => $data[USER_NAME],
+                USER_SURNAME => $data[USER_SURNAME],
+                USER_EMAIL => $data[USER_EMAIL],
+                USER_PASSWORD => $data[USER_PASSWORD],
+                USER_DATE => $data[USER_DATE]
+            ];
+        }
     }
     catch(Exception $ex) {}
     finally {
