@@ -45,7 +45,10 @@ $USER_SESSION = getSession();
 
 $CATEGORIAS = getAllCategories();
 
-$ENTRIES = getAllEntries();
+if (!isset($_GET['postID'])) {
+    header('Location: home.php');
+}
+$ENTRY = getEntryByID($_GET['postID']);
 ?>
 <html lang="es">
 
@@ -65,10 +68,8 @@ $ENTRIES = getAllEntries();
 		<article>
 			<section>
 				<!-- Start page content -->
-				<?php for ($i = 0; $i < 2; $i++): ?>
-					<?php $post = $ENTRIES[array_keys($ENTRIES)[$i]]; ?>
-					<?php include('templates/widgets/postWidget.php'); ?>
-				<?php endfor; ?>
+				<?php $post = $ENTRY; ?>
+				<?php include('templates/widgets/postWidget.php'); ?>
 				<!-- End page content -->
 			</section>
 		</article>

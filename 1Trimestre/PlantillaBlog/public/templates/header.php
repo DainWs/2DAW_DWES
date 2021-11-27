@@ -2,7 +2,7 @@
     <h1>Blog de Jose Antonio Duarte</h1>
     <nav>
         <ul class="nav-menu">
-            <li><a href="index.php">Home</a></li>
+            <li><a href="home.php">Home</a></li>
             <li>
                 <a>Categor&iacute;as</a>
                 <ul>

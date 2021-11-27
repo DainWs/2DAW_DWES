@@ -25,6 +25,9 @@ define('ENTRY_TITLE', 'TITULO');
 define('ENTRY_DESCRIPTION', 'DESCRIPTION');
 define('ENTRY_DATE', 'FECHA');
 
+define('ENTRY_USER_NAME', 'USUARIO');
+define('ENTRY_CATEGORY_NAME', 'CATEGORY');
+
 /* SUBMIT TYPES */
 define('SUBMIT_TYPE_LOGOUT', 'LogoutPost');
 define('SUBMIT_TYPE_LOGIN', 'LoginPost');

@@ -1,0 +1,45 @@
+:root {
+    --category-field-background: transparent;
+    --category-field-hover-background: lightgrey;
+    --category-field-checked-background: rgb(46, 46, 46);
+}
+
+form div.category-div {
+    overflow: auto;
+    max-height: 400px;
+}
+
+form label.category-field {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px 5px;
+
+    color: var(--primary-text-color);
+    background-color: var(--category-field-background);
+}
+
+form label.category-field:hover {
+    cursor: pointer;
+    background-color: var(--category-field-hover-background);
+}
+
+form label.category-field input[type=radio] {
+    margin: 0;
+    border: 1px solid var(--primary-text-color);
+    border-radius: 5px;
+    padding: 0.5em;
+    vertical-align: bottom;
+    -webkit-appearance: none;
+}
+  
+form label.category-field input[type=radio]:focus {
+    outline-color: transparent;
+}
+
+form label.category-field input[type=radio]:checked {
+    background-color: var(--category-field-checked-background);
+    background-size: 9px 9px;
+}
+  

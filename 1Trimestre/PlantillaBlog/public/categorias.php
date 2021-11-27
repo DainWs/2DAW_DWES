@@ -17,15 +17,7 @@ $USER_SESSION = getSession();
 
 $CATEGORIAS = getAllCategories();
 
-$POSTS = [
-	0 => [
-		'header' => 'Post 1',
-		'main' => 'Lorem ipsum dolor sit amet, donec diam urna et wisi aliquam quis, ut habitasse aenean dui amet et. Ullamcorper augue. Et mauris nunc ut morb...',
-		'footer' => ''
-	]
-];
-
-
+$ENTRIES = getAllEntries();
 ?>
 <html lang="es">
 
@@ -34,6 +26,9 @@ $POSTS = [
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0" name="viewport" />
 	<link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/categorias.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/posts.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/widget.css" rel="stylesheet" type="text/css" />
 	<title><?= $DATA['title'] ?? '' ?></title>
 </head>
 
@@ -43,18 +38,8 @@ $POSTS = [
 		<article>
 			<section>
 				<!-- Start page content -->
-				<?php foreach ($POSTS as $key => $post) : ?>
-					<article class="post-outer">
-						<header>
-							<h2><?= $post['header'] ?? ''; ?></h2>
-						</header>
-						<main>
-							<?= $post['main'] ?? ''; ?>
-						</main>
-						<footer>
-							<?= $post['footer'] ?? ''; ?>
-						</footer>
-					</article>
+				<?php foreach ($ENTRIES as $key => $post) : ?>
+					<?php include('templates/models/postModels.php'); ?>
 				<?php endforeach; ?>
 				<!-- End page content -->
 			</section>

@@ -1,0 +1,109 @@
+.widget {
+    padding: 10px;
+    box-shadow: 0px 0px 10px -3px;
+}
+
+aside .widget {
+    margin: 5px;
+}
+
+footer .widget {
+    box-shadow: 0px -6px 5px -5px;
+}
+
+.widget .title {
+    color: #666;
+    margin: 0;
+    margin-top: 10px;
+}
+aside .title {
+	border-left: 3px solid #aaa;
+	padding-left: 8px;
+}
+
+body > footer .title {
+	padding-top: 8px;
+}
+
+body > footer .title,
+body > footer .widget {
+	text-align: center;
+}
+/* Comentarios */
+.comments ol {
+	padding: 0;
+}
+.comment-content {
+	padding-left: 40px; /* 30px de imagen + 10px de margin-right */
+}
+.comment-header {
+	/* Alinear al medio con la imangen */
+	line-height: 30px;
+}
+.avatar-image-container img {
+	/* Reducir la imagen y separarla 10px a la derecha */
+	width: 30px;
+	margin-right: 10px;
+}
+.avatar-image-container {
+	float: left;
+}
+
+.widget form {
+	margin: 0 10px 0;
+}
+
+.widget input {
+    font-size: 11pt;
+} 
+
+.widget input:not([type=radio]) {
+    width: 100%;
+    padding: 6px 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid var(--nav-background);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.widget input[type=submit]:hover {
+	color: var(--nav-hover-color);
+	background-color: var(--nav-hover-background);
+}
+
+.widget input[type=submit]:active {
+	color: var(--nav-hover-color);
+	background-color: var(--nav-active-background);
+}
+  
+body > section input[type=button]:hover {
+    background-color: #45a049;
+}
+
+.widget .on-book-readed {
+    visibility: hidden;
+}
+
+.widget #form-book-isreaded:checked ~ .on-book-readed {
+    visibility: visible;
+}
+
+footer .widget .title {
+	margin: 0;
+	padding: 0;
+}
+
+.model-widget:hover {
+    background-color: #eee;
+}
+
+.model-widget * {
+    cursor: pointer;
+    -webkit-touch-callout: none;
+      -webkit-user-select: none;
+       -khtml-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+}
