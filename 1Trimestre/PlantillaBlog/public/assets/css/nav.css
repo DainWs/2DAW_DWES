@@ -1,0 +1,105 @@
+:root {
+    --nav-color: var(--primary-text-color);
+    --nav-background: var(--primary-color);
+    --nav-hover-color: var(--secondary-text-color);
+    --nav-hover-background: gray;
+    --nav-active-color: var(--secondary-text-color);
+    --nav-active-background: rgb(46, 46, 46);
+}
+
+nav {
+	display: flex;
+    background-color: var(--nav-background);
+    border-bottom: 10px solid var(--nav-active-background);
+}
+
+nav ul { 
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav > ul { 
+    padding-inline-start: 10px;
+    padding-inline-end: 10px;
+    display: flex;
+}
+
+nav > ul > li.profile > a,
+nav > ul > li > ul {
+    box-sizing: border-box;
+	width: 200px;
+}
+nav > ul > li.profile > a {
+    text-align: end;
+}
+
+nav > ul > li.profile {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+    position: relative;
+}
+
+nav > ul > li.profile > ul {
+    position: absolute;
+    bottom: -100%;
+}
+
+nav > ul > li.profile form input[type="submit"]{
+	background-color: unset;
+	border: unset;
+	font-size: unset;
+}
+
+nav li > a,
+nav > ul > li.profile form input[type="submit"]{
+    padding: 15px;
+    color: var(--nav-color);
+    text-decoration: none;
+}
+
+/*nav ul > li { display: inline-block; }*/
+
+
+/* LI */
+nav li:hover > a, nav li:hover > ul  {
+    background-color: var(--nav-hover-background);
+}
+
+nav li:hover a,
+nav > ul > li.profile form input[type="submit"] {
+	cursor: pointer;
+    color: var(--nav-hover-color);
+}
+
+nav li > a,
+nav > ul > li.profile form input[type="submit"],
+nav li:hover > ul {
+    display: block;
+}
+
+nav li:active > a, nav li.current,
+nav li:hover > ul > li:hover {
+    background-color: var(--nav-active-background);
+}
+
+nav li:active, nav li.current,
+nav li:active > a, nav li.current > a,
+nav > ul > li.profile form input[type="submit"]{
+    color: var(--secondary-text-color);
+}
+
+nav li > ul {
+    display: none;
+    position: absolute;
+}
+
+a {
+	opacity: .9;
+	color: #32A1CC;
+	text-decoration: none;
+}

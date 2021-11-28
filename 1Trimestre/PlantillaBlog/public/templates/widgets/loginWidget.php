@@ -1,6 +1,6 @@
 <div class="widget">
     <h2 class="title">Login</h2>
-    <form action="<?= $_SERVER['PHP_SELF']; ?>" enctype="application/x-www-form-urlencoded" method="POST">
+    <form action="<?= $_SERVER['PHP_SELF']; ?>" enctype="application/x-www-form-urlencoded" method="POST" autocomplete="off">
         <label for="login-email">Email:</label><br />
         <input id="login-email" type="text" name="email" value="<?= $_POST['email'] ?? '' ?>" /><br />
 

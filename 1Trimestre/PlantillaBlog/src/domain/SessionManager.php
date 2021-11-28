@@ -28,6 +28,10 @@ function clearSession(): void
 
 function hasSession(): bool
 {
-    $token = $_COOKIE['PHPSESSID'];
-    return (isset($_SESSION[$token]) && $_SESSION[$token] != null);
+    $result = false;
+    if (isset($_COOKIE['PHPSESSID'])) {
+        $token = $_COOKIE['PHPSESSID'];
+        $result = (isset($_SESSION[$token]) && $_SESSION[$token] != null);
+    }
+    return $result;
 }

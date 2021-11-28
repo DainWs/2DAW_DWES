@@ -14,10 +14,8 @@
                     <?php endfor; ?>
                 </ul>
             </li>
-        </ul>
-        <?php if (!(isset($DATA['showSessionForms']) && $DATA['showSessionForms'])) : ?>
-            <ul class="nav-profile">
-                <li>
+            <?php if (hasSession()) : ?>
+                <li class="profile">
                     <a><?= $USER_SESSION[USER_NAME] ?></a>
                     <ul>
                         <li>
@@ -28,7 +26,7 @@
                         </li>
                     </ul>
                 </li>
-            </ul>
-        <?php endif; ?>
+            <?php endif; ?>
+        </ul>
     </nav>
 </header>

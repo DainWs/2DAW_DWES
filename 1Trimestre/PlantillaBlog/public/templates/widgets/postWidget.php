@@ -3,7 +3,7 @@
         <header>
             <h2><?= $post[ENTRY_TITLE] ?? ''; ?></h2>
             <span>Autor: <?= $post[ENTRY_USER_NAME] ?? 'Anonymous'; ?></span><br/>
-            <span>Fecha publicaci&oacute;n: <?= $post[ENTRY_DATE] ?? date('d/m/Y'); ?> </span>
+            <span>Fecha publicaci&oacute;n: <?= date(DATE_FORMAT, strtotime($post[ENTRY_DATE])); ?> </span>
         </header>
         <main>
             <?= $post[ENTRY_DESCRIPTION] ?? ''; ?>

@@ -67,6 +67,7 @@ function getUserByEmail(String $email): Array {
         $data = mysqli_query($connection, $sql);
         $data = mysqli_fetch_assoc($data);
 
+        //TODO useless step?
         if(isset($data[USER_ID])) {
             $user = [
                 USER_ID => $data[USER_ID],
@@ -89,43 +90,36 @@ function getUserByEmail(String $email): Array {
 }
 
 /**
- * Check if a user exist
- * @return true if exist
- * @return false if not
- */
-function existUserWithID(int $id): bool {
-    return (count(getUserByID($id)) > 0);
-}
-
-/**
- * Returns the user where the id are equals to the sended one.
+ * Returns all users basic data.
  * 
  * This method should not be called for user data validation purposes.
  * for this purpose call getUserByEmail($email)
  * @param String $id The id of the user
  * @return Array the represented user data as array
  */
-function getUserByID(int $id): Array {
-    $user = [];
+function getAllUsers(String $order = USER_ID, String $orderType = SQL_ORDER_ASC): Array {
+    $users = [];
     try {
         //Open the connection
         $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
 
         //make SQL Sentence
-        $sql = "SELECT * FROM USUARIOS WHERE ".USER_ID."=$id";
-
+        $sql = "SELECT ".USER_ID.", ".USER_NAME.", ".USER_SURNAME.", ".USER_EMAIL.", ".USER_DATE." FROM USUARIOS ORDER BY $order $orderType";
+        
         // Execute the SQL Sentence
         $data = mysqli_query($connection, $sql);
-        $data = mysqli_fetch_assoc($data);
-
-        $user = [
-            USER_ID => $data[USER_ID],
-            USER_NAME => $data[USER_NAME],
-            USER_SURNAME => $data[USER_SURNAME],
-            USER_EMAIL => $data[USER_EMAIL],
-            USER_PASSWORD => $data[USER_PASSWORD],
-            USER_DATE => $data[USER_DATE]
-        ];
+        $data = mysqli_fetch_all($data);
+        
+        foreach ($data as $value) {
+            $user = [
+                USER_ID => $value[0],
+                USER_NAME => $value[1],
+                USER_SURNAME => $value[2],
+                USER_EMAIL => $value[3],
+                USER_DATE => $value[4]
+            ];
+            array_push($users, $user);
+        }
     }
     catch(Exception $ex) {}
     finally {
@@ -134,7 +128,7 @@ function getUserByID(int $id): Array {
             $connection->close();
         }
     }
-    return $user;
+    return $users;
 }
 
 /**

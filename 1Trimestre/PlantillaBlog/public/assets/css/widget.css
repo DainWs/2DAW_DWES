@@ -1,20 +1,17 @@
 .widget {
     padding: 10px;
-    box-shadow: 0px 0px 10px -3px;
+    /*box-shadow: 0px 0px 10px -3px;*/
 }
 
 aside .widget {
     margin: 5px;
 }
 
-footer .widget {
-    box-shadow: 0px -6px 5px -5px;
-}
-
 .widget .title {
     color: #666;
     margin: 0;
     margin-top: 10px;
+    margin-bottom: 5px;
 }
 aside .title {
 	border-left: 3px solid #aaa;
@@ -28,6 +25,7 @@ body > footer .title {
 body > footer .title,
 body > footer .widget {
 	text-align: center;
+    flex-grow: 1;
 }
 /* Comentarios */
 .comments ol {
@@ -89,21 +87,12 @@ body > section input[type=button]:hover {
     visibility: visible;
 }
 
-footer .widget .title {
+body > footer > section {
+    display: flex;
+    justify-content: space-around;
+}
+
+body > footer .widget .title {
 	margin: 0;
 	padding: 0;
-}
-
-.model-widget:hover {
-    background-color: #eee;
-}
-
-.model-widget * {
-    cursor: pointer;
-    -webkit-touch-callout: none;
-      -webkit-user-select: none;
-       -khtml-user-select: none;
-         -moz-user-select: none;
-          -ms-user-select: none;
-              user-select: none;
 }

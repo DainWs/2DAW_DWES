@@ -3,12 +3,6 @@
     --secondary-color: white;
     --primary-text-color: black;
     --secondary-text-color: white;
-    --nav-color: var(--primary-text-color);
-    --nav-background: var(--primary-color);
-    --nav-hover-color: var(--secondary-text-color);
-    --nav-hover-background: gray;
-    --nav-active-color: var(--secondary-text-color);
-    --nav-active-background: rgb(46, 46, 46);
 
     --aside-width: 300px;
 }
@@ -28,7 +22,6 @@ body {
 	flex-flow: column;
 }
 
-nav ul,
 h1 {
     margin: 0;
 }
@@ -38,75 +31,6 @@ h1 {
 }
 
 body > header > h1 { padding: 20px 0 10px 10px; }
-
-nav {
-	display: flex;
-    background-color: var(--nav-background);
-    border-bottom: 10px solid var(--nav-active-background);
-}
-
-nav ul { 
-    padding: 0;
-}
-nav > ul { padding-inline-start: 10px; }
-nav ul > li { display: inline-block; }
-nav ul.nav-profile > li {position: relative;}
-
-nav li > a,
-nav ul.nav-profile form input[type="submit"]{
-    padding: 15px;
-
-    color: var(--nav-color);
-    text-decoration: none;
-}
-
-nav ul.nav-profile form input[type="submit"] {
-	background-color: unset;
-	border: unset;
-	font-size: unset;
-}
-
-nav li:hover, nav li:hover > ul  {
-    background-color: var(--nav-hover-background);
-}
-
-nav li:hover a,
-nav ul.nav-profile form input[type="submit"] {
-	cursor: pointer;
-    color: var(--nav-hover-color);
-}
-
-nav li > a,
-nav ul.nav-profile form input[type="submit"],
-nav li:hover > ul,
-li:hover > ul > li {
-    display: block;
-}
-
-nav li:active, nav li.current,
-nav li:hover > ul > li:hover {
-    background-color: var(--nav-active-background);
-}
-
-nav li:active, nav li.current,
-nav li:active > a, nav li.current > a,
-nav ul.nav-profile form input[type="submit"]{
-    color: var(--secondary-text-color);
-}
-
-nav li > ul {
-    display: none;
-    position: absolute;
-}
-nav ul.nav-menu {flex-grow: 1;}
-nav ul.nav-profile li > ul {
-	right: 0;
-	width: 100%;
-}
-
-nav > ul > li > ul {
-	width: 200px;
-} 
 
 a {
 	opacity: .9;
@@ -121,7 +45,11 @@ body > section, body > footer {
 	margin: 0 auto;
 	background: #fff;
 	box-shadow: 5px 5px 5px rgba(0,0,0,.5);
+}
 
+body > footer {
+	box-shadow: 0px -6px 5px -5px;
+	margin-top: 50px;
 }
 
 body > section {
@@ -131,6 +59,21 @@ body > section {
 
 body > section > article {
 	flex-grow: 1;
+	padding-left: 5px;
+}
+
+body > section > article > header {
+	padding: 15px 0 10px 0;
+	text-align: center;
+	border-bottom: 2px solid gray;
+}
+
+body > section > article > header ~ section {
+	box-shadow: inset 0px 0px 6px -2px;
+}
+
+body > section > article > section {
+	padding: 15px;
 }
 
 body > section > aside {
@@ -149,4 +92,23 @@ body > section > aside {
 .site-header {
 	border-bottom: 1px dashed #aaa;
 	margin-bottom: 1em;
+}
+
+.flex-list,
+.main-flex-article {
+	display: flex;
+}
+
+.main-flex-article > .flex-list {
+	flex-grow: 1;
+}
+
+.flex-list {
+	align-items: stretch;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.main-flex-article {
+	flex-direction: column;
 }

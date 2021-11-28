@@ -17,7 +17,4 @@ if ($result) {
     $emailedUser = getUserByEmail('jose.ant.du@gmail.com');
     var_dump($emailedUser);
     echo "<br/>";
-    $idUser = getUserByID($emailedUser[USER_ID]);
-    var_dump($idUser);
-    echo "<br/>";
 }

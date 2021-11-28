@@ -28,7 +28,13 @@ define('ENTRY_DATE', 'FECHA');
 define('ENTRY_USER_NAME', 'USUARIO');
 define('ENTRY_CATEGORY_NAME', 'CATEGORY');
 
+define('SQL_ORDER_ASC', 'ASC');
+define('SQL_ORDER_DESC', 'DESC');
+
 /* SUBMIT TYPES */
 define('SUBMIT_TYPE_LOGOUT', 'LogoutPost');
 define('SUBMIT_TYPE_LOGIN', 'LoginPost');
 define('SUBMIT_TYPE_SIGNIN', 'SigninPost');
+
+/* Others */
+define('DATE_FORMAT', 'd/m/Y');

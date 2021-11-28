@@ -5,18 +5,14 @@ require_once('../src/domain/SessionManager.php');
 require_once('../src/services/db/DBCategoryConnection.php');
 require_once('../src/services/db/DBEntryConnection.php');
 
-$DATA = [
-	'title' => 'Plantilla de blog de jose'
-];
+require_once('../src/controllers/PostController.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_POST['category'])) {
     
 }
 
 $USER_SESSION = getSession();
-
 $CATEGORIAS = getAllCategories();
-
 $ENTRIES = getAllEntries();
 ?>
 <html lang="es">
@@ -26,6 +22,7 @@ $ENTRIES = getAllEntries();
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0" name="viewport" />
 	<link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/nav.css?t=1" rel="stylesheet" type="text/css" />
 	<link href="assets/css/categorias.css" rel="stylesheet" type="text/css" />
 	<link href="assets/css/posts.css" rel="stylesheet" type="text/css" />
 	<link href="assets/css/widget.css" rel="stylesheet" type="text/css" />

@@ -1,6 +1,6 @@
 <div class="widget">
     <h2 class="title">Sign in</h2>
-    <form action="<?= $_SERVER['PHP_SELF']; ?>" enctype="application/x-www-form-urlencoded" method="POST">
+    <form action="<?= $_SERVER['PHP_SELF']; ?>" enctype="application/x-www-form-urlencoded" method="POST" autocomplete="off">
         <label for="signin-name">Nombre:</label><br />
         <input id="signin-name" type="text" name="name" value="<?= $_POST['name'] ?? '' ?>" /><br />
 

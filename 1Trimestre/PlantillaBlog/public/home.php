@@ -4,48 +4,13 @@ require_once('../src/config/constants.php');
 require_once('../src/domain/SessionManager.php');
 require_once('../src/services/db/DBCategoryConnection.php');
 require_once('../src/services/db/DBEntryConnection.php');
-require_once('../src/controllers/LoginPostController.php');
-require_once('../src/controllers/SigninPostController.php');
 
-$DATA = [
-	'title' => 'Plantilla de blog de jose',
-    'showSessionForms' => true
-];
-
-if (hasSession()) {
-    $DATA['showSessionForms'] = false;
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submitType'])) {
-    switch ($_POST['submitType']) {
-        case SUBMIT_TYPE_LOGOUT:
-            if (hasSession()) {
-                clearSession();
-                $DATA['showSessionForms'] = true;
-            }
-            break;
-        case SUBMIT_TYPE_SIGNIN:
-            if (!hasSession()) {
-            }
-            break;
-        case SUBMIT_TYPE_LOGIN:
-            if (!hasSession()) {
-                $result = doLoginPost();
-                if (is_string($result)) {
-                    $DATA['errors'] = [0=>$result];
-                } else {
-                    $DATA['showSessionForms'] = !$result;
-                }
-            }
-            break;
-    }
-}
+require_once('../src/controllers/PostController.php');
 
 $USER_SESSION = getSession();
-
 $CATEGORIAS = getAllCategories();
-
 $ENTRIES = getAllEntries();
+$USERS = getAllUsers(USER_DATE);
 ?>
 <html lang="es">
 
@@ -53,21 +18,38 @@ $ENTRIES = getAllEntries();
 	<meta charset="UTF-8" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0" name="viewport" />
-	<link href="assets/css/main.css" rel="stylesheet" type="text/css" />
-	<link href="assets/css/posts.css" rel="stylesheet" type="text/css" />
-	<link href="assets/css/widget.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/main.css?t=1" rel="stylesheet" type="text/css" />
+    <link href="assets/css/nav.css?t=1" rel="stylesheet" type="text/css" />
+	<link href="assets/css/posts.css?t=5" rel="stylesheet" type="text/css" />
+    <link href="assets/css/users.css?t=5" rel="stylesheet" type="text/css" />
+	<link href="assets/css/widget.css?t=5" rel="stylesheet" type="text/css" />
 	<title><?= $DATA['title'] ?? '' ?></title>
 </head>
 
 <body>
     <?php include('templates/header.php'); ?>
 	<section>
-		<article>
-			<section>
+		<article class="main-flex-article">
+            <header>
+                <h1>Lastest Posts</h1>
+            </header>
+			<section class="flex-list">
 				<!-- Start page content -->
-				<?php for ($i = 0; $i < 2; $i++): ?>
+				<?php for ($i = 0; $i < 4 && $i < count($ENTRIES); $i++): ?>
 					<?php $post = $ENTRIES[array_keys($ENTRIES)[$i]]; ?>
-					<?php include('templates/widgets/postWidget.php'); ?>
+                    <?php include('templates/models/compressedPostModel.php'); ?>
+				<?php endfor; ?>
+				<!-- End page content -->
+			</section>
+
+            <header>
+                <h1>Newests Users</h1>
+            </header>
+			<section class="flex-list">
+				<!-- Start page content -->
+				<?php for ($i = 0; $i < 4 && $i < count($USERS); $i++): ?>
+					<?php $user = $USERS[array_keys($USERS)[$i]]; ?>
+                    <?php include('templates/models/compressedUserModel.php'); ?>
 				<?php endfor; ?>
 				<!-- End page content -->
 			</section>

@@ -1,10 +1,7 @@
 <footer>
     <section>
-        <article class="widget">
-            <h2 class="title">---</h2>
-            <div>
-                
-            </div>
-        </article>
+        <?php include('templates/widgets/aboutUsWidget.php'); ?>
+        <?php include('templates/widgets/contactUsWidget.php'); ?>
+        <?php include('templates/widgets/supportWidget.php'); ?>
     </section>
 </footer>
