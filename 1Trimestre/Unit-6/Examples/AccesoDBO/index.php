@@ -23,6 +23,13 @@ try {
     $prepareSQL->execute( array(':id' => 1) );
 
     var_dump($prepareSQL);
+
+    $prepareSQL = $db->prepare('INSERT INTO USUARIOS(NOMBRE, APELLIDOS, EMAIL, PASSWORD) VALUES (?, ?, ?, ?)');
+    $prepareSQL->bindParam(1, "Jose");
+    $prepareSQL->bindParam(2, "Duarte");
+    $prepareSQL->bindParam(3, "jose@gmail.com");
+    $prepareSQL->bindParam(4, "Prueba");
+    $prepareSQL->execute();
     echo "<br/>";
 
 } catch(Exception $e) {
