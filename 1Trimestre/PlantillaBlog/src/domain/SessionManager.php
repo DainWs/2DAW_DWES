@@ -1,15 +1,24 @@
 <?php
 session_start();
-function addSession(array $data): void
-{
+
+/**
+ * Adds the current user data to session
+ * @param array $data the user data array
+ * @return void
+ */
+function addSession(array $data): void {
     if (!hasSession()) {
         $token = $_COOKIE['PHPSESSID'];
         $_SESSION[$token] = $data;
     }
 }
 
-function getSession(): array|null
-{
+/**
+ * gets the current user data from session
+ * @return array if the session contains user data
+ * @return null if the session dont contains user data
+ */
+function getSession(): array|null {
     $result = null;
     if (hasSession()) {
         $token = $_COOKIE['PHPSESSID'];
@@ -18,16 +27,23 @@ function getSession(): array|null
     return $result;
 }
 
-function clearSession(): void
-{
+/**
+ * Clears the user data from session
+ * @return void
+ */
+function clearSession(): void {
     if (hasSession()) {
         $token = $_COOKIE['PHPSESSID'];
         $_SESSION[$token] = null;
     }
 }
 
-function hasSession(): bool
-{
+/**
+ * Check if the session contains user data
+ * @return true if the session contains the user data
+ * @return false if the session dont contains the user data
+ */
+function hasSession(): bool {
     $result = false;
     if (isset($_COOKIE['PHPSESSID'])) {
         $token = $_COOKIE['PHPSESSID'];
