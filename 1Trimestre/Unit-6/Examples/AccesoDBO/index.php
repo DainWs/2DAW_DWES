@@ -17,6 +17,13 @@ try {
     $prepareSQL->execute( array(0) );
 
     var_dump($prepareSQL);
+    echo "<br/>";
+    
+    $prepareSQL = $db->prepare('SELECT * FROM USUARIOS WHERE ID = :id');
+    $prepareSQL->execute( array(':id' => 1) );
+
+    var_dump($prepareSQL);
+    echo "<br/>";
 
 } catch(Exception $e) {
     echo $e->getMessage();
