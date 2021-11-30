@@ -11,10 +11,11 @@ $USER_SESSION = getSession();
 
 $CATEGORIAS = getAllCategories();
 
-if (!isset($_GET['postID'])) {
+if (!isset($_GET['entryID'])) {
     header('Location: home.php');
 }
-$ENTRY = getEntryByID($_GET['postID']);
+$ENTRY = getEntryByID($_GET['entryID']);
+$IS_ENTRY_NEW = false;
 ?>
 <html lang="es">
 
@@ -22,10 +23,10 @@ $ENTRY = getEntryByID($_GET['postID']);
 	<meta charset="UTF-8" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0" name="viewport" />
-	<link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/main.css?t=1" rel="stylesheet" type="text/css" />
     <link href="assets/css/nav.css?t=1" rel="stylesheet" type="text/css" />
-	<link href="assets/css/posts.css" rel="stylesheet" type="text/css" />
-	<link href="assets/css/widget.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/entries.css?t=1" rel="stylesheet" type="text/css" />
+	<link href="assets/css/widget.css?t=1" rel="stylesheet" type="text/css" />
 	<title><?= $DATA['title'] ?? '' ?></title>
 </head>
 
@@ -35,8 +36,7 @@ $ENTRY = getEntryByID($_GET['postID']);
 		<article>
 			<section>
 				<!-- Start page content -->
-				<?php $post = $ENTRY; ?>
-				<?php include('templates/widgets/postWidget.php'); ?>
+				<?php include('templates/models/editEntryModel.php'); ?>
 				<!-- End page content -->
 			</section>
 		</article>

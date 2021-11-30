@@ -21,11 +21,11 @@ $ENTRIES = getAllEntries();
 	<meta charset="UTF-8" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0" name="viewport" />
-	<link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/main.css?t=1" rel="stylesheet" type="text/css" />
 	<link href="assets/css/nav.css?t=1" rel="stylesheet" type="text/css" />
-	<link href="assets/css/categorias.css" rel="stylesheet" type="text/css" />
-	<link href="assets/css/posts.css" rel="stylesheet" type="text/css" />
-	<link href="assets/css/widget.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/categorias.css?t=1" rel="stylesheet" type="text/css" />
+	<link href="assets/css/entries.css?t=1" rel="stylesheet" type="text/css" />
+	<link href="assets/css/widget.css?t=1" rel="stylesheet" type="text/css" />
 	<title><?= $DATA['title'] ?? '' ?></title>
 </head>
 
@@ -35,8 +35,8 @@ $ENTRIES = getAllEntries();
 		<article>
 			<section>
 				<!-- Start page content -->
-				<?php foreach ($ENTRIES as $key => $post) : ?>
-					<?php include('templates/models/postModels.php'); ?>
+				<?php foreach ($ENTRIES as $key => $entry) : ?>
+					<?php include('templates/models/compressedEntryModel.php'); ?>
 				<?php endforeach; ?>
 				<!-- End page content -->
 			</section>

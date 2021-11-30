@@ -1,0 +1,74 @@
+.entry-outer { padding: 0; }
+.entry-outer header,
+.entry-outer.model {
+	padding: 1em;
+}
+
+.entry-outer header {
+    box-shadow: 0px 6px 5px -5px;
+    position: relative;
+}
+
+.entry-outer > header .edit-buttom {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+}
+
+.entry-outer > header .edit-buttom input[type=submit] {
+    color: transparent;
+    height: 100%;
+    width: 100%;
+    background: url('../images/edit.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.entry-outer > header .edit-buttom input[type=submit]:hover {
+    background-color: lightgray;
+}
+
+.entry-outer.model {
+    box-shadow: 6px 6px 5px -5px;
+}
+
+.entry-outer header h2,
+.entry-outer.model h2 { margin: 0; }
+
+.entry-outer header span,
+.entry-outer.model span { 
+    font-size: 10pt; 
+    color: gray; 
+}
+
+.entry-outer main{ padding: 1em 2em; }
+.entry-outer footer{ 
+    margin-bottom: 1em;
+    border-top: 1px solid gray;
+    padding: 1em;
+}
+
+.entry-outer.model:hover {
+    background-color: #eee;
+}
+
+.entry-outer.model:hover,
+.entry-outer.model * {
+    cursor: pointer;
+    -webkit-touch-callout: none;
+      -webkit-user-select: none;
+       -khtml-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+}
+
+.entry-outer.model.compressed {
+    width: 50%;
+    box-sizing: border-box;
+}

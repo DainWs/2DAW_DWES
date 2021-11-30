@@ -36,17 +36,11 @@ nav > ul > li.profile > a {
 }
 
 nav > ul > li.profile {
-    flex-grow: 1;
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-    align-items: flex-end;
-    position: relative;
+    margin-left: auto;
 }
 
 nav > ul > li.profile > ul {
     position: absolute;
-    bottom: -100%;
 }
 
 nav > ul > li.profile form input[type="submit"]{

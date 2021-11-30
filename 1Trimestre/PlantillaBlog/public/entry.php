@@ -8,9 +8,13 @@ require_once('../src/services/db/DBEntryConnection.php');
 require_once('../src/controllers/PostController.php');
 
 $USER_SESSION = getSession();
+
 $CATEGORIAS = getAllCategories();
-$ENTRIES = getAllEntries();
-$USERS = getAllUsers(USER_DATE);
+
+if (!isset($_GET['entryID'])) {
+    header('Location: home.php');
+}
+$ENTRY = getEntryByID($_GET['entryID']);
 ?>
 <html lang="es">
 
@@ -20,37 +24,18 @@ $USERS = getAllUsers(USER_DATE);
 	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0" name="viewport" />
 	<link href="assets/css/main.css?t=1" rel="stylesheet" type="text/css" />
     <link href="assets/css/nav.css?t=1" rel="stylesheet" type="text/css" />
-	<link href="assets/css/entries.css?t=5" rel="stylesheet" type="text/css" />
-    <link href="assets/css/users.css?t=5" rel="stylesheet" type="text/css" />
-	<link href="assets/css/widget.css?t=5" rel="stylesheet" type="text/css" />
+	<link href="assets/css/entries.css?t=1" rel="stylesheet" type="text/css" />
+	<link href="assets/css/widget.css?t=1" rel="stylesheet" type="text/css" />
 	<title><?= $DATA['title'] ?? '' ?></title>
 </head>
 
 <body>
     <?php include('templates/header.php'); ?>
 	<section>
-		<article class="main-flex-article">
-            <header>
-                <h1>Lastest Posts</h1>
-            </header>
-			<section class="flex-list">
+		<article>
+			<section>
 				<!-- Start page content -->
-				<?php for ($i = 0; $i < 4 && $i < count($ENTRIES); $i++): ?>
-					<?php $entry = $ENTRIES[array_keys($ENTRIES)[$i]]; ?>
-                    <?php include('templates/models/compressedEntryModel.php'); ?>
-				<?php endfor; ?>
-				<!-- End page content -->
-			</section>
-
-            <header>
-                <h1>Newests Users</h1>
-            </header>
-			<section class="flex-list">
-				<!-- Start page content -->
-				<?php for ($i = 0; $i < 4 && $i < count($USERS); $i++): ?>
-					<?php $user = $USERS[array_keys($USERS)[$i]]; ?>
-                    <?php include('templates/models/compressedUserModel.php'); ?>
-				<?php endfor; ?>
+				<?php include('templates/models/entryModels.php'); ?>
 				<!-- End page content -->
 			</section>
 		</article>

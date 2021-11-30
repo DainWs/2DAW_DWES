@@ -8,9 +8,9 @@
                 <ul>
                     <?php for ($i = 1; $i < 5 && $i <= count($CATEGORIAS); $i++) : ?>
                         <?php $value = $CATEGORIAS[$i]; ?>
-                        <?= "<li id=\"categoria_$i\">"; ?>
-                        <?= "<a href=\"categorias.php?category=$value\">$value</a>"; ?>
-                        <?= "</li>"; ?>
+                        <li id="categoria_<?= $i ?>">
+                            <a href="categorias.php?category=<?= $value ?>"><?= $value ?></a>
+                        </li>
                     <?php endfor; ?>
                 </ul>
             </li>
@@ -18,6 +18,12 @@
                 <li class="profile">
                     <a><?= $USER_SESSION[USER_NAME] ?></a>
                     <ul>
+                        <li>
+                            <a href="categoryBuilder.php">New Category</a>
+                        </li>
+                        <li>
+                            <a href="entryBuilder.php">New Entry</a>
+                        </li>
                         <li>
                             <form action="<?= $_SERVER['PHP_SELF']; ?>" method="POST">
                                 <input id="logout-btn" type="submit" value="Cerrar sesi&oacute;n" />
