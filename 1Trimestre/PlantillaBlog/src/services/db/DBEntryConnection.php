@@ -23,8 +23,64 @@ function saveEntry(Array $entry): bool {
         
         // Execute the SQL Sentence
         $result = (mysqli_query($connection, $sql)) ? true : false;
-        echo $sql;
-        echo ($result) ? 'true' : 'false';
+    }
+    catch(Exception $ex) {}
+    finally {
+        //Close the connection
+        if(isset($connection)) {
+            $connection->close();
+        }
+    }
+    return $result;
+}
+
+/**
+ * Update the sended entry data (represented by an Array) in the database
+ * @param Array $entry The entry data represented as Array
+ * @return true if was successfully saved
+ * @return false if it can't be saved.
+ */
+function updateEntry(Array $entry): bool {
+    try {
+        //Open the connection
+        $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
+        $values = validateEntry($connection, $entry);
+
+        $id = $values[ENTRY_ID];
+        $idUsuario = $values[ENTRY_USER_ID];
+        $idCategoria = $values[ENTRY_CATEGORY_ID];
+        $title = $values[ENTRY_TITLE];
+        $description = $values[ENTRY_DESCRIPTION];
+        $date = $values[ENTRY_DATE] ?? date('Y-m-d H:i:s');
+
+        //make UPDATE SQL Sentence
+        $sql = "UPDATE ENTRADAS SET ".ENTRY_ID."=$id, ". ENTRY_USER_ID ."=$idUsuario, ". ENTRY_CATEGORY_ID ."=$idCategoria, "
+                . ENTRY_TITLE ."='$title', ".ENTRY_DESCRIPTION."='$description', ".ENTRY_DATE."='$date' WHERE ".ENTRY_ID."=$id";
+
+        // Execute the SQL Sentence
+        $result = (mysqli_query($connection, $sql)) ? true : false;
+    }
+    catch(Exception $ex) {}
+    finally {
+        //Close the connection
+        if(isset($connection)) {
+            $connection->close();
+        }
+    }
+    return $result;
+}
+
+function deleteEntry($id): bool {
+    try {
+        //Open the connection
+        $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
+        $validId = mysqli_real_escape_string($connection, $id);
+
+        //make INSERT SQL Sentence
+        $sql = "DELETE FROM ENTRADAS WHERE ".ENTRY_ID."=$validId";
+        
+        // Execute the SQL Sentence
+        $result = (mysqli_query($connection, $sql)) ? true : false;
     }
     catch(Exception $ex) {}
     finally {

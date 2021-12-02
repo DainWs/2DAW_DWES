@@ -4,6 +4,11 @@
     --category-field-checked-background: rgb(46, 46, 46);
 }
 
+body > section > article > section {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 form div.category-div {
     overflow: auto;
     max-height: 400px;

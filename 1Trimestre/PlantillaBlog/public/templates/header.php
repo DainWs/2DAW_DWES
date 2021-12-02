@@ -19,10 +19,10 @@
                     <a><?= $USER_SESSION[USER_NAME] ?></a>
                     <ul>
                         <li>
-                            <a href="categoryBuilder.php">New Category</a>
+                            <a href="categoryNew.php">New Category</a>
                         </li>
                         <li>
-                            <a href="entryBuilder.php">New Entry</a>
+                            <a href="entryNew.php">New Entry</a>
                         </li>
                         <li>
                             <form action="<?= $_SERVER['PHP_SELF']; ?>" method="POST">

@@ -10,6 +10,13 @@
                     <input type="hidden" name="entryID" value="<?= $ENTRY[ENTRY_ID] ?>"/>
                     <input type="submit" value="Edit"/>
                 </form>
+                <?php if($USER_SESSION[USER_ID] == $ENTRY[ENTRY_USER_ID]): ?>
+                    <form class="delete-buttom" action="<?= $_SERVER['PHP_SELF']; ?>" method="POST">
+                        <input type="hidden" name="entryID" value="<?= $ENTRY[ENTRY_ID] ?>"/>
+                        <input type="hidden" name="submitType" value="<?= SUBMIT_TYPE_DELETE_ENTRY ?>" />
+                        <input type="submit" value="Borrar"/>
+                    </form>
+                <?php endif; ?>
             <?php endif; ?>
         </header>
         <main>

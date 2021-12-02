@@ -35,6 +35,12 @@ define('SQL_ORDER_DESC', 'DESC');
 define('SUBMIT_TYPE_LOGOUT', 'LogoutPost');
 define('SUBMIT_TYPE_LOGIN', 'LoginPost');
 define('SUBMIT_TYPE_SIGNIN', 'SigninPost');
+define('SUBMIT_TYPE_NEW_ENTRY', 'newEntry');
+define('SUBMIT_TYPE_EDIT_ENTRY', 'editEntry');
+define('SUBMIT_TYPE_DELETE_ENTRY', 'deleteUser');
+define('SUBMIT_TYPE_NEW_CATEGORY', 'newCategory');
+define('SUBMIT_TYPE_EDIT_CATEGORY', 'editCategory');
+define('SUBMIT_TYPE_EDIT_USER', 'editUser');
 
 /* Others */
 define('DATE_FORMAT', 'd/m/Y');

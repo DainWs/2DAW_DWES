@@ -9,6 +9,7 @@ require_once('../src/controllers/PostController.php');
 
 $USER_SESSION = getSession();
 
+$USERS = getAllUsers();
 $CATEGORIAS = getAllCategories();
 
 if (!isset($_GET['entryID'])) {
@@ -33,20 +34,7 @@ $IS_ENTRY_NEW = false;
 <body>
     <?php include('templates/header.php'); ?>
 	<section>
-		<article>
-			<section>
-				<!-- Start page content -->
-				<?php include('templates/models/editEntryModel.php'); ?>
-				<!-- End page content -->
-			</section>
-		</article>
-		<aside>
-            <?php if (isset($DATA['showSessionForms']) && $DATA['showSessionForms']): ?>
-                <?php include('templates/widgets/loginWidget.php'); ?>
-                <?php include('templates/widgets/signinWidget.php'); ?>
-            <?php else: ?>
-            <?php endif; ?>
-		</aside>
+		<?php include('templates/models/editEntryModel.php'); ?>
 	</section>
     <?php include('templates/footer.php'); ?>
 </body>

@@ -59,6 +59,8 @@ $USERS = getAllUsers(USER_DATE);
                 <?php include('templates/widgets/loginWidget.php'); ?>
                 <?php include('templates/widgets/signinWidget.php'); ?>
             <?php else: ?>
+				<?php include('templates/widgets/newEntryWidget.php'); ?>
+				<?php include('templates/widgets/newCategoryWidget.php'); ?>
             <?php endif; ?>
 		</aside>
 	</section>
