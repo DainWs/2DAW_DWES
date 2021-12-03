@@ -75,7 +75,9 @@ body > footer .widget {
 	background-color: var(--nav-active-background);
 }
   
-body > section input[type=button]:hover {
+body > section input[type=button]:hover,
+.widget input[type=button]:hover,
+.widget input[type=submit]:hover {
     background-color: #45a049;
 }
 
@@ -85,6 +87,10 @@ body > section input[type=button]:hover {
 
 .widget #form-book-isreaded:checked ~ .on-book-readed {
     visibility: visible;
+}
+
+.widget .search-form {
+
 }
 
 body > footer > section {

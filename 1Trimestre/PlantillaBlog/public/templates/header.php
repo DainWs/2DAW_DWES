@@ -9,7 +9,7 @@
                     <?php for ($i = 1; $i < 5 && $i <= count($CATEGORIAS); $i++) : ?>
                         <?php $value = $CATEGORIAS[$i]; ?>
                         <li id="categoria_<?= $i ?>">
-                            <a href="categorias.php?category=<?= $value ?>"><?= $value ?></a>
+                            <a href="categorias.php?category=<?= $i ?>"><?= $value ?></a>
                         </li>
                     <?php endfor; ?>
                 </ul>
@@ -18,9 +18,6 @@
                 <li class="profile">
                     <a><?= $USER_SESSION[USER_NAME] ?></a>
                     <ul>
-                        <li>
-                            <a href="categoryNew.php">New Category</a>
-                        </li>
                         <li>
                             <a href="entryNew.php">New Entry</a>
                         </li>

@@ -28,6 +28,9 @@ define('ENTRY_DATE', 'FECHA');
 define('ENTRY_USER_NAME', 'USUARIO');
 define('ENTRY_CATEGORY_NAME', 'CATEGORY');
 
+define('ENTRY_USER', 'ENTRY_USER');
+define('ENTRY_CATEGORY', 'ENTRY_CATEGORY');
+
 define('SQL_ORDER_ASC', 'ASC');
 define('SQL_ORDER_DESC', 'DESC');
 
@@ -39,8 +42,8 @@ define('SUBMIT_TYPE_NEW_ENTRY', 'newEntry');
 define('SUBMIT_TYPE_EDIT_ENTRY', 'editEntry');
 define('SUBMIT_TYPE_DELETE_ENTRY', 'deleteUser');
 define('SUBMIT_TYPE_NEW_CATEGORY', 'newCategory');
-define('SUBMIT_TYPE_EDIT_CATEGORY', 'editCategory');
 define('SUBMIT_TYPE_EDIT_USER', 'editUser');
+define('SUBMIT_TYPE_DELETE_USER', 'deleteUser');
 
 /* Others */
 define('DATE_FORMAT', 'd/m/Y');

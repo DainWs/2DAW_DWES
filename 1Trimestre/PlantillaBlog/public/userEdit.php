@@ -8,8 +8,8 @@ require_once('../src/services/db/DBEntryConnection.php');
 require_once('../src/controllers/PostController.php');
 
 $USER_SESSION = getSession();
+
 $CATEGORIAS = getAllCategories();
-$IS_CATEGORY_NEW = true;
 ?>
 <html lang="es">
 
@@ -19,7 +19,7 @@ $IS_CATEGORY_NEW = true;
 	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0" name="viewport" />
 	<link href="assets/css/main.css?t=1" rel="stylesheet" type="text/css" />
     <link href="assets/css/nav.css?t=1" rel="stylesheet" type="text/css" />
-	<link href="assets/css/category.css?t=1" rel="stylesheet" type="text/css" />
+	<link href="assets/css/entries.css?t=1" rel="stylesheet" type="text/css" />
 	<link href="assets/css/widget.css?t=1" rel="stylesheet" type="text/css" />
 	<title><?= $DATA['title'] ?? '' ?></title>
 </head>
@@ -27,7 +27,7 @@ $IS_CATEGORY_NEW = true;
 <body>
     <?php include('templates/header.php'); ?>
 	<section>
-		<?php include('templates/models/editCategoryModel.php'); ?>
+		<?php include('templates/models/editUserModel.php'); ?>
 	</section>
     <?php include('templates/footer.php'); ?>
 </body>

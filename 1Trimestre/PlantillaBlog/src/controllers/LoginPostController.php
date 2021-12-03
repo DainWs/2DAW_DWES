@@ -22,17 +22,24 @@ function validateUserCredentials(String $email, String $password): Array|null {
 
 /**
  * Do all actions for a login post type
- * @return String error mensaje
+ * @return Array error mensaje
  * @return true if was successfully complete
+ * @return false if has errors
  */
-function doLoginPost(): String|bool {
+function doLoginPost(): Array|bool {
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
-    $err = '';
-    if (empty($email) || empty($email)) {
-        $err = 'You have to specify a email and password.';
-    } else {
+    $err = [];
+    if (empty($email)) {
+        $err[USER_EMAIL] = 'You have to specify a email.';
+    }
+    
+    if (empty($password)) {
+        $err[USER_PASSWORD] = 'You have to specify a password.';
+    } 
+
+    if (count($err) == 0){
         $userCredentials = validateUserCredentials($email, $password);
         if ($userCredentials != null) {
             addSession($userCredentials);

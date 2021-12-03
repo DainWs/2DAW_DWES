@@ -9,12 +9,7 @@ require_once('../src/controllers/PostController.php');
 
 $USER_SESSION = getSession();
 $CATEGORIAS = getAllCategories();
-
-if (!isset($_GET['categoryID'])) {
-    header('Location: home.php');
-}
-$CATEGORY = getCategoryByID($_GET['categoryID']);
-$IS_CATEGORY_NEW = false;
+$ENTRIES = getAllEntries($_GET['entryName'] ?? "", $_GET['user'] ?? -1, $_GET['category'] ?? -1);
 ?>
 <html lang="es">
 
@@ -23,8 +18,9 @@ $IS_CATEGORY_NEW = false;
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0" name="viewport" />
 	<link href="assets/css/main.css?t=1" rel="stylesheet" type="text/css" />
-    <link href="assets/css/nav.css?t=1" rel="stylesheet" type="text/css" />
-	<link href="assets/css/category.css?t=1" rel="stylesheet" type="text/css" />
+	<link href="assets/css/nav.css?t=1" rel="stylesheet" type="text/css" />
+	<link href="assets/css/categorias.css?t=1" rel="stylesheet" type="text/css" />
+	<link href="assets/css/entries.css?t=1" rel="stylesheet" type="text/css" />
 	<link href="assets/css/widget.css?t=1" rel="stylesheet" type="text/css" />
 	<title><?= $DATA['title'] ?? '' ?></title>
 </head>
@@ -32,7 +28,22 @@ $IS_CATEGORY_NEW = false;
 <body>
     <?php include('templates/header.php'); ?>
 	<section>
-		<?php include('templates/models/editCategoryModel.php'); ?>
+		<article>
+			<section>
+				<!-- Start page content -->
+				<?php foreach ($ENTRIES as $key => $entry) : ?>
+					<?php include('templates/models/compressedEntryModel.php'); ?>
+				<?php endforeach; ?>
+				<!-- End page content -->
+			</section>
+		</article>
+		<aside>
+            <?php include('templates/widgets/forms/searchWidget.php') ?>
+			<?php if(hasSession()): ?>
+				<?php include('templates/widgets/forms/newCategoryWidget.php'); ?>
+				<?php include('templates/widgets/forms/newEntryWidget.php'); ?>
+			<?php endif; ?>
+		</aside>
 	</section>
     <?php include('templates/footer.php'); ?>
 </body>

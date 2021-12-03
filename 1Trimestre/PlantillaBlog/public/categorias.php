@@ -7,13 +7,9 @@ require_once('../src/services/db/DBEntryConnection.php');
 
 require_once('../src/controllers/PostController.php');
 
-if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_POST['category'])) {
-    
-}
-
 $USER_SESSION = getSession();
 $CATEGORIAS = getAllCategories();
-$ENTRIES = getAllEntries();
+$ENTRIES = getAllEntries("", $_GET['user'] ?? -1, $_GET['category'] ?? -1);
 ?>
 <html lang="es">
 
@@ -42,10 +38,11 @@ $ENTRIES = getAllEntries();
 			</section>
 		</article>
 		<aside>
-            <?php include('templates/widgets/categoryWidget.php') ?>
+            <?php include('templates/widgets/forms/searchWidget.php') ?>
+            <?php include('templates/widgets/forms/categoryWidget.php') ?>
 			<?php if(hasSession()): ?>
-				<?php include('templates/widgets/newEntryWidget.php'); ?>
-				<?php include('templates/widgets/newCategoryWidget.php'); ?>
+				<?php include('templates/widgets/forms/newCategoryWidget.php'); ?>
+				<?php include('templates/widgets/forms/newEntryWidget.php'); ?>
 			<?php endif; ?>
 		</aside>
 	</section>

@@ -69,15 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submitType'])) {
             if (hasSession()) {
                 $result = doCategoryNewPost();
                 if (is_string($result)) {
-                    $DATA['errors'] = [0 => $result];
-                }
-            }
-            break;
-        case SUBMIT_TYPE_EDIT_CATEGORY:
-            if (hasSession()) {
-                $result = doCategoryDeletePost();
-                if (is_string($result)) {
-                    $DATA['errors'] = [0 => $result];
+                    $DATA['errors'] = [SUBMIT_TYPE_NEW_CATEGORY => $result];
                 }
             }
             break;

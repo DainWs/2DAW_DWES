@@ -51,8 +51,11 @@ En concreto podremos:
 - [ ] Añade un formulario para buscar dentro de nuestro blog.
 - [ ] Usando el título de la entrada buscamos si tenemos una entrada con ese valor. Es decir, que contienen algo de esta información en el título de la entrada
 
-
-
+## Dudas
+- [ ] Crear entradas para usuarios identificados
+- [ ] Redirecciona al index.php
+- [ ] Recuerda que se han mostrado sólo unas líneas.
+- [ ] Permite borrar y editar entradas a los usuarios logueados
 
 ## TODO Tasks
 - [ ] Add button in CategoriasWidget.php for add new categories.
@@ -63,6 +66,14 @@ En concreto podremos:
 - [ ] Test form controls.
 - [ ] Text insert, update and delete
     - [ ] Users
+        - [ ] Insert
+        - [ ] Update
+        - [ ] Delete
+    - [ ] Entries
+        - [ ] Insert
+        - [ ] Update
+        - [ ] Delete
+    - [ ] Categories
         - [ ] Insert
         - [ ] Update
         - [ ] Delete

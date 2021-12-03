@@ -78,6 +78,7 @@ body > section > article > section {
 
 body > section > aside {
 	min-width: 300px;
+	max-width: 300px;
 }
 
 /* El título */

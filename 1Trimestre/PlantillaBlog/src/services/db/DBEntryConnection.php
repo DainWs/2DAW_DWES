@@ -154,28 +154,36 @@ function getEntryByID(int $id): Array {
  * @param int $idCategory the specified category id
  * @return Array of table entries
  */
-function getAllEntries(int $idUser = -1, int $idCategoria = -1): Array {
+function getAllEntries(String $entryName = "", int $idUser = -1, int $idCategoria = -1): Array {
     $entries = [];
     try {
         //Open the connection
         $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
-        
+        $validName = mysqli_real_escape_string($connection, $entryName);
+        $validUser = mysqli_real_escape_string($connection, $idUser);
+        $validCategory = mysqli_real_escape_string($connection, $idCategoria);
+
+
         //make SQL Sentence
         $sql = "SELECT E.".ENTRY_ID.', E.'.ENTRY_USER_ID.', U.'.USER_NAME.' AS '.ENTRY_USER_NAME.', E.'.ENTRY_CATEGORY_ID.', C.'.CATEGORY_NAME.' AS '.ENTRY_CATEGORY_NAME.', E.'.ENTRY_TITLE.', E.'.ENTRY_DESCRIPTION.', E.'.ENTRY_DATE. 
                 " FROM ENTRADAS E" . 
                 " LEFT OUTER JOIN USUARIOS U ON E.".ENTRY_USER_ID."=U.". USER_ID . 
                 " LEFT OUTER JOIN CATEGORIAS C ON E.".ENTRY_CATEGORY_ID."=C.".CATEGORY_ID;
 
-        if (($idUser >= 0) || ($idCategoria >= 0)) {
+        if (!empty($validName) || ($idUser >= 0) || ($idCategoria >= 0)) {
             $sql .= ' WHERE';
         }
 
-        if ($idUser >= 0) {
-            $sql .= ' '.ENTRY_USER_ID."=$idUser";
+        if (!empty($validName)) {
+            $sql .= ' E.'.ENTRY_TITLE." LIKE \"%$validName%\"";
         }
 
-        if ($idCategoria >= 0) {
-            $sql .= ' '.ENTRY_CATEGORY_ID."=$idUser";
+        if ($validUser >= 0) {
+            $sql .= ' E.'.ENTRY_USER_ID."=$validUser";
+        }
+
+        if ($validCategory >= 0) {
+            $sql .= ' E.'.ENTRY_CATEGORY_ID."=$validCategory";
         }
 
         // Execute the SQL Sentence

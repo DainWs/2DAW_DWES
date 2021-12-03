@@ -6,22 +6,36 @@ require_once("../src/services/db/DBEntryConnection.php");
 
 /**
  * Do all actions for a entry edit post type
- * @return String error mensaje
+ * @return Array error mensaje
  * @return true if was successfully complete
+ * @return false if has errors
  */
-function doEntryEditPost(): String|bool {
+function doEntryEditPost(): Array|bool {
     $id = $_POST['entryId'] ?? '';
     $title = $_POST['title'] ?? '';
     $author = $_POST['author'] ?? '';
     $category = $_POST['category'] ?? '';
     $content = $_POST['content'] ?? '';
 
-    $err = '';
-    if (empty($title) || empty($author) || empty($category) || empty($content)) {
-        $err = 'You have to specify a title, author, category and content.';
-    } else if (empty($id)) {
-        $err = 'The id cant be null.';
-    } else {
+    $err = [];
+    if (empty($id)) {
+        $err[ENTRY_ID] = 'You have to specify a entry id.';
+    }
+
+    if (empty($title)) {
+        $err[ENTRY_TITLE] = 'You have to specify a title.';
+    }
+
+    if (empty($author)) {
+        $err[ENTRY_USER] = 'You have to specify a author.';
+    }
+
+    if (empty($category)) {
+        $err[ENTRY_CATEGORY] = 'You have to specify a category.';
+    }
+
+    $result = true;
+    if (count($err) == 0) {
         $entry = [
             ENTRY_ID => $id,
             ENTRY_USER_ID => $author,
@@ -29,45 +43,66 @@ function doEntryEditPost(): String|bool {
             ENTRY_TITLE => $title,
             ENTRY_DESCRIPTION => $content
         ];
-        updateEntry($entry);
+        $result = updateEntry($entry);
     }
-    return (!empty($err))? $err : true;
+    return (count($err) > 0) ? $err : $result;
 }
 
 /**
  * Do all actions for a entry edit post type
- * @return String error mensaje
+ * @return Array error mensaje
  * @return true if was successfully complete
+ * @return false if has errors
  */
-function doEntryNewPost(): String|bool {
+function doEntryNewPost(): Array|bool {
     $title = $_POST['title'] ?? '';
     $author = $_POST['author'] ?? '';
     $category = $_POST['category'] ?? '';
     $content = $_POST['content'] ?? '';
 
-    $err = '';
-    if (empty($title) || empty($author) || empty($category) || empty($content)) {
-        $err = 'You have to specify a title, author, category and content.';
-    } else {
+    $err = [];
+    if (empty($title)) {
+        $err[ENTRY_TITLE] = 'You have to specify a title.';
+    }
+
+    if (empty($author)) {
+        $err[ENTRY_USER] = 'You have to specify a author.';
+    }
+
+    if (empty($category)) {
+        $err[ENTRY_CATEGORY] = 'You have to specify a category.';
+    }
+
+    $result = true;
+    if (count($err) == 0) {
         $entry = [
             ENTRY_USER_ID => $author,
             ENTRY_CATEGORY_ID => $category,
             ENTRY_TITLE => $title,
             ENTRY_DESCRIPTION => $content
         ];
-        saveEntry($entry);
+        $result = saveEntry($entry);
     }
-    return (!empty($err))? $err : true;
+    return (count($err) > 0) ? $err : $result;
 }
 
-function doEntryDeletePost(): String|bool {
+/**
+ * Do all actions for a entry delete post type
+ * @return Array error mensaje
+ * @return true if was successfully complete
+ * @return false if has errors
+ */
+function doEntryDeletePost(): Array|bool {
     $id = $_POST['entryID'] ?? '';
 
-    $err = '';
+    $err = [];
     if (empty($id)) {
-        $err = 'No entry id specified.';
-    } else {
-        deleteEntry($id);
+        $err[ENTRY_ID] = 'No entry id specified.';
     }
-    return (!empty($err))? $err : true;
+
+    $result = true;
+    if (count($err) == 0) {
+        $result = deleteEntry($id);
+    }
+    return (count($err) > 0) ? $err : $result;
 }

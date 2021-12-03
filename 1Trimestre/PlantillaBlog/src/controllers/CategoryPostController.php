@@ -6,32 +6,45 @@ require_once("../src/services/db/DBCategoryConnection.php");
 
 /**
  * Do all actions for a category edit post type
- * @return String error mensaje
+ * @return Array error mensaje
  * @return true if was successfully complete
+ * @return false if has errors
  */
-function doCategoryNewPost(): String|bool {
+function doCategoryNewPost(): Array|bool {
     $name = $_POST['name'] ?? '';
 
-    $err = '';
+    $err = [];
     if (empty($name)) {
-        $err = 'You have to specify a name for a new category.';
-    } else {
+        $err[CATEGORY_NAME] = 'You have to specify a name for a new category.';
+    } 
+    
+    $result = true;
+    if (count($err) == 0) {
         $category = [
             CATEGORY_NAME => $name
         ];
-        saveCategory($category);
+        $result = saveCategory($category);
     }
-    return (!empty($err))? $err : true;
+    return (count($err) > 0) ? $err : $result;
 }
 
+/**
+ * Do all actions for a category delete post type
+ * @return Array error mensaje
+ * @return true if was successfully complete
+ * @return false if has errors
+ */
 function doCategoryDeletePost(): String|bool {
     $id = $_POST['categoryID'] ?? '';
 
-    $err = '';
+    $err = [];
     if (empty($id)) {
-        $err = 'No category id specified.';
-    } else {
-        deleteCategory($id);
+        $err[CATEGORY_ID] = 'No category id specified.';
+    } 
+
+    $result = true;
+    if (count($err) == 0) {
+        $result = deleteCategory($id);
     }
-    return (!empty($err))? $err : true;
+    return (count($err) > 0) ? $err : $result;
 }

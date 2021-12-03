@@ -90,10 +90,10 @@ nav > ul > li.profile form input[type="submit"]{
 nav li > ul {
     display: none;
     position: absolute;
+    z-index: 10;
 }
 
 a {
-	opacity: .9;
 	color: #32A1CC;
 	text-decoration: none;
 }

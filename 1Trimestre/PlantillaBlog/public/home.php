@@ -55,12 +55,13 @@ $USERS = getAllUsers(USER_DATE);
 			</section>
 		</article>
 		<aside>
-            <?php if (isset($DATA['showSessionForms']) && $DATA['showSessionForms']): ?>
-                <?php include('templates/widgets/loginWidget.php'); ?>
-                <?php include('templates/widgets/signinWidget.php'); ?>
+            <?php include('templates/widgets/forms/searchWidget.php') ?>
+            <?php if (hasSession()): ?>
+                <?php include('templates/widgets/forms/newCategoryWidget.php'); ?>
+				<?php include('templates/widgets/forms/newEntryWidget.php'); ?>
             <?php else: ?>
-				<?php include('templates/widgets/newEntryWidget.php'); ?>
-				<?php include('templates/widgets/newCategoryWidget.php'); ?>
+				<?php include('templates/widgets/forms/loginWidget.php'); ?>
+                <?php include('templates/widgets/forms/signinWidget.php'); ?>
             <?php endif; ?>
 		</aside>
 	</section>
