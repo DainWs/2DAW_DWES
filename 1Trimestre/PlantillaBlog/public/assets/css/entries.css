@@ -18,6 +18,10 @@
     height: 30px;
 }
 
+.entry-outer > header .delete-buttom {
+    right: 35px;
+}
+
 .entry-outer > header .delete-buttom input[type=submit],
 .entry-outer > header .edit-buttom input[type=submit] {
     color: transparent;
@@ -29,6 +33,10 @@
     border: 1px solid gray;
     border-radius: 5px;
     padding: 5px;
+}
+
+.entry-outer > header .delete-buttom input[type=submit] {
+    background: url('../images/edit.png');
 }
 
 .entry-outer > header .delete-buttom input[type=submit]:hover,
