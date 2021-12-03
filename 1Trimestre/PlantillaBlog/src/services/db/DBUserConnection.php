@@ -39,6 +39,72 @@ function saveUser(Array $user): bool {
     return $result;
 }
 
+
+/**
+ * Update the sended user data (represented by an Array) in the database
+ * @param Array $user The user data represented as Array
+ * @return true if was successfully saved
+ * @return false if it can't be saved.
+ */
+function updateUser(Array $user): bool {
+    try {
+        //Open the connection
+        $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
+        $values = validateUser($connection, $user);
+
+        $id = $values[USER_ID];
+        $nombre = $values[USER_NAME];
+        $apellidos = $values[USER_SURNAME];
+        $email = $values[USER_EMAIL];
+        // Password encrypted with MD5
+        $password = md5($values[USER_PASSWORD]);
+
+        //make UPDATE SQL Sentence
+        $sql = "UPDATE USUARIOS SET ";
+
+        $dataCount = 0;
+        if (!empty($nombre)) {
+            $sql .= USER_NAME."='$nombre' ";
+            $dataCount++;
+        }
+
+        if (!empty($apellidos)) {
+            if ($dataCount > 0) {
+                $sql .= ',';    
+            }
+            $sql .= USER_SURNAME."='$apellidos' ";
+            $dataCount++;
+        }
+
+        if (!empty($email)) {
+            if ($dataCount > 0) {
+                $sql .= ',';    
+            }
+            $sql .= USER_EMAIL."='$email' ";
+            $dataCount++;
+        }
+
+        if (!empty($password)) {
+            if ($dataCount > 0) {
+                $sql .= ',';    
+            }
+            $sql .= USER_PASSWORD."='$password' ";
+        }
+
+        $sql .= "WHERE ".USER_ID."=$id";
+        // Execute the SQL Sentence
+        $result = (mysqli_query($connection, $sql)) ? true : false;
+    }
+    catch(Exception $ex) {}
+    finally {
+        //Close the connection
+        if(isset($connection)) {
+            $connection->close();
+        }
+    }
+    return $result;
+}
+
 /**
  * Check if a user exist
  * @return true if exist

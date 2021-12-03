@@ -1,6 +1,6 @@
 <article class="user-outer">
     <main>
-        <form action="<?= $_SERVER['PHP_SELF'] . '?userID=' . $USER[USER_ID]; ?>" enctype="application/x-www-form-urlencoded" method="POST" autocomplete="off">
+        <form action="user.php" enctype="application/x-www-form-urlencoded" method="POST" autocomplete="off">
             <label for="user-name">Nombre:</label><br />
             <input id="user-name" type="text" name="name" value="<?= $_POST['name'] ?? '' ?>" /><br />
 
