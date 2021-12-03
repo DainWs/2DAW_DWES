@@ -1,4 +1,6 @@
 # Project
+For the database creation you can see the `./sql/SQLSentences`.
+
 ## Objetivo
 El objetivo es crear una aplicación básica para gestionar un blog.
 
