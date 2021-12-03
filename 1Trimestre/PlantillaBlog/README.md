@@ -52,7 +52,7 @@ En concreto podremos:
 - [ ] Usando el título de la entrada buscamos si tenemos una entrada con ese valor. Es decir, que contienen algo de esta información en el título de la entrada
 
 ## Dudas
-- [ ] Crear entradas para usuarios identificados
+- [X] Crear entradas para usuarios identificados
 - [ ] Redirecciona al index.php
 - [ ] Recuerda que se han mostrado sólo unas líneas.
 - [ ] Permite borrar y editar entradas a los usuarios logueados
