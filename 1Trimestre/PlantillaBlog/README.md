@@ -7,17 +7,16 @@ En concreto podremos:
 - [X] Hacer el login de usuarios
 - [ ] Editar los datos de los usuarios.
 - [X] Crear categorías para nuestro blog
-- [ ] Crear entradas para usuarios identificados
+- [X] Crear entradas para usuarios identificados
 - [X] Listar entradas en la página de inicio
 - [X] Crear una página de edición de entradas para usuarios logueados.
 - [X] Borrar entradas 
-- [ ] Además, se añadirá un buscador de entradas a la web
+- [X] Además, se añadirá un buscador de entradas a la web
 
 ## Crear categorías
 - [X] No olvides la conexión a la BBDD
 - [X] Recoge los valores del formulario y valida
 - [X] Si no hay errores inserta en la tabla categorias el nuevo valor 
-- [ ] Redirecciona al index.php
 
 ## Crear entradas
 - [X] Escribe un formulario para poder guardar las entradas de los usuarios identificados
@@ -27,7 +26,7 @@ En concreto podremos:
 
 ## Actualizar datos usuario
 - [ ] Crea un formulario para actualizar los datos del usuario.
-- [X] Conecta a la base de datos
+- [ ] Conecta a la base de datos
 - [ ] Recoge y valida los datos
 - [ ] Realiza una consulta de actualización con los nuevos datos del usuario. Recuerda que el id no se modifica
 - [ ] Controla los errores
@@ -48,14 +47,8 @@ En concreto podremos:
 - [X] Permite borrar y editar entradas a los usuarios logueados
 
 ## Añade un buscador
-- [ ] Añade un formulario para buscar dentro de nuestro blog.
-- [ ] Usando el título de la entrada buscamos si tenemos una entrada con ese valor. Es decir, que contienen algo de esta información en el título de la entrada
-
-## Dudas
-- [X] Crear entradas para usuarios identificados
-- [ ] Redirecciona al index.php
-- [ ] Recuerda que se han mostrado sólo unas líneas.
-- [ ] Permite borrar y editar entradas a los usuarios logueados
+- [X] Añade un formulario para buscar dentro de nuestro blog.
+- [X] Usando el título de la entrada buscamos si tenemos una entrada con ese valor. Es decir, que contienen algo de esta información en el título de la entrada
 
 ## TODO Tasks
 - [ ] Add button in CategoriasWidget.php for add new categories.
