@@ -50,3 +50,19 @@ En concreto podremos:
 ## Añade un buscador
 - [ ] Añade un formulario para buscar dentro de nuestro blog.
 - [ ] Usando el título de la entrada buscamos si tenemos una entrada con ese valor. Es decir, que contienen algo de esta información en el título de la entrada
+
+
+
+
+## TODO Tasks
+- [ ] Add button in CategoriasWidget.php for add new categories.
+- [ ] Add too the delete buttom in CategoriasWidget.php for categories.
+- [ ] Make the edit view for user data changes
+
+## Final tasks
+- [ ] Test form controls.
+- [ ] Text insert, update and delete
+    - [ ] Users
+        - [ ] Insert
+        - [ ] Update
+        - [ ] Delete

@@ -74,6 +74,28 @@ function getCategoryByID(int $id): Array {
     return $category;
 }
 
+function deleteCategory($id): bool {
+    try {
+        //Open the connection
+        $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
+        $validId = mysqli_real_escape_string($connection, $id);
+
+        //make INSERT SQL Sentence
+        $sql = "DELETE FROM CATEGORIAS WHERE ".CATEGORY_ID."=$validId";
+        
+        // Execute the SQL Sentence
+        $result = (mysqli_query($connection, $sql)) ? true : false;
+    }
+    catch(Exception $ex) {}
+    finally {
+        //Close the connection
+        if(isset($connection)) {
+            $connection->close();
+        }
+    }
+    return $result;
+}
+
 function getAllCategories(): Array {
     $categories = [];
     try {
