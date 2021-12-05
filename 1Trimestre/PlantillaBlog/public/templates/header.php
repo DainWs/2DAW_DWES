@@ -16,11 +16,10 @@
             </li>
             <?php if (hasSession()) : ?>
                 <li class="profile">
-                    <a><?= $USER_SESSION[USER_NAME] ?></a>
+                    <a href="user.php"><?= $USER_SESSION[USER_NAME] ?></a>
                     <ul>
-                        <li>
-                            <a href="entryNew.php">New Entry</a>
-                        </li>
+                        <li><a href="userEdit.php">Editar perfil</a></li>
+                        <li><a href="entryNew.php">Nueva entrada</a></li>
                         <li>
                             <form action="<?= $_SERVER['PHP_SELF']; ?>" method="POST">
                                 <input id="logout-btn" type="submit" value="Cerrar sesi&oacute;n" />

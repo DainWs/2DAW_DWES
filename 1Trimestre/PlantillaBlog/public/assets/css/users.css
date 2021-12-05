@@ -1,4 +1,9 @@
-.user-outer { padding: 0; }
+.user-outer {
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+}
 .user-outer header,
 .user-outer.model {
 	padding: 1em;
@@ -46,4 +51,96 @@
 .user-outer.model.compressed {
     width: 50%;
     box-sizing: border-box;
+}
+
+.user-outer .grid-div {
+    flex-grow: 1;
+    display: grid;
+    grid-template-areas: 
+        "name surname image"
+        "email email image"
+        "date date none"
+        "auto auto auto";
+    grid-template-rows: minmax(20px, 1fr) minmax(20px, 1fr) minmax(20px, 1fr) minmax(auto, 50%);
+    grid-auto-columns: minmax(35%, auto) minmax(35%, auto) minmax(0px, 30%);
+}
+
+.user-outer .grid-div > .grid-name { grid-area: name; }
+.user-outer .grid-div > .grid-surname { grid-area: surname; }
+.user-outer .grid-div > .grid-image { grid-area: image; }
+.user-outer .grid-div > .grid-email { grid-area: email; }
+.user-outer .grid-div > .grid-date { grid-area: date; }
+
+.user-outer select,
+.user-outer textarea,
+.user-outer input {
+    font-size: 11pt;
+} 
+
+.user-outer .flex-grow {
+    flex-grow: 1;
+}
+
+.user-outer .textarea-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-outer textarea {
+    flex-grow: 1;
+    resize: none;
+}
+
+.user-outer select,
+.user-outer textarea,
+.user-outer input:not([type=radio]) {
+    width: 100%;
+    padding: 6px 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid var(--nav-background);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.user-outer input[type=submit]:hover {
+    cursor: pointer;
+	color: var(--nav-hover-color);
+	background-color: var(--nav-hover-background);
+}
+
+.user-outer input[type=submit]:active {
+	color: var(--nav-hover-color);
+	background-color: var(--nav-active-background);
+}
+
+.user-outer .save-buttom input[type=submit]:hover,
+.user-outer .save-buttom input[type=button]:hover {
+    background-color: #45a049;
+}
+
+.user-outer .delete-buttom {
+    border: 1px solid #ca1c1c;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #ca1c1c2a;
+}
+
+.user-outer .delete-buttom input[type=submit],
+.user-outer .delete-buttom input[type=button] {
+    color: white;
+    background-color: #f549499d;
+}
+
+.user-outer .delete-buttom input[type=submit]:hover,
+.user-outer .delete-buttom input[type=button]:hover {
+    background-color: #ca1c1c;
+}
+
+.user-outer .grid-div > div > span ~ p {
+    margin-top: 5px;
+}
+
+.user-outer form.grid-edit {
+    margin-bottom: 15px;
 }

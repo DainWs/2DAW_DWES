@@ -27,8 +27,8 @@ En concreto podremos:
 - [X] Este script puede ser reutilizado después para editar entradas.
 
 ## Actualizar datos usuario
-- [ ] Crea un formulario para actualizar los datos del usuario.
-- [ ] Conecta a la base de datos
+- [X] Crea un formulario para actualizar los datos del usuario.
+- [X] Conecta a la base de datos
 - [ ] Recoge y valida los datos
 - [ ] Realiza una consulta de actualización con los nuevos datos del usuario. Recuerda que el id no se modifica
 - [ ] Controla los errores
