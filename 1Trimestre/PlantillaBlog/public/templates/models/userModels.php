@@ -24,16 +24,21 @@
         </main>
         <footer>
             <?php if (hasSession()) : ?>
-                <form class="edit-buttom grid-edit" action="userEdit.php" method="GET">
+                <form class="edit-buttom" action="userEdit.php" method="GET">
                     <input type="hidden" name="userID" value="<?= $USER_SESSION[USER_ID] ?>" />
                     <input type="submit" value="Editar cuenta" />
                 </form>
-                <form class="delete-buttom grid-delete" action="<?= $_SERVER['PHP_SELF']; ?>" method="POST">
+                <form class="logout-buttom" action="home.php" method="POST">
+                    <input id="logout-btn" type="submit" value="Cerrar sesi&oacute;n" />
+                    <input type="hidden" name="submitType" value="<?= SUBMIT_TYPE_LOGOUT ?>" />
+                </form>
+                <form class="delete-buttom" action="<?= $_SERVER['PHP_SELF']; ?>" method="POST">
                     
                     <label for="login-password">Si quieres borrar este usuario, deberas proporcionar tu contrase&ntilde;a actual:</label><br />
                     <input id="login-password" type="password" name="password" value="<?= $_POST['password'] ?? '' ?>" /><br />
 
-                    <input type="hidden" name="userID" value="<?= $USER_SESSION[USER_ID] ?>" />
+                    <input type="hidden" name="id" value="<?= $USER_SESSION[USER_ID] ?>" />
+                    <input type="hidden" name="email" value="<?= $USER_SESSION[USER_EMAIL] ?>" />
                     <input type="hidden" name="submitType" value="<?= SUBMIT_TYPE_DELETE_USER ?>" />
                     <input type="submit" value="Borrar cuenta" />
                 </form>

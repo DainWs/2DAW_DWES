@@ -33,12 +33,12 @@
     padding: 1em;
 }
 
-.user-outer.model:hover {
+.user-outer.model:not(.compressed):hover {
     background-color: #eee;
 }
 
-.user-outer.model:hover,
-.user-outer.model * {
+.user-outer.model:not(.compressed):hover,
+.user-outer.model:not(.compressed) * {
     cursor: pointer;
     -webkit-touch-callout: none;
       -webkit-user-select: none;
@@ -141,6 +141,6 @@
     margin-top: 5px;
 }
 
-.user-outer form.grid-edit {
-    margin-bottom: 15px;
+.user-outer form.delete-buttom {
+    margin-top: 10px;
 }

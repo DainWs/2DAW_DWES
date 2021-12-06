@@ -117,7 +117,7 @@ function getEntryByID(int $id): Array {
         $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
 
         //make SQL Sentence
-        $sql = "SELECT E.".ENTRY_ID.', E.'.ENTRY_USER_ID.', U.'.USER_NAME.' AS '.ENTRY_USER_NAME.', E.'.ENTRY_CATEGORY_ID.', C.'.CATEGORY_NAME.' AS '.ENTRY_CATEGORY_NAME.', E.'.ENTRY_TITLE.', E.'.ENTRY_DESCRIPTION.', E.'.ENTRY_DATE. 
+        $sql = "SELECT E.".ENTRY_ID.', E.'.ENTRY_USER_ID.', U.'.USER_NAME.' AS '.ENTRY_USER_NAME.', U.'.USER_EMAIL.' AS '.ENTRY_USER_EMAIL.', E.'.ENTRY_CATEGORY_ID.', C.'.CATEGORY_NAME.' AS '.ENTRY_CATEGORY_NAME.', E.'.ENTRY_TITLE.', E.'.ENTRY_DESCRIPTION.', E.'.ENTRY_DATE. 
                 " FROM ENTRADAS E" . 
                 " LEFT OUTER JOIN USUARIOS U ON E.".ENTRY_USER_ID."=U.". USER_ID . 
                 " LEFT OUTER JOIN CATEGORIAS C ON E.".ENTRY_CATEGORY_ID."=C.".CATEGORY_ID . 
@@ -131,6 +131,7 @@ function getEntryByID(int $id): Array {
             ENTRY_ID => $data[ENTRY_ID],
             ENTRY_USER_ID => $data[ENTRY_USER_ID],
             ENTRY_USER_NAME => $data[ENTRY_USER_NAME],
+            ENTRY_USER_EMAIL => $data[ENTRY_USER_EMAIL],
             ENTRY_CATEGORY_ID => $data[ENTRY_CATEGORY_ID],
             ENTRY_CATEGORY_NAME => $data[ENTRY_CATEGORY_NAME],
             ENTRY_TITLE => $data[ENTRY_TITLE],
@@ -154,7 +155,7 @@ function getEntryByID(int $id): Array {
  * @param int $idCategory the specified category id
  * @return Array of table entries
  */
-function getAllEntries(String $entryName = "", int $idUser = -1, int $idCategoria = -1): Array {
+function getAllEntries(String $entryName = "", int $idUser = -1, int $idCategoria = -1, String $order = ENTRY_ID, String $orderType = SQL_ORDER_ASC): Array {
     $entries = [];
     try {
         //Open the connection
@@ -165,10 +166,11 @@ function getAllEntries(String $entryName = "", int $idUser = -1, int $idCategori
 
 
         //make SQL Sentence
-        $sql = "SELECT E.".ENTRY_ID.', E.'.ENTRY_USER_ID.', U.'.USER_NAME.' AS '.ENTRY_USER_NAME.', E.'.ENTRY_CATEGORY_ID.', C.'.CATEGORY_NAME.' AS '.ENTRY_CATEGORY_NAME.', E.'.ENTRY_TITLE.', E.'.ENTRY_DESCRIPTION.', E.'.ENTRY_DATE. 
+        $sql = "SELECT E.".ENTRY_ID.', E.'.ENTRY_USER_ID.', U.'.USER_NAME.' AS '.ENTRY_USER_NAME.', U.'.USER_EMAIL.' AS '.ENTRY_USER_EMAIL.', E.'.ENTRY_CATEGORY_ID.', C.'.CATEGORY_NAME.' AS '.ENTRY_CATEGORY_NAME.', E.'.ENTRY_TITLE.', E.'.ENTRY_DESCRIPTION.', E.'.ENTRY_DATE. 
                 " FROM ENTRADAS E" . 
                 " LEFT OUTER JOIN USUARIOS U ON E.".ENTRY_USER_ID."=U.". USER_ID . 
-                " LEFT OUTER JOIN CATEGORIAS C ON E.".ENTRY_CATEGORY_ID."=C.".CATEGORY_ID;
+                " LEFT OUTER JOIN CATEGORIAS C ON E.".ENTRY_CATEGORY_ID."=C.".CATEGORY_ID.
+                " ORDER BY $order $orderType";
 
         if (!empty($validName) || ($idUser >= 0) || ($idCategoria >= 0)) {
             $sql .= ' WHERE';
@@ -195,11 +197,12 @@ function getAllEntries(String $entryName = "", int $idUser = -1, int $idCategori
                 ENTRY_ID => $value[0],
                 ENTRY_USER_ID => $value[1],
                 ENTRY_USER_NAME => $value[2],
-                ENTRY_CATEGORY_ID => $value[3],
-                ENTRY_CATEGORY_NAME => $value[4],
-                ENTRY_TITLE => $value[5],
-                ENTRY_DESCRIPTION => $value[6],
-                ENTRY_DATE => $value[7]
+                ENTRY_USER_EMAIL => $value[3],
+                ENTRY_CATEGORY_ID => $value[4],
+                ENTRY_CATEGORY_NAME => $value[5],
+                ENTRY_TITLE => $value[6],
+                ENTRY_DESCRIPTION => $value[7],
+                ENTRY_DATE => $value[8]
             ];
             $entries[$value[0]] = $entry;
         }

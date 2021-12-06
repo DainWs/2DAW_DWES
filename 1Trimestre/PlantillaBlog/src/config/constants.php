@@ -26,6 +26,7 @@ define('ENTRY_DESCRIPTION', 'DESCRIPTION');
 define('ENTRY_DATE', 'FECHA');
 
 define('ENTRY_USER_NAME', 'USUARIO');
+define('ENTRY_USER_EMAIL', 'USUARIO_EMAIL');
 define('ENTRY_CATEGORY_NAME', 'CATEGORY');
 
 define('ENTRY_USER', 'ENTRY_USER');
@@ -40,10 +41,11 @@ define('SUBMIT_TYPE_LOGIN', 'LoginPost');
 define('SUBMIT_TYPE_SIGNIN', 'SigninPost');
 define('SUBMIT_TYPE_NEW_ENTRY', 'newEntry');
 define('SUBMIT_TYPE_EDIT_ENTRY', 'editEntry');
-define('SUBMIT_TYPE_DELETE_ENTRY', 'deleteUser');
+define('SUBMIT_TYPE_DELETE_ENTRY', 'deleteEntry');
 define('SUBMIT_TYPE_NEW_CATEGORY', 'newCategory');
 define('SUBMIT_TYPE_EDIT_USER', 'editUser');
 define('SUBMIT_TYPE_DELETE_USER', 'deleteUser');
 
 /* Others */
 define('DATE_FORMAT', 'd/m/Y');
+define('UNKNOWN_USER_EMAIL', 'unknown@BlogJose.com');

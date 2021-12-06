@@ -11,7 +11,7 @@
                     <?php $userID = $_POST['author'] ?? $ENTRY[ENTRY_USER_ID] ?? 1 ?>
                     <?php foreach ($USERS as $tmpUser) : ?>
                         <option value="<?= $tmpUser[USER_ID] ?>" <?= ($userID == $tmpUser[USER_ID]) ? 'selected' : '' ?>>
-                            <?= $tmpUser[USER_NAME] . ' ' . $tmpUser[USER_SURNAME] ?>
+                            <?= $tmpUser[USER_NAME] . ' ' . ($tmpUser[USER_SURNAME] ?? '') ?>
                         </option>
                     <?php endforeach; ?>
                 </select><br />

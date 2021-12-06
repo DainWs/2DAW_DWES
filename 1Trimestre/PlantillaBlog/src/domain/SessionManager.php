@@ -14,6 +14,17 @@ function addSession(array $data): void {
 }
 
 /**
+ * updates the current user data in session
+ * @param array $data the user data array
+ * @return void
+ */
+function updateSession(array $data): void {
+    if (hasSession()) {
+        $token = $_COOKIE['PHPSESSID'];
+        $_SESSION[$token] = $data;
+    }
+}
+/**
  * gets the current user data from session
  * @return array if the session contains user data
  * @return null if the session dont contains user data

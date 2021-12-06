@@ -9,8 +9,8 @@ require_once('../src/controllers/PostController.php');
 
 $USER_SESSION = getSession();
 $CATEGORIAS = getAllCategories();
-$ENTRIES = getAllEntries();
-$USERS = getAllUsers(USER_DATE);
+$ENTRIES = getAllEntries("", -1, -1, ENTRY_DATE, SQL_ORDER_DESC);
+$USERS = getAllUsers(USER_DATE, SQL_ORDER_DESC);
 ?>
 <html lang="es">
 

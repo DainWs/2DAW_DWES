@@ -1,13 +1,16 @@
 # Project
 For the database creation you can see the `./sql/SQLSentences`.
 
+## Unknown user password
+NQv*q}&a3d,5v2@p
+
 ## Objetivo
 El objetivo es crear una aplicación básica para gestionar un blog.
 
 En concreto podremos:
 - [X] Registrar usuarios
 - [X] Hacer el login de usuarios
-- [ ] Editar los datos de los usuarios.
+- [X] Editar los datos de los usuarios.
 - [X] Crear categorías para nuestro blog
 - [X] Crear entradas para usuarios identificados
 - [X] Listar entradas en la página de inicio
@@ -30,9 +33,9 @@ En concreto podremos:
 - [X] Crea un formulario para actualizar los datos del usuario.
 - [X] Conecta a la base de datos
 - [ ] Recoge y valida los datos
-- [ ] Realiza una consulta de actualización con los nuevos datos del usuario. Recuerda que el id no se modifica
+- [X] Realiza una consulta de actualización con los nuevos datos del usuario. Recuerda que el id no se modifica
 - [ ] Controla los errores
-- [ ] Cuidado con el valor del email. No puede estar repetido en la base de datos. Por tanto, antes de actualizar asegúrate de que no existe y no dejes modificarlo si ya coincide con otro usuario.
+- [X] Cuidado con el valor del email. No puede estar repetido en la base de datos. Por tanto, antes de actualizar asegúrate de que no existe y no dejes modificarlo si ya coincide con otro usuario.
 
 ## Listar todas las entradas
 - [X] Crea una página que te permita listar todas las entradas que tenemos.
@@ -53,22 +56,20 @@ En concreto podremos:
 - [X] Usando el título de la entrada buscamos si tenemos una entrada con ese valor. Es decir, que contienen algo de esta información en el título de la entrada
 
 ## TODO Tasks
-- [ ] Add button in CategoriasWidget.php for add new categories.
-- [ ] Add too the delete buttom in CategoriasWidget.php for categories.
-- [ ] Make the edit view for user data changes
+- [X] Add button in CategoriasWidget.php for add new categories.
+- [X] Make the edit view for user data changes
 
 ## Final tasks
 - [ ] Test form controls.
 - [ ] Text insert, update and delete
-    - [ ] Users
-        - [ ] Insert
-        - [ ] Update
-        - [ ] Delete
-    - [ ] Entries
-        - [ ] Insert
-        - [ ] Update
-        - [ ] Delete
+    - [X] Users
+        - [X] Insert
+        - [X] Update
+        - [X] Delete
+    - [X] Entries
+        - [X] Insert
+        - [X] Update
+        - [X] Delete
     - [ ] Categories
-        - [ ] Insert
-        - [ ] Update
+        - [X] Insert
         - [ ] Delete

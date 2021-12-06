@@ -10,7 +10,7 @@
                     <input type="hidden" name="entryID" value="<?= $ENTRY[ENTRY_ID] ?>"/>
                     <input type="submit" value="Edit"/>
                 </form>
-                <?php if($USER_SESSION[USER_ID] == $ENTRY[ENTRY_USER_ID]): ?>
+                <?php if($USER_SESSION[USER_ID] == $ENTRY[ENTRY_USER_ID] || $ENTRY[ENTRY_USER_EMAIL] == UNKNOWN_USER_EMAIL): ?>
                     <form class="delete-buttom" action="<?= $_SERVER['PHP_SELF']; ?>" method="POST">
                         <input type="hidden" name="entryID" value="<?= $ENTRY[ENTRY_ID] ?>"/>
                         <input type="hidden" name="submitType" value="<?= SUBMIT_TYPE_DELETE_ENTRY ?>" />

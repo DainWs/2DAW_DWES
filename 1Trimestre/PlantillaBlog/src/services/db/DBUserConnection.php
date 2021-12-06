@@ -57,7 +57,7 @@ function updateUser(Array $user): bool {
         $apellidos = $values[USER_SURNAME];
         $email = $values[USER_EMAIL];
         // Password encrypted with MD5
-        $password = md5($values[USER_PASSWORD]);
+        $password = (!empty($values[USER_PASSWORD]))? md5($values[USER_PASSWORD]) : '' ;
 
         //make UPDATE SQL Sentence
         $sql = "UPDATE USUARIOS SET ";
@@ -94,6 +94,36 @@ function updateUser(Array $user): bool {
         $sql .= "WHERE ".USER_ID."=$id";
         // Execute the SQL Sentence
         $result = (mysqli_query($connection, $sql)) ? true : false;
+    }
+    catch(Exception $ex) {}
+    finally {
+        //Close the connection
+        if(isset($connection)) {
+            $connection->close();
+        }
+    }
+    return $result;
+}
+
+/**
+ * Delete the sended user data (represented by an ID) in the database
+ * @param int $id The user id
+ * @return true if was successfully saved
+ * @return false if it can't be saved.
+ */
+function deleteUser(int $id): bool {
+    try {
+        $defaultUser = getDefaultUser();
+
+        //Open the connection
+        $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
+
+        $sql = "UPDATE ENTRADAS SET ".ENTRY_USER_ID."=".$defaultUser[USER_ID]." WHERE ".ENTRY_USER_ID."=".$id;
+        mysqli_query($connection, $sql);
+
+        $sql = "DELETE FROM USUARIOS WHERE ". USER_ID ."=$id";
+        $result = (mysqli_query($connection, $sql)) ? true : false;
+        
     }
     catch(Exception $ex) {}
     finally {
@@ -156,6 +186,47 @@ function getUserByEmail(String $email): Array {
 }
 
 /**
+ * Returns the user where the id are equals to the sended one.
+ * @param String $id The unique id of the user
+ * @return Array the represented user data as array
+ */
+function getUserById(String $id): Array {
+    $user = [];
+    try {
+        //Open the connection
+        $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
+        $validId = mysqli_real_escape_string($connection, $id);
+        
+        //make SQL Sentence
+        $sql = "SELECT * FROM USUARIOS WHERE ".USER_ID."=\"$validId\"";
+        
+        // Execute the SQL Sentence
+        $data = mysqli_query($connection, $sql);
+        $data = mysqli_fetch_assoc($data);
+
+        //TODO useless step?
+        if(isset($data[USER_ID])) {
+            $user = [
+                USER_ID => $data[USER_ID],
+                USER_NAME => $data[USER_NAME],
+                USER_SURNAME => $data[USER_SURNAME],
+                USER_EMAIL => $data[USER_EMAIL],
+                USER_PASSWORD => $data[USER_PASSWORD],
+                USER_DATE => $data[USER_DATE]
+            ];
+        }
+    }
+    catch(Exception $ex) {}
+    finally {
+        //Close the connection
+        if(isset($connection)) {
+            $connection->close();
+        }
+    }
+    return $user;
+}
+
+/**
  * Returns all users basic data.
  * 
  * This method should not be called for user data validation purposes.
@@ -170,7 +241,9 @@ function getAllUsers(String $order = USER_ID, String $orderType = SQL_ORDER_ASC)
         $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
 
         //make SQL Sentence
-        $sql = "SELECT ".USER_ID.", ".USER_NAME.", ".USER_SURNAME.", ".USER_EMAIL.", ".USER_DATE." FROM USUARIOS ORDER BY $order $orderType";
+        $sql = "SELECT ".USER_ID.", ".USER_NAME.", ".USER_SURNAME.", ".USER_EMAIL.", ".USER_DATE." FROM USUARIOS " 
+                ."WHERE ". USER_EMAIL ."<>'".UNKNOWN_USER_EMAIL."' "
+                ."ORDER BY $order $orderType";
         
         // Execute the SQL Sentence
         $data = mysqli_query($connection, $sql);
@@ -210,3 +283,21 @@ function validateUser(mysqli $connection, Array $array): Array {
     }
     return $result;
 }
+
+function getDefaultUser(): Array {
+    $defaultUser = getUserByEmail(UNKNOWN_USER_EMAIL);
+
+    if(count($defaultUser) == 0) {
+        $user = [
+            USER_ID => 0,
+            USER_NAME => 'unknown',
+            USER_SURNAME => 'unknown',
+            USER_EMAIL => UNKNOWN_USER_EMAIL,
+            USER_PASSWORD => '7381be761d67037a436fc4a03c96f067'
+        ];
+        saveUser($user);
+        $defaultUser = getUserByEmail(UNKNOWN_USER_EMAIL);
+    }
+    return $defaultUser;
+}
+
