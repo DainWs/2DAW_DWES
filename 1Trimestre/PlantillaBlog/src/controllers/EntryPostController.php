@@ -18,20 +18,20 @@ function doEntryEditPost(): Array|bool {
     $content = $_POST['content'] ?? '';
 
     $err = [];
-    if (empty($id)) {
-        $err[ENTRY_ID] = 'You have to specify a entry id.';
+    if (validateIsEmpty($id)) {
+        $err['entryId'] = 'You have to specify a entry id.';
     }
 
-    if (empty($title)) {
-        $err[ENTRY_TITLE] = 'You have to specify a title.';
+    if (validateIsEmpty($title)) {
+        $err['title'] = 'You have to specify a title.';
     }
 
-    if (empty($author)) {
-        $err[ENTRY_USER] = 'You have to specify a author.';
+    if (validateIsEmpty($author)) {
+        $err['author'] = 'You have to specify a author.';
     }
 
-    if (empty($category)) {
-        $err[ENTRY_CATEGORY] = 'You have to specify a category.';
+    if (validateIsEmpty($category)) {
+        $err['category'] = 'You have to specify a category.';
     }
 
     $result = true;
@@ -44,6 +44,9 @@ function doEntryEditPost(): Array|bool {
             ENTRY_DESCRIPTION => $content
         ];
         $result = updateEntry($entry);
+        if (!$result) {
+            $err['others']= 'An unknown error was success, please try it again more later.';
+        }
     }
     return (count($err) > 0) ? $err : $result;
 }
@@ -61,16 +64,16 @@ function doEntryNewPost(): Array|bool {
     $content = $_POST['content'] ?? '';
 
     $err = [];
-    if (empty($title)) {
-        $err[ENTRY_TITLE] = 'You have to specify a title.';
+    if (validateIsEmpty($title)) {
+        $err['title'] = 'You have to specify a title.';
     }
 
-    if (empty($author)) {
-        $err[ENTRY_USER] = 'You have to specify a author.';
+    if (validateIsEmpty($author)) {
+        $err['author'] = 'You have to specify a author.';
     }
 
-    if (empty($category)) {
-        $err[ENTRY_CATEGORY] = 'You have to specify a category.';
+    if (validateIsEmpty($category)) {
+        $err['category'] = 'You have to specify a category.';
     }
 
     $result = true;
@@ -82,6 +85,9 @@ function doEntryNewPost(): Array|bool {
             ENTRY_DESCRIPTION => $content
         ];
         $result = saveEntry($entry);
+        if (!$result) {
+            $err['others']= 'An unknown error was success, please try it again more later.';
+        }
     }
     return (count($err) > 0) ? $err : $result;
 }
@@ -96,13 +102,16 @@ function doEntryDeletePost(): Array|bool {
     $id = $_POST['entryID'] ?? '';
 
     $err = [];
-    if (empty($id)) {
-        $err[ENTRY_ID] = 'No entry id specified.';
+    if (validateIsEmpty($id)) {
+        $err['entryID'] = 'No entry id specified.';
     }
 
     $result = true;
     if (count($err) == 0) {
         $result = deleteEntry($id);
+        if (!$result) {
+            $err['others']= 'An unknown error was success, please try it again more later.';
+        }
     }
     return (count($err) > 0) ? $err : $result;
 }

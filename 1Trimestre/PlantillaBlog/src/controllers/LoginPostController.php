@@ -31,12 +31,14 @@ function doLoginPost(): Array|bool {
     $password = $_POST['password'] ?? '';
 
     $err = [];
-    if (empty($email)) {
-        $err[USER_EMAIL] = 'You have to specify a email.';
+    if (validateIsEmpty($email)) {
+        $err['email'] = 'You have to specify a email for your account.';
+    } else if (!validateEmail($email)){
+        $err['email'] = 'The specified email is nor correct';
     }
     
-    if (empty($password)) {
-        $err[USER_PASSWORD] = 'You have to specify a password.';
+    if (validateIsEmpty($password)) {
+        $err['password'] = 'You have to specify a password.';
     } 
 
     if (count($err) == 0){
@@ -46,7 +48,7 @@ function doLoginPost(): Array|bool {
             header("Location: ../index.php");
             exit;
         } else {
-            $err = 'Review email and password';
+            $err['others'] = 'Review email and password';
         }
     }
     return (!empty($err))? $err : true;

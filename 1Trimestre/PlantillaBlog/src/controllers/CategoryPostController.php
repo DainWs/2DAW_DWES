@@ -14,8 +14,8 @@ function doCategoryNewPost(): Array|bool {
     $name = $_POST['name'] ?? '';
 
     $err = [];
-    if (empty($name)) {
-        $err[CATEGORY_NAME] = 'You have to specify a name for a new category.';
+    if (validateIsEmpty($name)) {
+        $err['others'] = 'You have to specify a name for a new category.';
     } 
     
     $result = true;
@@ -24,6 +24,9 @@ function doCategoryNewPost(): Array|bool {
             CATEGORY_NAME => $name
         ];
         $result = saveCategory($category);
+        if (!$result) {
+            $err['others']= 'An unknown error was success, please try it again more later.';
+        }
     }
     return (count($err) > 0) ? $err : $result;
 }
@@ -38,13 +41,16 @@ function doCategoryDeletePost(): String|bool {
     $id = $_POST['categoryID'] ?? '';
 
     $err = [];
-    if (empty($id)) {
-        $err[CATEGORY_ID] = 'No category id specified.';
+    if (validateIsEmpty($id)) {
+        $err['categoryID'] = 'No category id specified.';
     } 
 
     $result = true;
     if (count($err) == 0) {
         $result = deleteCategory($id);
+        if (!$result) {
+            $err['others']= 'An unknown error was success, please try it again more later.';
+        }
     }
     return (count($err) > 0) ? $err : $result;
 }

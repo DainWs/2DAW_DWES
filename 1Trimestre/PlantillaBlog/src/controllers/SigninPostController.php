@@ -16,15 +16,17 @@ function doSigninPost(): Array|bool {
     $password = $_POST['password'] ?? '';
 
     $err = [];
-    if (empty($name)) {
+    if (validateIsEmpty($name)) {
         $err['name'] = 'You have to specify a name for your account.';
     }
 
-    if (empty($email)) {
+    if (validateIsEmpty($email)) {
         $err['email'] = 'You have to specify a email for your account.';
+    } else if (!validateEmail($email)){
+        $err['email'] = 'The specified email is nor correct';
     }
 
-    if (empty($password)) {
+    if (validateIsEmpty($password)) {
         $err['password'] = 'You have to specify a password for your account.';
     }
 

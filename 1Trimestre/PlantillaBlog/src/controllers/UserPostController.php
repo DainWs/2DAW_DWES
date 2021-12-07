@@ -21,18 +21,22 @@ function doUserEditPost(): Array|bool {
     $newpassword = $_POST['new-password'] ?? '';
 
     $err = [];
-    if (empty($id)) {
+    if (validateIsEmpty($id)) {
         $err[USER_ID] = 'You have to specify a user id.';
     }
 
-    if (!empty($email)) {
-        if (existUserWithEmail($_POST['email'])) {
-            $err[USER_EMAIL] = 'A user is already using this email.';
+    if (validateIsNotEmpty($email)) {
+        if (validateEmail($email)) {
+            if (existUserWithEmail($_POST['email'])) {
+                $err[USER_EMAIL] = 'A user is already using this email.';
+            }
+        } else {
+            $err[USER_EMAIL] = 'The specified email is nor correct';
         }
     }
 
-    if (!empty($newpassword)) {
-        if (empty($password)) {
+    if (validateIsNotEmpty($newpassword)) {
+        if (validateIsEmpty($password)) {
             $err[USER_PASSWORD] = 'You have to specify the user password to change this one to a new password.';
         }
         else {
@@ -53,6 +57,9 @@ function doUserEditPost(): Array|bool {
             USER_PASSWORD => $newpassword
         ];
         $result = updateUser($user);
+        if (!$result) {
+            $err['others']= 'An unknown error was success, please try it again more later.';
+        }
     }
     return (count($err) > 0) ? $err : $result;
 }
@@ -66,27 +73,38 @@ function doUserEditPost(): Array|bool {
 function doUserDeletePost(): Array|bool {
     $tempUserSession = getSession();
     $id = $_POST['id'] ?? $tempUserSession[USER_ID] ?? '';
-    $email = $_POST['email'] ?? $tempUserSession[USER_EMAIL] ?? '';
+    $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
 
     $err = [];
-    if (empty($id) || empty($email)) {
+    if (validateIsEmpty($id)) {
         $err['other'] = 'Your session may have expired, refresh the page.';
     }
 
-    if (empty($password)) {
+    if (validateIsEmpty($password)) {
         $err[USER_PASSWORD] = 'You have to specify the user password to delete this account.';
     }
     else {
-        $dbUser = getUserByEmail($email);
-        if ($dbUser[USER_PASSWORD] != md5($password)) {
-            $err[USER_PASSWORD] = 'The specified password is not valid';
+        if (!validateEmail($email)) {
+            $email = $tempUserSession[USER_EMAIL] ?? '';
+        }
+        try {
+            $dbUser = getUserByEmail($email);
+            if ($dbUser['password'] != md5($password)) {
+                $err['password'] = 'The specified password is not valid';
+            }
+        }
+        catch(Exception $ex) {
+            $err['password'] = 'An unknown error was success, please try it again more later.';
         }
     }
 
     $result = true;
     if (count($err) == 0) {
         $result = deleteUser($id);
+        if (!$result) {
+            $err['others']= 'An unknown error was success, please try it again more later.';
+        }
     }
     return (count($err) > 0) ? $err : $result;
 }

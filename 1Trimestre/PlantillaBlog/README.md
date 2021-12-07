@@ -32,9 +32,9 @@ En concreto podremos:
 ## Actualizar datos usuario
 - [X] Crea un formulario para actualizar los datos del usuario.
 - [X] Conecta a la base de datos
-- [ ] Recoge y valida los datos
+- [X] Recoge y valida los datos
 - [X] Realiza una consulta de actualización con los nuevos datos del usuario. Recuerda que el id no se modifica
-- [ ] Controla los errores
+- [X] Controla los errores
 - [X] Cuidado con el valor del email. No puede estar repetido en la base de datos. Por tanto, antes de actualizar asegúrate de que no existe y no dejes modificarlo si ya coincide con otro usuario.
 
 ## Listar todas las entradas
@@ -61,7 +61,10 @@ En concreto podremos:
 
 ## Final tasks
 - [ ] Test form controls.
-- [ ] Text insert, update and delete
+- [ ] Add styles for error class
+- [ ] Add try and catch
+- [ ] on logout in some pages, return to home.
+- [X] Text insert, update and delete
     - [X] Users
         - [X] Insert
         - [X] Update
@@ -70,6 +73,5 @@ En concreto podremos:
         - [X] Insert
         - [X] Update
         - [X] Delete
-    - [ ] Categories
+    - [X] Categories
         - [X] Insert
-        - [ ] Delete

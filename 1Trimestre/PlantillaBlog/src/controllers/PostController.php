@@ -1,5 +1,6 @@
 <?php
 require_once('../src/domain/SessionManager.php');
+require_once('../src/validators/FormValidator.php');
 require_once('../src/controllers/LoginPostController.php');
 require_once('../src/controllers/SigninPostController.php');
 require_once('../src/controllers/EntryPostController.php');
