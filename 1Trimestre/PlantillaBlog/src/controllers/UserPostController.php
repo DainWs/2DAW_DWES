@@ -22,27 +22,27 @@ function doUserEditPost(): Array|bool {
 
     $err = [];
     if (validateIsEmpty($id)) {
-        $err[USER_ID] = 'You have to specify a user id.';
+        $err['others'] = 'You have to specify a user id.';
     }
 
     if (validateIsNotEmpty($email)) {
         if (validateEmail($email)) {
             if (existUserWithEmail($_POST['email'])) {
-                $err[USER_EMAIL] = 'A user is already using this email.';
+                $err['email'] = 'A user is already using this email.';
             }
         } else {
-            $err[USER_EMAIL] = 'The specified email is nor correct';
+            $err['email'] = 'The specified email is nor correct';
         }
     }
 
     if (validateIsNotEmpty($newpassword)) {
         if (validateIsEmpty($password)) {
-            $err[USER_PASSWORD] = 'You have to specify the user password to change this one to a new password.';
+            $err['new-password'] = 'You have to specify the user password to change this one to a new password.';
         }
         else {
             $dbUser = getUserByEmail($email);
             if ($dbUser[USER_PASSWORD] != md5($password)) {
-                $err[USER_PASSWORD] = 'The specified password is not valid';
+                $err['password'] = 'The specified password is not valid';
             }
         }
     }
@@ -82,11 +82,11 @@ function doUserDeletePost(): Array|bool {
     }
 
     if (validateIsEmpty($password)) {
-        $err[USER_PASSWORD] = 'You have to specify the user password to delete this account.';
+        $err['password'] = 'You have to specify the user password to delete this account.';
     }
     else {
         if (!validateEmail($email)) {
-            $email = $tempUserSession[USER_EMAIL] ?? '';
+            $email = $tempUserSession['email'] ?? '';
         }
         try {
             $dbUser = getUserByEmail($email);

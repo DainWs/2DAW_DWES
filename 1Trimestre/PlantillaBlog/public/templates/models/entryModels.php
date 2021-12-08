@@ -24,7 +24,7 @@
         </main>
         <footer>
             <?php if (isset($ENTRY[ENTRY_CATEGORY_NAME])) : ?>
-                <span>Categor&iacute;a: <a class="category-tag" href="categorias.php?category=<?= $ENTRY[ENTRY_CATEGORY_NAME] ?>"> <?= $ENTRY[ENTRY_CATEGORY_NAME] ?> </a></span>
+                <span>Categor&iacute;a: <a class="category-tag" href="categorias.php?category=<?= $ENTRY[ENTRY_CATEGORY_ID] ?>"> <?= $ENTRY[ENTRY_CATEGORY_NAME] ?> </a></span>
             <?php endif; ?>
         </footer>
     </article>

@@ -53,6 +53,11 @@
     box-sizing: border-box;
 }
 
+.user-outer > main,
+.user-outer > main > form {
+    height: 100%;
+}
+
 .user-outer .grid-div {
     flex-grow: 1;
     display: grid;
@@ -65,11 +70,29 @@
     grid-auto-columns: minmax(35%, auto) minmax(35%, auto) minmax(0px, 30%);
 }
 
+.user-outer form.grid-div {
+    grid-template-areas:
+        "name surname password"
+        "email email new-password"
+        "others others others"
+        "button button button";
+    grid-template-rows: minmax(20px, 1fr) minmax(20px, 1fr) minmax(auto, 50%) minmax(20px, 1fr);
+    grid-auto-columns: minmax(30%, auto) minmax(30%, auto) minmax(30%, auto);
+}
+
+.user-outer form.grid-div > div {
+    padding: 0 5px;
+}
+
 .user-outer .grid-div > .grid-name { grid-area: name; }
 .user-outer .grid-div > .grid-surname { grid-area: surname; }
 .user-outer .grid-div > .grid-image { grid-area: image; }
 .user-outer .grid-div > .grid-email { grid-area: email; }
 .user-outer .grid-div > .grid-date { grid-area: date; }
+.user-outer .grid-div > .grid-password { grid-area: password; }
+.user-outer .grid-div > .grid-new-password { grid-area: new-password; }
+.user-outer .grid-div > .grid-others { grid-area: others; }
+.user-outer .grid-div > .grid-button { grid-area: button; }
 
 .user-outer select,
 .user-outer textarea,

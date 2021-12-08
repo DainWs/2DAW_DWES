@@ -60,10 +60,10 @@ En concreto podremos:
 - [X] Make the edit view for user data changes
 
 ## Final tasks
-- [ ] Test form controls.
+- [X] Test form controls.
 - [X] Add styles for error class
 - [ ] Add try and catch
-- [ ] add Delete.png image
+- [X] add Delete.png image
 - [X] on logout in some pages, return to home.
 - [X] Text insert, update and delete
     - [X] Users

@@ -1,11 +1,13 @@
 <?php
+
 /**
  * Save the sended entry data (represented by an Array) in the database
  * @param Array $entry The entry data represented as Array
  * @return true if was successfully saved
  * @return false if it can't be saved.
  */
-function saveEntry(Array $entry): bool {
+function saveEntry(array $entry): bool
+{
     try {
         //Open the connection
         $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
@@ -18,16 +20,15 @@ function saveEntry(Array $entry): bool {
         $date = $values[ENTRY_DATE] ?? date('Y-m-d H:i:s');
 
         //make INSERT SQL Sentence
-        $sql = "INSERT INTO ENTRADAS(".ENTRY_USER_ID.", ".ENTRY_CATEGORY_ID.", ".ENTRY_TITLE.", ".ENTRY_DESCRIPTION.", ".ENTRY_DATE.") ".
-                "VALUES ($idUsuario, $idCategoria, '$title', '$description', '$date')";
-        
+        $sql = "INSERT INTO ENTRADAS(" . ENTRY_USER_ID . ", " . ENTRY_CATEGORY_ID . ", " . ENTRY_TITLE . ", " . ENTRY_DESCRIPTION . ", " . ENTRY_DATE . ") " .
+            "VALUES ($idUsuario, $idCategoria, '$title', '$description', '$date')";
+
         // Execute the SQL Sentence
         $result = (mysqli_query($connection, $sql)) ? true : false;
-    }
-    catch(Exception $ex) {}
-    finally {
+    } catch (Exception $ex) {
+    } finally {
         //Close the connection
-        if(isset($connection)) {
+        if (isset($connection)) {
             $connection->close();
         }
     }
@@ -40,7 +41,8 @@ function saveEntry(Array $entry): bool {
  * @return true if was successfully saved
  * @return false if it can't be saved.
  */
-function updateEntry(Array $entry): bool {
+function updateEntry(array $entry): bool
+{
     try {
         //Open the connection
         $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
@@ -54,38 +56,37 @@ function updateEntry(Array $entry): bool {
         $date = $values[ENTRY_DATE] ?? date('Y-m-d H:i:s');
 
         //make UPDATE SQL Sentence
-        $sql = "UPDATE ENTRADAS SET ".ENTRY_ID."=$id, ". ENTRY_USER_ID ."=$idUsuario, ". ENTRY_CATEGORY_ID ."=$idCategoria, "
-                . ENTRY_TITLE ."='$title', ".ENTRY_DESCRIPTION."='$description', ".ENTRY_DATE."='$date' WHERE ".ENTRY_ID."=$id";
+        $sql = "UPDATE ENTRADAS SET " . ENTRY_ID . "=$id, " . ENTRY_USER_ID . "=$idUsuario, " . ENTRY_CATEGORY_ID . "=$idCategoria, "
+            . ENTRY_TITLE . "='$title', " . ENTRY_DESCRIPTION . "='$description', " . ENTRY_DATE . "='$date' WHERE " . ENTRY_ID . "=$id";
 
         // Execute the SQL Sentence
         $result = (mysqli_query($connection, $sql)) ? true : false;
-    }
-    catch(Exception $ex) {}
-    finally {
+    } catch (Exception $ex) {
+    } finally {
         //Close the connection
-        if(isset($connection)) {
+        if (isset($connection)) {
             $connection->close();
         }
     }
     return $result;
 }
 
-function deleteEntry($id): bool {
+function deleteEntry($id): bool
+{
     try {
         //Open the connection
         $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
         $validId = mysqli_real_escape_string($connection, $id);
 
         //make INSERT SQL Sentence
-        $sql = "DELETE FROM ENTRADAS WHERE ".ENTRY_ID."=$validId";
-        
+        $sql = "DELETE FROM ENTRADAS WHERE " . ENTRY_ID . "=$validId";
+
         // Execute the SQL Sentence
         $result = (mysqli_query($connection, $sql)) ? true : false;
-    }
-    catch(Exception $ex) {}
-    finally {
+    } catch (Exception $ex) {
+    } finally {
         //Close the connection
-        if(isset($connection)) {
+        if (isset($connection)) {
             $connection->close();
         }
     }
@@ -98,7 +99,8 @@ function deleteEntry($id): bool {
  * @return true if exist
  * @return false if not
  */
-function existEntryWithID(int $id): bool {
+function existEntryWithID(int $id): bool
+{
     return (count(getEntryByID($id)) > 0);
 }
 
@@ -110,18 +112,19 @@ function existEntryWithID(int $id): bool {
  * @param String $id The id of the entry
  * @return Array the represented entry data as array
  */
-function getEntryByID(int $id): Array {
+function getEntryByID(int $id): array
+{
     $entry = [];
     try {
         //Open the connection
         $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
 
         //make SQL Sentence
-        $sql = "SELECT E.".ENTRY_ID.', E.'.ENTRY_USER_ID.', U.'.USER_NAME.' AS '.ENTRY_USER_NAME.', U.'.USER_EMAIL.' AS '.ENTRY_USER_EMAIL.', E.'.ENTRY_CATEGORY_ID.', C.'.CATEGORY_NAME.' AS '.ENTRY_CATEGORY_NAME.', E.'.ENTRY_TITLE.', E.'.ENTRY_DESCRIPTION.', E.'.ENTRY_DATE. 
-                " FROM ENTRADAS E" . 
-                " LEFT OUTER JOIN USUARIOS U ON E.".ENTRY_USER_ID."=U.". USER_ID . 
-                " LEFT OUTER JOIN CATEGORIAS C ON E.".ENTRY_CATEGORY_ID."=C.".CATEGORY_ID . 
-                " WHERE E.".ENTRY_ID."=$id";
+        $sql = "SELECT E." . ENTRY_ID . ', E.' . ENTRY_USER_ID . ', U.' . USER_NAME . ' AS ' . ENTRY_USER_NAME . ', U.' . USER_EMAIL . ' AS ' . ENTRY_USER_EMAIL . ', E.' . ENTRY_CATEGORY_ID . ', C.' . CATEGORY_NAME . ' AS ' . ENTRY_CATEGORY_NAME . ', E.' . ENTRY_TITLE . ', E.' . ENTRY_DESCRIPTION . ', E.' . ENTRY_DATE .
+            " FROM ENTRADAS E" .
+            " LEFT OUTER JOIN USUARIOS U ON E." . ENTRY_USER_ID . "=U." . USER_ID .
+            " LEFT OUTER JOIN CATEGORIAS C ON E." . ENTRY_CATEGORY_ID . "=C." . CATEGORY_ID .
+            " WHERE E." . ENTRY_ID . "=$id";
 
         // Execute the SQL Sentence
         $data = mysqli_query($connection, $sql);
@@ -138,11 +141,10 @@ function getEntryByID(int $id): Array {
             ENTRY_DESCRIPTION => $data[ENTRY_DESCRIPTION],
             ENTRY_DATE => $data[ENTRY_DATE]
         ];
-    }
-    catch(Exception $ex) {}
-    finally {
+    } catch (Exception $ex) {
+    } finally {
         //Close the connection
-        if(isset($connection)) {
+        if (isset($connection)) {
             $connection->close();
         }
     }
@@ -155,7 +157,8 @@ function getEntryByID(int $id): Array {
  * @param int $idCategory the specified category id
  * @return Array of table entries
  */
-function getAllEntries(String $entryName = "", int $idUser = -1, int $idCategoria = -1, String $order = ENTRY_ID, String $orderType = SQL_ORDER_ASC): Array {
+function getAllEntries(String $entryName = "", int $idUser = -1, int $idCategoria = -1, String $order = ENTRY_ID, String $orderType = SQL_ORDER_ASC): array
+{
     $entries = [];
     try {
         //Open the connection
@@ -164,29 +167,29 @@ function getAllEntries(String $entryName = "", int $idUser = -1, int $idCategori
         $validUser = mysqli_real_escape_string($connection, $idUser);
         $validCategory = mysqli_real_escape_string($connection, $idCategoria);
 
-
         //make SQL Sentence
-        $sql = "SELECT E.".ENTRY_ID.', E.'.ENTRY_USER_ID.', U.'.USER_NAME.' AS '.ENTRY_USER_NAME.', U.'.USER_EMAIL.' AS '.ENTRY_USER_EMAIL.', E.'.ENTRY_CATEGORY_ID.', C.'.CATEGORY_NAME.' AS '.ENTRY_CATEGORY_NAME.', E.'.ENTRY_TITLE.', E.'.ENTRY_DESCRIPTION.', E.'.ENTRY_DATE. 
-                " FROM ENTRADAS E" . 
-                " LEFT OUTER JOIN USUARIOS U ON E.".ENTRY_USER_ID."=U.". USER_ID . 
-                " LEFT OUTER JOIN CATEGORIAS C ON E.".ENTRY_CATEGORY_ID."=C.".CATEGORY_ID.
-                " ORDER BY $order $orderType";
+        $sql = "SELECT E." . ENTRY_ID . ', E.' . ENTRY_USER_ID . ', U.' . USER_NAME . ' AS ' . ENTRY_USER_NAME . ', U.' . USER_EMAIL . ' AS ' . ENTRY_USER_EMAIL . ', E.' . ENTRY_CATEGORY_ID . ', C.' . CATEGORY_NAME . ' AS ' . ENTRY_CATEGORY_NAME . ', E.' . ENTRY_TITLE . ', E.' . ENTRY_DESCRIPTION . ', E.' . ENTRY_DATE .
+            " FROM ENTRADAS E" .
+            " LEFT OUTER JOIN USUARIOS U ON E." . ENTRY_USER_ID . "=U." . USER_ID .
+            " LEFT OUTER JOIN CATEGORIAS C ON E." . ENTRY_CATEGORY_ID . "=C." . CATEGORY_ID;
 
         if (!empty($validName) || ($idUser >= 0) || ($idCategoria >= 0)) {
             $sql .= ' WHERE';
         }
 
         if (!empty($validName)) {
-            $sql .= ' E.'.ENTRY_TITLE." LIKE \"%$validName%\"";
+            $sql .= ' E.' . ENTRY_TITLE . " LIKE \"%$validName%\"";
         }
 
         if ($validUser >= 0) {
-            $sql .= ' E.'.ENTRY_USER_ID."=$validUser";
+            $sql .= ' E.' . ENTRY_USER_ID . "=$validUser";
         }
 
         if ($validCategory >= 0) {
-            $sql .= ' E.'.ENTRY_CATEGORY_ID."=$validCategory";
+            $sql .= ' E.' . ENTRY_CATEGORY_ID . "=$validCategory";
         }
+
+        $sql .= " ORDER BY $order $orderType";
 
         // Execute the SQL Sentence
         $data = mysqli_query($connection, $sql);
@@ -206,11 +209,10 @@ function getAllEntries(String $entryName = "", int $idUser = -1, int $idCategori
             ];
             $entries[$value[0]] = $entry;
         }
-    }
-    catch(Exception $ex) {}
-    finally {
+    } catch (Exception $ex) {
+    } finally {
         //Close the connection
-        if(isset($connection)) {
+        if (isset($connection)) {
             $connection->close();
         }
     }
@@ -223,7 +225,8 @@ function getAllEntries(String $entryName = "", int $idUser = -1, int $idCategori
  * @param Array $array the given array
  * @return Array the validated array
  */
-function validateEntry(mysqli $connection, Array $array): Array {
+function validateEntry(mysqli $connection, array $array): array
+{
     $result = [];
     foreach ($array as $key => $value) {
         $result[$key] = mysqli_real_escape_string($connection, $value);

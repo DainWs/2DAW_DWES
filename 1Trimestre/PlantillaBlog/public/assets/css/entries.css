@@ -36,7 +36,9 @@
 }
 
 .entry-outer > header .delete-buttom input[type=submit] {
-    background: url('../images/edit.png');
+    background: url('../images/delete.png');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .entry-outer > header .delete-buttom input[type=submit]:hover,

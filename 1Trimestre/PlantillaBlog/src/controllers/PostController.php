@@ -76,6 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submitType'])) {
                     $tempSession = getSession();
                     $newSession = getUserById($tempSession[USER_ID]);
                     updateSession($newSession);
+                    header('location: user.php');
+                    exit;
                 }
             }
             break;
