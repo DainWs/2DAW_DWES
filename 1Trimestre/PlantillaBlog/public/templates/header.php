@@ -6,7 +6,7 @@
             <li>
                 <a>Categor&iacute;as</a>
                 <ul>
-                    <?php for ($i = 1; $i < 5 && $i <= count($CATEGORIAS); $i++) : ?>
+                    <?php for ($i = 1; $i < 5 && $i < count($CATEGORIAS); $i++) : ?>
                         <?php $value = $CATEGORIAS[$i]; ?>
                         <li id="categoria_<?= $i ?>">
                             <a href="categorias.php?category=<?= $i ?>"><?= $value ?></a>

@@ -7,6 +7,11 @@ require_once('../src/services/db/DBEntryConnection.php');
 
 require_once('../src/controllers/PostController.php');
 
+if (!hasSession()) {
+	header("location: ../index.php");
+	exit;
+}
+
 $USER_SESSION = getSession();
 
 $CATEGORIAS = getAllCategories();

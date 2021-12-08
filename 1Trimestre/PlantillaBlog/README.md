@@ -61,9 +61,10 @@ En concreto podremos:
 
 ## Final tasks
 - [ ] Test form controls.
-- [ ] Add styles for error class
+- [X] Add styles for error class
 - [ ] Add try and catch
-- [ ] on logout in some pages, return to home.
+- [ ] add Delete.png image
+- [X] on logout in some pages, return to home.
 - [X] Text insert, update and delete
     - [X] Users
         - [X] Insert

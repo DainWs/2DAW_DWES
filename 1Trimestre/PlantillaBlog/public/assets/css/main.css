@@ -113,3 +113,13 @@ body > section > aside {
 .main-flex-article {
 	flex-direction: column;
 }
+
+.error {
+	margin-top: 0;
+    color: red;
+    font-size: 10pt;
+}
+
+.error::before {
+	content: "*";
+}
