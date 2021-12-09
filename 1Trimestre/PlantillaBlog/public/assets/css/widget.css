@@ -115,5 +115,6 @@ body > footer .widget > div {
 
 body > footer .widget > div ul,
 body > footer .widget > div li {
+    text-align: left;
     margin: 0;
 }
