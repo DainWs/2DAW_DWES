@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
 require_once('../src/config/constants.php');
+require_once('../src/domain/LangManager.php');
 require_once('../src/domain/SessionManager.php');
 require_once('../src/services/db/DBCategoryConnection.php');
 require_once('../src/services/db/DBEntryConnection.php');
@@ -10,6 +11,14 @@ require_once('../src/controllers/PostController.php');
 if (!hasSession()) {
 	header("location: ../index.php");
 	exit;
+}
+
+if (!existEntryWithID($_GET['entryID'])) {
+	header('Location: home.php');
+}
+
+if ($DATA['entryUpdate'] ?? false) {
+	header("location: home.php");
 }
 
 $USER_SESSION = getSession();

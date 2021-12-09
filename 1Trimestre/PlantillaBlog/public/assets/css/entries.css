@@ -135,7 +135,8 @@
     box-sizing: border-box;
 }
 
-.entry-outer input[type=submit]:hover {
+.entry-outer input[type=submit]:hover,
+.entry-outer input[type=button].normal:hover {
 	color: var(--nav-hover-color);
 	background-color: var(--nav-hover-background);
 }
@@ -147,4 +148,4 @@
 
 body > section input[type=button]:hover {
     background-color: #45a049;
-} 
+}

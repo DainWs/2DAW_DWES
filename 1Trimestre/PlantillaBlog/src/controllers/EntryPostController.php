@@ -1,12 +1,11 @@
 <?php
 require_once("../src/config/constants.php");
-require_once("../src/domain/LangManager.php");
 require_once("../src/domain/SessionManager.php");
 require_once("../src/services/db/DBEntryConnection.php");
 
 /**
  * Do all actions for a entry edit post type
- * @return Array error mensaje
+ * @return Array of error mensajes
  * @return true if was successfully complete
  * @return false if has errors
  */
@@ -19,7 +18,7 @@ function doEntryEditPost(): Array|bool {
 
     $err = [];
     if (validateIsEmpty($id)) {
-        $err['entryId'] = 'You have to specify a entry id.';
+        $err['others']= 'An unknown error was success, please try it again more later.';
     }
 
     if (validateIsEmpty($title)) {
@@ -36,24 +35,32 @@ function doEntryEditPost(): Array|bool {
 
     $result = true;
     if (count($err) == 0) {
-        $entry = [
-            ENTRY_ID => $id,
-            ENTRY_USER_ID => $author,
-            ENTRY_CATEGORY_ID => $category,
-            ENTRY_TITLE => $title,
-            ENTRY_DESCRIPTION => $content
-        ];
-        $result = updateEntry($entry);
-        if (!$result) {
-            $err['others']= 'An unknown error was success, please try it again more later.';
+        // DB Access exception control
+        try {
+            $entry = [
+                ENTRY_ID => $id,
+                ENTRY_USER_ID => $author,
+                ENTRY_CATEGORY_ID => $category,
+                ENTRY_TITLE => $title,
+                ENTRY_DESCRIPTION => $content
+            ];
+            $result = updateEntry($entry);
+        } 
+        catch(Exception $ex) {
+            $result = false;
+        } 
+        finally {
+            if (!$result) {
+                $err['others']= 'An unknown error was success, please try it again more later.';
+            }
         }
     }
     return (count($err) > 0) ? $err : $result;
 }
 
 /**
- * Do all actions for a entry edit post type
- * @return Array error mensaje
+ * Do all actions for a entry new post type
+ * @return Array of error mensajes
  * @return true if was successfully complete
  * @return false if has errors
  */
@@ -78,15 +85,23 @@ function doEntryNewPost(): Array|bool {
 
     $result = true;
     if (count($err) == 0) {
-        $entry = [
-            ENTRY_USER_ID => $author,
-            ENTRY_CATEGORY_ID => $category,
-            ENTRY_TITLE => $title,
-            ENTRY_DESCRIPTION => $content
-        ];
-        $result = saveEntry($entry);
-        if (!$result) {
-            $err['others']= 'An unknown error was success, please try it again more later.';
+        // DB Access exception control
+        try {
+            $entry = [
+                ENTRY_USER_ID => $author,
+                ENTRY_CATEGORY_ID => $category,
+                ENTRY_TITLE => $title,
+                ENTRY_DESCRIPTION => $content
+            ];
+            $result = saveEntry($entry);
+        }
+        catch(Exception $ex) {
+            $result = false;
+        }
+        finally {
+            if (!$result) {
+                $err['others']= 'An unknown error was success, please try it again more later.';
+            }
         }
     }
     return (count($err) > 0) ? $err : $result;
@@ -94,7 +109,7 @@ function doEntryNewPost(): Array|bool {
 
 /**
  * Do all actions for a entry delete post type
- * @return Array error mensaje
+ * @return Array of error mensajes
  * @return true if was successfully complete
  * @return false if has errors
  */
@@ -103,14 +118,22 @@ function doEntryDeletePost(): Array|bool {
 
     $err = [];
     if (validateIsEmpty($id)) {
-        $err['entryID'] = 'No entry id specified.';
+        $err['others']= 'An unknown error was success, please try it again more later.';
     }
 
     $result = true;
     if (count($err) == 0) {
-        $result = deleteEntry($id);
-        if (!$result) {
-            $err['others']= 'An unknown error was success, please try it again more later.';
+        // DB Access exception control
+        try {
+            $result = deleteEntry($id);
+        } 
+        catch(Exception $ex) {
+            $result = false;
+        } 
+        finally {
+            if (!$result) {
+                $err['others']= 'An unknown error was success, please try it again more later.';
+            }
         }
     }
     return (count($err) > 0) ? $err : $result;

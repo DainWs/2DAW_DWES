@@ -18,6 +18,10 @@ aside .title {
 	padding-left: 8px;
 }
 
+body > footer {
+    padding-bottom: 25px;
+}
+
 body > footer .title {
 	padding-top: 8px;
 }
@@ -27,6 +31,11 @@ body > footer .widget {
 	text-align: center;
     flex-grow: 1;
 }
+
+body > footer .widget {
+    max-width: 33%;
+}
+
 /* Comentarios */
 .comments ol {
 	padding: 0;
@@ -89,10 +98,6 @@ body > section input[type=button]:hover,
     visibility: visible;
 }
 
-.widget .search-form {
-
-}
-
 body > footer > section {
     display: flex;
     justify-content: space-around;
@@ -101,4 +106,14 @@ body > footer > section {
 body > footer .widget .title {
 	margin: 0;
 	padding: 0;
+}
+
+body > footer .widget > div {
+	text-overflow: clip;
+    text-align: left;
+}
+
+body > footer .widget > div ul,
+body > footer .widget > div li {
+    margin: 0;
 }

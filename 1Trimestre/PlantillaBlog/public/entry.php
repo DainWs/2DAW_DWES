@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
 require_once('../src/config/constants.php');
+require_once('../src/domain/LangManager.php');
 require_once('../src/domain/SessionManager.php');
 require_once('../src/services/db/DBCategoryConnection.php');
 require_once('../src/services/db/DBEntryConnection.php');
@@ -14,6 +15,11 @@ $CATEGORIAS = getAllCategories();
 if (!isset($_GET['entryID'])) {
     header('Location: home.php');
 }
+
+if (!existEntryWithID($_GET['entryID'])) {
+	header('Location: home.php');
+}
+
 $ENTRY = getEntryByID($_GET['entryID']);
 ?>
 <html lang="es">

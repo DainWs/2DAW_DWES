@@ -12,67 +12,61 @@ $DATA = [
 ];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submitType'])) {
+    $result = true;
     switch ($_POST['submitType']) {
         case SUBMIT_TYPE_LOGOUT:
-            if (hasSession()) {
-                clearSession();
-                $DATA['showSessionForms'] = true;
-            }
+            clearSession();
             break;
         case SUBMIT_TYPE_SIGNIN: 
             if (!hasSession()) {
                 $result = doSigninPost();
-                if (is_array($result)) {
-                    $DATA['errors'] = [SUBMIT_TYPE_SIGNIN => $result];
-                }
             }
             break;
         case SUBMIT_TYPE_LOGIN:
             if (!hasSession()) {
                 $result = doLoginPost();
-                if (is_array($result)) {
-                    $DATA['errors'] = [SUBMIT_TYPE_LOGIN => $result];
-                }
             }
             break;
         case SUBMIT_TYPE_EDIT_ENTRY:
             if (hasSession()) {
                 $result = doEntryEditPost();
-                if (is_array($result)) {
-                    $DATA['errors'] = [SUBMIT_TYPE_EDIT_ENTRY => $result];
+                if (is_bool($result) && $result) {
+                    $DATA['entryUpdate'] = true;
+                }
+                else {
+                    $DATA['entryUpdate'] = false;
                 }
             }
             break;
         case SUBMIT_TYPE_NEW_ENTRY:
             if (hasSession()) {
                 $result = doEntryNewPost();
-                if (is_array($result)) {
-                    $DATA['errors'] = [SUBMIT_TYPE_NEW_ENTRY => $result];
+                if (is_bool($result) && $result) {
+                    $DATA['entryUpdate'] = true;
+                }
+                else {
+                    $DATA['entryUpdate'] = false;
                 }
             }
             break;
         case SUBMIT_TYPE_DELETE_ENTRY:
             if (hasSession()) {
                 $result = doEntryDeletePost();
-                if (is_array($result)) {
-                    $DATA['errors'] = [SUBMIT_TYPE_DELETE_ENTRY => $result];
+                if (is_bool($result) && $result) {
+                    header('location: home.php');
+                    exit;
                 }
             }
             break;
         case SUBMIT_TYPE_NEW_CATEGORY:
             if (hasSession()) {
                 $result = doCategoryNewPost();
-                if (is_array($result)) {
-                    $DATA['errors'] = [SUBMIT_TYPE_NEW_CATEGORY => $result];
-                }
             }
             break;
         case SUBMIT_TYPE_EDIT_USER:
             if (hasSession()) {
                 $result = doUserEditPost();
-                if (is_array($result)) {
-                    $DATA['errors'] = [SUBMIT_TYPE_EDIT_USER => $result];
-                } else if ($result) {
+                if (is_bool($result) && $result) {
                     $tempSession = getSession();
                     $newSession = getUserById($tempSession[USER_ID]);
                     updateSession($newSession);
@@ -84,14 +78,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submitType'])) {
         case SUBMIT_TYPE_DELETE_USER:
             if (hasSession()) {
                 $result = doUserDeletePost();
-                if (is_array($result)) {
-                    $DATA['errors'] = [SUBMIT_TYPE_DELETE_USER => $result];
-                } else if ($result) {
+                if (is_bool($result) && $result) {
                     clearSession();
                     header("location: home.php");
                     exit;
                 }
             }
             break;
+    }
+
+    if (is_array($result)) {
+        $DATA['errors'] = [$_POST['submitType'] => $result];
     }
 }

@@ -1,12 +1,11 @@
 <?php
 require_once("../src/config/constants.php");
-require_once("../src/domain/LangManager.php");
 require_once("../src/domain/SessionManager.php");
 require_once("../src/services/db/DBCategoryConnection.php");
 
 /**
- * Do all actions for a category edit post type
- * @return Array error mensaje
+ * Do all actions for a category new post type
+ * @return Array of error mensajes
  * @return true if was successfully complete
  * @return false if has errors
  */
@@ -16,40 +15,31 @@ function doCategoryNewPost(): Array|bool {
     $err = [];
     if (validateIsEmpty($name)) {
         $err['others'] = 'You have to specify a name for a new category.';
+    } else {
+        try {
+            if (existCategoryWithName($name)) {
+                $err['others'] = 'There is already a category with that name.';
+            }
+        }
+        catch(Exception $ex) {
+            $err['others']= 'An unknown error was success, please try it again more later.';
+        }
     } 
     
     $result = true;
     if (count($err) == 0) {
-        $category = [
-            CATEGORY_NAME => $name
-        ];
-        $result = saveCategory($category);
-        if (!$result) {
-            $err['others']= 'An unknown error was success, please try it again more later.';
+        // DB Access exception control
+        try {
+            $category = [ CATEGORY_NAME => $name ];
+            $result = saveCategory($category);
         }
-    }
-    return (count($err) > 0) ? $err : $result;
-}
-
-/**
- * Do all actions for a category delete post type
- * @return Array error mensaje
- * @return true if was successfully complete
- * @return false if has errors
- */
-function doCategoryDeletePost(): String|bool {
-    $id = $_POST['categoryID'] ?? '';
-
-    $err = [];
-    if (validateIsEmpty($id)) {
-        $err['categoryID'] = 'No category id specified.';
-    } 
-
-    $result = true;
-    if (count($err) == 0) {
-        $result = deleteCategory($id);
-        if (!$result) {
-            $err['others']= 'An unknown error was success, please try it again more later.';
+        catch(Exception $ex) {
+            $result = false;
+        }
+        finally {
+            if (!$result) {
+                $err['others']= 'An unknown error was success, please try it again more later.';
+            }
         }
     }
     return (count($err) > 0) ? $err : $result;

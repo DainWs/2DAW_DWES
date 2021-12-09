@@ -36,25 +36,49 @@ function saveCategory(Array $category): bool {
  * @return false if not
  */
 function existCategoryWithID(int $id): bool {
-    return (count(getCategoryByID($id)) > 0);
+    return (count(getCategory($id)) > 0);
 }
 
 /**
- * Returns the category where the id are equals to the sended one.
+ * Check if a category exist with the same name
+ * @param int $name the name of the category
+ * @return true if exist
+ * @return false if not
+ */
+function existCategoryWithName(String $name): bool {
+    return (count(getCategory(-1, $name)) > 0);
+}
+
+/**
+ * Returns one category.
  * 
- * This method should not be called for category data validation purposes.
- * for this purpose call getCategoryByEmail($email)
  * @param String $id The id of the category
+ * @param String $name The name of the category
  * @return Array the represented category data as array
  */
-function getCategoryByID(int $id): Array {
+function getCategory(int $id = -1, String $name = ""): Array {
     $category = [];
     try {
         //Open the connection
         $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
 
         //make SQL Sentence
-        $sql = "SELECT * FROM CATEGORIAS WHERE ".CATEGORY_ID."=$id";
+        $sql = "SELECT * FROM CATEGORIAS";
+
+        //If has select params then add WHERE sentence
+        if (($id != -1) || (!empty($name))) {
+            $sql .=  " WHERE ";
+
+            if ($id != -1) {
+                $sql .= CATEGORY_ID."=$id ";
+            }
+    
+            if (!empty($name)) {
+                $sql .= CATEGORY_NAME." LIKE '%$name%' ";
+            }
+        }
+
+        $sql .= "LIMIT 1";
         // Execute the SQL Sentence
         $data = mysqli_query($connection, $sql);
         $data = mysqli_fetch_assoc($data);
@@ -72,28 +96,6 @@ function getCategoryByID(int $id): Array {
         }
     }
     return $category;
-}
-
-function deleteCategory($id): bool {
-    try {
-        //Open the connection
-        $connection = mysqli_connect(DB_DOMAIN, DB_USER, DB_PASSWORD, DB_NAME);
-        $validId = mysqli_real_escape_string($connection, $id);
-
-        //make INSERT SQL Sentence
-        $sql = "DELETE FROM CATEGORIAS WHERE ".CATEGORY_ID."=$validId";
-        
-        // Execute the SQL Sentence
-        $result = (mysqli_query($connection, $sql)) ? true : false;
-    }
-    catch(Exception $ex) {}
-    finally {
-        //Close the connection
-        if(isset($connection)) {
-            $connection->close();
-        }
-    }
-    return $result;
 }
 
 function getAllCategories(): Array {

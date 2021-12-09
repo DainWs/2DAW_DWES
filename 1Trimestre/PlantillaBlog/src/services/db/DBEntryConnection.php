@@ -128,19 +128,23 @@ function getEntryByID(int $id): array
 
         // Execute the SQL Sentence
         $data = mysqli_query($connection, $sql);
-        $data = mysqli_fetch_assoc($data);
-
-        $entry = [
-            ENTRY_ID => $data[ENTRY_ID],
-            ENTRY_USER_ID => $data[ENTRY_USER_ID],
-            ENTRY_USER_NAME => $data[ENTRY_USER_NAME],
-            ENTRY_USER_EMAIL => $data[ENTRY_USER_EMAIL],
-            ENTRY_CATEGORY_ID => $data[ENTRY_CATEGORY_ID],
-            ENTRY_CATEGORY_NAME => $data[ENTRY_CATEGORY_NAME],
-            ENTRY_TITLE => $data[ENTRY_TITLE],
-            ENTRY_DESCRIPTION => $data[ENTRY_DESCRIPTION],
-            ENTRY_DATE => $data[ENTRY_DATE]
-        ];
+        if (!is_bool($data)) {
+            $data = mysqli_fetch_assoc($data);
+            if (is_array($data)){
+                $entry = [
+                    ENTRY_ID => $data[ENTRY_ID],
+                    ENTRY_USER_ID => $data[ENTRY_USER_ID],
+                    ENTRY_USER_NAME => $data[ENTRY_USER_NAME],
+                    ENTRY_USER_EMAIL => $data[ENTRY_USER_EMAIL],
+                    ENTRY_CATEGORY_ID => $data[ENTRY_CATEGORY_ID],
+                    ENTRY_CATEGORY_NAME => $data[ENTRY_CATEGORY_NAME],
+                    ENTRY_TITLE => $data[ENTRY_TITLE],
+                    ENTRY_DESCRIPTION => $data[ENTRY_DESCRIPTION],
+                    ENTRY_DATE => $data[ENTRY_DATE]
+                ];
+            }
+        }
+        
     } catch (Exception $ex) {
     } finally {
         //Close the connection

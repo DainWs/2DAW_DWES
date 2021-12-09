@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
 require_once('../src/config/constants.php');
+require_once('../src/domain/LangManager.php');
 require_once('../src/domain/SessionManager.php');
 require_once('../src/services/db/DBCategoryConnection.php');
 require_once('../src/services/db/DBEntryConnection.php');
@@ -31,7 +32,7 @@ $USERS = getAllUsers(USER_DATE, SQL_ORDER_DESC);
 	<section>
 		<article class="main-flex-article">
             <header>
-                <h1>Lastest Posts</h1>
+                <h1><?= traduce('Lastest Posts'); ?></h1>
             </header>
 			<section class="flex-list">
 				<!-- Start page content -->
@@ -43,7 +44,7 @@ $USERS = getAllUsers(USER_DATE, SQL_ORDER_DESC);
 			</section>
 
             <header>
-                <h1>Newests Users</h1>
+                <h1><?= traduce('Newests Users'); ?></h1>
             </header>
 			<section class="flex-list">
 				<!-- Start page content -->

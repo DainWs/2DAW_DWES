@@ -1,6 +1,5 @@
 <?php
 require_once("../src/config/constants.php");
-require_once("../src/domain/LangManager.php");
 require_once("../src/domain/SessionManager.php");
 require_once("../src/services/db/DBUserConnection.php");
 
@@ -9,11 +8,11 @@ require_once("../src/services/db/DBUserConnection.php");
  * @param String $email the user email
  * @param String $password the user password
  * @return Array with the user data
- * @return null if was not valid/correct data
+ * @return false if was not valid/correct data
  */
-function validateUserCredentials(String $email, String $password): Array|null {
+function validateUserCredentials(String $email, String $password): Array|bool {
     $dbUser = getUserByEmail($email);
-    $result = null;
+    $result = false;
     if ($dbUser[USER_PASSWORD] == md5($password)) {
         $result = $dbUser;
     }
@@ -34,21 +33,30 @@ function doLoginPost(): Array|bool {
     if (validateIsEmpty($email)) {
         $err['email'] = 'You have to specify a email for your account.';
     } else if (!validateEmail($email)){
-        $err['email'] = 'The specified email is nor correct';
+        $err['email'] = 'The specified email is not correct';
     }
     
     if (validateIsEmpty($password)) {
         $err['password'] = 'You have to specify a password.';
     } 
 
+    $result = [];
     if (count($err) == 0){
-        $userCredentials = validateUserCredentials($email, $password);
-        if ($userCredentials != null) {
-            addSession($userCredentials);
-            header("Location: ../index.php");
-            exit;
-        } else {
-            $err['others'] = 'Review email and password';
+        // DB Access exception control
+        try {
+            $result = validateUserCredentials($email, $password);
+        } 
+        catch(Exception $ex) {
+            $result = false;
+        } 
+        finally {
+            if (is_array($result)) {
+                addSession($result);
+                header("Location: ../index.php");
+                exit;
+            } else {
+                $err['others']= 'Review email and password.';
+            }
         }
     }
     return (!empty($err))? $err : true;

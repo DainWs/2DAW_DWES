@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php
 require_once('../src/config/constants.php');
+require_once('../src/domain/LangManager.php');
 require_once('../src/domain/SessionManager.php');
 require_once('../src/services/db/DBCategoryConnection.php');
 require_once('../src/services/db/DBEntryConnection.php');
@@ -33,8 +34,7 @@ $CATEGORIAS = getAllCategories();
     <?php include('templates/header.php'); ?>
 	<section>
 		<?php include('templates/models/userModels.php'); ?>
-		<aside>
-		</aside>
+		<aside></aside>
 	</section>
     <?php include('templates/footer.php'); ?>
 </body>
