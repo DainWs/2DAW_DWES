@@ -113,8 +113,8 @@ body > footer .widget > div {
     text-align: left;
 }
 
-body > footer .widget > div ul,
-body > footer .widget > div li {
+footer .widget div ul,
+footer .widget div li {
     text-align: left;
     margin: 0;
 }
