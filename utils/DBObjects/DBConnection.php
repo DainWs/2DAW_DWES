@@ -1,6 +1,6 @@
 <?php
 
-class DBAccess {
+class DBConnection {
     protected PDO $dbConnection;
 
     public function __construct(
@@ -18,11 +18,11 @@ class DBAccess {
     public function query(): array|false {
         $result = [];
         try {
-            $statement = $this->dbConnection->prepare("SELECT * FROM :table");
-            $statement->bindParam(':table', $this->table);
+            $statement = $this->dbConnection->prepare("SELECT * FROM ".$this->table);
             $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_CLASS, $this->object::class);
+            $result = $statement->fetchAll(PDO::FETCH_CLASS, 'Usuario');
         } catch(Exception $ex) {
+            echo $ex->getMessage();
             $result = false;
         }
         return $result;
@@ -31,35 +31,28 @@ class DBAccess {
     public function queryWith(String $key, String $value): array|false {
         $result = [];
         try {
-            $statement = $this->dbConnection->prepare("SELECT * FROM :table WHERE :field = :value");
-            $statement->bindParam(':table', $this->table);
+            $statement = $this->dbConnection->prepare("SELECT * FROM ".$this->table." WHERE :field = :value");
             $statement->bindParam(':field', $key);
             $statement->bindParam(':value', $value);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_CLASS, $this->object::class);
         } catch(Exception $ex) {
+            echo $ex->getMessage();
             $result = false;
         }
         return $result;
     }
 
-    public function insert(Array $keys, Array $values): bool {
+    public function insert(Usuario $user): bool {
         $result = true;
         try {
-            $statement = $this->dbConnection->prepare("INSERT INTO :table VALUES (:values)");
-
-            $tempTable = $this->table;
-            if (count($keys) > 0) {
-                $tempTable .= '(' . implode(',', $keys) . ')';
-            }
-
-            $statement->bindParam(':table', $tempTable);
-            $statement->bindParam(':values', implode(',', $values));
-
+            
+            $statement = $this->dbConnection->prepare("INSERT INTO ".$this->table." VALUES (:ID, :NOMBRE, :APELLIDOS, :EMAIL, :PASSWORD, :FECHA)");
             $this->dbConnection->beginTransaction();
-            $statement->execute();
+            $statement->execute((Array)$user);
             $this->dbConnection->commit();
         } catch(Exception $ex) {
+            echo $ex->getMessage();
             $result = false;
         }
         return $result;

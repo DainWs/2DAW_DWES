@@ -9,7 +9,7 @@ class DBConnection {
         private String $user,
         private String $password,
         private String $table,
-        private Object $object
+        private String $object
     ) {
         $url = "mysql:dbname=".$this->database.";host=".$this->domain;
         $this->dbConnection = new PDO($url, $this->user, $this->password);
@@ -20,9 +20,7 @@ class DBConnection {
         try {
             $statement = $this->dbConnection->prepare("SELECT * FROM ".$this->table);
             $statement->execute();
-            var_dump($statement->fetchAll(PDO::FETCH_CLASS, Usuario::class));
-            echo "<br>";
-            $result = $statement->fetchAll(PDO::FETCH_CLASS, Usuario::class);
+            $result = $statement->fetchAll(PDO::FETCH_CLASS, 'Usuario');
         } catch(Exception $ex) {
             echo $ex->getMessage();
             $result = false;
