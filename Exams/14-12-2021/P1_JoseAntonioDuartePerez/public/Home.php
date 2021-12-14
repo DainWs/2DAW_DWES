@@ -54,6 +54,7 @@ $RUTES = (new DBRuteConnection())->query($_GET['name'] ?? "", $_GET['filterBy'] 
                     <th>Descripci&oacute;n</th>
                     <th>Desnivel (m)</th>
                     <th>Distancia (km)</th>
+                    <th>Notas</th>
                     <th>Dificultad</th>
                     <th>operaciones</th>
                 </tr>
