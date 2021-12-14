@@ -43,7 +43,7 @@ try {
     }
 
     $lastUser = new Usuario();
-    $lastUser->ID = 2;
+    $lastUser->ID = 6;
     $lastUser->NOMBRE = 'Pedrito';
     $lastUser->APELLIDOS = 'Pedrito';
     $lastUser->EMAIL = 'pedrito@hofmail.com';
@@ -51,6 +51,28 @@ try {
     $lastUser->FECHA = date('Y-m-d H:i:s');
 
     $db->insert($lastUser);
+    echo "<br/>";
+    echo "<br/>";
+
+    $usuarios = $db->query();
+    foreach ($usuarios as $key => $value) {
+        echo $value->getNombre();
+        echo "<br/>";
+    }
+
+    $lastUser->NOMBRE = 'Francisco';
+
+    $db->update($lastUser);
+    echo "<br/>";
+    echo "<br/>";
+
+    $usuarios = $db->query();
+    foreach ($usuarios as $key => $value) {
+        echo $value->getNombre();
+        echo "<br/>";
+    }
+
+    $db->delete($lastUser);
     echo "<br/>";
     echo "<br/>";
 

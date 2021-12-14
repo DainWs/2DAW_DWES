@@ -58,4 +58,33 @@ class DBConnection {
         return $result;
     }
 
+    public function update(Usuario $user): bool {
+        $result = true;
+        try {
+            $statement = $this->dbConnection->prepare("UPDATE ".$this->table." set NOMBRE=:NOMBRE, APELLIDOS=:APELLIDOS, EMAIL=:EMAIL, PASSWORD=:PASSWORD, FECHA=:FECHA WHERE ID=:ID");
+            $this->dbConnection->beginTransaction();
+            $statement->execute((Array)$user);
+            $this->dbConnection->commit();
+        } catch(Exception $ex) {
+            echo $ex->getMessage();
+            $result = false;
+        }
+        return $result;
+    }
+
+    public function delete(Usuario $user): bool {
+        $result = true;
+        try {
+            $statement = $this->dbConnection->prepare("DELETE FROM ".$this->table." WHERE ID=:ID");
+            $statement->bindParam(":ID", $user->ID);
+            $this->dbConnection->beginTransaction();
+            $statement->execute();
+            $this->dbConnection->commit();
+        } catch(Exception $ex) {
+            echo $ex->getMessage();
+            $result = false;
+        }
+        return $result;
+    }
+
 }
