@@ -1,8 +1,8 @@
 <?php
 
-use src\services\db\Database;
+use src\services\db\DBConnection;
 
-abstract class DBTable extends Database {
+abstract class DBTable extends DBConnection {
     
     /**
      * Get all rows where match the conditions

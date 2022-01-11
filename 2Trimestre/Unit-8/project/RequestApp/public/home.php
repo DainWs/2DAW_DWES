@@ -1,3 +1,2 @@
 <?php
-
-require_once('../src/config/constants.php');
+include_once("../autoload.php");
