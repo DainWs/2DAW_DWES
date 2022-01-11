@@ -18,6 +18,10 @@ define('SQL_ORDER_ASC', 'ASC');
 define('SQL_ORDER_DESC', 'DESC');
 
 /* SUBMIT TYPES */
+define('SUBMIT_TYPE_SIGNIN', 'signin');
+define('SUBMIT_TYPE_LOGIN', 'login');
+define('SUBMIT_TYPE_LOGOUT', 'logout');
+
 define('SUBMIT_TYPE_ADD_USER', 'addUser');
 define('SUBMIT_TYPE_EDIT_USER', 'editUser');
 define('SUBMIT_TYPE_DELETE_USER', 'deleteUser');
