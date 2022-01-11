@@ -13,21 +13,30 @@ define('USUARIO_EMAIL', 'email');
 define('USUARIO_PASSWORD', 'password');
 define('USUARIO_ROL', 'rol');
 
-/* DB COMMENTS FIELD NAMES */
-define('COMENTARIOS_ID', 'id');
-define('COMENTARIOS_ID_RUTA', 'id_ruta');
-define('COMENTARIOS_NOMBRE', 'nombre');
-define('COMENTARIOS_TEXTO', 'texto');
-define('COMENTARIOS_FECHA', 'fecha');
-
 /* DB ORDER METHODS */
 define('SQL_ORDER_ASC', 'ASC');
 define('SQL_ORDER_DESC', 'DESC');
 
 /* SUBMIT TYPES */
-define('SUBMIT_TYPE_ADD_RUTE', 'addRute');
-define('SUBMIT_TYPE_EDIT_RUTE', 'editRute');
-define('SUBMIT_TYPE_DELETE_RUTE', 'deleteRute');
+define('SUBMIT_TYPE_ADD_USER', 'addUser');
+define('SUBMIT_TYPE_EDIT_USER', 'editUser');
+define('SUBMIT_TYPE_DELETE_USER', 'deleteUser');
+
+define('SUBMIT_TYPE_ADD_CATEGORY', 'addCategory');
+define('SUBMIT_TYPE_DELETE_CATEGORY', 'deleteCategory');
+
+define('SUBMIT_TYPE_ADD_PRODUCT', 'addProduct');
+define('SUBMIT_TYPE_EDIT_PRODUCT', 'editProduct');
+define('SUBMIT_TYPE_DELETE_PRODUCT', 'deleteProduct');
+
+define('SUBMIT_TYPE_ADD_PEDIDOS', 'addPedidos');
+define('SUBMIT_TYPE_EDIT_PEDIDOS', 'editPedidos');
+define('SUBMIT_TYPE_DELETE_PEDIDOS', 'deletePedidos');
+
+define('SUBMIT_TYPE_ADD_LINEA_PEDIDO', 'addLineaPedido');
+define('SUBMIT_TYPE_EDIT_LINEA_PEDIDO', 'editLineaPedido');
+define('SUBMIT_TYPE_DELETE_LINEA_PEDIDO', 'deleteLineaPedido');
 
 /* Others */
 define('DATE_FORMAT', 'd/m/Y');
+define('TIME_FORMAT', 'hh:mm:ss');
