@@ -10,4 +10,5 @@
     RewriteCond %{SCRIPT_FILENAME} !-f
 
     RewriteRule ^(.*)/(.*) ./index.php?controller=$1&action=$2
+    RewriteRule ^public/(.*) ./index.php?moveTo=$1
 </IfModule>

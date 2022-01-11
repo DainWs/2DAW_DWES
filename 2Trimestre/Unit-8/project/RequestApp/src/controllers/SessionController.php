@@ -2,107 +2,152 @@
 
 namespace src\controllers;
 
-class SessionController {
+use Exception;
+use src\domain\SessionManager;
+use src\domain\validators\FormValidator;
+use src\models\Usuarios;
+use src\services\db\DBTableUsuarios;
+
+class SessionController extends PostController {
 
     /**
      * Do all actions for a login post type
-     * @return Array error mensaje
      * @return true if was successfully complete
      * @return false if has errors
      */
-    public function doLoginPost(): Array|bool {
+    public function doLoginPost(): bool {
         $email = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
     
-        $err = [];
-        if (validateIsEmpty($email)) {
-            $err['email'] = 'You have to specify a email for your account.';
-        } else if (!validateEmail($email)){
-            $err['email'] = 'The specified email is not correct';
+        $this->errors = [];
+        if (FormValidator::validateIsEmpty($email)) {
+            $this->errors['email'] = 'You have to specify a email for your account.';
+        } else if (!FormValidator::validateEmail($email)){
+            $this->errors['email'] = 'The specified email is not correct';
         }
         
-        if (validateIsEmpty($password)) {
-            $err['password'] = 'You have to specify a password.';
+        if (FormValidator::validateIsEmpty($password)) {
+            $this->errors['password'] = 'You have to specify a password.';
         } 
     
-        $result = [];
-        if (count($err) == 0){
+        if (count($this->errors) == 0){
+            $result = null;
             // DB Access exception control
             try {
-                $result = validateUserCredentials($email, $password);
+                $result = $this->validateUserCredentials($email, $password);
             } 
             catch(Exception $ex) {
                 $result = false;
             } 
             finally {
-                if (is_array($result)) {
-                    addSession($result);
+                if ($result instanceof Usuarios) {
+                    SessionManager::getInstance()->addSession($result);
+                    //TODO es posible un cambio
                     header("Location: ../index.php");
                     exit;
                 } else {
-                    $err['others']= 'Review email and password.';
+                    $this->errors['others']= 'Review email and password.';
                 }
             }
         }
-        return (!empty($err))? $err : true;
+        return (count($this->errors) <= 0);
+    }
+
+    /**
+     * Do all actions for a login post type
+     * @return true if was successfully complete
+     * @return false if has errors
+     */
+    public function doSigninPost(): bool {
+        $name = $_POST['name'] ?? '';
+        $surname = $_POST['surname'] ?? '';
+        $email = $_POST['email'] ?? '';
+        $password = $_POST['password'] ?? '';
+    
+        $this->errors = [];
+        if (FormValidator::validateIsEmpty($name)) {
+            $this->errors['name'] = 'You have to specify a name for your account.';
+        }
+    
+        if (FormValidator::validateIsEmpty($email)) {
+            $this->errors['email'] = 'You have to specify a email for your account.';
+        } else if (!FormValidator::validateEmail($email)){
+            $this->errors['email'] = 'The specified email is not correct';
+        } else {
+            try {
+                $table = new DBTableUsuarios();
+                $user = $table->queryWhere('email', $email);
+                if ($user && count($user) > 0) {
+                    $this->errors['email'] = 'There is already a user with that email.';
+                }
+            }
+            catch(Exception $ex) {
+                $this->errors['others']= 'An unknown error was success, please try it again more later.';
+            }
+        }
+    
+        if (FormValidator::validateIsEmpty($password)) {
+            $this->errors['password'] = 'You have to specify a password for your account.';
+        }
+    
+        $result = true;
+        if (count($this->errors) == 0) {
+            // DB Access exception control
+            try {
+                $user = new Usuarios();
+                $user->id = 0;
+                $user->nombre = $name;
+                $user->apellidos = $surname;
+                $user->email = $email;
+                $user->password = $password;
+                $user->rol = 'Cliente';
+
+                $table = new DBTableUsuarios();
+                $result = $table->insert($user);
+            } 
+            catch(Exception $ex) {
+                $result = false;
+            } 
+            finally {
+                if ($result) {
+                    $table = new DBTableUsuarios();
+                    $dbUsers = $table->queryWhere('email', $email);
+                    if (is_array($dbUsers)) {
+                        $user = $dbUsers[array_keys($dbUsers)[0]];
+                        SessionManager::getInstance()->addSession($user);
+                        //TODO es posible un cambio
+                        header("Location: ../index.php");
+                        exit;
+                    }
+                } else {
+                    $this->errors['other'] = 'Review email and password.';
+                }
+            }
+        }
+        return (count($this->errors) <= 0);
+    }
+
+    public function doClosePost(): void {
+        SessionManager::getInstance()->clearSession();
     }
 
     /**
      * Validate the user credentials from the db
      * @param String $email the user email
      * @param String $password the user password
-     * @return Array with the user data
+     * @return Usuarios with the user data
      * @return false if was not valid/correct data
      */
-    private function validateUserCredentials(String $email, String $password): Array|bool {
-       $dbUser = getUserByEmail($email);
-       $result = false;
-       if ($dbUser[USER_PASSWORD] == md5($password)) {
-           $result = $dbUser;
-       }
-       return $result;
-   }
-}
-
-/**
- * Do all actions for a login post type
- * @return Array error mensaje
- * @return true if was successfully complete
- * @return false if has errors
- */
-function doLoginPost(): Array|bool {
-    $email = $_POST['email'] ?? '';
-    $password = $_POST['password'] ?? '';
-
-    $err = [];
-    if (validateIsEmpty($email)) {
-        $err['email'] = 'You have to specify a email for your account.';
-    } else if (!validateEmail($email)){
-        $err['email'] = 'The specified email is not correct';
-    }
-    
-    if (validateIsEmpty($password)) {
-        $err['password'] = 'You have to specify a password.';
-    } 
-
-    $result = [];
-    if (count($err) == 0){
-        // DB Access exception control
-        try {
-            $result = validateUserCredentials($email, $password);
-        } 
-        catch(Exception $ex) {
-            $result = false;
-        } 
-        finally {
-            if (is_array($result)) {
-                addSession($result);
-                header("Location: ../index.php");
-                exit;
-            } else {
-                $err['others']= 'Review email and password.';
+    private function validateUserCredentials(String $email, String $password): Usuarios|bool {
+        $table = new DBTableUsuarios();
+        $dbUsers = $table->queryWhere('email', $email);
+        $result = false;
+        if (is_array($dbUsers)) {
+            $dbUser = $dbUsers[array_keys($dbUsers)[0]];
+            if ($dbUser->password == md5($password)) {
+                $result = $dbUser;
             }
         }
-    }
-    return (!empty($err))? $err : true;
+        return $result;
+   }
 }
