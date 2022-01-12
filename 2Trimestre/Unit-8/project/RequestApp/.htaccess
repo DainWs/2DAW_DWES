@@ -7,16 +7,15 @@
 
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} ^(.*)\.(jpg|png|jpeg|css|js)$
-    RewriteRule ^(.*)\.(jpg|png|jpeg|css|js)$ public/$1.$2 [L]
+    RewriteRule ^(.*)\.(jpg|png|jpeg|css|js)$ ./public/$1.$2 [L]
 
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URL} ^.*public/.*$
-    RewriteRule ^public/(.*) index.php?moveTo=$1 [L]
+    RewriteRule ^public/(.*)$ ./index.php?moveTo=$1 [L]
 
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)/(.*)(?:\.php)? index.php?controller=$1&action=$2
+    RewriteRule ^(.*)/(.*)(?:\.php|)$ ./index.php?controller=$1&action=$2
 
 </IfModule>
