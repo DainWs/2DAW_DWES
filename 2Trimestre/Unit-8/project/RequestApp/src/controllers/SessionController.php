@@ -141,8 +141,10 @@ class SessionController extends PostController {
     private function validateUserCredentials(String $email, String $password): Usuarios|bool {
         $table = new DBTableUsuarios();
         $dbUsers = $table->queryWhere('email', $email);
+        echo $email;
         $result = false;
         if (is_array($dbUsers)) {
+            var_dump($dbUsers);
             $dbUser = $dbUsers[array_keys($dbUsers)[0]];
             if ($dbUser->password == md5($password)) {
                 $result = $dbUser;

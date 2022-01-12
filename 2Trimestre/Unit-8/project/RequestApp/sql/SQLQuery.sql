@@ -1,3 +1,3 @@
 USE tienda;
 
-SELECT * FROM usuarios;
+SELECT * FROM usuarios WHERE email='jose.ant.du@gmail.com';

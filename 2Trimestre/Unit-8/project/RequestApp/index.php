@@ -6,9 +6,10 @@ use src\domain\SessionManager;
 include_once('autoload.php');
 
 if (isset($_GET['controller']) && isset($_GET['action'])) {
-    $controllerClass = str_replace("/", "\\", $_GET['controller']);
+    $controllerClass = 'src\\controllers\\' .str_replace("/", "\\", $_GET['controller']);
     $method = $_GET['action'];
-
+    echo $controllerClass;
+    echo $method;
     $controller = new $controllerClass();
     $controller->$method();
 }

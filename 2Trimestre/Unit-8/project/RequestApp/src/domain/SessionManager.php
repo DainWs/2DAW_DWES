@@ -26,7 +26,7 @@ class SessionManager {
      */
     public function addSession(Usuarios $data): void {
         if (!$this->hasSession()) {
-            $token = $_COOKIE['PHPSESSID'];
+            $token = session_id();
             $_SESSION[$token] = $data;
         }
     }
@@ -38,7 +38,7 @@ class SessionManager {
      */
     public function updateSession(Usuarios $data): void {
         if ($this->hasSession()) {
-            $token = $_COOKIE['PHPSESSID'];
+            $token = session_id();
             $_SESSION[$token] = $data;
         }
     }
@@ -49,7 +49,7 @@ class SessionManager {
      * @return void
      */
     public function updateSessionLocation(String $view): void {
-        $token = $_COOKIE['PHPSESSID'];
+        $token = session_id();
         $_SESSION["$token-location"] = $view;
     }
 
@@ -61,7 +61,7 @@ class SessionManager {
     public function getSession(): Usuarios|null {
         $result = null;
         if ($this->hasSession()) {
-            $token = $_COOKIE['PHPSESSID'];
+            $token = session_id();
             $result = $_SESSION[$token];
         }
         return $result;
@@ -73,8 +73,11 @@ class SessionManager {
      * @return null if the session dont contains view location
      */
     public function getSessionLocation(): String|null {
-        $token = $_COOKIE['PHPSESSID'];
-        $result = $_SESSION["$token-location"];
+        $token = session_id();
+        $result = null;
+        if(isset($_SESSION["$token-location"])) {
+            $result = $_SESSION["$token-location"];
+        }
         return $result;
     }
 
@@ -84,7 +87,7 @@ class SessionManager {
      */
     public function clearSession(): void {
         if ($this->hasSession()) {
-            $token = $_COOKIE['PHPSESSID'];
+            $token = session_id();
             $_SESSION[$token] = null;
             $_SESSION["$token-location"] = null;
         }
@@ -96,12 +99,11 @@ class SessionManager {
      * @return false if the session dont contains the user data
      */
     public function hasSession(): bool {
-        $result = false;
+        $token = session_id();
         if (isset($_COOKIE['PHPSESSID'])) {
             $token = $_COOKIE['PHPSESSID'];
-            $result = (isset($_SESSION[$token]) && $_SESSION[$token] != null);
         }
-        return $result;
+        return (isset($_SESSION[$token]) && $_SESSION[$token] != null);
     }
 
 }

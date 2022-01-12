@@ -1,0 +1,126 @@
+:root {
+    --primary-color: gainsboro;
+    --secondary-color: white;
+    --primary-text-color: black;
+    --secondary-text-color: white;
+
+    --aside-width: 300px;
+}
+
+html {
+	height: 100vh;
+}
+
+body {
+	min-height: 100%;
+	margin: 0;
+	background: #eee;
+	color: #333;
+	font-family: Arial, Helvetica, sans-serif;
+
+	display: flex;
+	flex-flow: column;
+}
+
+h1 {
+    margin: 0;
+}
+
+h1 { 
+    font-size: 20pt; 
+}
+
+body > header > h1 { padding: 20px 0 10px 10px; }
+
+a {
+	opacity: .9;
+	color: #32A1CC;
+	text-decoration: none;
+}
+
+body > section, body > footer {
+	/* Estático, es un ejemplo */
+	width: 90%;
+	height: 100%;
+	margin: 0 auto;
+	background: #fff;
+	box-shadow: 5px 5px 5px rgba(0,0,0,.5);
+}
+
+body > footer {
+	box-shadow: 0px -6px 5px -5px;
+	margin-top: 20px;
+}
+
+body > section {
+	display: flex;
+	flex-grow: 1;
+}
+
+body > section > article {
+	flex-grow: 1;
+	padding: 5px 0 5px 5px;
+}
+
+body > section > article > header {
+	padding: 15px 0 10px 0;
+	text-align: center;
+	border-bottom: 2px solid gray;
+}
+
+body > section > article > header ~ section {
+	box-shadow: inset 0px 0px 6px -2px;
+}
+
+body > section > article > section {
+	padding: 15px;
+}
+
+body > section > aside {
+	min-width: 300px;
+	max-width: 300px;
+}
+
+/* El título */
+.site-title {
+	text-align: center;
+	line-height: 2;
+	margin: 0;
+}
+.description {
+	display: none;
+}
+.site-header {
+	border-bottom: 1px dashed #aaa;
+	margin-bottom: 1em;
+}
+
+.flex-list,
+.main-flex-article {
+	display: flex;
+}
+
+.main-flex-article > .flex-list,
+form.flex-grow {
+	flex-grow: 1;
+}
+
+.flex-list {
+	align-items: stretch;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.main-flex-article {
+	flex-direction: column;
+}
+
+.error {
+	margin-top: 0;
+    color: red;
+    font-size: 10pt;
+}
+
+.error::before {
+	content: "*";
+}
