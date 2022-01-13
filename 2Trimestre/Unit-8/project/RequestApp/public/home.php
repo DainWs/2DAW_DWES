@@ -11,8 +11,13 @@
     <body>
         <?php include('templates/header.php'); ?>
         <main>
-            <?php include('templates/widgets/forms/signinWidget.php'); ?>
-            <?php include('templates/widgets/forms/loginWidget.php'); ?>
+
+            <aside>
+                <?php if (!$DATA[HAS_SESSION]): ?>
+                    <?php include('templates/widgets/forms/signinWidget.php'); ?>
+                    <?php include('templates/widgets/forms/loginWidget.php'); ?>
+                <?php endif ?>
+            </aside>
         </main>
         <?php include('templates/footer.php'); ?>
     </body>

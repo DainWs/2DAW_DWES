@@ -2,8 +2,8 @@
 /* DB CONSTANTS */
 define('DB_DOMAIN', 'localhost');
 define('DB_NAME', 'tienda');
-define('DB_USER', 'root');
-define('DB_PASSWORD', '');
+define('DB_USER', 'tienda');
+define('DB_PASSWORD', 'tienda');
 
 /* DB USUARIOS FIELD NAMES */
 define('USUARIO_ID', 'id');
@@ -17,12 +17,21 @@ define('USUARIO_ROL', 'rol');
 define('SQL_ORDER_ASC', 'ASC');
 define('SQL_ORDER_DESC', 'DESC');
 
-/* SUBMIT TYPES */
-define('SUBMIT_TYPE_SIGNIN', 'signin');
-define('SUBMIT_TYPE_LOGIN', 'login');
-define('SUBMIT_TYPE_LOGOUT', 'logout');
+/* Data View Identifiers */
+define('USER_SESSION', 'userSession');
+define('HAS_SESSION', 'hasSession');
+define('ERRORS', 'errors');
 
-define('SUBMIT_TYPE_ADD_USER', 'addUser');
+/* Controllers Error identifies */
+define('CONTROLLER_SESSION_SINGING', 'signing');
+define('CONTROLLER_SESSION_LOGIN', 'login');
+define('CONTROLLER_SESSION_LOGOUT', 'logout');
+
+define('CONTROLLER_NAVIGATION_MOVE', 'move');
+
+define('CONTROLLER_USUARIOS_NEW', 'newUser');
+define('CONTROLLER_USUARIOS_EDIT', 'editUser');
+
 define('SUBMIT_TYPE_EDIT_USER', 'editUser');
 define('SUBMIT_TYPE_DELETE_USER', 'deleteUser');
 

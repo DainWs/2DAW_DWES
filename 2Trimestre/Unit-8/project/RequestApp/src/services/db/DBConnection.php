@@ -14,5 +14,5 @@ class DBConnection {
             $url = "mysql:dbname=".DB_NAME.";host=".DB_DOMAIN;
             $this::$connection = new PDO($url, DB_USER, DB_PASSWORD);
         }
-    }    
+    }
 }

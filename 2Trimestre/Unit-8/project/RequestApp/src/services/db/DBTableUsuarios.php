@@ -24,19 +24,19 @@ class DBTableUsuarios extends DBTable {
         return $result;
     }
 
+    /**
+     * Only for internal use.
+     */
     public function queryWhere($field, $value): array|false {
         $result = [];
         try {
-            $statement = parent::$connection->prepare("SELECT * FROM usuarios WHERE :field = :val");
-            $statement->bindParam(':field', $field);
-            $statement->bindParam(':val', $value);
+            $statement = parent::$connection->prepare("SELECT * FROM usuarios WHERE $field = ?");
+            $statement->bindParam(1, $value);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_CLASS, Usuarios::class);
-            var_dump($result);
         } catch(Exception $ex) {
             $this->errors = $ex->getMessage();
             $result = false;
-            var_dump($ex->getMessage());
         }
         return $result;
     }

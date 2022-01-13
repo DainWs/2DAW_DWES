@@ -9,89 +9,46 @@ use src\models\Usuarios;
 use src\services\db\DBTableUsuarios;
 
 class SessionController extends PostController {
-
+    
     /**
      * Do all actions for a login post type
      * @return true if was successfully complete
      * @return false if has errors
      */
-    public function doLoginPost(): bool {
-        $email = $_POST['email'] ?? '';
-        $password = $_POST['password'] ?? '';
-    
-        $this->errors = [];
-        if (FormValidator::validateIsEmpty($email)) {
-            $this->errors['email'] = 'You have to specify a email for your account.';
-        } else if (!FormValidator::validateEmail($email)){
-            $this->errors['email'] = 'The specified email is not correct';
-        }
-        
-        if (FormValidator::validateIsEmpty($password)) {
-            $this->errors['password'] = 'You have to specify a password.';
-        } 
-    
-        if (count($this->errors) == 0){
-            $result = null;
-            // DB Access exception control
-            try {
-                $result = $this->validateUserCredentials($email, $password);
-            } 
-            catch(Exception $ex) {
-                $result = false;
-            } 
-            finally {
-                if ($result instanceof Usuarios) {
-                    SessionManager::getInstance()->addSession($result);
-                    //TODO es posible un cambio
-                    header("Location: ../index.php");
-                    exit;
-                } else {
-                    $this->errors['others']= 'Review email and password.';
-                }
-            }
-        }
-        return (count($this->errors) <= 0);
-    }
-
-    /**
-     * Do all actions for a login post type
-     * @return true if was successfully complete
-     * @return false if has errors
-     */
-    public function doSigninPost(): bool {
+    public function doSigningPost(): bool {
         $name = $_POST['name'] ?? '';
         $surname = $_POST['surname'] ?? '';
         $email = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
     
-        $this->errors = [];
+        $errors = [];
         if (FormValidator::validateIsEmpty($name)) {
-            $this->errors['name'] = 'You have to specify a name for your account.';
+            $errors['name'] = 'You have to specify a name for your account.';
         }
     
         if (FormValidator::validateIsEmpty($email)) {
-            $this->errors['email'] = 'You have to specify a email for your account.';
+            $errors['email'] = 'You have to specify a email for your account.';
         } else if (!FormValidator::validateEmail($email)){
-            $this->errors['email'] = 'The specified email is not correct';
+            $errors['email'] = 'The specified email is not correct';
         } else {
             try {
                 $table = new DBTableUsuarios();
                 $user = $table->queryWhere('email', $email);
                 if ($user && count($user) > 0) {
-                    $this->errors['email'] = 'There is already a user with that email.';
+                    $errors['email'] = 'There is already a user with that email.';
                 }
             }
             catch(Exception $ex) {
-                $this->errors['others']= 'An unknown error was success, please try it again more later.';
+                $errors['others']= 'An unknown error was success, please try it again more later.';
             }
         }
     
         if (FormValidator::validateIsEmpty($password)) {
-            $this->errors['password'] = 'You have to specify a password for your account.';
+            $errors['password'] = 'You have to specify a password for your account.';
         }
     
         $result = true;
-        if (count($this->errors) == 0) {
+        if (count($errors) == 0) {
             // DB Access exception control
             try {
                 $user = new Usuarios();
@@ -115,19 +72,62 @@ class SessionController extends PostController {
                     if (is_array($dbUsers)) {
                         $user = $dbUsers[array_keys($dbUsers)[0]];
                         SessionManager::getInstance()->addSession($user);
-                        //TODO es posible un cambio
-                        header("Location: ../index.php");
-                        exit;
+                        NavigationController::home();
                     }
                 } else {
-                    $this->errors['other'] = 'Review email and password.';
+                    $errors['other'] = 'Review email and password.';
                 }
             }
         }
-        return (count($this->errors) <= 0);
+        $this->errors[CONTROLLER_SESSION_SINGING] = $errors;
+        return (count($errors) <= 0);
     }
 
-    public function doClosePost(): void {
+    /**
+     * Do all actions for a login post type
+     * @return true if was successfully complete
+     * @return false if has errors
+     */
+    public function doLoginPost(): bool {
+        $email = $_POST['email'] ?? '';
+        $password = $_POST['password'] ?? '';
+    
+        $errors = [];
+        if (FormValidator::validateIsEmpty($email)) {
+            $errors['email'] = 'You have to specify a email for your account.';
+        } else if (!FormValidator::validateEmail($email)){
+            $errors['email'] = 'The specified email is not correct';
+        }
+        
+        if (FormValidator::validateIsEmpty($password)) {
+            $errors['password'] = 'You have to specify a password.';
+        } 
+    
+        var_dump(count($errors));
+        if (count($errors) <= 0){
+            $result = null;
+            // DB Access exception control
+            try {
+                $result = $this->validateUserCredentials($email, $password);
+            } 
+            catch(Exception $ex) {
+                echo $ex;
+                $result = false;
+            } 
+            finally {
+                if ($result instanceof Usuarios) {
+                    SessionManager::getInstance()->addSession($result);
+                    NavigationController::home();
+                } else {
+                    $errors['others']= 'Review email and password.';
+                }
+            }
+        }
+        $this->errors[CONTROLLER_SESSION_LOGIN] = $errors;
+        return (count($errors) <= 0);
+    }
+
+    public function doLogoutPost(): void {
         SessionManager::getInstance()->clearSession();
     }
 
@@ -141,7 +141,6 @@ class SessionController extends PostController {
     private function validateUserCredentials(String $email, String $password): Usuarios|bool {
         $table = new DBTableUsuarios();
         $dbUsers = $table->queryWhere('email', $email);
-        echo $email;
         $result = false;
         if (is_array($dbUsers)) {
             var_dump($dbUsers);

@@ -3,7 +3,7 @@
 define('DB_DOMAIN', 'localhost');
 define('DB_NAME', 'senderismo');
 define('DB_USER', 'root');
-define('DB_PASSWORD', '');
+define('DB_PASSWORD', 'Sellama2jose');
 
 /* DB RUTE FIELD NAMES */
 define('RUTE_ID', 'id');

@@ -1,4 +1,4 @@
-DROP DATABASE senderismo;
+
 SET NAMES UTF8;
 CREATE DATABASE  IF NOT EXISTS senderismo DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE senderismo;
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS rutas (
   descripcion varchar(200) ,
   desnivel int(6) UNSIGNED NOT NULL DEFAULT '0' ,
   distancia double NOT NULL DEFAULT '0' ,
-  notas varchar(200),
+  notas varchar(1000),
   dificultad smallint unsigned NOT NULL DEFAULT '0' ,
   CONSTRAINT pk_rutas PRIMARY KEY(id),
   KEY titulo (titulo)

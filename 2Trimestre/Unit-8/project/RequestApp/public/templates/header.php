@@ -1,6 +1,3 @@
-<?php 
-use src\domain\SessionManager;
-?>
 <header>
     <h1><?= $DATA['title'] ?? 'Blog de Jose Antonio Duarte' ?></h1>
     <nav>
@@ -12,16 +9,14 @@ use src\domain\SessionManager;
                     
                 </ul>
             </li>
-            <?php if (SessionManager::getInstance()->hasSession()) : ?>
+            <?php if ($DATA[HAS_SESSION]) : ?>
                 <li class="profile">
-                    <a href="user.php"><?= $USER_SESSION[USER_NAME] ?></a>
+                    <a href="user.php"><?= $DATA[USER_SESSION]->nombre ?></a>
                     <ul>
                         <li><a href="userEdit.php">Edit profile</a></li>
-                        <li><a href="entryNew.php">New post</a></li>
                         <li>
-                            <form action="<?= $_SERVER['PHP_SELF']; ?>" method="POST">
+                            <form action="<?= $_SERVER['APP_BASE_URL'] . '/SessionController/doLogoutPost'; ?>" method="POST">
                                 <input id="logout-btn" type="submit" value="Logout" />
-                                <input type="hidden" name="submitType" value="<?= SUBMIT_TYPE_LOGOUT ?>" />
                             </form>
                         </li>
                     </ul>
