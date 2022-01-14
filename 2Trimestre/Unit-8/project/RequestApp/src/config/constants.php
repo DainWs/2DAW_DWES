@@ -17,9 +17,9 @@ define('USUARIO_PASSWORD', 'password');
 define('USUARIO_ROL', 'rol');
 
 /* Roles */
-define('ADMIN', 'Admin');
-define('CLIENTE', 'comprador');
-define('PROVEEDOR', 'Proveedor');
+define('ROL_ADMIN', 'Admin');
+define('ROL_CLIENTE', 'comprador');
+define('ROL_PROVEEDOR', 'Proveedor');
 
 /* DB ORDER METHODS */
 define('SQL_ORDER_ASC', 'ASC');
