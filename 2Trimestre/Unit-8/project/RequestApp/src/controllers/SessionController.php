@@ -103,7 +103,6 @@ class SessionController extends PostController {
             $errors['password'] = 'You have to specify a password.';
         } 
     
-        var_dump(count($errors));
         if (count($errors) <= 0){
             $result = null;
             // DB Access exception control
@@ -111,7 +110,6 @@ class SessionController extends PostController {
                 $result = $this->validateUserCredentials($email, $password);
             } 
             catch(Exception $ex) {
-                echo $ex;
                 $result = false;
             } 
             finally {
@@ -143,7 +141,6 @@ class SessionController extends PostController {
         $dbUsers = $table->queryWhereEmail($email);
         $result = false;
         if (is_array($dbUsers)) {
-            var_dump($dbUsers);
             $dbUser = $dbUsers[array_keys($dbUsers)[0]];
             if ($dbUser->password == md5($password)) {
                 $result = $dbUser;

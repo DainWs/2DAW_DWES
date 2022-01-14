@@ -2,6 +2,7 @@
 
 namespace src\domain;
 
+use src\controllers\NavigationController;
 use src\models\Usuarios;
 
 class SessionManager {
@@ -92,6 +93,7 @@ class SessionManager {
             $_SESSION[$token] = null;
             $_SESSION["$token-location"] = null;
         }
+        NavigationController::home();
     }
 
     /**
