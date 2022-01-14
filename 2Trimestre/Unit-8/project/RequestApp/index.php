@@ -11,8 +11,7 @@ $DATA = [];
 if (isset($_GET['controller']) && isset($_GET['action'])) {
     $controllerClass = 'src\\controllers\\' .str_replace("/", "\\", $_GET['controller']);
     $method = $_GET['action'];
-    echo $controllerClass;
-    echo $method;
+    
     $controller = new $controllerClass();
     $controller->$method();
     $DATA[ERRORS] = $controller->getErrors();
