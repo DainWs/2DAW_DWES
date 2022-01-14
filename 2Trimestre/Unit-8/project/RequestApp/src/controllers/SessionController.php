@@ -33,7 +33,7 @@ class SessionController extends PostController {
         } else {
             try {
                 $table = new DBTableUsuarios();
-                $user = $table->queryWhere('email', $email);
+                $user = $table->queryWhereEmail($email);
                 if ($user && count($user) > 0) {
                     $errors['email'] = 'There is already a user with that email.';
                 }
@@ -68,7 +68,7 @@ class SessionController extends PostController {
             finally {
                 if ($result) {
                     $table = new DBTableUsuarios();
-                    $dbUsers = $table->queryWhere('email', $email);
+                    $dbUsers = $table->queryWhereEmail($email);
                     if (is_array($dbUsers)) {
                         $user = $dbUsers[array_keys($dbUsers)[0]];
                         SessionManager::getInstance()->addSession($user);
@@ -140,7 +140,7 @@ class SessionController extends PostController {
      */
     private function validateUserCredentials(String $email, String $password): Usuarios|bool {
         $table = new DBTableUsuarios();
-        $dbUsers = $table->queryWhere('email', $email);
+        $dbUsers = $table->queryWhereEmail($email);
         $result = false;
         if (is_array($dbUsers)) {
             var_dump($dbUsers);

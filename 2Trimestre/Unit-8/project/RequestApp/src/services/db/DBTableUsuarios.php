@@ -25,9 +25,16 @@ class DBTableUsuarios extends DBTable {
     }
 
     /**
-     * Only for internal use.
+     * Found user in db by email
      */
-    public function queryWhere($field, $value): array|false {
+    public function queryWhereEmail($value): array|false {
+        return $this->queryWhere('email', $value);
+    }
+
+    /**
+     * Only for internal use. (this method only used by this class)
+     */
+    private function queryWhere($field, $value): array|false {
         $result = [];
         try {
             $statement = parent::$connection->prepare("SELECT * FROM usuarios WHERE $field = ?");
