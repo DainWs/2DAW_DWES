@@ -8,7 +8,7 @@ const Products = {
     methods: {
         nextPage() {
             // TODO change this url
-            $.ajax( "http://api.disneyapi.dev/characters", {
+            $.ajax( URL, {
                 type : 'GET',
                 success: function (response) {
                     console.log(response);
@@ -22,7 +22,7 @@ const Products = {
         },
         prevPage() {
             // TODO change this url
-            $.ajax( "http://api.disneyapi.dev/characters", {
+            $.ajax( URL, {
                 type : 'GET',
                 success: function (response) {
                     console.log(response);
