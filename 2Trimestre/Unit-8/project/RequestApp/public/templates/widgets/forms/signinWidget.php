@@ -1,6 +1,6 @@
 <div class="widget">
     <h2 class="title">Registration</h2>
-    <form action="<?= $_SERVER['APP_BASE_URL'] . '/SessionController/doSigninPost'; ?>" enctype="application/x-www-form-urlencoded" method="POST" autocomplete="off">
+    <form action="<?= $_SERVER['APP_BASE_URL'] . '/SessionController/doSigningPost'; ?>" enctype="application/x-www-form-urlencoded" method="POST" autocomplete="off">
         <label for="signin-name">Name:</label><br />
         <input id="signin-name" type="text" name="name" value="<?= $_POST['name'] ?? '' ?>" /><br />
 
