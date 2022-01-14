@@ -1,6 +1,7 @@
 USE tienda;
 
-INSERT INTO usuarios VALUES(0, 'Jose Antonio', 'Duarte Pérez', 'jose.ant.du@gmail.com', 'c893bad68927b457dbed39460e6afd62', 'comprador');
+INSERT INTO usuarios VALUES(0, 'Jose Antonio', 'Duarte Pérez', 'jose.ant.du@gmail.com', 'c893bad68927b457dbed39460e6afd62', 'Admin');
+INSERT INTO usuarios VALUES(0, 'Admin', '', 'admin@gmail.com', 'c893bad68927b457dbed39460e6afd62', 'Admin');
 INSERT INTO usuarios VALUES(0, 'Pepito', 'Sanchez', 'pepito@gmail.com', 'c893bad68927b457dbed39460e6afd62', 'comprador');
 INSERT INTO usuarios VALUES(0, 'Javier', 'Pérez', 'javier@gmail.com', 'c893bad68927b457dbed39460e6afd62', 'comprador');
 INSERT INTO usuarios VALUES(0, 'Alverto', 'Fuentes', 'alverto@gmail.com', 'c893bad68927b457dbed39460e6afd62', 'comprador');
