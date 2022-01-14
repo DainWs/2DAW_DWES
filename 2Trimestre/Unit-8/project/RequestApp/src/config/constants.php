@@ -16,6 +16,11 @@ define('USUARIO_EMAIL', 'email');
 define('USUARIO_PASSWORD', 'password');
 define('USUARIO_ROL', 'rol');
 
+/* Roles */
+define('ADMIN', 'Admin');
+define('CLIENTE', 'comprador');
+define('PROVEEDOR', 'Proveedor');
+
 /* DB ORDER METHODS */
 define('SQL_ORDER_ASC', 'ASC');
 define('SQL_ORDER_DESC', 'DESC');
@@ -34,6 +39,9 @@ define('CONTROLLER_NAVIGATION_MOVE', 'move');
 
 define('CONTROLLER_USUARIOS_NEW', 'newUser');
 define('CONTROLLER_USUARIOS_EDIT', 'editUser');
+
+define('CONTROLLER_CATEGORY_NEW', 'newCategory');
+define('CONTROLLER_CATEGORY_DELETE', 'editCategory');
 
 define('SUBMIT_TYPE_EDIT_USER', 'editUser');
 define('SUBMIT_TYPE_DELETE_USER', 'deleteUser');

@@ -10,15 +10,21 @@
     </head>
     <body>
         <?php include('templates/header.php'); ?>
-        <main>
+        <section>
+            <article>
 
+            </article>
             <aside>
-                <?php if (!$DATA[HAS_SESSION]): ?>
+                <?php if ($DATA[HAS_SESSION]): ?>
+                    <?php if ($DATA[USER_SESSION]->rol == ADMIN): ?>
+                        <?php include('templates/widgets/forms/newCategoryWidget.php'); ?>
+                    <?php endif; ?>
+                <?php else: ?>
                     <?php include('templates/widgets/forms/signinWidget.php'); ?>
                     <?php include('templates/widgets/forms/loginWidget.php'); ?>
                 <?php endif ?>
             </aside>
-        </main>
+        </section>
         <?php include('templates/footer.php'); ?>
     </body>
 </html>

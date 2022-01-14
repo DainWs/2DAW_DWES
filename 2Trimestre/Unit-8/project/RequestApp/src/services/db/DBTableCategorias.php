@@ -9,6 +9,7 @@ use src\models\Categorias;
 
 class DBTableCategorias extends DBTable {
 
+    //TODO change this methods for security reasons
     public function query(String $name = "", String $order = 'id', String $orderType = SQL_ORDER_ASC): array|false {
         $result = [];
         try {
@@ -25,17 +26,14 @@ class DBTableCategorias extends DBTable {
     }
 
     public function queryWith($id): array|false {
-        $result = [];
-        try {
-            $statement = parent::$connection->prepare("SELECT * FROM categorias WHERE id=:id");
-            $statement->bindParam(':id', $id);
-            $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_CLASS, Categorias::class);
-        } catch(Exception $ex) {
-            $this->errors = $ex->getMessage();
-            $result = false;
-        }
-        return $result;
+        return $this->queryWhere('categorias', 'id', $id, Categorias::class);
+    }
+
+    /**
+     * Found category in db by name
+     */
+    public function queryWhereName($value): array|false {
+        return $this->queryWhere('categorias', 'nombre', $value, Categorias::class);
     }
 
     public function insert($categoria): bool {

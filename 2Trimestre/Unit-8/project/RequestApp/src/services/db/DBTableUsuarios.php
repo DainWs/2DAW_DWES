@@ -24,42 +24,15 @@ class DBTableUsuarios extends DBTable {
         return $result;
     }
 
+    public function queryWith($id): array|false {
+        return $this->queryWhere('usuarios', 'id', $id, Usuarios::class);
+    }
+
     /**
      * Found user in db by email
      */
     public function queryWhereEmail($value): array|false {
-        return $this->queryWhere('email', $value);
-    }
-
-    /**
-     * Only for internal use. (this method only used by this class)
-     */
-    private function queryWhere($field, $value): array|false {
-        $result = [];
-        try {
-            $statement = parent::$connection->prepare("SELECT * FROM usuarios WHERE $field = ?");
-            $statement->bindParam(1, $value);
-            $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_CLASS, Usuarios::class);
-        } catch(Exception $ex) {
-            $this->errors = $ex->getMessage();
-            $result = false;
-        }
-        return $result;
-    }
-
-    public function queryWith($id): array|false {
-        $result = [];
-        try {
-            $statement = parent::$connection->prepare("SELECT * FROM usuarios WHERE id=:id");
-            $statement->bindParam(':id', $id);
-            $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_CLASS, Usuarios::class);
-        } catch(Exception $ex) {
-            $this->errors = $ex->getMessage();
-            $result = false;
-        }
-        return $result;
+        return $this->queryWhere('usuarios', 'email', $value, Usuarios::class);
     }
 
     public function insert($usuario): bool {
@@ -72,7 +45,7 @@ class DBTableUsuarios extends DBTable {
                 $statement->bindParam(":nombre", $usuario->nombre);
                 $statement->bindParam(":apellidos", $usuario->apellidos);
                 $statement->bindParam(":email", $usuario->email);
-                $statement->bindParam(":pass", $usuario->password);
+                $statement->bindParam(":pass", md5($usuario->password));
                 $statement->bindParam(":rol", $usuario->rol);
                 parent::$connection->beginTransaction();
                 $statement->execute();

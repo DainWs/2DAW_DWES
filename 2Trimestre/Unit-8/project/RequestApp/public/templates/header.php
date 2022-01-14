@@ -2,7 +2,7 @@
     <h1><?= $DATA['title'] ?? 'Blog de Jose Antonio Duarte' ?></h1>
     <nav>
         <ul class="nav-menu">
-            <li><a href="home.php">Home</a></li>
+            <li><a href="<?= $_SERVER['APP_BASE_URL'] . '/NavigationController/home'; ?>">Home</a></li>
             <?php if ($DATA[HAS_SESSION]) : ?>
                 <li class="profile">
                     <a href="user.php"><?= $DATA[USER_SESSION]->nombre ?></a>
