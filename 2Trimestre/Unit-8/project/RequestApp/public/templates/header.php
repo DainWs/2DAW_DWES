@@ -3,12 +3,6 @@
     <nav>
         <ul class="nav-menu">
             <li><a href="home.php">Home</a></li>
-            <li>
-                <a href="categorias.php">Categories</a>
-                <ul>
-                    
-                </ul>
-            </li>
             <?php if ($DATA[HAS_SESSION]) : ?>
                 <li class="profile">
                     <a href="user.php"><?= $DATA[USER_SESSION]->nombre ?></a>
