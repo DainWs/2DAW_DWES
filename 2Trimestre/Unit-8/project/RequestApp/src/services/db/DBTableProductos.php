@@ -25,15 +25,23 @@ class DBTableProductos extends DBTable {
     }
 
     public function queryWith($id): array|false {
+        return $this->queryWhere('productos', 'id', $id, Usuarios::class);
+    }
+
+    public function queryPage(int $pageNum = 0, int $limit = 10, String $order = 'id', String $orderType = SQL_ORDER_ASC): array|false {
         $result = [];
-        try {
-            $statement = parent::$connection->prepare("SELECT * FROM productos WHERE id=:id");
-            $statement->bindParam(':id', $id);
-            $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_CLASS, Productos::class);
-        } catch(Exception $ex) {
-            $this->errors = $ex->getMessage();
-            $result = false;
+        $fromRownum = $pageNum * $limit;
+        if ($fromRownum >= 0) {
+            try {
+                $statement = parent::$connection->prepare("SELECT * FROM productos ORDER BY :fieldOrder :orderType LIMIT $limit OFFSET $fromRownum");
+                $statement->bindParam(":fieldOrder", $order);
+                $statement->bindParam(":orderType", $orderType);
+                $statement->execute();
+                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            } catch(Exception $ex) {
+                $this->errors = $ex->getMessage();
+                $result = false;
+            }
         }
         return $result;
     }

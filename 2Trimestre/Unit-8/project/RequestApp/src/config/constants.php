@@ -2,11 +2,12 @@
 /* DB CONSTANTS */
 define('DB_DOMAIN', 'localhost');
 define('DB_NAME', 'tienda');
-define('DB_USER', 'root');
-define('DB_PASSWORD', '');
 
-//define('DB_USER', 'tienda');
-//define('DB_PASSWORD', 'tienda');
+//define('DB_USER', 'root');
+//define('DB_PASSWORD', '');
+
+define('DB_USER', 'tienda');
+define('DB_PASSWORD', 'tienda');
 
 /* DB USUARIOS FIELD NAMES */
 define('USUARIO_ID', 'id');

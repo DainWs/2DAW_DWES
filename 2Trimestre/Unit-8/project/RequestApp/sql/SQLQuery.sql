@@ -6,6 +6,4 @@ SET global log_output = 'table';
 */
 USE tienda;
 
-SELECT * FROM usuarios WHERE email = 'jose.ant.du@gmail.com';
-
-select * from categorias;
+SELECT * FROM usuarios ORDER BY nombre LIMIT 4 OFFSET 2 ;
