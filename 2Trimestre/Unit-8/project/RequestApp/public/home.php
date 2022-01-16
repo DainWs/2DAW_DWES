@@ -11,9 +11,11 @@
                 <div id="products-list" class="products">
                     <?php include_once('templates/models/productModel.php') ?>
                 </div>
-                <button id="prevPageBtn" v-on:click="prevPage">Prev page</button>
-                <span>{{pageIndex + 1}}</span>
-                <button id="nextPageBtn" v-on:click="nextPage">Next page</button>
+                <div id="products-navigation">
+                    <button id="prevPageBtn" v-on:click="prevPage">Prev page</button>
+                    <span>{{pageIndex + 1}}</span>
+                    <button id="nextPageBtn" v-on:click="nextPage">Next page</button>
+                </div>
             </article>
             <aside>
                 <?php if ($DATA[HAS_SESSION]): ?>

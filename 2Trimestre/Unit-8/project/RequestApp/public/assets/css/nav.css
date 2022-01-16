@@ -87,6 +87,11 @@ nav > ul > li.profile form input[type="submit"]{
     color: var(--secondary-text-color);
 }
 
+nav > ul > li.profile form input[type="submit"] {
+    text-align: left;
+    width: 100%;
+}
+
 nav li > ul {
     display: none;
     position: absolute;
