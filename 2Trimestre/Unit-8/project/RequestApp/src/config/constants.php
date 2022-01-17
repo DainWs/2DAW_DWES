@@ -21,6 +21,7 @@ define('SQL_ORDER_DESC', 'DESC');
 /* Data View Identifiers */
 define('USER_SESSION', 'userSession');
 define('HAS_SESSION', 'hasSession');
+define('PRODUCTS_LENGHT', 'productsCount');
 define('ERRORS', 'errors');
 
 /* Controllers Error identifies */

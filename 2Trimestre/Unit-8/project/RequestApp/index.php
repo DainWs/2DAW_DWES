@@ -2,6 +2,7 @@
 
 use src\controllers\NavigationController;
 use src\domain\SessionManager;
+use src\services\db\DBTableProductos;
 
 include_once('autoload.php');
 include_once('src/config/constants.php');

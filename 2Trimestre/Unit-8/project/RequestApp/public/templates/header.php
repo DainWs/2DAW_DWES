@@ -1,5 +1,5 @@
 <header>
-    <h1><?= $DATA['title'] ?? 'Blog de Jose Antonio Duarte' ?></h1>
+    <h1><?= $DATA['title'] ?? 'Tienda de Jose Antonio Duarte' ?></h1>
     <nav>
         <ul class="nav-menu">
             <li><a href="<?= $_SERVER['APP_BASE_URL'] . '/NavigationController/home'; ?>">Home</a></li>

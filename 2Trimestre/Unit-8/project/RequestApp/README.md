@@ -38,3 +38,22 @@ css, js, and images are saved in **public/assets**
 - [ ] Almacenar pedidos en una base de datos
 - [ ] Controlar el acceso con una tabla de usuarios
 - [ ] Enviar correo de confirmación
+
+## Pasos
+- [X] Diseña y crea la base de datos
+- [X] Estructura de directorios para implementar el MVC
+- [X] Crear el archivo autoload.php
+- [X] Archivo con constantes
+- [X] Controlador frontal
+- [X] Conexión a la base de datos
+- [X] Registro de usuarios
+- [X] Rutas amigables
+- [X] Login de usuarios
+- [X] Cerrar sesión
+- [X] Gestionar categorías
+- [ ] Gestionar productos
+- [X] Sentencias preparadas
+- [X] Desligando el acceso a la base de datos
+- [X] Mostrando productos
+- [X] Namespaces
+- [X] Devolviendo JSON

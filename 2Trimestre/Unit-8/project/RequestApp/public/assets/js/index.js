@@ -3,7 +3,7 @@ const Products = {
         return {
             productos: [],
             pageIndex: 0,
-            oldPageIndex: 0,
+            commingPageIndex: 0,
             limit: 2,
             order: undefined,
             orderType: undefined
@@ -17,18 +17,18 @@ const Products = {
             return `${BASE_URL}/assets/images/products/${product.imagen}`;
         },
         nextPage() {
-            this.oldPageIndex = this.pageIndex++;
+            this.commingPageIndex = this.pageIndex + 1;
             this.requestProducts();
         },
         prevPage() {
             if (this.pageIndex > 0) {
-                this.oldPageIndex = this.pageIndex--;
+                this.commingPageIndex = this.pageIndex - 1;
                 this.requestProducts();
             }
         },
         requestProducts() {
             let requestData = {
-                page: this.pageIndex,
+                page: this.commingPageIndex,
                 limit: this.limit
             };
 
@@ -48,11 +48,14 @@ const Products = {
             });
         },
         onProductsRequestSuccess(response) {
-            this.productos = JSON.parse(response);
+            let parsedJSON = JSON.parse(response);
+            if (Array.from(parsedJSON).length > 0) {
+                this.productos = parsedJSON;
+                this.pageIndex = this.commingPageIndex;
+            }
         },
         onProductsRequestFailed(response = 'Products not founds.') {
             console.log(`Error: ${response}`);
-            this.pageIndex = this.oldPageIndex;
         }
     }
 }

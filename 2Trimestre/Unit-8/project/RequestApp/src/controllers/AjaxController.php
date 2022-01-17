@@ -2,6 +2,8 @@
 
 namespace src\controllers;
 
+use src\services\db\DBTableCategorias;
+use src\services\db\DBTablePedidos;
 use src\services\db\DBTableProductos;
 
 class AjaxController extends PostController {
@@ -16,6 +18,22 @@ class AjaxController extends PostController {
         $products = $table->queryPage($page, $limit, $order, $orderType);
 
         echo json_encode($products);
+        exit(0);
+    }
+
+    public function getCategorias() {
+        $table = new DBTableCategorias();
+        $categories = $table->query();
+
+        echo json_encode($categories);
+        exit(0);
+    }
+
+    public function getPedidos() {
+        $table = new DBTablePedidos();
+        $categories = $table->query();
+
+        echo json_encode($categories);
         exit(0);
     }
 }

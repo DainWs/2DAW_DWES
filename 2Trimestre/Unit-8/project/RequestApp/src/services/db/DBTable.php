@@ -54,4 +54,18 @@ abstract class DBTable extends DBConnection {
      * Delete where match the conditions
      */
     public abstract function deleteWhere($id): bool;
+
+    public static function count($table = ''): int {
+        $result = 0;
+        if (!empty($table)) {
+            try {
+                $statement = parent::$connection->prepare("SELECT COUNT(*) AS LENGTH FROM $table");
+                $statement->execute();
+                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            } catch(Exception $ex) {
+                $result = 0;
+            }
+        }
+        return $result;
+    }
 }
