@@ -3,19 +3,11 @@
 define('DB_DOMAIN', 'localhost');
 define('DB_NAME', 'tienda');
 
-//define('DB_USER', 'root');
-//define('DB_PASSWORD', '');
+define('DB_USER', 'root');
+define('DB_PASSWORD', '');
 
-define('DB_USER', 'tienda');
-define('DB_PASSWORD', 'tienda');
-
-/* DB USUARIOS FIELD NAMES */
-define('USUARIO_ID', 'id');
-define('USUARIO_NOMBRE', 'nombre');
-define('USUARIO_APELLIDOS', 'apellidos');
-define('USUARIO_EMAIL', 'email');
-define('USUARIO_PASSWORD', 'password');
-define('USUARIO_ROL', 'rol');
+//define('DB_USER', 'tienda');
+//define('DB_PASSWORD', 'tienda');
 
 /* Roles */
 define('ROL_ADMIN', 'Admin');

@@ -5,17 +5,28 @@
     # Activar mod_rewrite  
     RewriteEngine on
 
+    # Images and assets requests
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !^.*\.(jpg|png|jpeg|css|js)$
     RewriteRule ^(.*)\.(jpg|png|jpeg|css|js)$ ./public/$1.$2 [L]
 
+    # If the image is not found
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} ^.*\.(jpg|png|jpeg)$
+    RewriteRule ^(.*)\.(jpg|png|jpeg)$ ./public/assets/images/not-found.png [L]
+
+    # For view navigation
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URL} ^.*public/.*$
     RewriteRule ^public/(.*)$ ./index.php?moveTo=$1 [L]
 
+    # Controllers access
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)/(.*)(?:\.php|)$ ./index.php?controller=$1&action=$2
-
 </IfModule>
+<FilesMatch ".*\.(jpg|png|jpeg)$">
+    ErrorDocument 404 "./public/assets/not-found.png"
+</FilesMatch>

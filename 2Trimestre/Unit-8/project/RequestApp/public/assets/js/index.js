@@ -13,7 +13,7 @@ const Products = {
         this.requestProducts();
     },
     methods: {
-        getImageURL: function(product) {
+        getImageURL(product) {
             return `${BASE_URL}/assets/images/products/${product.imagen}`;
         },
         nextPage() {

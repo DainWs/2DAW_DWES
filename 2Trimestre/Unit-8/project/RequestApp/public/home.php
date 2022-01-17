@@ -8,7 +8,7 @@
         <?php include('templates/header.php'); ?>
         <section>
             <article id="products">
-                <div id="products-list" class="products">
+                <div id="products-list">
                     <?php include_once('templates/models/productModel.php') ?>
                 </div>
                 <div id="products-navigation">

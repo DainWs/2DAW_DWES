@@ -1,8 +1,19 @@
 :root {
     --primary-color: gainsboro;
+	--light-primary-color: #eee;
+	--shadow-primary-color: rgba(0,0,0,.5);
+
     --secondary-color: white;
+
+	--three-color: gray;
+
+    --four-color: rgb(46, 46, 46);
+
     --primary-text-color: black;
+	--light-primary-text-color: #333;
     --secondary-text-color: white;
+
+	--error-color: red;
 
     --aside-width: 300px;
 }
@@ -14,14 +25,96 @@ html {
 body {
 	min-height: 100%;
 	margin: 0;
-	background: #eee;
-	color: #333;
+	background: var(--light-primary-color);
+	color: var(--light-primary-text-color);
 	font-family: Arial, Helvetica, sans-serif;
 
 	display: flex;
 	flex-flow: column;
 }
 
+	body > header > h1 { padding: 20px 0 10px 10px; }
+
+	body > section, body > footer {
+		width: 90%;
+		height: 100%;
+		margin: 0 auto;
+		background: var(--secondary-color);
+		box-shadow: 5px 5px 5px var(--shadow-primary-color);
+	}
+
+	body > section {
+		display: flex;
+		flex-grow: 1;
+	}
+
+		body > section > article {
+			flex-grow: 1;
+			padding: 5px 0 5px 5px;
+		}
+		
+			body > section > article > header {
+				padding: 15px 0 10px 0;
+				text-align: center;
+				border-bottom: 2px solid var(--three-color);
+			}
+
+			body > section > article > header ~ section {
+				box-shadow: inset 0px 0px 6px -2px;
+			}
+
+			body > section > article > section {
+				padding: 15px;
+			}
+
+		body > section > aside {
+			min-width: 300px;
+			max-width: 300px;
+		}
+
+	body > footer {
+		box-shadow: 0px -6px 5px -5px;
+		margin-top: 20px;
+		padding-bottom: 25px;
+	}
+	
+		body > footer .title,
+		body > footer .widget {
+			text-align: center;
+			flex-grow: 1;
+		}
+
+		body > footer .title {
+			padding-top: 8px;
+		}
+		
+		body > footer .widget {
+			max-width: 33%;
+		}
+
+			body > footer .widget .title {
+				margin: 0;
+				padding: 0;
+			}
+
+			body > footer .widget > div {
+				text-overflow: clip;
+				text-align: left;
+			}
+
+		body > footer > section {
+			display: flex;
+			justify-content: space-around;
+		}
+
+/* Links */
+a {
+	opacity: .9;
+	color: #32A1CC;
+	text-decoration: none;
+}
+
+/* Encabezados */
 h1 {
     margin: 0;
 }
@@ -30,114 +123,76 @@ h1 {
     font-size: 20pt; 
 }
 
-body > header > h1 { padding: 20px 0 10px 10px; }
-
-a {
-	opacity: .9;
-	color: #32A1CC;
-	text-decoration: none;
-}
-
-body > section, body > footer {
-	/* Estático, es un ejemplo */
-	width: 90%;
-	height: 100%;
-	margin: 0 auto;
-	background: #fff;
-	box-shadow: 5px 5px 5px rgba(0,0,0,.5);
-}
-
-body > footer {
-	box-shadow: 0px -6px 5px -5px;
-	margin-top: 20px;
-}
-
-body > section {
-	display: flex;
-	flex-grow: 1;
-}
-
-body > section > article {
-	flex-grow: 1;
-	padding: 5px 0 5px 5px;
-}
-
-body > section > article > header {
-	padding: 15px 0 10px 0;
-	text-align: center;
-	border-bottom: 2px solid gray;
-}
-
-body > section > article > header ~ section {
-	box-shadow: inset 0px 0px 6px -2px;
-}
-
-body > section > article > section {
-	padding: 15px;
-}
-
-body > section > aside {
-	min-width: 300px;
-	max-width: 300px;
-}
-
-/* El título */
+/* Classes */
 .site-title {
 	text-align: center;
 	line-height: 2;
 	margin: 0;
 }
+
 .description {
 	display: none;
 }
+
 .site-header {
-	border-bottom: 1px dashed #aaa;
+	border-bottom: 1px dashed var(--primary-color);
 	margin-bottom: 1em;
 }
 
-.flex-list,
-.main-flex-article {
-	display: flex;
-}
-
-.main-flex-article > .flex-list,
-form.flex-grow {
-	flex-grow: 1;
-}
-
-.flex-list {
-	align-items: stretch;
-    flex-wrap: wrap;
-    align-content: flex-start;
-}
-
-.main-flex-article {
-	flex-direction: column;
-}
-
+/* Errors */
 .error {
 	margin-top: 0;
-    color: red;
+    color: var(--error-color);
     font-size: 10pt;
 }
 
-.error::before {
-	content: "*";
-}
+	.error::before {
+		content: "*";
+	}
 
-article#products {
+/* Products */
+#products {
 	display: flex;
     flex-direction: column;
 }
 
-article#products > #products-list {
-	display: flex;
-    flex-wrap: wrap;
+	#products > #products-list {
+		display: flex;
+		flex-wrap: wrap;
 
-	flex-grow: 1;
+		flex-grow: 1;
+	}
+
+	#products > #products-navigation {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	#products > #products-navigation button { width: 100px;	}
+
+/* Forms */
+input:not([type=radio]),
+input:not([type=checkbox]),
+button {
+	box-sizing: border-box;
+	display: inline-block;
+		
+	border: 1px solid var(--primary-color);
+	border-radius: 4px;
+	margin: 8px 0;
+	padding: 6px 12px;	
 }
 
-article#products > #products-navigation {
-	display: flex;
-    justify-content: space-between;
+input[type=button]:hover,
+input[type=submit]:hover,
+button:hover {
+	color: var(--secondary-text-color);
+	background-color: var(--three-color);
+}
+
+input[type=button]:active,
+input[type=submit]:active,
+button:active {
+	color: var(--secondary-text-color);
+	background-color: var(--four-color);
 }

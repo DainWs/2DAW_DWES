@@ -9,7 +9,7 @@ use src\models\Usuarios;
 
 class DBTableUsuarios extends DBTable {
 
-    public function query(String $name = "", String $order = USUARIO_ID, String $orderType = SQL_ORDER_ASC): array|false {
+    public function query(String $name = "", String $order = 'id', String $orderType = SQL_ORDER_ASC): array|false {
         $result = [];
         try {
             $statement = parent::$connection->prepare("SELECT * FROM usuarios WHERE nombre LIKE '%$name%' ORDER BY :fieldOrder :orderType");
