@@ -158,9 +158,10 @@ h1 {
 
 	#products > #products-list {
 		display: flex;
+		align-items: flex-start;
 		flex-wrap: wrap;
-
-		flex-grow: 1;
+		align-content: flex-start;
+		justify-content: center;
 	}
 
 	#products > #products-navigation {
@@ -168,13 +169,12 @@ h1 {
 		justify-content: space-between;
 	}
 
-	#products > #products-navigation button { width: 100px;	}
+	#products > #products-navigation button { width: 6rem;	}
 	#products > #products-navigation span { margin: auto;	}
 
 .product-item {
 	box-sizing: border-box;
-    width: 150px;
-    height: 195px;
+    width: 12vw;
     padding: 5px;
 }
 

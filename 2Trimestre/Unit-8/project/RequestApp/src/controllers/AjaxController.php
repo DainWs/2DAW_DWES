@@ -14,9 +14,13 @@ class AjaxController extends PostController {
         $order = $_POST['order'] ?? 'id';
         $orderType = $_POST['orderType'] ?? SQL_ORDER_ASC;
 
-        $table = new DBTableProductos();
-        $products = $table->queryPage($page, $limit, $order, $orderType);
+        $startingIndex = $page * $limit;
 
+        $table = new DBTableProductos();
+        $products = $table->query("", $order, $orderType);
+        array_filter($products, function($key, $value) {
+            
+        });
         echo json_encode($products);
         exit(0);
     }

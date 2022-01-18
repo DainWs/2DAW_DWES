@@ -4,15 +4,29 @@ const Products = {
             productos: [],
             pageIndex: 0,
             commingPageIndex: 0,
-            limit: 2,
+            limit: 10,
             order: undefined,
             orderType: undefined
         }
     },
     mounted() {
+        this.updateLimit();
+        window.addEventListener('resize', this.updateLimit);
+
         this.requestProducts();
     },
     methods: {
+        updateLimit() {
+            let productsListWidth = $('#products-list').innerWidth();
+            let productItemWidth = window.innerWidth * 0.12;
+            let productsPerRow = Math.trunc(productsListWidth/productItemWidth);
+            let neededsRows = Math.ceil((10 * 1) / productsPerRow);
+
+            if (this.limit != (productsPerRow * neededsRows)) {
+                this.limit = productsPerRow * neededsRows;
+                this.requestProducts();
+            }
+        },
         getImageURL(product) {
             return `${BASE_URL}/assets/images/products/${product.imagen}`;
         },
