@@ -57,3 +57,10 @@ css, js, and images are saved in **public/assets**
 - [X] Mostrando productos
 - [X] Namespaces
 - [X] Devolviendo JSON
+- [ ] El carrito de la compra
+- [ ] Procesamiento del pedido
+- [ ] Mis pedidos
+- [ ] Envío de correo
+
+# Opcional
+- [ ] Gestion usuarios

@@ -27,6 +27,10 @@ const Products = {
                 this.requestProducts();
             }
         },
+        select(product) {
+            document.cookie = `selectedProduct=${product.id}`;
+            window.location=`${BASE_URL}/moveTo/proveedores/product.php`;
+        },
         getImageURL(product) {
             return `${BASE_URL}/assets/images/products/${product.imagen}`;
         },

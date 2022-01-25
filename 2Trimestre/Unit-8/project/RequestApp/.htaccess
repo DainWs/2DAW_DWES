@@ -18,14 +18,17 @@
 
     # For view navigation
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URL} ^.*public/.*$
-    RewriteRule ^public/(.*)$ ./index.php?moveTo=$1 [L]
+    RewriteCond %{REQUEST_URL} !^.*moveTo/.*\.php$
+    RewriteRule ^.*moveTo/(.*)$ ./index.php?moveTo=$1 [L]
 
     # Controllers access
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)/(.*)(?:\.php|)$ ./index.php?controller=$1&action=$2
+    RewriteRule ^(.*)/(.*)(?:\.php|)$ ./index.php?controller=$1&action=$2  [L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^.*/.*$ ./index.php?moveTo=home.php
 </IfModule>
 <FilesMatch ".*\.(jpg|png|jpeg)$">
     ErrorDocument 404 "./public/assets/not-found.png"

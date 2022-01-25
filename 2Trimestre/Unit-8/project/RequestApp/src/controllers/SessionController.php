@@ -57,7 +57,7 @@ class SessionController extends PostController {
                 $user->apellidos = $surname;
                 $user->email = $email;
                 $user->password = $password;
-                $user->rol = 'Cliente';
+                $user->rol = ROL_CLIENTE;
 
                 $table = new DBTableUsuarios();
                 $result = $table->insert($user);

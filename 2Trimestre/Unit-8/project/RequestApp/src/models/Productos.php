@@ -2,8 +2,6 @@
 
 namespace src\models;
 
-use DateTime;
-
 class Productos {
     public int $id;
     public int $categoria_id;
@@ -12,6 +10,6 @@ class Productos {
     public float $precio;
     public int $stock;
     public string $oferta;
-    public DateTime $fecha;
+    public string $fecha;
     public string $imagen;
 }

@@ -25,7 +25,7 @@ class DBTableProductos extends DBTable {
     }
 
     public function queryWith($id): array|false {
-        return $this->queryWhere('productos', 'id', $id, Usuarios::class);
+        return $this->queryWhere('productos', 'id', $id, Productos::class);
     }
 
     public function queryPage(int $pageNum = 0, int $limit = 10, String $order = 'id', String $orderType = SQL_ORDER_ASC): array|false {

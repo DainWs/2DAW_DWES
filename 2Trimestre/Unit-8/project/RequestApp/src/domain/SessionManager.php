@@ -83,6 +83,24 @@ class SessionManager {
         return $result;
     }
 
+    public function isAllowedLocation(): bool {
+        $rol = $this->getSession()->rol;
+        $location = $this->getSessionLocation();
+        
+        $minLevel = ROL_UNDEFINED_LEVEL;
+        if (str_contains($location, 'administration')) {
+            $minLevel = ROL_ADMIN_LEVEL;
+        }
+        else if (str_contains($location, 'proveedores')) {
+            $minLevel = ROL_PROVEEDOR_LEVEL;
+        }
+        else if (str_contains($location, 'profile')) {
+            $minLevel = ROL_CLIENTE_LEVEL;
+        }
+
+        return $rol >= $minLevel;
+    }
+
     /**
      * Clears the user data from session
      * @return void
@@ -108,5 +126,4 @@ class SessionManager {
         }
         return (isset($_SESSION[$token]) && $_SESSION[$token] != null);
     }
-
 }

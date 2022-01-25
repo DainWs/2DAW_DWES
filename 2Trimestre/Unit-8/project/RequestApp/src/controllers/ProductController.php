@@ -8,14 +8,14 @@ use src\domain\validators\FormValidator;
 use src\models\Usuarios;
 use src\services\db\DBTableUsuarios;
 
-class UsuariosController extends PostController {
+class ProductController extends PostController {
 
     /**
-     * Do all actions for a add user post type
+     * Do all actions for a add product post type
      * @return true if was successfully complete
      * @return false if has errors
      */
-    public function doAddUserPost(): bool {
+    public function doAddProductPost(): bool {
         $name = $_POST['name'] ?? '';
         $surname = $_POST['surname'] ?? '';
         $email = $_POST['email'] ?? '';

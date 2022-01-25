@@ -40,12 +40,14 @@ class DBTableUsuarios extends DBTable {
 
         if ($usuario instanceof Usuarios) {
             try {
+                $encryptedPass = md5($usuario->password);
+
                 $statement = parent::$connection->prepare("INSERT INTO usuarios VALUES (:id, :nombre, :apellidos, :email, :pass, :rol)");
                 $statement->bindParam(":id", $usuario->id);
                 $statement->bindParam(":nombre", $usuario->nombre);
                 $statement->bindParam(":apellidos", $usuario->apellidos);
                 $statement->bindParam(":email", $usuario->email);
-                $statement->bindParam(":pass", md5($usuario->password));
+                $statement->bindParam(":pass", $encryptedPass);
                 $statement->bindParam(":rol", $usuario->rol);
                 parent::$connection->beginTransaction();
                 $statement->execute();
