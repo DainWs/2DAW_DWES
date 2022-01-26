@@ -110,9 +110,11 @@ class SessionController extends PostController {
                 $result = $this->validateUserCredentials($email, $password);
             } 
             catch(Exception $ex) {
+                echo $ex->getMessage();
                 $result = false;
             } 
             finally {
+                var_dump($result);
                 if ($result instanceof Usuarios) {
                     SessionManager::getInstance()->addSession($result);
                     NavigationController::home();

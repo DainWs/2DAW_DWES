@@ -1,6 +1,7 @@
 const Products = {
     data() {
         return {
+            selected: null,
             productos: [],
             pageIndex: 0,
             commingPageIndex: 0,
@@ -20,7 +21,7 @@ const Products = {
             let productsListWidth = $('#products-list').innerWidth();
             let productItemWidth = window.innerWidth * 0.12;
             let productsPerRow = Math.trunc(productsListWidth/productItemWidth);
-            let neededsRows = Math.ceil((10 * 1) / productsPerRow);
+            let neededsRows = Math.ceil((20 * 1) / productsPerRow);
 
             if (this.limit != (productsPerRow * neededsRows)) {
                 this.limit = productsPerRow * neededsRows;
@@ -28,8 +29,7 @@ const Products = {
             }
         },
         select(product) {
-            document.cookie = `selectedProduct=${product.id}`;
-            window.location=`${BASE_URL}/moveTo/proveedores/product.php`;
+            this.selected = (this.selected == product) ? null : product;
         },
         getImageURL(product) {
             return `${BASE_URL}/assets/images/products/${product.imagen}`;
@@ -74,7 +74,16 @@ const Products = {
         },
         onProductsRequestFailed(response = 'Products not founds.') {
             console.log(`Error: ${response}`);
+        },
+        precioStyle(product) {
+            return (product.oferta > 0) ? 'tachado' : '';
+        },
+        calcOferta(product) {
+            return (product.precio - (product.precio * (product.oferta/100))).toFixed(2);
         }
+    },
+    computed: {
+        
     }
 }
 
