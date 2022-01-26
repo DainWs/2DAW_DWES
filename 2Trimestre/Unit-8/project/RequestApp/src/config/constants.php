@@ -37,6 +37,7 @@ define('ERRORS', 'errors');
 define('CATEGORIES', 'categories');
 define('SELECTED_USER', 'selectedUsers');
 define('SELECTED_PRODUCT', 'selectedProduct');
+define('SELECTED_CATEGORY', 'selectedCategory');
 
 
 /* Controllers Error identifies */

@@ -2,8 +2,7 @@
 
 use src\controllers\NavigationController;
 use src\domain\SessionManager;
-use src\services\db\DBTableCategorias;
-use src\services\db\DBTableProductos;
+use src\domain\ViewDataPackager;
 
 include_once('autoload.php');
 include_once('src/config/constants.php');
@@ -27,18 +26,10 @@ if (isset($_GET['moveTo'])) {
     exit();
 }
 
-if (isset($_COOKIE['selectedProduct'])) {
-    $DATA[SELECTED_PRODUCT] = (new DBTableProductos())->queryWith($_COOKIE['selectedProduct'])[0];
-}
-
-$DATA[CATEGORIES] = (new DBTableCategorias())->query();
 $DATA[HAS_SESSION] = SessionManager::getInstance()->hasSession();
 $DATA[USER_SESSION] = SessionManager::getInstance()->getSession();
 
-if (!SessionManager::getInstance()->isAllowedLocation()) {
-    NavigationController::home();
-}
-
 $viewPath = SessionManager::getInstance()->getSessionLocation() ?? 'home.php';
+$DATA = array_merge($DATA, ViewDataPackager::pakageDataFor($viewPath)); 
 include_once("./public/$viewPath");
 ?>
