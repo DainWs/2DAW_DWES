@@ -19,12 +19,12 @@
     # For view navigation
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_URL} !^.*moveTo/.*\.php$
-    RewriteRule ^.*moveTo/(.*)(?:\?(.*))?$ ./index.php?moveTo=$1&$2 [L]
+    RewriteRule ^.*moveTo/(.*)$ ./index.php?moveTo=$1 [QSA] [L]
 
     # Controllers access
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^(.*)/(.*)(?:\.php)?(?:\?(.*))?$ ./index.php?controller=$1&action=$2&$3  [L]
+    RewriteRule ^(.*)/([^\.\?]*)(?:\.php)?$ ./index.php?controller=$1&action=$2 [QSA] [L]
 
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} -d

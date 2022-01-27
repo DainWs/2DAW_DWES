@@ -176,14 +176,14 @@ h1 {
 	#products > #products-navigation button { width: 6rem;	}
 	#products > #products-navigation span { margin: auto;	}
 
-.product-item {
+.product--item {
 	box-sizing: border-box;
 	flex: 1 1 30%;
 
 	position: relative;
 }
 
-	.product__content {		
+	.product--item__content {		
 		overflow: hidden;
 		
 		border: 2px solid transparent;
@@ -193,49 +193,49 @@ h1 {
 		display: flex;
 	}
 
-	.product-item:hover {
+	.product--item:hover {
 		border-color: var(--four-color);
 		background-color: var(--primary-color);
 		cursor: pointer;
 	}
 
-		.product-item figure,
-		.product-item img {
+		.product--item figure,
+		.product--item img {
 			margin: 0;
 			height: 100%;
 		}
 
-		.product-item img {
+		.product--item img {
 			box-sizing: border-box;
 			padding: 5px;
 		}
 
-		.product-item__description,
-		.product-item__prices {
+		.product--item__description,
+		.product--item__prices {
 			height: 100%;
 
 			display: flex;
 			flex-direction: column;
 		}
 
-		.product-item__description {		
+		.product--item__description {		
 			flex-grow: 1;
 			overflow: hidden;
 		}
 
-		.product-item__description h3 {
+		.product--item__description h3 {
 			margin: 0;
 			overflow-x: hidden;
 			text-overflow: ellipsis;
 			white-space: pre;
 		}
 
-		.product-item__description span {
+		.product--item__description span {
 			overflow-y: hidden;
 			text-overflow: ellipsis;
 		}
 
-		.product-item figure:hover figcaption {
+		.product--item figure:hover figcaption {
 			color: var(--light-primary-color);
 			border-color: var(--four-color);
 			background-color: var(--four-color);

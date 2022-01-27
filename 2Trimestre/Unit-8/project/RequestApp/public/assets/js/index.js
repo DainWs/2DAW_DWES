@@ -82,15 +82,15 @@ const Products = {
             return (product.precio - (product.precio * (product.oferta/100))).toFixed(2);
         },
         removeConfirmDialog(url) {
-            
+            if (confirm("¿Quieres eliminar este producto?") == true) {
+                window.location = url;
+            }
         }
     },
     computed: {
         
     }
 }
-
 window.onload = () => {
     Vue.createApp(Products).mount('#products');
-
 }

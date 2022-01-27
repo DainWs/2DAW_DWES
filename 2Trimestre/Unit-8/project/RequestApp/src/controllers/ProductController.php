@@ -154,7 +154,7 @@ class ProductController extends PostController {
      * @return false if has errors
      */
     public function doDeleteProductPost(): bool {
-        $id = $_POST['productID'] ?? '';
+        $id = $_GET['productID'] ?? '';
 
         $errors = [];
         if (FormValidator::validateIsEmpty($id)) {
