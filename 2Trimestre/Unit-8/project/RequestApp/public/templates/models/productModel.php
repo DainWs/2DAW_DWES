@@ -1,6 +1,6 @@
 <!-- This model use VUE -->
-<article v-for="product in productos" :key="product.id" v-bind:id="'product-'+product.id" class="product-item" @click="select(product)">
-    <div class="product__content">
+<article v-for="product in productos" :key="product.id" v-bind:id="'product-'+product.id" class="product--item" @click="select(product)">
+    <div class="product--item__content">
         <figure>
             <img v-bind:src="getImageURL(product)" v-bind:alt="product.nombre" width="50" height="50">
         </figure>
@@ -15,12 +15,12 @@
         </div>
     </div>
     <div v-if="selected == product" class="product__actions">
-        <a>Buy</a>    
+        <a v-bind:href="'<?= $_SERVER['APP_BASE_URL'] ?>/CarritoController/add.php?productID=' + product.id">Buy</a>    
         
         <?php $userRol = $DATA[USER_SESSION]->rol ?? ROL_CLIENTE; ?>
         <?php if ($userRol == ROL_PROVEEDOR || $userRol == ROL_ADMIN) : ?>
-            <a>Edit</a>
-            <a>remove</a>
+            <a v-bind:href="'<?= $_SERVER['APP_BASE_URL'] ?>/moveTo/proveedores/newProduct.php?productID=' + product.id">Edit</a>
+            <a @click="removeConfirmDialog('<?= $_SERVER['APP_BASE_URL'] ?>/ProductController/doDeleteProductPost.php?productID=' + product.id)">remove</a>
         <?php endif; ?>
     </div>
 </article>

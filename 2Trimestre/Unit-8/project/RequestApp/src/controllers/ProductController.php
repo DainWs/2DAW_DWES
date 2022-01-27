@@ -6,6 +6,7 @@ use Exception;
 use src\domain\SessionManager;
 use src\domain\validators\FormValidator;
 use src\models\Usuarios;
+use src\services\db\DBTableProductos;
 use src\services\db\DBTableUsuarios;
 
 class ProductController extends PostController {
@@ -143,7 +144,40 @@ class ProductController extends PostController {
                 }
             }
         }
-        $this->errors[CONTROLLER_USUARIOS_NEW] = $errors;
+        $this->errors[CONTROLLER_PRODUCT_EDIT] = $errors;
+        return (count($errors) <= 0);
+    }
+
+    /**
+     * Do all actions for a delete product post type
+     * @return true if was successfully complete
+     * @return false if has errors
+     */
+    public function doDeleteProductPost(): bool {
+        $id = $_POST['productID'] ?? '';
+
+        $errors = [];
+        if (FormValidator::validateIsEmpty($id)) {
+            $errors['others']= 'An unknown error was success, please try it again more later.';
+        }
+    
+        $result = true;
+        if (count($errors) == 0) {
+            // DB Access exception control
+            try {
+                $table = new DBTableProductos();
+                $result = $table->delete($id);
+            } 
+            catch(Exception $ex) {
+                $result = false;
+            } 
+            finally {
+                if (!$result) {
+                    $errors['others']= 'An unknown error was success, please try it again more later.';
+                }
+            }
+        }
+        $this->errors[CONTROLLER_PRODUCT_DELETE] = $errors;
         return (count($errors) <= 0);
     }
 }

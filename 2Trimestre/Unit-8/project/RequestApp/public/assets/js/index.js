@@ -73,13 +73,16 @@ const Products = {
             }
         },
         onProductsRequestFailed(response = 'Products not founds.') {
-            console.log(`Error: ${response}`);
+            console.log(`Error: ${JSON.parse(response)}`);
         },
         precioStyle(product) {
             return (product.oferta > 0) ? 'tachado' : '';
         },
         calcOferta(product) {
             return (product.precio - (product.precio * (product.oferta/100))).toFixed(2);
+        },
+        removeConfirmDialog(url) {
+            
         }
     },
     computed: {
