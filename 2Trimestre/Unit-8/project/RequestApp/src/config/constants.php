@@ -35,6 +35,7 @@ define('HAS_SESSION', 'hasSession');
 define('PRODUCTS_LENGHT', 'productsCount');
 define('ERRORS', 'errors');
 define('CATEGORIES', 'categories');
+define('CARRITO', 'carrito');
 define('SELECTED_USER', 'selectedUsers');
 define('SELECTED_PRODUCT', 'selectedProduct');
 define('SELECTED_CATEGORY', 'selectedCategory');
@@ -56,6 +57,8 @@ define('CONTROLLER_CATEGORY_DELETE', 'editCategory');
 define('CONTROLLER_PRODUCT_NEW', 'newProduct');
 define('CONTROLLER_PRODUCT_EDIT', 'editProduct');
 define('CONTROLLER_PRODUCT_DELETE', 'deleteProduct');
+
+define('CONTROLLER_CARRITO_BUY', 'carritoBuy');
 
 /* Routes */
 define('VIEW_HOME', 'home.php');

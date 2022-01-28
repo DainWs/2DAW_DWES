@@ -37,6 +37,8 @@ $DATA[HAS_SESSION] = SessionManager::getInstance()->hasSession();
 $DATA[USER_SESSION] = SessionManager::getInstance()->getSession();
 
 $viewPath = SessionManager::getInstance()->getSessionLocation() ?? 'home.php';
-$DATA = array_merge($DATA, ViewDataPackager::pakageDataFor($viewPath)); 
+$DATA = array_merge($DATA, ViewDataPackager::pakageDataFor($viewPath));
+var_dump($DATA);
+echo $viewPath;
 include_once("./public/$viewPath");
 ?>

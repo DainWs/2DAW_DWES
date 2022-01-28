@@ -25,6 +25,7 @@
                 <li class="profile">
                     <a href="user.php"><?= $DATA[USER_SESSION]->nombre ?></a>
                     <ul>
+                        <li><a href="<?= $_SERVER['APP_BASE_URL'] . '/moveTo/carrito.php'; ?>">Carrito</a></li>
                         <li><a href="<?= $_SERVER['APP_BASE_URL'] . '/moveTo/profile/editProfile.php'; ?>">Edit profile</a></li>
                         <li>
                             <form action="<?= $_SERVER['APP_BASE_URL'] . '/SessionController/doLogoutPost'; ?>" method="POST">
@@ -32,6 +33,10 @@
                             </form>
                         </li>
                     </ul>
+                </li>
+            <?php else: ?>
+                <li class="profile">
+                    <a href="<?= $_SERVER['APP_BASE_URL'] . '/moveTo/carrito.php'; ?>">Carrito</a>
                 </li>
             <?php endif; ?>
         </ul>

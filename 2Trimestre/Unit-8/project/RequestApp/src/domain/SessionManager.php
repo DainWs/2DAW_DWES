@@ -3,6 +3,7 @@
 namespace src\domain;
 
 use src\controllers\NavigationController;
+use src\models\Carrito;
 use src\models\Usuarios;
 
 class SessionManager {
@@ -26,10 +27,21 @@ class SessionManager {
      * @return void
      */
     public function addSession(Usuarios $data): void {
-        echo 'adding';
         if (!$this->hasSession()) {
             $token = session_id();
-            $_SESSION[$token] = $data;
+            $_SESSION[$token]['user'] = $data;
+        }
+    }
+
+    /**
+     * Adds the current carrito data to session
+     * @param Carrito $carrito the user carrito array
+     * @return void
+     */
+    public function setCarritoSession(Carrito $carrito): void {
+        if (!$this->hasSession()) {
+            $token = session_id();
+            $_SESSION[$token]['carrito'] = $carrito;
         }
     }
 
@@ -41,7 +53,19 @@ class SessionManager {
     public function updateSession(Usuarios $data): void {
         if ($this->hasSession()) {
             $token = session_id();
-            $_SESSION[$token] = $data;
+            $_SESSION[$token]['user'] = $data;
+        }
+    }
+
+    /**
+     * updates the current carrito data in session
+     * @param Carrito $carrito the user carrito array
+     * @return void
+     */
+    public function updateCarritoSession(Carrito $carrito): void {
+        if ($this->hasSession()) {
+            $token = session_id();
+            $_SESSION[$token]['carrito'] = $carrito;
         }
     }
 
@@ -52,7 +76,7 @@ class SessionManager {
      */
     public function updateSessionLocation(String $view): void {
         $token = session_id();
-        $_SESSION["$token-location"] = $view;
+        $_SESSION[$token]['location'] = $view;
     }
 
     /**
@@ -64,7 +88,21 @@ class SessionManager {
         $result = null;
         if ($this->hasSession()) {
             $token = session_id();
-            $result = $_SESSION[$token];
+            $result = $_SESSION[$token]['user'];
+        }
+        return $result;
+    }
+
+    /**
+     * gets the current carrito data from session
+     * @return Carrito if the session contains carrito data
+     * @return null if the session dont contains carrito data
+     */
+    public function getCarritoSession(): Carrito {
+        $result = new Carrito;
+        if ($this->hasSession()) {
+            $token = session_id();
+            $result = $_SESSION[$token]['carrito'] ?? new Carrito;
         }
         return $result;
     }
@@ -77,31 +115,10 @@ class SessionManager {
     public function getSessionLocation(): String|null {
         $token = session_id();
         $result = null;
-        if(isset($_SESSION["$token-location"])) {
-            $result = $_SESSION["$token-location"];
+        if(isset($_SESSION[$token]['location'])) {
+            $result = $_SESSION[$token]['location'];
         }
         return $result;
-    }
-
-    /**
-     * @deprecated
-     */
-    public function isAllowedLocation(): bool {
-        $rol = $this->getSession()->rol;
-        $location = $this->getSessionLocation();
-        
-        $minLevel = ROL_UNDEFINED_LEVEL;
-        if (str_contains($location, 'administration')) {
-            $minLevel = ROL_ADMIN_LEVEL;
-        }
-        else if (str_contains($location, 'proveedores')) {
-            $minLevel = ROL_PROVEEDOR_LEVEL;
-        }
-        else if (str_contains($location, 'profile')) {
-            $minLevel = ROL_CLIENTE_LEVEL;
-        }
-
-        return $rol >= $minLevel;
     }
 
     /**
@@ -111,8 +128,9 @@ class SessionManager {
     public function clearSession(): void {
         if ($this->hasSession()) {
             $token = session_id();
-            $_SESSION[$token] = null;
-            $_SESSION["$token-location"] = null;
+            $_SESSION[$token]['user'] = null;
+            $_SESSION[$token]['carrito'] = null;
+            $_SESSION[$token]['location'] = null;
         }
         NavigationController::home();
     }

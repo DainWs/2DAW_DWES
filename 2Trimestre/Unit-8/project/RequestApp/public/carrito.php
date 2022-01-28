@@ -10,17 +10,18 @@
         <script>
             const BASE_URL = "<?= $_SERVER['APP_BASE_URL'] ?>";
             const PRODUCTS_COUNT = <?= $DATA[PRODUCTS_LENGHT] ?? 0 ?>;
+            const LINEA_PRODUCT = <?= $DATA[CARRITO] ?? [] ?>;
         </script>
         <script src="https://unpkg.com/vue@next"></script>
         <script src="<?= $_SERVER['APP_BASE_URL'] ?>/assets/libs/js/jquery.js"></script>
-        <script src="<?= $_SERVER['APP_BASE_URL'] ?>/assets/js/products.js"></script>
+        <script src="<?= $_SERVER['APP_BASE_URL'] ?>/assets/js/lineasProducts.js"></script>
     </head>
     <body>
         <?php include('templates/header.php'); ?>
         <section>
             <article id="products">
                 <div id="products-list">
-                    <?php include_once('templates/models/productModel.php') ?>
+                    <?php include_once('templates/models/lineaPedidoModel.php') ?>
                 </div>
                 <div id="products-navigation">
                     <button id="prevPageBtn" v-on:click="prevPage">Prev page</button>
