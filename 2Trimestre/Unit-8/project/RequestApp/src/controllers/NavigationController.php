@@ -2,7 +2,9 @@
 
 namespace src\controllers;
 
+use src\domain\Roles;
 use src\domain\SessionManager;
+use src\domain\Views;
 
 class NavigationController extends PostController {
 
@@ -11,8 +13,14 @@ class NavigationController extends PostController {
         exit;
     }
 
-    public function moveTo($view) {
+    public function moveTo($viewPath) {
+        $minLevel = Views::getViewByRoute($viewPath)->getMinLevel();
+
         $sessionManager = SessionManager::getInstance();
-        $sessionManager->updateSessionLocation($view);
+        $session = $sessionManager->getSession();
+        $userLevel = ROLES[$session->rol];
+        if ( $userLevel >= $minLevel ) {
+            $sessionManager->updateSessionLocation($viewPath);
+        }
     }
 }

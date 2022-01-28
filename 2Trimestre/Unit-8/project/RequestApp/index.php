@@ -1,11 +1,18 @@
 <?php
 
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 use src\controllers\NavigationController;
 use src\domain\SessionManager;
 use src\domain\ViewDataPackager;
 
 include_once('autoload.php');
 include_once('src/config/constants.php');
+
+$log = new Logger('Index');
+$log->pushHandler(new StreamHandler('logs/'.time().'.log', Logger::WARNING));
+
+$log->info('Received Request, information: '.implode(',', $_REQUEST));
 
 $DATA = [];
 

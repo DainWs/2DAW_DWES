@@ -83,6 +83,9 @@ class SessionManager {
         return $result;
     }
 
+    /**
+     * @deprecated
+     */
     public function isAllowedLocation(): bool {
         $rol = $this->getSession()->rol;
         $location = $this->getSessionLocation();

@@ -57,21 +57,13 @@ define('CONTROLLER_PRODUCT_NEW', 'newProduct');
 define('CONTROLLER_PRODUCT_EDIT', 'editProduct');
 define('CONTROLLER_PRODUCT_DELETE', 'deleteProduct');
 
-define('SUBMIT_TYPE_ADD_CATEGORY', 'addCategory');
-define('SUBMIT_TYPE_DELETE_CATEGORY', 'deleteCategory');
+/* Routes */
+define('VIEW_HOME', 'home.php');
+define('VIEW_PROFILE', 'profile.php');
+define('VIEW_PRODUCT', 'product.php');
 
-define('SUBMIT_TYPE_ADD_PRODUCT', 'addProduct');
-define('SUBMIT_TYPE_EDIT_PRODUCT', 'editProduct');
-define('SUBMIT_TYPE_DELETE_PRODUCT', 'deleteProduct');
-
-define('SUBMIT_TYPE_ADD_PEDIDOS', 'addPedidos');
-define('SUBMIT_TYPE_EDIT_PEDIDOS', 'editPedidos');
-define('SUBMIT_TYPE_DELETE_PEDIDOS', 'deletePedidos');
-
-define('SUBMIT_TYPE_ADD_LINEA_PEDIDO', 'addLineaPedido');
-define('SUBMIT_TYPE_EDIT_LINEA_PEDIDO', 'editLineaPedido');
-define('SUBMIT_TYPE_DELETE_LINEA_PEDIDO', 'deleteLineaPedido');
-
+define('VIEW_EDIT_USER', 'editUser.php');
+define('VIEW_NEW_USER', 'newUser.php');
 /* Others */
 define('DATE_FORMAT', 'd/m/Y');
 define('TIME_FORMAT', 'hh:mm:ss');
