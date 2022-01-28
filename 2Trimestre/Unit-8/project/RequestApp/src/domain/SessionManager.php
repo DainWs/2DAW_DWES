@@ -39,10 +39,8 @@ class SessionManager {
      * @return void
      */
     public function setCarritoSession(Carrito $carrito): void {
-        if (!$this->hasSession()) {
-            $token = session_id();
-            $_SESSION[$token]['carrito'] = $carrito;
-        }
+        $token = session_id();
+        $_SESSION[$token]['carrito'] = $carrito;
     }
 
     /**
@@ -63,10 +61,8 @@ class SessionManager {
      * @return void
      */
     public function updateCarritoSession(Carrito $carrito): void {
-        if ($this->hasSession()) {
-            $token = session_id();
-            $_SESSION[$token]['carrito'] = $carrito;
-        }
+        $token = session_id();
+        $_SESSION[$token]['carrito'] = $carrito;
     }
 
     /**
@@ -88,7 +84,7 @@ class SessionManager {
         $result = null;
         if ($this->hasSession()) {
             $token = session_id();
-            $result = $_SESSION[$token]['user'];
+            $result = $_SESSION[$token]['user'] ?? null;
         }
         return $result;
     }
@@ -99,12 +95,8 @@ class SessionManager {
      * @return null if the session dont contains carrito data
      */
     public function getCarritoSession(): Carrito {
-        $result = new Carrito;
-        if ($this->hasSession()) {
-            $token = session_id();
-            $result = $_SESSION[$token]['carrito'] ?? new Carrito;
-        }
-        return $result;
+        $token = session_id();
+        return $_SESSION[$token]['carrito'] ?? new Carrito;
     }
 
     /**
@@ -145,6 +137,6 @@ class SessionManager {
         if (isset($_COOKIE['PHPSESSID'])) {
             $token = $_COOKIE['PHPSESSID'];
         }
-        return (isset($_SESSION[$token]) && $_SESSION[$token] != null);
+        return (isset($_SESSION[$token]) && ($_SESSION[$token]['user'] ?? null) != null);
     }
 }

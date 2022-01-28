@@ -11,7 +11,7 @@ const LineasProducts = {
         }
     },
     mounted() {
-        this.list = LINEA_PRODUCT;
+        this.list = LINEA_PRODUCT.list;
         console.log(this.list);
     },
     methods: {

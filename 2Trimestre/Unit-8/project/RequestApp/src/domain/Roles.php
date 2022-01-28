@@ -35,7 +35,7 @@ class Roles {
     }
 
     public static function getById($searchedId): ?Roles {
-        return constant("SELF::$searchedId") ?? null;
+        return Roles::${strtoupper($searchedId)};
     }
 }
 

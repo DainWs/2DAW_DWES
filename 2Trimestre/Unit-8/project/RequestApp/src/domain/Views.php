@@ -3,6 +3,8 @@
 namespace src\domain;
 
 use src\domain\packages\HomePackager;
+use src\domain\packages\CarritoPackager;
+use src\domain\packages\ProductPackager;
 
 class Views {
     static $HOME;
@@ -42,7 +44,7 @@ class Views {
      * Get the value of packager
      */
     public function getPackager() {
-        return new ($this->packager)();
+        return new ($this->packager);
     }
 
     public static function getViewByRoute(String $route): ?Views {

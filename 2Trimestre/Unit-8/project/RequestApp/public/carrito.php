@@ -10,7 +10,7 @@
         <script>
             const BASE_URL = "<?= $_SERVER['APP_BASE_URL'] ?>";
             const PRODUCTS_COUNT = <?= $DATA[PRODUCTS_LENGHT] ?? 0 ?>;
-            const LINEA_PRODUCT = <?= $DATA[CARRITO] ?? [] ?>;
+            const LINEA_PRODUCT = <?= json_encode($DATA[CARRITO]) ?>;
         </script>
         <script src="https://unpkg.com/vue@next"></script>
         <script src="<?= $_SERVER['APP_BASE_URL'] ?>/assets/libs/js/jquery.js"></script>

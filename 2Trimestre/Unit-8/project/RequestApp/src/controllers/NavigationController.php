@@ -15,11 +15,12 @@ class NavigationController extends PostController {
 
     public function moveTo($viewPath) {
         $minLevel = Views::getViewByRoute($viewPath)->getMinLevel();
-
         $sessionManager = SessionManager::getInstance();
         $session = $sessionManager->getSession();
-        $userLevel = ROLES[$session->rol];
-        if ( $userLevel >= $minLevel ) {
+
+        $sessionRol = ($session) ? $session->rol : 'UNDEFINED';
+        $userLevel = Roles::getById($sessionRol);
+        if ( $userLevel->getLevel() >= $minLevel->getLevel() ) {
             $sessionManager->updateSessionLocation($viewPath);
         }
     }

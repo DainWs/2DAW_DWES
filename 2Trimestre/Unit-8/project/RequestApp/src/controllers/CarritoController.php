@@ -9,26 +9,26 @@ use src\services\db\DBTableProductos;
 class CarritoController extends PostController {
     public function add() {
         $carrito = SessionManager::getInstance()->getCarritoSession();
-        $id = $_POST['productID'] ?? '';
-        $cantidad = $_POST['cantidad'] ?? 1;
+        $id = $_GET['productID'] ?? '';
+        $cantidad = $_GET['cantidad'] ?? 1;
 
         $product = null;
         try {
             $table = new DBTableProductos();
-            $product = $table->queryWith($id);
+            $product = $table->queryWith($id)[0];
         } catch(Exception $ex) {}
 
         if ($product) {
-            $carrito->set($product, $cantidad);
+            $carrito->add($product, $cantidad);
         }
         SessionManager::getInstance()->updateCarritoSession($carrito);
     }
 
     public function remove() {
         $carrito = SessionManager::getInstance()->getCarritoSession();
-        $id = $_POST['productID'] ?? '';
+        $id = $_GET['productID'] ?? '';
 
-        $carrito->set($id, 0);
+        $carrito->remove($id);
         SessionManager::getInstance()->updateCarritoSession($carrito);
     }
 }

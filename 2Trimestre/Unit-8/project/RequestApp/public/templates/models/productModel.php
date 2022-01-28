@@ -15,7 +15,7 @@
         </div>
     </div>
     <div v-if="selected == product" class="product__actions">
-        <a v-bind:href="'<?= $_SERVER['APP_BASE_URL'] ?>/CarritoController/add.php?productID=' + product.id">Buy</a>    
+        <a v-bind:href="'<?= $_SERVER['APP_BASE_URL'] ?>/CarritoController/add.php?productID=' + product.id + '&cantidad=1'">Buy</a>    
         
         <?php $userRol = $DATA[USER_SESSION]->rol ?? ROL_CLIENTE; ?>
         <?php if ($userRol == ROL_PROVEEDOR || $userRol == ROL_ADMIN) : ?>

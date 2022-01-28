@@ -3,9 +3,10 @@
 namespace src\models;
 
 class Carrito {
-    private Array $list;
+    public Array $list;
 
     public function __construct() {
+        $this->list = [];
     }
 
     public function add(Productos $product, int $cantidad) {
@@ -15,6 +16,10 @@ class Carrito {
 
     public function set($productID, int $cantidad) {
         $this->list[$productID]['cantidad'] = $cantidad;
+    }
+
+    public function remove($productID) {
+        unset($this->list[$productID]);
     }
 
     /**
