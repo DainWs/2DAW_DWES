@@ -12,7 +12,7 @@
         <input id="signin-surname" type="text" name="surname" value="<?= $_POST['surname'] ?? '' ?>" /><br />
 
         <label for="signin-email">Email:</label><br />
-        <input id="signin-password" type="text" name="email" value="<?= $_POST['email'] ?? '' ?>" /><br />
+        <input id="signin-email" type="text" name="email" value="<?= $_POST['email'] ?? '' ?>" /><br />
 
         <?php if(isset($DATA[ERRORS][CONTROLLER_SESSION_SINGING]['email'])): ?>
             <p class="error"><?= $DATA[ERRORS][CONTROLLER_SESSION_SINGING]['email'] ?? ''; ?></p>
