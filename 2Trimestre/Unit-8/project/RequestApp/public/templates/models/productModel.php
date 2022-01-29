@@ -1,5 +1,5 @@
 <!-- This model use VUE -->
-<article v-for="product in productos" :key="product.id" v-bind:id="'product-'+product.id" class="product--item" @click="select(product)">
+<article v-for="product in productos" :key="product.id" v-bind:id="'product-'+product.id" class="product--item" @mouseover="select(product)">
     <div class="product--item__content">
         <figure>
             <img v-bind:src="getImageURL(product)" v-bind:alt="product.nombre" width="50" height="50">
@@ -14,13 +14,14 @@
             <span v-if="product.oferta > 0">-{{product.oferta}}%</span>
         </div>
     </div>
-    <div v-if="selected == product" class="product__actions">
-        <a v-bind:href="'<?= $_SERVER['APP_BASE_URL'] ?>/CarritoController/add.php?productID=' + product.id + '&cantidad=1'">Buy</a>    
+    <ul class="product__actions">
+        <li><a v-bind:href="'<?= $_SERVER['APP_BASE_URL'] ?>/CarritoController/add.php?productID=' + product.id + '&cantidad=1'">Add to shopping car</a></li>
         
         <?php $userRol = $DATA[USER_SESSION]->rol ?? ROL_CLIENTE; ?>
         <?php if ($userRol == ROL_PROVEEDOR || $userRol == ROL_ADMIN) : ?>
-            <a v-bind:href="'<?= $_SERVER['APP_BASE_URL'] ?>/moveTo/proveedores/newProduct.php?productID=' + product.id">Edit</a>
-            <a @click="removeConfirmDialog('<?= $_SERVER['APP_BASE_URL'] ?>/ProductController/doDeleteProductPost?productID=' + product.id)">remove</a>
+            <li class="title"><span>Product management</span></li>
+            <li><a v-bind:href="'<?= $_SERVER['APP_BASE_URL'] ?>/moveTo/proveedores/newProduct.php?productID=' + product.id">Edit Product</a></li>
+            <li><a @click="removeConfirmDialog('<?= $_SERVER['APP_BASE_URL'] ?>/ProductController/doDeleteProductPost?productID=' + product.id)">Remove Product</a></li>
         <?php endif; ?>
-    </div>
+    </ul>
 </article>
