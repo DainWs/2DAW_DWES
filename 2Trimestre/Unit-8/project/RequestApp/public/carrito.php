@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Request App</title>
+        <title>Chinos Paco</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="<?= $_SERVER['APP_BASE_URL'] ?>/assets/css/main.css" rel="stylesheet" type="text/css" />
@@ -37,8 +37,8 @@
                                     <button @click="addUnit(linea)">+</button>
                                 </div>
                             </div>
-                            <div class="product--item__actions">
-                                <span @click="removeLinea(linea)">&times;</span>
+                            <div class="product--item__actions" @click="removeLinea(linea)">
+                                <span>&times;</span>
                             </div>
                         </div>
                     </article>

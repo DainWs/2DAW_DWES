@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Request App</title>
+        <title>Chinos Paco</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="<?= $_SERVER['APP_BASE_URL'] ?>/assets/css/main.css" rel="stylesheet" type="text/css" />
@@ -16,7 +16,12 @@
         <script src="<?= $_SERVER['APP_BASE_URL'] ?>/assets/js/products.js"></script>
     </head>
     <body>
-        <?php include('templates/header.php'); ?>
+        <?php
+
+                        use src\domain\Roles;
+                        use src\domain\ViewConstants;
+
+include('templates/header.php'); ?>
         <section>
             <article id="products">
                 <div id="products-list">
@@ -30,7 +35,7 @@
             </article>
             <aside>
                 <?php if ($DATA[HAS_SESSION]): ?>
-                    <?php if ($DATA[USER_SESSION]->rol == ROL_ADMIN): ?>
+                    <?php if ($DATA[USER_SESSION]->rol == Roles::$ADMIN->getId()): ?>
                         <?php include('templates/widgets/forms/newCategoryWidget.php'); ?>
                     <?php endif; ?>
                 <?php else: ?>

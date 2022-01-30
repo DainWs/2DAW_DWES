@@ -9,6 +9,8 @@ use src\domain\ViewDataPackager;
 include_once('autoload.php');
 include_once('src/config/constants.php');
 
+//C41n0sP4c0
+
 $log = new Logger('Index');
 $log->pushHandler(new StreamHandler('logs/'.time().'.log', Logger::WARNING));
 

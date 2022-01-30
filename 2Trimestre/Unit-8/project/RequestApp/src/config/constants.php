@@ -51,4 +51,4 @@ define('VIEW_EDIT_USER', 'editUser.php');
 define('VIEW_NEW_USER', 'newUser.php');
 /* Others */
 define('DATE_FORMAT', 'd/m/Y');
-define('TIME_FORMAT', 'hh:mm:ss');
+define('TIME_FORMAT', 'h:m:s');

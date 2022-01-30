@@ -2,40 +2,40 @@
 
 namespace src\models;
 
-use DateTime;
-use src\factories\LineasPedidoFactory;
-
 class Pedidos {
-    public int $id;
+    public $id;
     public int $usuario_id;
     public string $provincia;
     public string $localidad;
     public string $direccion;
     public float $coste;
     public string $estado;
-    public DateTime $fecha;
-    public DateTime $hora;
+    public $fecha;
+    public $hora;
 
-    public Array $lineas;
+    public ?Usuarios $usuario = null;
+    public Array $lineas = [];
 
     public function __construct() {
-        $this->lineas = [];
     }
 
     public function add(Productos $product): void {
         $lineaPedido = new LineasPedidos();
         $lineaPedido->setProducto($product);
         $this->lineas[$product->id] = $lineaPedido;
+        $this->calcCoste();
     }
 
     public function set($productID, int $unidades): void {
         if (isset($this->lineas[$productID])) {
             $this->lineas[$productID]->unidades = $unidades;
         }
+        $this->calcCoste();
     }
 
     public function remove($productID): void {
         unset($this->lineas[$productID]);
+        $this->calcCoste();
     }
 
     /**
@@ -46,14 +46,29 @@ class Pedidos {
         return $this->lineas;
     }
 
-    public function calcCoste(): float {
+    public function setLineas($lineas) {
+        foreach ($lineas as $linea) {
+            $linea->pedido_id = $this->id;
+        }
+        $this->lineas = $lineas;
+    }
+
+    public function getUsuario(): ?Usuarios {
+        return $this->usuario;
+    }
+
+    public function setUsuario(?Usuarios $usuario): void {
+        $this->usuario = $usuario;
+    }
+
+    public function calcCoste(): void {
         $costeCarrito = 0.0;
-        foreach ($this->lineas as $data) {
-            $product = $data['product'];
+        foreach ($this->lineas as $linea) {
+            $product = $linea->getProducto();
             $oferta = $product->oferta/100;
             $precio = $product->precio*$oferta;
-            $costeCarrito += $precio*$data['cantidad'];
+            $costeCarrito += $precio*$linea->unidades;
         }
-        return $costeCarrito;
+        $this->coste = $costeCarrito;
     }
 }

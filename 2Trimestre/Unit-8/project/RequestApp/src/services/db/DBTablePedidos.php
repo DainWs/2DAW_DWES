@@ -38,11 +38,34 @@ class DBTablePedidos extends DBTable {
         return $result;
     }
 
+    public function queryRecently(Pedidos $pedido): array|false {
+        $result = [];
+        try {
+            $fecha = date($pedido->fecha->format('Y-m-d'));
+            $time = date($pedido->hora->format('H:i:s'));
+
+            $statement = parent::$connection->prepare("SELECT * FROM pedidos WHERE usuario_id=:usuario_id AND fecha=:fecha AND hora=:hora");
+            $statement->bindParam(':usuario_id', $pedido->usuario_id);
+            $statement->bindParam(':fecha', $fecha);
+            $statement->bindParam(':hora', $time);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_CLASS, Pedidos::class);
+        } catch(Exception $ex) {
+            $this->errors = $ex->getMessage();
+            var_dump($ex);
+            $result = false;
+        }
+        return $result;
+    }
+
     public function insert($pedido): bool {
         $result = true;
 
         if ($pedido instanceof Pedidos) {
             try {
+                $fecha = date($pedido->fecha->format('Y-m-d'));
+                $time = date($pedido->hora->format('H:i:s'));
+
                 $statement = parent::$connection->prepare("INSERT INTO pedidos VALUES (:id, :usuario_id, :provincia, :localidad, :direccion, :coste, :estado, :fecha, :hora)");
                 $statement->bindParam(":id", $pedido->id);
                 $statement->bindParam(":usuario_id", $pedido->usuario_id);
@@ -51,8 +74,8 @@ class DBTablePedidos extends DBTable {
                 $statement->bindParam(":direccion", $pedido->direccion);
                 $statement->bindParam(":coste", $pedido->coste);
                 $statement->bindParam(":estado", $pedido->estado);
-                $statement->bindParam(":fecha", $pedido->fecha);
-                $statement->bindParam(":hora", $pedido->hora);
+                $statement->bindParam(":fecha", $fecha);
+                $statement->bindParam(":hora", $time);
                 parent::$connection->beginTransaction();
                 $statement->execute();
                 parent::$connection->commit();

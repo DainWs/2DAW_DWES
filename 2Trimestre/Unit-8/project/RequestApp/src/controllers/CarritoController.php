@@ -2,9 +2,11 @@
 
 namespace src\controllers;
 
+use DateTime;
 use Exception;
 use src\domain\SessionManager;
 use src\domain\validators\FormValidator;
+use src\libraries\EmailManager;
 use src\services\db\DBTableLineasPedidos;
 use src\services\db\DBTablePedidos;
 use src\services\db\DBTableProductos;
@@ -20,9 +22,9 @@ class CarritoController extends PostController {
         $provincia = $_POST['provincia'] ?? '';
         $localidad = $_POST['localidad'] ?? '';
         $direccion = $_POST['direccion'] ?? '';
-        
+
         $errors = [];
-        if ($session) {
+        if (!$session) {
             $errors['others']= 'You must sign up/sign in to buy something.';
         }
 
@@ -42,22 +44,28 @@ class CarritoController extends PostController {
             $errors['direccion'] = 'You have to specify a direccion.';
         }
         
-        $result = true;
+        $result = false;
+        var_dump($errors);
+        var_dump((count($errors) == 0));
         if (count($errors) == 0) {
-            // DB Access exception control
+            // DB Access exception control            
             try {
                 $pedido->id = 0;
                 $pedido->usuario_id = $session->id;
-                $pedido->fecha = date(DATE_FORMAT);
-                $pedido->hora = date(TIME_FORMAT);
+                $pedido->fecha = new DateTime(date('Y-m-d'));
+                $pedido->hora = new DateTime(date('h:i:s'));
+                $pedido->estado = 'packaging';
                 $pedido->provincia = $provincia;
                 $pedido->localidad = $localidad;
                 $pedido->direccion = $direccion;
 
                 $pedidoTable = new DBTablePedidos();
                 $result = $pedidoTable->insert($pedido);
-
                 if ($result) {
+                    $newPedido = $pedidoTable->queryRecently($pedido)[0];
+                    $newPedido->setLineas($pedido->lineas);
+                    $newPedido->setUsuario($pedido->usuario);
+
                     $lineasPedidoTable = new DBTableLineasPedidos();
                     foreach ($pedido->getLineas() as $linea) {
                         $result = $result && $lineasPedidoTable->insert($linea);
@@ -68,8 +76,20 @@ class CarritoController extends PostController {
                 $result = false;
             }
             finally {
+                var_dump($result);
                 if ($result) {
-                   NavigationController::home();
+                    try {
+                        //TODO here comes the bank transactions actions
+                        $pedido->setUsuario(clone  $session);
+
+                        $emailSender = new EmailManager();
+                        $emailSender->send($pedido);
+                        SessionManager::getInstance()->clearSession();
+                        SessionManager::getInstance()->addSession($session);
+                        NavigationController::home();
+                    } catch(Exception $ex) {
+                        echo $ex->getMessage();
+                    }
                 } else {
                     $errors['others']= 'An unknown error was success, please try it again more later.';
                 }

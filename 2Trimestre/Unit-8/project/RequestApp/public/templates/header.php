@@ -1,11 +1,12 @@
 <header>
-    <h1><?= $DATA['title'] ?? 'Tienda de Jose Antonio Duarte' ?></h1>
+    <?php use src\domain\Roles; ?>
+    <h1><?= $DATA['title'] ?? 'Chinos Paco' ?></h1>
     <nav>
         <ul class="nav-menu">
             <li><a href="<?= $_SERVER['APP_BASE_URL'] . '/moveTo/home.php'; ?>">Home</a></li>
             <?php if ($DATA[HAS_SESSION]) : ?>
-                <?php $userRol = $DATA[USER_SESSION]->rol; ?>
-                <?php if ($userRol == ROL_PROVEEDOR || $userRol == ROL_ADMIN) : ?>
+                <?php $userRol = Roles::getById($DATA[USER_SESSION]->rol ?? 'UNDEFINED'); ?>
+                <?php if ($userRol->isAllowedBy(Roles::$PROVEEDOR)) : ?>
                     <li>
                         <a href="">Proveer</a>
                         <ul>
@@ -13,7 +14,7 @@
                         </ul>
                     </li>
                 <?php endif; ?>
-                <?php if ($userRol == ROL_ADMIN) : ?>
+                <?php if ($userRol->isAllowedBy(Roles::$ADMIN)) : ?>
                     <li>
                         <a href="">Administration</a>
                         <ul>

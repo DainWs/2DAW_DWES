@@ -3,6 +3,7 @@
 namespace src\controllers;
 
 use Exception;
+use src\domain\Roles;
 use src\domain\SessionManager;
 use src\domain\validators\FormValidator;
 use src\models\Usuarios;
@@ -57,7 +58,7 @@ class SessionController extends PostController {
                 $user->apellidos = $surname;
                 $user->email = $email;
                 $user->password = $password;
-                $user->rol = ROL_CLIENTE;
+                $user->rol = Roles::$CLIENTE;
 
                 $table = new DBTableUsuarios();
                 $result = $table->insert($user);

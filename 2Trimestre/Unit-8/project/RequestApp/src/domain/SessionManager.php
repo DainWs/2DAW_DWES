@@ -96,7 +96,7 @@ class SessionManager {
      */
     public function getCarritoSession(): Pedidos {
         $token = session_id();
-        return $_SESSION[$token]['carrito'] ?? new Pedidos;
+        return $_SESSION[$token]['carrito'] ?? new Pedidos();
     }
 
     /**
