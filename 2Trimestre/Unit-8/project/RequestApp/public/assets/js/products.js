@@ -75,6 +75,12 @@ const Products = {
         onProductsRequestFailed(response = 'Products not founds.') {
             console.log(`Error: ${JSON.parse(response)}`);
         },
+        addToShoppingCar(product) {
+            $.ajax( `${BASE_URL}/CarritoController/add`, {
+                type : 'POST',
+                data : {productID: product.id}
+            });
+        },
         precioStyle(product) {
             return (product.oferta > 0) ? 'tachado' : '';
         },

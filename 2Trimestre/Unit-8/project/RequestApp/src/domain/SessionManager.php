@@ -3,7 +3,7 @@
 namespace src\domain;
 
 use src\controllers\NavigationController;
-use src\models\Carrito;
+use src\models\Pedidos;
 use src\models\Usuarios;
 
 class SessionManager {
@@ -34,13 +34,13 @@ class SessionManager {
     }
 
     /**
-     * Adds the current carrito data to session
-     * @param Carrito $carrito the user carrito array
+     * Adds the current pedido data to session
+     * @param Pedidos $pedido the user pedido array
      * @return void
      */
-    public function setCarritoSession(Carrito $carrito): void {
+    public function setCarritoSession(Pedidos $pedido): void {
         $token = session_id();
-        $_SESSION[$token]['carrito'] = $carrito;
+        $_SESSION[$token]['carrito'] = $pedido;
     }
 
     /**
@@ -56,13 +56,13 @@ class SessionManager {
     }
 
     /**
-     * updates the current carrito data in session
-     * @param Carrito $carrito the user carrito array
+     * updates the current pedido data in session
+     * @param Pedidos $pedido the user pedido array
      * @return void
      */
-    public function updateCarritoSession(Carrito $carrito): void {
+    public function updateCarritoSession(Pedidos $pedido): void {
         $token = session_id();
-        $_SESSION[$token]['carrito'] = $carrito;
+        $_SESSION[$token]['carrito'] = $pedido;
     }
 
     /**
@@ -90,13 +90,13 @@ class SessionManager {
     }
 
     /**
-     * gets the current carrito data from session
-     * @return Carrito if the session contains carrito data
-     * @return null if the session dont contains carrito data
+     * gets the current pedido data from session
+     * @return Pedidos if the session contains pedido data
+     * @return null if the session dont contains pedido data
      */
-    public function getCarritoSession(): Carrito {
+    public function getCarritoSession(): Pedidos {
         $token = session_id();
-        return $_SESSION[$token]['carrito'] ?? new Carrito;
+        return $_SESSION[$token]['carrito'] ?? new Pedidos;
     }
 
     /**

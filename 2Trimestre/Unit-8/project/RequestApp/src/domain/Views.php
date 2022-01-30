@@ -10,9 +10,9 @@ class Views {
     static $HOME;
     static $CARRITO;
     static $PROFILE;
-    static $PRODUCT;
-    static $NEW_USER;
-    static $EDIT_USER;
+    static $PRODUCTOS;
+    static $NEWUSER;
+    static $EDITUSER;
 
     private String $route;
     private Roles $minLevel;
@@ -57,6 +57,6 @@ class Views {
 Views::$HOME = new Views('home.php', Roles::$UNDEFINED, HomePackager::class);
 Views::$CARRITO = new Views('carrito.php', Roles::$UNDEFINED, CarritoPackager::class);
 Views::$PROFILE = new Views('profile.php', Roles::$CLIENTE, HomePackager::class);
-Views::$PRODUCT = new Views('product.php', Roles::$PROVEEDOR, ProductPackager::class);
-Views::$NEW_USER = new Views('newUser.php', Roles::$ADMIN, HomePackager::class);
-Views::$EDIT_USER = new Views('editUser.php', Roles::$ADMIN, HomePackager::class);
+Views::$PRODUCTOS = new Views('productos.php', Roles::$PROVEEDOR, ProductPackager::class);
+Views::$NEWUSER = new Views('newUser.php', Roles::$ADMIN, HomePackager::class);
+Views::$EDITUSER = new Views('editUser.php', Roles::$ADMIN, HomePackager::class);

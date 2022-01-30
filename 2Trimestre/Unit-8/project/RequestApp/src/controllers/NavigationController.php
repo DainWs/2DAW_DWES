@@ -20,7 +20,7 @@ class NavigationController extends PostController {
 
         $sessionRol = ($session) ? $session->rol : 'UNDEFINED';
         $userLevel = Roles::getById($sessionRol);
-        if ( $userLevel->getLevel() >= $minLevel->getLevel() ) {
+        if ( $userLevel->getLevel() <= $minLevel->getLevel() ) {
             $sessionManager->updateSessionLocation($viewPath);
         }
     }

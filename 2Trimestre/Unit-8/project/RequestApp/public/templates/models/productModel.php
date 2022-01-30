@@ -15,12 +15,12 @@
         </div>
     </div>
     <ul class="product__actions">
-        <li><a v-bind:href="'<?= $_SERVER['APP_BASE_URL'] ?>/CarritoController/add.php?productID=' + product.id + '&cantidad=1'">Add to shopping car</a></li>
+        <li><a :href="'<?= $_SERVER['APP_BASE_URL'] ?>/CarritoController/add.php?productID=' + product.id">Add to shopping car</a></li>
         
         <?php $userRol = $DATA[USER_SESSION]->rol ?? ROL_CLIENTE; ?>
         <?php if ($userRol == ROL_PROVEEDOR || $userRol == ROL_ADMIN) : ?>
             <li class="title"><span>Product management</span></li>
-            <li><a v-bind:href="'<?= $_SERVER['APP_BASE_URL'] ?>/moveTo/proveedores/newProduct.php?productID=' + product.id">Edit Product</a></li>
+            <li><a v-bind:href="'<?= $_SERVER['APP_BASE_URL'] ?>/moveTo/proveedores/Productos.php?productID=' + product.id">Edit Product</a></li>
             <li><a @click="removeConfirmDialog('<?= $_SERVER['APP_BASE_URL'] ?>/ProductController/doDeleteProductPost?productID=' + product.id)">Remove Product</a></li>
         <?php endif; ?>
     </ul>
