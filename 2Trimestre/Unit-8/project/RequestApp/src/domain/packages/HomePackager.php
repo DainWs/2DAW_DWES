@@ -3,7 +3,7 @@
 namespace src\domain\packages;
 
 class HomePackager extends DataPackager {
-    public function getData(...$args): Array {
+    public function getData(): Array {
         return [];
     }
 }

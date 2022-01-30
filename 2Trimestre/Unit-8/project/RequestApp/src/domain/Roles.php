@@ -2,6 +2,8 @@
 
 namespace src\domain;
 
+use ReflectionClass;
+
 class Roles {
     static Roles $ADMIN;
     static Roles $PROVEEDOR;
@@ -36,6 +38,13 @@ class Roles {
 
     public static function getById($searchedId): ?Roles {
         return Roles::${strtoupper($searchedId)};
+    }
+
+    public static function getRoles(): Array {
+        $class = new ReflectionClass(Roles::class);
+        $arr = $class->getStaticProperties();
+        var_dump($arr);
+        return $arr;
     }
 }
 

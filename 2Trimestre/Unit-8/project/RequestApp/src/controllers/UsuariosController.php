@@ -3,6 +3,7 @@
 namespace src\controllers;
 
 use Exception;
+use src\domain\Roles;
 use src\domain\SessionManager;
 use src\domain\validators\FormValidator;
 use src\models\Usuarios;
@@ -20,7 +21,7 @@ class UsuariosController extends PostController {
         $surname = $_POST['surname'] ?? '';
         $email = $_POST['email'] ?? '';
         $password = $_POST['password'] ?? '';
-        $rol = $_POST['rol'] ?? ROL_CLIENTE;
+        $rol = $_POST['rol'] ?? Roles::$CLIENTE->getId();
     
         $errors = [];
         if (FormValidator::validateIsEmpty($name)) {
@@ -72,7 +73,7 @@ class UsuariosController extends PostController {
                 }
             }
         }
-        $this->errors[CONTROLLER_USUARIOS_NEW] = $errors;
+        $this->errors[CONTROLLER_USUARIOS] = $errors;
         return (count($errors) <= 0);
     }
 
@@ -93,7 +94,7 @@ class UsuariosController extends PostController {
         $rol = $_POST['rol'] ?? '';
     
         $errors = [];
-        if ($id != $currentUser->id && $currentUser->rol != ROL_ADMIN) {
+        if ($currentUser->rol != Roles::$ADMIN->getId() && $id != $currentUser->id) {
             $errors['others'] = 'You are not allowed to edit this.';
         }
 
@@ -143,7 +144,7 @@ class UsuariosController extends PostController {
                 }
             }
         }
-        $this->errors[CONTROLLER_USUARIOS_NEW] = $errors;
+        $this->errors[CONTROLLER_USUARIOS] = $errors;
         return (count($errors) <= 0);
     }
 }

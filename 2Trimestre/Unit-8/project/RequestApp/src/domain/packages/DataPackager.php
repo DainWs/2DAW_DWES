@@ -3,5 +3,16 @@
 namespace src\domain\packages;
 
 abstract class DataPackager {
-    public abstract function getData(...$args): Array;
+
+    protected Array $data;
+
+    public function __construct() {
+        $this->data = [];
+    }
+
+    protected function add($key, $value): void {
+        $this->data[$key] = $value;
+    }
+
+    public abstract function getData(): Array;
 }

@@ -5,6 +5,8 @@ namespace src\domain;
 use src\domain\packages\HomePackager;
 use src\domain\packages\CarritoPackager;
 use src\domain\packages\ProductPackager;
+use src\domain\packages\ProfilePackager;
+use src\domain\packages\UsuarioPackager;
 
 class Views {
     static $HOME;
@@ -13,6 +15,7 @@ class Views {
     static $PRODUCTOS;
     static $NEWUSER;
     static $EDITUSER;
+    static $USUARIO;
 
     private String $route;
     private Roles $minLevel;
@@ -56,7 +59,8 @@ class Views {
 
 Views::$HOME = new Views('home.php', Roles::$UNDEFINED, HomePackager::class);
 Views::$CARRITO = new Views('carrito.php', Roles::$UNDEFINED, CarritoPackager::class);
-Views::$PROFILE = new Views('profile.php', Roles::$CLIENTE, HomePackager::class);
+Views::$PROFILE = new Views('profile.php', Roles::$CLIENTE, ProfilePackager::class);
 Views::$PRODUCTOS = new Views('productos.php', Roles::$PROVEEDOR, ProductPackager::class);
-Views::$NEWUSER = new Views('newUser.php', Roles::$ADMIN, HomePackager::class);
-Views::$EDITUSER = new Views('editUser.php', Roles::$ADMIN, HomePackager::class);
+Views::$NEWUSER = new Views('newUser.php', Roles::$ADMIN, UsuarioPackager::class);
+Views::$EDITUSER = new Views('editUser.php', Roles::$ADMIN, UsuarioPackager::class);
+Views::$USUARIO = new Views('usuario.php', Roles::$ADMIN, UsuarioPackager::class);

@@ -9,22 +9,6 @@ define('DB_PASSWORD', '');
 define('DB_USER', 'tienda');
 define('DB_PASSWORD', 'tienda');
 
-/* Roles */
-define('ROL_ADMIN', 'Admin');
-define('ROL_ADMIN_LEVEL', 0);
-define('ROL_PROVEEDOR', 'Proveedor');
-define('ROL_PROVEEDOR_LEVEL', 1);
-define('ROL_CLIENTE', 'comprador');
-define('ROL_CLIENTE_LEVEL', 2);
-define('ROL_UNDEFINED', 'undefined');
-define('ROL_UNDEFINED_LEVEL', 3);
-define('ROLES', [
-    ROL_ADMIN_LEVEL => ROL_ADMIN, 
-    ROL_PROVEEDOR_LEVEL => ROL_PROVEEDOR, 
-    ROL_CLIENTE_LEVEL => ROL_CLIENTE,
-    ROL_UNDEFINED_LEVEL => ROL_UNDEFINED
-]);
-
 /* DB ORDER METHODS */
 define('SQL_ORDER_ASC', 'ASC');
 define('SQL_ORDER_DESC', 'DESC');
@@ -48,14 +32,12 @@ define('CONTROLLER_SESSION_LOGOUT', 'logout');
 
 define('CONTROLLER_NAVIGATION_MOVE', 'move');
 
-define('CONTROLLER_USUARIOS_NEW', 'newUser');
-define('CONTROLLER_USUARIOS_EDIT', 'editUser');
+define('CONTROLLER_USUARIOS', 'user');
 
 define('CONTROLLER_CATEGORY_NEW', 'newCategory');
 define('CONTROLLER_CATEGORY_DELETE', 'editCategory');
 
-define('CONTROLLER_PRODUCT_NEW', 'newProduct');
-define('CONTROLLER_PRODUCT_EDIT', 'editProduct');
+define('CONTROLLER_PRODUCT', 'product');
 define('CONTROLLER_PRODUCT_DELETE', 'deleteProduct');
 
 define('CONTROLLER_CARRITO_BUY', 'carritoBuy');
