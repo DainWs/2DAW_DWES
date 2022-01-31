@@ -1,20 +1,16 @@
 <?php
 
-use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use src\controllers\NavigationController;
 use src\domain\SessionManager;
 use src\domain\ViewDataPackager;
+use src\libraries\LogManager;
 
 include_once('autoload.php');
 include_once('src/config/constants.php');
 
-//C41n0sP4c0
-
-$log = new Logger('Index');
-$log->pushHandler(new StreamHandler('logs/'.time().'.log', Logger::WARNING));
-
-$log->info('Received Request, information: '.implode(',', $_REQUEST));
+$logger = new LogManager('Router');
+$logger->log('Received Request, session: '.session_id(), Logger::INFO);
 
 $DATA = [];
 

@@ -2,12 +2,15 @@
 
 namespace src\libraries;
 
-
 use Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 use src\models\Pedidos;
 
 class EmailManager {
+    private const SMTP_HOST = 'smtp.gmail.com';
+    private const SMTP_PORT = 465;
+    private const SMTP_AUTH = true;
+    private const SMTP_ENCRYPTION = PHPMailer::ENCRYPTION_SMTPS;
     private const USER_NAME = 'Chinos Paco';
     private const USER_EMAIL = 'chinospac453@gmail.com';
     private const USER_PASSWORD = 'C41n0sP4c0';
@@ -15,12 +18,13 @@ class EmailManager {
     public function __construct() {
         $this->mailer = new PHPMailer(true);
         $this->mailer->isSMTP();
-        $this->mailer->Host = 'smtp.gmail.com';
-        $this->mailer->SMTPAuth = true;
+        $this->mailer->Host = SELF::SMTP_HOST;
+        $this->mailer->Port = SELF::SMTP_PORT;
+        $this->mailer->SMTPAuth = SELF::SMTP_AUTH;
+        $this->mailer->SMTPSecure = SELF::SMTP_ENCRYPTION;
+
         $this->mailer->Username = SELF::USER_EMAIL;
         $this->mailer->Password = SELF::USER_PASSWORD;
-        $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        $this->mailer->Port = 465;
 
         $this->mailer->setFrom(SELF::USER_EMAIL, SELF::USER_NAME);
     }

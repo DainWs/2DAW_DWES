@@ -1,6 +1,3 @@
-<IfModule mod_env.c>
-    SetEnv APP_BASE_URL http://localhost/DWES/2Trimestre/Unit-8/project/RequestApp
-</IfModule>
 <IfModule mod_rewrite.c>
     # Activar mod_rewrite  
     RewriteEngine on
