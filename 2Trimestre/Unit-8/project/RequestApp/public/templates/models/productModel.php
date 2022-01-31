@@ -21,7 +21,7 @@
         <?php $userRol = Roles::getById($DATA[USER_SESSION]->rol ?? 'UNDEFINED'); ?>
         <?php if ($userRol->isAllowedBy(Roles::$PROVEEDOR)) : ?>
             <li class="title"><span>Product management</span></li>
-            <li><a v-bind:href="'<?= $_SERVER['APP_BASE_URL'] ?>/moveTo/proveedores/Productos.php?productID=' + product.id">Edit Product</a></li>
+            <li><a v-bind:href="'<?= $_SERVER['APP_BASE_URL'] ?>/moveTo/producto.php?productID=' + product.id">Edit Product</a></li>
             <li><a @click="removeConfirmDialog('<?= $_SERVER['APP_BASE_URL'] ?>/ProductController/doDeleteProductPost?productID=' + product.id)">Remove Product</a></li>
         <?php endif; ?>
     </ul>

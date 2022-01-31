@@ -67,10 +67,10 @@ class SessionManager {
 
     /**
      * updates the current user location to session
-     * @param String $view the user view location
+     * @param array $view the user view location
      * @return void
      */
-    public function updateSessionLocation(String $view): void {
+    public function updateSessionLocation(array $view): void {
         $token = session_id();
         $_SESSION[$token]['location'] = $view;
     }
@@ -101,10 +101,10 @@ class SessionManager {
 
     /**
      * gets the current user location of session
-     * @return String $view the user view location
+     * @return array $view the user view location
      * @return null if the session dont contains view location
      */
-    public function getSessionLocation(): String|null {
+    public function getSessionLocation(): array|null {
         $token = session_id();
         $result = null;
         if(isset($_SESSION[$token]['location'])) {

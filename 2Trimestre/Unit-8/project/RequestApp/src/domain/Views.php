@@ -12,7 +12,7 @@ class Views {
     static $HOME;
     static $CARRITO;
     static $PROFILE;
-    static $PRODUCTOS;
+    static $PRODUCTO;
     static $NEWUSER;
     static $EDITUSER;
     static $USUARIO;
@@ -60,7 +60,7 @@ class Views {
 Views::$HOME = new Views('home.php', Roles::$UNDEFINED, HomePackager::class);
 Views::$CARRITO = new Views('carrito.php', Roles::$UNDEFINED, CarritoPackager::class);
 Views::$PROFILE = new Views('profile.php', Roles::$CLIENTE, ProfilePackager::class);
-Views::$PRODUCTOS = new Views('productos.php', Roles::$PROVEEDOR, ProductPackager::class);
+Views::$PRODUCTO = new Views('productos.php', Roles::$PROVEEDOR, ProductPackager::class);
 Views::$NEWUSER = new Views('newUser.php', Roles::$ADMIN, UsuarioPackager::class);
 Views::$EDITUSER = new Views('editUser.php', Roles::$ADMIN, UsuarioPackager::class);
 Views::$USUARIO = new Views('usuario.php', Roles::$ADMIN, UsuarioPackager::class);

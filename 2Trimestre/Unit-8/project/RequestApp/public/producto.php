@@ -56,7 +56,7 @@ use src\models\Productos;
 
                         <div>
                             <label for="product-price">Price:</label><br />
-                            <input id="product-price" type="number" name="price" min="0" value="<?= $_POST['price'] ?? $PRODUCT->precio ?? 0.0 ?>"/>
+                            <input id="product-price" type="number" step="any" name="price" min="0" value="<?= $_POST['price'] ?? $PRODUCT->precio ?? 0.0 ?>"/>
 
                             <?php if (isset($ERRORS['price'])) : ?>
                                 <p class="error"><?= $ERRORS['price'] ?? ''; ?></p>

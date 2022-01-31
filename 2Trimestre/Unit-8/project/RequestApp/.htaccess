@@ -15,7 +15,7 @@
 
     # For view navigation
     RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_URL} !^.*moveTo/.*\.php$
+    RewriteCond %{REQUEST_URL} !^.*moveTo/.*\.php.*$
     RewriteRule ^.*moveTo/(.*)$ ./index.php?moveTo=$1 [QSA] [L]
 
     # Controllers access

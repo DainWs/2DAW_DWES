@@ -34,7 +34,7 @@ if (isset($_GET['moveTo'])) {
 $DATA[HAS_SESSION] = SessionManager::getInstance()->hasSession();
 $DATA[USER_SESSION] = SessionManager::getInstance()->getSession();
 
-$viewPath = SessionManager::getInstance()->getSessionLocation() ?? 'home.php';
-$DATA = array_merge($DATA, ViewDataPackager::pakageDataFor($viewPath));
-include_once("./public/$viewPath");
+$viewPath = SessionManager::getInstance()->getSessionLocation() ?? ['url' => 'home.php', 'args' => []];
+$DATA = array_merge($DATA, ViewDataPackager::pakageDataFor($viewPath['url']));
+include_once('./public/'.$viewPath['url']);
 ?>
