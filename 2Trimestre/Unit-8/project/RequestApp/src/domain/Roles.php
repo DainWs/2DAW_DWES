@@ -20,6 +20,7 @@ class Roles {
 
     /**
      * Get the value of id
+     * @return String
      */
     public function getId(): String {
         return $this->id;
@@ -27,19 +28,32 @@ class Roles {
 
     /**
      * Get the value of level privilege
+     * @return int
      */
     public function getLevel(): int {
         return $this->level;
     }
 
+    /**
+     * check if the privilege level is greater than other rol
+     * @return bool
+     */
     public function isAllowedBy(Roles $rol): bool {
         return ($this->level >= $rol->level);
     }
 
+    /**
+     * Search a rol identified by an id
+     * @return Roles if the role is found
+     * @return Null if the role is not found
+     */
     public static function getById($searchedId): ?Roles {
         return Roles::${strtoupper($searchedId)};
     }
 
+    /**
+     * @return Array of all roles
+     */
     public static function getRoles(): Array {
         $class = new ReflectionClass(Roles::class);
         $arr = $class->getStaticProperties();
