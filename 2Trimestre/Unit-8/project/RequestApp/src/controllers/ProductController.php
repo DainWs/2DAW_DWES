@@ -3,6 +3,7 @@
 namespace src\controllers;
 
 use Exception;
+use Monolog\Logger;
 use src\domain\ResourceManager;
 use src\domain\Roles;
 use src\domain\SessionManager;
@@ -59,6 +60,7 @@ class ProductController extends PostController {
                 $resourceManager = new ResourceManager();
                 $resourceManager->upload($_FILES['file'], 'public/assets/images/products');
             } catch(Exception $ex) {
+                $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
                 $errors['other'] = 'An unknown error was success, please try it again more later.';
             }
         }
@@ -82,6 +84,7 @@ class ProductController extends PostController {
                 $result = $table->insert($producto);
             } 
             catch(Exception $ex) {
+                $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
                 $result = false;
             } 
             finally {
@@ -140,6 +143,7 @@ class ProductController extends PostController {
                 $resourceManager = new ResourceManager();
                 $resourceManager->upload($_FILES['file'], 'public/assets/images/products');
             } catch(Exception $ex) {
+                $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
                 $errors['other'] = 'An unknown error was success, please try it again more later.';
             }
         }
@@ -162,6 +166,7 @@ class ProductController extends PostController {
                 $result = $table->update($producto);
             } 
             catch(Exception $ex) {
+                $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
                 $result = false;
             } 
             finally {
@@ -195,6 +200,7 @@ class ProductController extends PostController {
                 $result = $table->delete($id);
             } 
             catch(Exception $ex) {
+                $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
                 $result = false;
             } 
             finally {

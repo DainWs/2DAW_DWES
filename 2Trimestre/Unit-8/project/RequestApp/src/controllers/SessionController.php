@@ -3,6 +3,7 @@
 namespace src\controllers;
 
 use Exception;
+use Monolog\Logger;
 use src\domain\Roles;
 use src\domain\SessionManager;
 use src\domain\validators\FormValidator;
@@ -40,6 +41,7 @@ class SessionController extends PostController {
                 }
             }
             catch(Exception $ex) {
+                $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
                 $errors['others']= 'An unknown error was success, please try it again more later.';
             }
         }
@@ -64,6 +66,7 @@ class SessionController extends PostController {
                 $result = $table->insert($user);
             } 
             catch(Exception $ex) {
+                $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
                 $result = false;
             } 
             finally {
@@ -111,7 +114,7 @@ class SessionController extends PostController {
                 $result = $this->validateUserCredentials($email, $password);
             } 
             catch(Exception $ex) {
-                echo $ex->getMessage();
+                $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
                 $result = false;
             } 
             finally {

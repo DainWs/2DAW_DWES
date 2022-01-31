@@ -4,6 +4,7 @@ namespace src\controllers;
 
 use src\controllers\PostController;
 use Exception;
+use Monolog\Logger;
 use src\domain\validators\FormValidator;
 use src\models\Categorias;
 use src\services\db\DBTableCategorias;
@@ -30,6 +31,7 @@ class CategoriasController extends PostController {
                 }
             }
             catch(Exception $ex) {
+                $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
                 $errors['others']= 'An unknown error was success, please try it again more later.';
             }
         } 
@@ -46,6 +48,7 @@ class CategoriasController extends PostController {
                 $result = $table->insert($category);
             }
             catch(Exception $ex) {
+                $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
                 $result = false;
             }
             finally {

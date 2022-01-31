@@ -4,6 +4,7 @@ namespace src\controllers;
 
 use DateTime;
 use Exception;
+use Monolog\Logger;
 use src\domain\SessionManager;
 use src\domain\validators\FormValidator;
 use src\libraries\EmailManager;
@@ -17,6 +18,7 @@ use src\services\db\DBTableProductos;
 class CarritoController extends PostController {
 
     public function doBuyRequest() {
+        $this->logger->log('[Carrito] Buy request received.');
         $session = SessionManager::getInstance()->getSession();
         $pedido = SessionManager::getInstance()->getCarritoSession();
         $provincia = $_POST['provincia'] ?? '';
@@ -45,8 +47,6 @@ class CarritoController extends PostController {
         }
         
         $result = false;
-        var_dump($errors);
-        var_dump((count($errors) == 0));
         if (count($errors) == 0) {
             // DB Access exception control            
             try {
@@ -73,14 +73,14 @@ class CarritoController extends PostController {
                 }
             }
             catch(Exception $ex) {
+                $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
                 $result = false;
             }
             finally {
-                var_dump($result);
                 if ($result) {
                     try {
                         //TODO here comes the bank transactions actions
-                        $pedido->setUsuario(clone  $session);
+                        $pedido->setUsuario(clone $session);
 
                         $emailSender = new EmailManager();
                         $emailSender->send($pedido);
@@ -88,7 +88,7 @@ class CarritoController extends PostController {
                         SessionManager::getInstance()->addSession($session);
                         NavigationController::home();
                     } catch(Exception $ex) {
-                        echo $ex->getMessage();
+                        $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
                     }
                 } else {
                     $errors['others']= 'An unknown error was success, please try it again more later.';
@@ -101,6 +101,7 @@ class CarritoController extends PostController {
     }
 
     public function add() {
+        $this->logger->log('[Carrito] Buy request received.');
         $pedido = SessionManager::getInstance()->getCarritoSession();
         $id = $_GET['productID'] ?? '';
 

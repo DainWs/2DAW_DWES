@@ -6,7 +6,7 @@ class ResourceManager {
     private String $basePath;
 
     public function __construct() {
-        $this->basePath = __DIR__;
+        $this->basePath = $_SERVER['APP_BASE_PATH'];
     }
 
     public function upload($file, $destinationPath): bool {

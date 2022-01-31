@@ -3,6 +3,7 @@
 namespace src\libraries;
 
 use Exception;
+use Monolog\Logger;
 use PHPMailer\PHPMailer\PHPMailer;
 use src\models\Pedidos;
 
@@ -15,7 +16,11 @@ class EmailManager {
     private const USER_EMAIL = 'chinospac453@gmail.com';
     private const USER_PASSWORD = 'C41n0sP4c0';
     
+    private LogManager $logger;
+    private PHPMailer $mailer;
+
     public function __construct() {
+        $this->logger = new LogManager('EmailManager');
         $this->mailer = new PHPMailer(true);
         $this->mailer->isSMTP();
         $this->mailer->Host = SELF::SMTP_HOST;
@@ -32,6 +37,7 @@ class EmailManager {
     public function send(Pedidos $pedido)  {
         try {
             $cliente = $pedido->getUsuario();
+            $this->logger->log("Send email to $cliente->email for her buy request.");
             $this->mailer->addAddress($cliente->email, $cliente->nombre);
             $this->mailer->Subject = 'Factura de Chinos Paco';
 
@@ -70,7 +76,7 @@ class EmailManager {
             $this->mailer->Body = $body;
             $this->mailer->send();
         } catch(Exception $ex) {
-            echo $ex->getMessage();
+            $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
             exit;
         }
     }

@@ -10,8 +10,8 @@ class Roles {
     static Roles $CLIENTE;
     static Roles $UNDEFINED;
 
-    private $id;
-    private $level;
+    private string $id;
+    private int $level;
 
     public function __construct(String $id, int $level) {
         $this->id = $id;
@@ -39,7 +39,7 @@ class Roles {
      * @return bool
      */
     public function isAllowedBy(Roles $rol): bool {
-        return ($this->level >= $rol->level);
+        return ($this->level <= $rol->level);
     }
 
     /**

@@ -21,6 +21,6 @@ class LogManager {
     }
 
     private function getFile(): string {
-        return 'logs/'.date('d-m-Y').'.log';
+        return $_SERVER['APP_BASE_PATH'].'/logs/'.date('d-m-Y').'.log';
     }
 }

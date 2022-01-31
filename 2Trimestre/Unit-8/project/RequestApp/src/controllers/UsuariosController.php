@@ -3,6 +3,7 @@
 namespace src\controllers;
 
 use Exception;
+use Monolog\Logger;
 use src\domain\Roles;
 use src\domain\SessionManager;
 use src\domain\validators\FormValidator;
@@ -41,6 +42,7 @@ class UsuariosController extends PostController {
                 }
             }
             catch(Exception $ex) {
+                $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
                 $errors['others']= 'An unknown error was success, please try it again more later.';
             }
         }
@@ -65,6 +67,7 @@ class UsuariosController extends PostController {
                 $result = $table->insert($user);
             } 
             catch(Exception $ex) {
+                $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
                 $result = false;
             } 
             finally {
@@ -109,6 +112,7 @@ class UsuariosController extends PostController {
                     }
                 } 
                 catch(Exception $ex) {
+                    $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
                     $errors['others']= 'An unknown error was success, please try it again more later.';
                 }   
             } else {
@@ -136,6 +140,7 @@ class UsuariosController extends PostController {
                 $result = $table->update($user);
             } 
             catch(Exception $ex) {
+                $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
                 $result = false;
             } 
             finally {
