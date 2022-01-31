@@ -19,7 +19,7 @@ use src\domain\ViewConstants;
             <article class="user-outer">
                 <main>
                     <form class="grid-div " action="<?= $DATA[ViewConstants::URL] ?>" enctype="application/x-www-form-urlencoded" method="POST" autocomplete="off">
-                        <?php $USUARIO = $DATA[ViewConstants::MODEL_USUARIO]; ?>
+                        <?php $USUARIO = $DATA[ViewConstants::MODEL_USUARIO] ?? $DATA[ViewConstants::SESSION_USER]; ?>
                         <?php $ERRORS = $DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS] ?? []; ?>
                         
                         <input type="hidden" name="id" value="<?= $USUARIO->id ?>"/>

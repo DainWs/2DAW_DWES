@@ -1,16 +1,12 @@
 <?php
 
-use Monolog\Logger;
 use src\controllers\NavigationController;
 use src\domain\SessionManager;
+use src\domain\ViewConstants;
 use src\domain\ViewDataPackager;
-use src\libraries\LogManager;
 
 include_once('autoload.php');
 include_once('src/config/constants.php');
-
-$logger = new LogManager('Router');
-$logger->log('Received Request, session: '.session_id(), Logger::INFO);
 
 $DATA = [];
 
@@ -31,8 +27,8 @@ if (isset($_GET['moveTo'])) {
     exit();
 }
 
-$DATA[HAS_SESSION] = SessionManager::getInstance()->hasSession();
-$DATA[USER_SESSION] = SessionManager::getInstance()->getSession();
+$DATA[ViewConstants::HAS_SESSION] = SessionManager::getInstance()->hasSession();
+$DATA[ViewConstants::SESSION_USER] = SessionManager::getInstance()->getSession();
 
 $viewPath = SessionManager::getInstance()->getSessionLocation() ?? ['url' => 'home.php', 'args' => []];
 $DATA = array_merge($DATA, ViewDataPackager::pakageDataFor($viewPath['url']));

@@ -6,7 +6,7 @@ class FormValidator {
     private function __construct() {}
 
     public static function validateIsNotEmpty(String $value): bool {
-        return !validateIsEmpty($value);
+        return !SELF::validateIsEmpty($value);
     }
     
     public static function validateIsEmpty(String $value): bool {

@@ -1,3 +1,6 @@
+<?php
+use src\domain\ViewConstants; 
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -45,7 +48,7 @@
                 </div>
             </article>
             <aside>
-                <?php if ($DATA[HAS_SESSION]): ?>
+                <?php if ($DATA[ViewConstants::HAS_SESSION]): ?>
                     <div class="widget">
                         <h2 class="title">Buy information</h2>
                         <form action="<?= $_SERVER['APP_BASE_URL'] . '/CarritoController/doBuyRequest'; ?>" enctype="application/x-www-form-urlencoded" method="POST" autocomplete="off">

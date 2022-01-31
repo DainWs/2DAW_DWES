@@ -1,11 +1,14 @@
 <header>
-    <?php use src\domain\Roles; ?>
+    <?php 
+    use src\domain\Roles;
+    use src\domain\ViewConstants;
+    ?>
     <h1><?= $DATA['title'] ?? 'Chinos Paco' ?></h1>
     <nav>
         <ul class="nav-menu">
             <li><a href="<?= $_SERVER['APP_BASE_URL'] . '/moveTo/home.php'; ?>">Home</a></li>
-            <?php if ($DATA[HAS_SESSION]) : ?>
-                <?php $userRol = Roles::getById($DATA[USER_SESSION]->rol ?? 'UNDEFINED'); ?>
+            <?php if ($DATA[ViewConstants::HAS_SESSION]) : ?>
+                <?php $userRol = Roles::getById($DATA[ViewConstants::SESSION_USER]->rol ?? 'UNDEFINED'); ?>
                 <?php if ($userRol->isAllowedBy(Roles::$PROVEEDOR)) : ?>
                     <li>
                         <a href="">Proveer</a>
@@ -24,10 +27,10 @@
                 <?php endif; ?>
 
                 <li class="profile">
-                    <a href="user.php"><?= $DATA[USER_SESSION]->nombre ?></a>
+                    <a href="<?= $_SERVER['APP_BASE_URL'] . '/moveTo/profile.php'; ?>"><?= $DATA[ViewConstants::SESSION_USER]->nombre ?></a>
                     <ul>
                         <li><a href="<?= $_SERVER['APP_BASE_URL'] . '/moveTo/carrito.php'; ?>">Carrito</a></li>
-                        <li><a href="<?= $_SERVER['APP_BASE_URL'] . '/moveTo/profile/editProfile.php'; ?>">Edit profile</a></li>
+                        <li><a href="<?= $_SERVER['APP_BASE_URL'] . '/moveTo/profile.php'; ?>">Edit profile</a></li>
                         <li>
                             <form action="<?= $_SERVER['APP_BASE_URL'] . '/SessionController/doLogoutPost'; ?>" method="POST">
                                 <input id="logout-btn" type="submit" value="Logout" />

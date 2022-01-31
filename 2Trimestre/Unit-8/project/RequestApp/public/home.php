@@ -1,3 +1,7 @@
+<?php
+use src\domain\Roles;
+use src\domain\ViewConstants; 
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -16,12 +20,7 @@
         <script src="<?= $_SERVER['APP_BASE_URL'] ?>/assets/js/products.js"></script>
     </head>
     <body>
-        <?php
-
-                        use src\domain\Roles;
-                        use src\domain\ViewConstants;
-
-include('templates/header.php'); ?>
+        <?php include('templates/header.php'); ?>
         <section>
             <article id="products">
                 <div id="products-list">
@@ -34,8 +33,8 @@ include('templates/header.php'); ?>
                 </div>
             </article>
             <aside>
-                <?php if ($DATA[HAS_SESSION]): ?>
-                    <?php if ($DATA[USER_SESSION]->rol == Roles::$ADMIN->getId()): ?>
+                <?php if ($DATA[ViewConstants::HAS_SESSION]): ?>
+                    <?php if ($DATA[ViewConstants::SESSION_USER]->rol == Roles::$ADMIN->getId()): ?>
                         <?php include('templates/widgets/forms/newCategoryWidget.php'); ?>
                     <?php endif; ?>
                 <?php else: ?>

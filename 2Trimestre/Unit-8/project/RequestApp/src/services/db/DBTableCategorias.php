@@ -49,8 +49,6 @@ class DBTableCategorias extends DBTable {
                 parent::$connection->commit();
             } catch (Exception $ex) {
                 $this->errors = $ex->getMessage();
-            
-                echo $ex->getMessage();
                 $result = false;
             }
         }
@@ -70,8 +68,6 @@ class DBTableCategorias extends DBTable {
                 parent::$connection->commit();
             } catch (Exception $ex) {
                 $this->errors = $ex->getMessage();
-            
-                echo $ex->getMessage();
                 $result = false;
             }
         }

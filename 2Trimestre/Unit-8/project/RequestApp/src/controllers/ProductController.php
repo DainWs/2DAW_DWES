@@ -54,11 +54,11 @@ class ProductController extends PostController {
         }
 
         $image = $name;
-        if (count($errors) == 0 && isset($_FILES['file'])) {
+        if (count($errors) == 0 && isset($_FILES['image'])) {
             try {
-                $_FILES['file']['name'] =  $image;
+                $_FILES['image']['name'] =  $image;
                 $resourceManager = new ResourceManager();
-                $resourceManager->upload($_FILES['file'], 'public/assets/images/products');
+                $resourceManager->upload($_FILES['image'], 'public/assets/images/products');
             } catch(Exception $ex) {
                 $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
                 $errors['other'] = 'An unknown error was success, please try it again more later.';
@@ -136,12 +136,14 @@ class ProductController extends PostController {
             $errors['oferta'] = 'You have to specify a oferta for this new product.';
         }
 
-        $image = $name;
-        if (count($errors) == 0 && isset($_FILES['file'])) {
+        $image = "$name.png";
+        if (count($errors) == 0 && isset($_FILES['image']) && FormValidator::validateIsNotEmpty($_FILES['image']['name'])) {
             try {
-                $_FILES['file']['name'] =  $image;
+                $extension = str_replace('image/', '', $_FILES['image']['type']);
+                $image = "$name.$extension";
+                $_FILES['image']['name'] =  $image;
                 $resourceManager = new ResourceManager();
-                $resourceManager->upload($_FILES['file'], 'public/assets/images/products');
+                $resourceManager->upload($_FILES['image'], 'public/assets/images/products');
             } catch(Exception $ex) {
                 $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
                 $errors['other'] = 'An unknown error was success, please try it again more later.';
@@ -153,7 +155,7 @@ class ProductController extends PostController {
             // DB Access exception control
             try {
                 $producto = new Productos();
-                $producto->id = 0;
+                $producto->id = $id;
                 $producto->categoria_id = $category;
                 $producto->nombre = $name;
                 $producto->descripcion = $description;

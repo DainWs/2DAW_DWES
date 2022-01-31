@@ -7,6 +7,7 @@ class ViewConstants {
 
     const FORM_ERRORS = 'errors';
 
+    const HAS_SESSION = 'hasSession';
     const SESSION_USER = 'sessionUser';
 
     const MODEL_USUARIO = 'usuario';

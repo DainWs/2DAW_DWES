@@ -66,8 +66,6 @@ class DBTableProductos extends DBTable {
                 parent::$connection->commit();
             } catch (Exception $ex) {
                 $this->errors = $ex->getMessage();
-            
-                echo $ex->getMessage();
                 $result = false;
             }
         }
@@ -183,8 +181,6 @@ class DBTableProductos extends DBTable {
                 parent::$connection->commit();
             } catch (Exception $ex) {
                 $this->errors = $ex->getMessage();
-            
-                echo $ex->getMessage();
                 $result = false;
             }
         }

@@ -1,6 +1,5 @@
 <?php 
 use src\domain\ViewConstants;
-use src\models\Categorias;
 use src\models\Productos;
 ?>
 <!DOCTYPE html>
@@ -12,19 +11,19 @@ use src\models\Productos;
         <link href="<?= $_SERVER['APP_BASE_URL'] ?>/assets/css/main.css" rel="stylesheet" type="text/css" />
         <link href="<?= $_SERVER['APP_BASE_URL'] ?>/assets/css/nav.css" rel="stylesheet" type="text/css" />
         <link href="<?= $_SERVER['APP_BASE_URL'] ?>/assets/css/widget.css" rel="stylesheet" type="text/css" />
-        <link href="<?= $_SERVER['APP_BASE_URL'] ?>/assets/css/users.css" rel="stylesheet" type="text/css" />
+        <link href="<?= $_SERVER['APP_BASE_URL'] ?>/assets/css/product.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
         <?php include('public/templates/header.php'); ?>
         <section>
             <article class="product-outer">
                 <main>
-                    <form action="<?= $DATA[ViewConstants::URL] ?>" enctype="multipart/form-data" method="POST" autocomplete="off">
+                    <form class="grid-div" action="<?= $DATA[ViewConstants::URL] ?>" enctype="multipart/form-data" method="POST" autocomplete="off">
                         <?php $PRODUCT = $DATA[ViewConstants::MODEL_PRODUCTO] ?? new Productos(); ?>
                         <?php $ERRORS = $DATA[ViewConstants::FORM_ERRORS][CONTROLLER_PRODUCT] ?? []; ?>
 
                         <input type="hidden" name="id" value="<?= $PRODUCT->id ?? -1 ?>">
-                        <div>
+                        <div class="grid-name">
                             <label for="product-name">Name:</label><br />
                             <input id="product-name" type="text" name="name" value="<?= $_POST['name'] ?? $PRODUCT->nombre ?? '' ?>" /><br />
 
@@ -33,7 +32,7 @@ use src\models\Productos;
                             <?php endif; ?>
                         </div>
 
-                        <div>
+                        <div class="grid-category">
                             <label for="product-category">Category:</label><br />
                             <select id="product-category" name="category">
                                 <?php $currentCategoryID = $PRODUCT->categoria_id ?? 0; ?>
@@ -49,12 +48,12 @@ use src\models\Productos;
                             <?php endif; ?>
                         </div>
 
-                        <div class="flex-grow textarea-div">
+                        <div class="flex-grow textarea-div grid-description">
                             <label for="product-description">Description :</label><br>
                             <textarea id="product-description" name="description"><?= $_POST['description'] ?? $PRODUCT->descripcion ?? '' ?></textarea>
                         </div>
 
-                        <div>
+                        <div  class="grid-price">
                             <label for="product-price">Price:</label><br />
                             <input id="product-price" type="number" step="any" name="price" min="0" value="<?= $_POST['price'] ?? $PRODUCT->precio ?? 0.0 ?>"/>
 
@@ -63,7 +62,7 @@ use src\models\Productos;
                             <?php endif; ?>
                         </div>
 
-                        <div>
+                        <div  class="grid-stock">
                             <label for="product-stock">Stock:</label><br />
                             <input id="product-stock" type="number" name="stock" min="0" value="<?= $_POST['stock'] ?? $PRODUCT->stock ?? 0 ?>"/>
 
@@ -72,7 +71,7 @@ use src\models\Productos;
                             <?php endif; ?>
                         </div>
 
-                        <div>
+                        <div  class="grid-oferta">
                             <label for="product-oferta">Oferta:</label><br />
                             <input id="product-oferta" type="number" name="oferta" min="0" max="100" value="<?= $_POST['oferta'] ?? $PRODUCT->oferta ?? 0 ?>"/>
 
@@ -81,10 +80,10 @@ use src\models\Productos;
                             <?php endif; ?>
                         </div>
 
-                        <div>
+                        <div  class="grid-image">
                             <label for="product-image">Imagen:</label><br/>
                             <img src="<?= $_SERVER['APP_BASE_URL'] . '/assets/images/products/' . ($PRODUCT->imagen ?? 'unknown.png') ?>" width="100" height="100">
-                            <input type="file" id="product-image" name="image" value="<?= $_FILES['image'] ?? '' ?>">
+                            <input type="file" id="product-image" name="image" value="">
 
                             <?php if (isset($ERRORS['image'])) : ?>
                                 <p class="error"><?= $ERRORS['image'] ?? ''; ?></p>
@@ -92,10 +91,10 @@ use src\models\Productos;
                         </div>
 
                         <?php if (isset($ERRORS['others'])) : ?>
-                            <p class="error"><?= $ERRORS['others'] ?? ''; ?></p>
+                            <p class="error grid-other"><?= $ERRORS['others'] ?? ''; ?></p>
                         <?php endif; ?>
 
-                        <input id="product-modify" type="submit" value="Save" />
+                        <input  class="grid-button" id="product-modify" type="submit" value="Save" />
                     </form>
                 </main>
             </article>
