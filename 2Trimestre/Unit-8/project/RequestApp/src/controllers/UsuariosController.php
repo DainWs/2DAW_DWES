@@ -144,7 +144,13 @@ class UsuariosController extends PostController {
                 $result = false;
             } 
             finally {
-                if (!$result) {
+                if ($result) {
+                    if ($id == $currentUser->id) {
+                        $table = new DBTableUsuarios();
+                        $currentUser = $table->queryWith($id)[0];
+                        SessionManager::getInstance()->updateSession($currentUser);
+                    }
+                } else {
                     $errors['other'] = 'An unknown error was success, please try it again more later.';
                 }
             }

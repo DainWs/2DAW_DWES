@@ -1,5 +1,8 @@
 <!-- This model use VUE -->
-<?php use src\domain\Roles; ?>
+<?php
+use src\domain\Roles;
+use src\domain\ViewConstants;
+?>
 <article v-for="product in productos" :key="product.id" v-bind:id="'product-'+product.id" class="product--item" @mouseover="select(product)">
     <div class="product--item__content">
         <figure>
@@ -18,7 +21,7 @@
     <ul class="product__actions">
         <li><a :href="'<?= $_SERVER['APP_BASE_URL'] ?>/CarritoController/add.php?productID=' + product.id">Add to shopping car</a></li>
         
-        <?php $userRol = Roles::getById($DATA[USER_SESSION]->rol ?? 'UNDEFINED'); ?>
+        <?php $userRol = Roles::getById($DATA[ViewConstants::SESSION_USER]->rol ?? 'UNDEFINED'); ?>
         <?php if ($userRol->isAllowedBy(Roles::$PROVEEDOR)) : ?>
             <li class="title"><span>Product management</span></li>
             <li><a v-bind:href="'<?= $_SERVER['APP_BASE_URL'] ?>/moveTo/producto.php?productID=' + product.id">Edit Product</a></li>

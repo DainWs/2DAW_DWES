@@ -60,7 +60,7 @@ class SessionController extends PostController {
                 $user->apellidos = $surname;
                 $user->email = $email;
                 $user->password = $password;
-                $user->rol = Roles::$CLIENTE;
+                $user->rol = Roles::$CLIENTE->getId();
 
                 $table = new DBTableUsuarios();
                 $result = $table->insert($user);
@@ -74,7 +74,7 @@ class SessionController extends PostController {
                     $table = new DBTableUsuarios();
                     $dbUsers = $table->queryWhereEmail($email);
                     if (is_array($dbUsers)) {
-                        $user = $dbUsers[array_keys($dbUsers)[0]];
+                        $user = $dbUsers[0];
                         SessionManager::getInstance()->addSession($user);
                         NavigationController::home();
                     }

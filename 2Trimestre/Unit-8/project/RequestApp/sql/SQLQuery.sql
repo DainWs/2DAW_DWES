@@ -6,4 +6,4 @@ SET global log_output = 'table';
 */
 USE tienda;
 
-SELECT * FROM productos;
+SELECT * FROM usuarios;

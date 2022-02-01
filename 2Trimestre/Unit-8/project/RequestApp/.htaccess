@@ -1,3 +1,9 @@
+<IfModule mod_env.c>
+    SetEnv DB_DOMAIN 'localhost'
+    SetEnv DB_NAME 'tienda'
+    SetEnv DB_USER 'root'
+    SetEnv DB_PASSWORD ''
+</IfModule>
 <IfModule mod_rewrite.c>
     # Activar mod_rewrite  
     RewriteEngine on

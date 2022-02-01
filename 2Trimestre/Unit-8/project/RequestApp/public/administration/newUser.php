@@ -23,8 +23,8 @@ use src\domain\ViewConstants;
                             <label for="user-name">Name: </label><br />
                             <input id="user-name" type="text" name="name" value="<?= $_POST['name'] ?? '' ?>" autocomplete="new-name"/><br />
 
-                            <?php if(isset($DATA[ERRORS][CONTROLLER_USUARIOS]['name'])): ?>
-                                <p class="error"><?= $DATA[ERRORS][CONTROLLER_USUARIOS]['name'] ?? '' ?></p>
+                            <?php if(isset($DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS]['name'])): ?>
+                                <p class="error"><?= $DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS]['name'] ?? '' ?></p>
                             <?php endif; ?>
                         </div>
                         
@@ -37,8 +37,8 @@ use src\domain\ViewConstants;
                             <label for="user-email">Email:</label><br />
                             <input id="user-password" type="text" name="email" value="<?= $_POST['email'] ?? '' ?>" autocomplete="new-email"/><br />
                             
-                            <?php if(isset($DATA[ERRORS][CONTROLLER_USUARIOS]['email'])): ?>
-                                <p class="error"><?= $DATA[ERRORS][CONTROLLER_USUARIOS]['email'] ?? '' ?></p>
+                            <?php if(isset($DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS]['email'])): ?>
+                                <p class="error"><?= $DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS]['email'] ?? '' ?></p>
                             <?php endif; ?>
                         </div>
 
@@ -49,8 +49,8 @@ use src\domain\ViewConstants;
                                     <option value="<?= $rol->getId() ?>" <?= ($rol->getId() == ($_POST['rol']->getId() ?? Roles::$CLIENTE->getId()) ) ? 'selected' : '' ?>><?= $rol->getId() ?></option>
                                 <?php endforeach; ?>
                             </select>
-                            <?php if(isset($DATA[ERRORS][CONTROLLER_USUARIOS]['rol'])): ?>
-                                <p class="error"><?= $DATA[ERRORS][CONTROLLER_USUARIOS]['rol'] ?? '' ?></p>
+                            <?php if(isset($DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS]['rol'])): ?>
+                                <p class="error"><?= $DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS]['rol'] ?? '' ?></p>
                             <?php endif; ?>
                         </div>
 
@@ -58,20 +58,20 @@ use src\domain\ViewConstants;
                             <label for="user-password">Password:</label><br />
                             <input id="user-password" type="password" name="password" value="<?= $_POST['password'] ?? '' ?>" autocomplete="new-password"/><br />
 
-                            <?php if(isset($DATA[ERRORS][CONTROLLER_USUARIOS]['password'])): ?>
-                                <p class="error"><?= $DATA[ERRORS][CONTROLLER_USUARIOS]['password'] ?? '' ?></p>
+                            <?php if(isset($DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS]['password'])): ?>
+                                <p class="error"><?= $DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS]['password'] ?? '' ?></p>
                             <?php endif; ?>
                         </div>
 
                         <div class="grid-others">
-                            <?php if(isset($DATA[ERRORS][CONTROLLER_USUARIOS]['others'])): ?>
-                                <p class="error"><?= $DATA[ERRORS][CONTROLLER_USUARIOS]['others'] ?? '' ?></p>
+                            <?php if(isset($DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS]['others'])): ?>
+                                <p class="error"><?= $DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS]['others'] ?? '' ?></p>
                             <?php endif; ?>
                         </div>
                         
                         <div class="grid-button">
                             <input id="user-btn" type="submit" value="Save" />
-                            <input type="hidden" name="id" value="<?= $DATA[USER_SESSION]->id ?>"/>
+                            <input type="hidden" name="id" value="<?= $DATA[ViewConstants::SESSION_USER]->id ?>"/>
                         </div>
                     </form>
                 </main>

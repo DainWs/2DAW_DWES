@@ -16,7 +16,7 @@ if (isset($_GET['controller']) && isset($_GET['action'])) {
     
     $controller = new $controllerClass();
     $controller->$method();
-    $DATA[ERRORS] = $controller->getErrors();
+    $DATA[ViewConstants::FORM_ERRORS] = $controller->getErrors();
 }
 
 if (isset($_GET['moveTo'])) {

@@ -67,7 +67,7 @@ class DBTableUsuarios extends DBTable {
                 $sql = "UPDATE usuarios set";
                 $counter = 0;
                 if (!empty($usuario->nombre)) {
-                    $sql .= " nombre=:nombre";
+                    $sql .= " nombre = :nombre";
                     $counter++;
                 }
 
@@ -75,7 +75,7 @@ class DBTableUsuarios extends DBTable {
                     if ($counter > 0) {
                         $sql .= ",";
                     }
-                    $sql .= " apellidos=:apellidos";
+                    $sql .= " apellidos = :apellidos";
                     $counter++;
                 }
 
@@ -83,7 +83,7 @@ class DBTableUsuarios extends DBTable {
                     if ($counter > 0) {
                         $sql .= ",";
                     }
-                    $sql .= " email=:email";
+                    $sql .= " email = :email";
                     $counter++;
                 }
 
@@ -91,7 +91,7 @@ class DBTableUsuarios extends DBTable {
                     if ($counter > 0) {
                         $sql .= ",";
                     }
-                    $sql .= " password=:password";
+                    $sql .= " password = :password";
                     $counter++;
                 }
 
@@ -99,11 +99,11 @@ class DBTableUsuarios extends DBTable {
                     if ($counter > 0) {
                         $sql .= ",";
                     }
-                    $sql .= " rol=:rol";
+                    $sql .= " rol = :rol";
                     $counter++;
                 }
 
-                $sql .= " WHERE id=:id";
+                $sql .= " WHERE id = :id";
 
                 $statement = parent::$connection->prepare($sql);
 

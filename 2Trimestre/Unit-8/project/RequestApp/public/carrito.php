@@ -12,7 +12,7 @@ use src\domain\ViewConstants;
         <link href="<?= $_SERVER['APP_BASE_URL'] ?>/assets/css/widget.css" rel="stylesheet" type="text/css" />
         <script>
             const BASE_URL = "<?= $_SERVER['APP_BASE_URL'] ?>";
-            const LINEA_PRODUCT = <?= json_encode($DATA[CARRITO]) ?>;
+            const LINEA_PRODUCT = <?= json_encode($DATA[ViewConstants::MODEL_CARRITO]) ?>;
         </script>
         <script src="https://unpkg.com/vue@next"></script>
         <script src="<?= $_SERVER['APP_BASE_URL'] ?>/assets/libs/js/jquery.js"></script>
@@ -61,8 +61,8 @@ use src\domain\ViewConstants;
                             <label for="direccion">Direccion:</label><br />
                             <input id="direccion" type="text" name="direccion" v-model="pedido.direccion" /><br />
 
-                            <?php if(isset($DATA[ERRORS][CONTROLLER_SESSION_SINGING]['others'])): ?>
-                                <p class="error"><?= $DATA[ERRORS][CONTROLLER_SESSION_SINGING]['others'] ?? ''; ?></p>
+                            <?php if(isset($DATA[ViewConstants::FORM_ERRORS][CONTROLLER_SESSION_SINGING]['others'])): ?>
+                                <p class="error"><?= $DATA[ViewConstants::FORM_ERRORS][CONTROLLER_SESSION_SINGING]['others'] ?? ''; ?></p>
                             <?php endif; ?>
 
                             <label>Total price: {{calcTotalPrice}}&euro;</label>

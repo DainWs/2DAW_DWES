@@ -13,7 +13,6 @@ use src\domain\ViewConstants;
         <link href="<?= $_SERVER['APP_BASE_URL'] ?>/assets/css/widget.css" rel="stylesheet" type="text/css" />
         <script>
             const BASE_URL = "<?= $_SERVER['APP_BASE_URL'] ?>";
-            const PRODUCTS_COUNT = <?= $DATA[PRODUCTS_LENGHT] ?? 0 ?>;
         </script>
         <script src="https://unpkg.com/vue@next"></script>
         <script src="<?= $_SERVER['APP_BASE_URL'] ?>/assets/libs/js/jquery.js"></script>
