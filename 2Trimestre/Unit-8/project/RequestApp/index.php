@@ -6,7 +6,6 @@ use src\domain\ViewConstants;
 use src\domain\ViewDataPackager;
 
 include_once('autoload.php');
-include_once('src/config/constants.php');
 
 $DATA = [];
 

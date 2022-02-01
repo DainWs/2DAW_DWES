@@ -1,3 +1,11 @@
+/*
+ * This is the first SQL file to execute, this one will create:
+ * - Database
+ * - Tables
+ * 
+ * If you want to have a specific user for this database, 
+ * you can execute SQLMyUser.sql after this
+ */
 CREATE DATABASE tienda;
 SET NAMES UTF8;
 CREATE DATABASE IF NOT EXISTS tienda;

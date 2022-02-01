@@ -18,6 +18,6 @@ class FormValidator {
     }
     
     public static function validateNumber($number): bool {
-        return is_numeric($number);
+        return is_numeric($number) || is_double($number) || is_float($number);
     }
 }

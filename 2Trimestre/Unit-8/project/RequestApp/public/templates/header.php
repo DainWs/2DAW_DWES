@@ -13,7 +13,7 @@
                     <li>
                         <a href="">Proveer</a>
                         <ul>
-                            <li><a href="<?= $_SERVER['APP_BASE_URL'] . '/moveTo/proveedores/Productos.php'; ?>">New Product</a></li>
+                            <li><a href="<?= $_SERVER['APP_BASE_URL'] . '/moveTo/producto.php?productID=-1'; ?>">New Product</a></li>
                         </ul>
                     </li>
                 <?php endif; ?>

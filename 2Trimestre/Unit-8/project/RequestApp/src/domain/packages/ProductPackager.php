@@ -16,7 +16,7 @@ class ProductPackager extends DataPackager {
         $product = new Productos();
         $categories = [];
         try {
-            $product = (new DBTableProductos())->queryWith($args['productID'] ?? -1)[0] ?? new Productos();
+            $product = (new DBTableProductos())->queryWith($args['productID'] ?? -1)[0] ?? null;
             $categories = (new DBTableCategorias())->query();
         } catch(Exception $ex) {}
         

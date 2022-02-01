@@ -1,4 +1,6 @@
 <?php
+include_once('src/config/constants.php');
+
 {/** Encapsulation Scope */
     /**
      * Use to load the current base url/path for diferents servers

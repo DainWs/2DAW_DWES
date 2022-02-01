@@ -43,14 +43,22 @@ class ProductController extends PostController {
 
         if (FormValidator::validateIsEmpty($price)) {
             $errors['price'] = 'You have to specify a price for this new product.';
+        } else if (FormValidator::validateNumber($price)) {
+            $errors['price'] = 'The price must be a number.';
         }
+
+        var_dump(FormValidator::validateNumber($price));
+        var_dump(FormValidator::validateNumber($stock));
+        var_dump(FormValidator::validateNumber($oferta));
 
         if (FormValidator::validateIsEmpty($stock)) {
             $errors['stock'] = 'You have to specify a stock for this new product.';
+        } else if (FormValidator::validateNumber($stock)) {
+            $errors['stock'] = 'The stock must be a number.';
         }
 
-        if (FormValidator::validateIsEmpty($oferta)) {
-            $errors['oferta'] = 'You have to specify a oferta for this new product.';
+        if (FormValidator::validateNumber($oferta)) {
+            $errors['oferta'] = 'The oferta must be a number.';
         }
 
         $image = $name;

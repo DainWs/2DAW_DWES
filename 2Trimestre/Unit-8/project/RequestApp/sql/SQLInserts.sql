@@ -1,3 +1,7 @@
+/*
+ * Insert all values into Tienda database
+ * Execute this after SQLSentences.sql
+ */
 USE tienda;
 
 INSERT INTO usuarios VALUES(0, 'Jose Antonio', 'Duarte Pérez', 'jose.ant.du@gmail.com', 'c893bad68927b457dbed39460e6afd62', 'Admin');

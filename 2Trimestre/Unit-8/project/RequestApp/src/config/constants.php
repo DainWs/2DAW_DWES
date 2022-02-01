@@ -5,14 +5,10 @@
  */
 
 /* DB CONSTANTS */
-define('DB_DOMAIN', 'localhost');
-define('DB_NAME', 'tienda');
-/*
-define('DB_USER', 'root');
-define('DB_PASSWORD', '');
-*/
-define('DB_USER', 'tienda');
-define('DB_PASSWORD', 'tienda');
+define('DB_DEFAULT_DOMAIN', 'localhost');
+define('DB_DEFAULT_NAME', 'tienda');
+define('DB_DEFAULT_USER', 'root');
+define('DB_DEFAULT_PASSWORD', '');
 
 /* DB ORDER METHODS */
 define('SQL_ORDER_ASC', 'ASC');
