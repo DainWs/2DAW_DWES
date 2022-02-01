@@ -2,6 +2,7 @@
 
 namespace src\controllers;
 
+use DateTime;
 use Exception;
 use Monolog\Logger;
 use src\domain\ResourceManager;
@@ -43,21 +44,17 @@ class ProductController extends PostController {
 
         if (FormValidator::validateIsEmpty($price)) {
             $errors['price'] = 'You have to specify a price for this new product.';
-        } else if (FormValidator::validateNumber($price)) {
+        } else if (!FormValidator::validateNumber($price)) {
             $errors['price'] = 'The price must be a number.';
         }
 
-        var_dump(FormValidator::validateNumber($price));
-        var_dump(FormValidator::validateNumber($stock));
-        var_dump(FormValidator::validateNumber($oferta));
-
         if (FormValidator::validateIsEmpty($stock)) {
             $errors['stock'] = 'You have to specify a stock for this new product.';
-        } else if (FormValidator::validateNumber($stock)) {
+        } else if (!FormValidator::validateNumber($stock)) {
             $errors['stock'] = 'The stock must be a number.';
         }
 
-        if (FormValidator::validateNumber($oferta)) {
+        if (!FormValidator::validateNumber($oferta)) {
             $errors['oferta'] = 'The oferta must be a number.';
         }
 
@@ -85,7 +82,7 @@ class ProductController extends PostController {
                 $producto->precio = $price;
                 $producto->stock = $stock;
                 $producto->oferta = $oferta;
-                $producto->date = date(DATE_FORMAT);
+                $producto->date = new DateTime(date('Y-m-d'));;
                 $producto->imagen = $image;
 
                 $table = new DBTableProductos();
