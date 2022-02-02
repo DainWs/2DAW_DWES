@@ -51,6 +51,10 @@ use src\models\Productos;
                         <div class="flex-grow textarea-div grid-description">
                             <label for="product-description">Description :</label><br>
                             <textarea id="product-description" name="description"><?= $_POST['description'] ?? $PRODUCT->descripcion ?? '' ?></textarea>
+
+                            <?php if (isset($ERRORS['description'])) : ?>
+                                <p class="error"><?= $ERRORS['description'] ?? ''; ?></p>
+                            <?php endif; ?>
                         </div>
 
                         <div  class="grid-price">

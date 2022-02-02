@@ -59,7 +59,7 @@ class EmailManager {
                 $row .= "<td style=\"border: 2px solid black;\">$product->nombre</td>";
                 $row .= "<td style=\"border: 2px solid black;\">$product->descripcion</td>";
                 $row .= "<td style=\"border: 2px solid black;\">$linea->unidades</td>";
-                $row .= "<td style=\"border: 2px solid black;\">$totalProductPrice €</td>";
+                $row .= "<td style=\"border: 2px solid black;\">$totalProductPrice &euro;</td>";
                 $row .= "</tr>";
 
                 $body .= $row;
@@ -68,7 +68,7 @@ class EmailManager {
             $fecha = $pedido->fecha->format(DATE_FORMAT);
             $hora = $pedido->hora->format(TIME_FORMAT);
 
-            $body .= "<tr><th style=\"text-align: right;\" colspan=\"4\">Precio Total: ".$pedido->calcCoste()." €</th></tr></table><br/>";
+            $body .= "<tr><th style=\"text-align: right;\" colspan=\"4\">Precio Total: ".$pedido->calcCoste()." &euro;</th></tr></table><br/>";
             $body .= "Este pedido se realizo el $fecha a las $hora. <br/>";
             $body .= "El pedido se enviar&aacute; a: $pedido->provincia, $pedido->localidad, $pedido->direccion<br/><br/>";
             $body .= "Tenga un buen dia, <br/>Firmado: Chinos Paco.";

@@ -8,6 +8,7 @@ use Monolog\Logger;
 use src\domain\SessionManager;
 use src\domain\validators\FormValidator;
 use src\libraries\EmailManager;
+use src\models\Pedidos;
 use src\services\db\DBTableLineasPedidos;
 use src\services\db\DBTablePedidos;
 use src\services\db\DBTableProductos;
@@ -70,6 +71,11 @@ class CarritoController extends PostController {
                     foreach ($pedido->getLineas() as $linea) {
                         $result = $result && $lineasPedidoTable->insert($linea);
                     }
+
+                    if (isset($lineasPedidoTable->errors)) {
+                        $errors['others'] = $lineasPedidoTable->errors;
+                        $result = false;
+                    }
                 }
             }
             catch(Exception $ex) {
@@ -80,22 +86,25 @@ class CarritoController extends PostController {
                 if ($result) {
                     try {
                         //TODO here comes the bank transactions actions
-                        $pedido->setUsuario(clone $session);
+                        $pedido->setUsuario($session);
 
                         $emailSender = new EmailManager();
                         $emailSender->send($pedido);
-                        SessionManager::getInstance()->clearSession();
-                        SessionManager::getInstance()->addSession($session);
-                        NavigationController::home();
+
+                        (new NavigationController())->moveTo('home.php');
+                        SessionManager::getInstance()->updateCarritoSession(new Pedidos());
                     } catch(Exception $ex) {
                         $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
+                        $errors['others']= 'An unknown error was success, please try it again more later.';
                     }
                 } else {
-                    $errors['others']= 'An unknown error was success, please try it again more later.';
+                    if (!isset($errors['others'])) {
+                        $errors['others']= 'An unknown error was success, please try it again more later.';
+                    }
                 }
             }
         }
-
+        
         $this->errors[CONTROLLER_CARRITO_BUY] = $errors;
         return (count($errors) > 0);
     }

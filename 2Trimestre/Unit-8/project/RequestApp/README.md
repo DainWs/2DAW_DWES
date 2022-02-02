@@ -51,16 +51,13 @@ css, js, and images are saved in **public/assets**
 - [X] Login de usuarios
 - [X] Cerrar sesión
 - [X] Gestionar categorías
-- [ ] Gestionar productos
+- [X] Gestionar productos
 - [X] Sentencias preparadas
 - [X] Desligando el acceso a la base de datos
 - [X] Mostrando productos
 - [X] Namespaces
 - [X] Devolviendo JSON
-- [ ] El carrito de la compra
-- [ ] Procesamiento del pedido
+- [X] El carrito de la compra
+- [X] Procesamiento del pedido
 - [ ] Mis pedidos
 - [ ] Envío de correo
-
-# Opcional
-- [ ] Gestion usuarios

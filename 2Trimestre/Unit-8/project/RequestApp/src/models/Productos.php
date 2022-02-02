@@ -10,6 +10,6 @@ class Productos {
     public float $precio;
     public int $stock;
     public string $oferta;
-    public string $fecha;
+    public $fecha;
     public string $imagen;
 }

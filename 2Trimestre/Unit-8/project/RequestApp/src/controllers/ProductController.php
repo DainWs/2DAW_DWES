@@ -58,9 +58,11 @@ class ProductController extends PostController {
             $errors['oferta'] = 'The oferta must be a number.';
         }
 
-        $image = $name;
-        if (count($errors) == 0 && isset($_FILES['image'])) {
+        $image = "$name.png";
+        if (count($errors) == 0 && isset($_FILES['image']) && FormValidator::validateIsNotEmpty($_FILES['image']['name'])) {
             try {
+                $extension = str_replace('image/', '', $_FILES['image']['type']);
+                $image = "$name.$extension";
                 $_FILES['image']['name'] =  $image;
                 $resourceManager = new ResourceManager();
                 $resourceManager->upload($_FILES['image'], 'public/assets/images/products');
@@ -82,7 +84,7 @@ class ProductController extends PostController {
                 $producto->precio = $price;
                 $producto->stock = $stock;
                 $producto->oferta = $oferta;
-                $producto->date = new DateTime(date('Y-m-d'));;
+                $producto->fecha = new DateTime(date('Y-m-d'));
                 $producto->imagen = $image;
 
                 $table = new DBTableProductos();
@@ -93,11 +95,15 @@ class ProductController extends PostController {
                 $result = false;
             } 
             finally {
-                if (!$result) {
+                if ($result) {
+                    header("Location: ".$_SERVER["APP_BASE_URL"]."/moveTo/home.php");
+                    exit();
+                } else {
                     $errors['other'] = 'An unknown error was success, please try it again more later.';
                 }
             }
         }
+
         $this->errors[CONTROLLER_PRODUCT] = $errors;
         return (count($errors) <= 0);
     }
@@ -117,27 +123,15 @@ class ProductController extends PostController {
         $oferta = $_POST['oferta'] ?? '';
     
         $errors = [];
-        if (FormValidator::validateIsEmpty($name)) {
-            $errors['name'] = 'You have to specify a name for this new product.';
-        }
-
-        if (FormValidator::validateIsEmpty($category)) {
-            $errors['category'] = 'You have to specify a category for this new product.';
-        }
-
-        if (FormValidator::validateIsEmpty($description)) {
-            $errors['description'] = 'You have to specify a description for this new product.';
-        }
-
-        if (FormValidator::validateIsEmpty($price)) {
+        if (!FormValidator::validateNumber($price)) {
             $errors['price'] = 'You have to specify a price for this new product.';
         }
 
-        if (FormValidator::validateIsEmpty($stock)) {
+        if (!FormValidator::validateNumber($stock)) {
             $errors['stock'] = 'You have to specify a stock for this new product.';
         }
 
-        if (FormValidator::validateIsEmpty($oferta)) {
+        if (!FormValidator::validateNumber($oferta)) {
             $errors['oferta'] = 'You have to specify a oferta for this new product.';
         }
 
@@ -177,7 +171,10 @@ class ProductController extends PostController {
                 $result = false;
             } 
             finally {
-                if (!$result) {
+                if ($result) {
+                    header("Location: ".$_SERVER["APP_BASE_URL"]."/moveTo/home.php");
+                    exit();
+                } else {
                     $errors['other'] = 'An unknown error was success, please try it again more later.';
                 }
             }

@@ -58,6 +58,26 @@ class DBTablePedidos extends DBTable {
         return $result;
     }
 
+    public function queryOf($userId): Pedidos|false {
+        $pedido = false;
+        try {
+            $statement = parent::$connection->prepare("SELECT * FROM pedidos WHERE usuario_id=:usuario_id");
+            $statement->bindParam(':usuario_id', $userId);
+            $statement->execute();
+            $pedido = $statement->fetchAll(PDO::FETCH_CLASS, Pedidos::class)[0];
+
+            $statement = parent::$connection->prepare("SELECT L.*, P.nombre AS 'nombreProducto' FROM lineas_pedidos L, productos P WHERE L.usuario_id=:usuario_id");
+            $statement->bindParam(':id', $id);
+            $statement->execute();
+            $lineas = $statement->fetchAll(PDO::FETCH_CLASS, LineasPedidos::class);
+            $pedido->lineas = $lineas;
+        } catch(Exception $ex) {
+            $this->errors = $ex->getMessage();
+            $pedido = false;
+        }
+        return $pedido;
+    }
+
     public function insert($pedido): bool {
         $result = true;
 

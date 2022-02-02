@@ -51,6 +51,8 @@ class DBTableProductos extends DBTable {
 
         if ($producto instanceof Productos) {
             try {
+                $fecha = date($producto->fecha->format('Y-m-d'));
+
                 $statement = parent::$connection->prepare("INSERT INTO productos VALUES (:id, :categoria_id, :nombre, :descripcion, :precio, :stock, :oferta, :fecha, :imagen)");
                 $statement->bindParam(":id", $producto->id);
                 $statement->bindParam(":categoria_id", $producto->categoria_id);
@@ -59,7 +61,7 @@ class DBTableProductos extends DBTable {
                 $statement->bindParam(":precio", $producto->precio);
                 $statement->bindParam(":stock", $producto->stock);
                 $statement->bindParam(":oferta", $producto->oferta);
-                $statement->bindParam(":fecha", $producto->fecha);
+                $statement->bindParam(":fecha", $fecha);
                 $statement->bindParam(":imagen", $producto->imagen);
                 parent::$connection->beginTransaction();
                 $statement->execute();

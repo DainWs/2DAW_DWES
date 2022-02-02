@@ -12,8 +12,10 @@ const Carrito = {
     },
     methods: {
         addUnit(linea) {
-            linea.unidades++;
-            this.changeUnitRequest(linea);
+            if (linea.producto.stock > (linea.unidades + 1)) {
+                linea.unidades++;
+                this.changeUnitRequest(linea);
+            }
         },
         removeUnit(linea) {
             if (linea.unidades > 1 ) {

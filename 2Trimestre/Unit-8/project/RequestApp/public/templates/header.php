@@ -7,6 +7,19 @@
     <nav>
         <ul class="nav-menu">
             <li><a href="<?= $_SERVER['APP_BASE_URL'] . '/moveTo/home.php'; ?>">Home</a></li>
+            <?php if(isset($DATA[ViewConstants::LIST_MODEL_CATEGORIAS])): ?>
+                <li>
+                    <a href="categorias.php">Categories</a>
+                    <ul>
+                        <?php for ($i = 1; $i < 12 && $i < count($DATA[ViewConstants::LIST_MODEL_CATEGORIAS]); $i++) : ?>
+                            <?php $category = $DATA[ViewConstants::LIST_MODEL_CATEGORIAS][$i]; ?>
+                            <li id="categoria_<?= $category->id ?>">
+                                <a href="categorias.php?category=<?= $category->id ?>"><?= $category->nombre ?></a>
+                            </li>
+                        <?php endfor; ?>
+                    </ul>
+                </li>
+            <?php endif; ?>
             <?php if ($DATA[ViewConstants::HAS_SESSION]) : ?>
                 <?php $userRol = Roles::getById($DATA[ViewConstants::SESSION_USER]->rol ?? 'UNDEFINED'); ?>
                 <?php if ($userRol->isAllowedBy(Roles::$PROVEEDOR)) : ?>

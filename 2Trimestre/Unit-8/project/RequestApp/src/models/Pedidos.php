@@ -4,12 +4,12 @@ namespace src\models;
 
 class Pedidos {
     public $id;
-    public int $usuario_id;
+    public $usuario_id;
     public string $provincia;
     public string $localidad;
     public string $direccion;
-    public float $coste;
-    public string $estado;
+    public $coste;
+    public $estado;
     public $fecha;
     public $hora;
 

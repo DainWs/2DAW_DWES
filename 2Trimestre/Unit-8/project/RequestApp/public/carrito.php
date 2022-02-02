@@ -55,14 +55,26 @@ use src\domain\ViewConstants;
                             <label for="provincia">Provincia:</label><br />
                             <input id="provincia" type="text" name="provincia" v-model="pedido.provincia" /><br />
 
+                            <?php if(isset($DATA[ViewConstants::FORM_ERRORS][CONTROLLER_CARRITO_BUY]['provincia'])): ?>
+                                <p class="error"><?= $DATA[ViewConstants::FORM_ERRORS][CONTROLLER_CARRITO_BUY]['provincia'] ?? ''; ?></p>
+                            <?php endif; ?>
+
                             <label for="localidad">Localidad:</label><br />
                             <input id="localidad" type="text" name="localidad" v-model="pedido.localidad" /><br />
 
+                            <?php if(isset($DATA[ViewConstants::FORM_ERRORS][CONTROLLER_CARRITO_BUY]['localidad'])): ?>
+                                <p class="error"><?= $DATA[ViewConstants::FORM_ERRORS][CONTROLLER_CARRITO_BUY]['localidad'] ?? ''; ?></p>
+                            <?php endif; ?>
+
                             <label for="direccion">Direccion:</label><br />
                             <input id="direccion" type="text" name="direccion" v-model="pedido.direccion" /><br />
+                            
+                            <?php if(isset($DATA[ViewConstants::FORM_ERRORS][CONTROLLER_CARRITO_BUY]['direccion'])): ?>
+                                <p class="error"><?= $DATA[ViewConstants::FORM_ERRORS][CONTROLLER_CARRITO_BUY]['direccion'] ?? ''; ?></p>
+                            <?php endif; ?>
 
-                            <?php if(isset($DATA[ViewConstants::FORM_ERRORS][CONTROLLER_SESSION_SINGING]['others'])): ?>
-                                <p class="error"><?= $DATA[ViewConstants::FORM_ERRORS][CONTROLLER_SESSION_SINGING]['others'] ?? ''; ?></p>
+                            <?php if(isset($DATA[ViewConstants::FORM_ERRORS][CONTROLLER_CARRITO_BUY]['others'])): ?>
+                                <p class="error"><?= $DATA[ViewConstants::FORM_ERRORS][CONTROLLER_CARRITO_BUY]['others'] ?? ''; ?></p>
                             <?php endif; ?>
 
                             <label>Total price: {{calcTotalPrice}}&euro;</label>

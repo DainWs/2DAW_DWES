@@ -43,14 +43,29 @@ class DBTableLineasPedidos extends DBTable {
 
         if ($lineaPedido instanceof LineasPedidos) {
             try {
-                $statement = parent::$connection->prepare("INSERT INTO lineas_pedidos VALUES (:id, :pedido_id, :producto_id, :unidades)");
-                $statement->bindParam(":id", $lineaPedido->id);
-                $statement->bindParam(":pedido_id", $lineaPedido->pedido_id);
-                $statement->bindParam(":producto_id", $lineaPedido->producto_id);
-                $statement->bindParam(":unidades", $lineaPedido->unidades);
                 parent::$connection->beginTransaction();
-                $statement->execute();
-                parent::$connection->commit();
+                $tableProduct = new DBTableProductos();
+                $product = $tableProduct->queryWith($lineaPedido->producto_id)[0];
+                $product->stock -= $lineaPedido->unidades;
+
+                if ($product->stock >= 0) {
+                    $statement = parent::$connection->prepare("UPDATE productos SET stock = :stock WHERE id = :id");
+                    $statement->bindParam(":id", $product->id);
+                    $statement->bindParam(":stock", $product->stock);
+                    $statement->execute();
+
+                    $statement = parent::$connection->prepare("INSERT INTO lineas_pedidos VALUES (:id, :pedido_id, :producto_id, :unidades)");
+                    $statement->bindParam(":id", $lineaPedido->id);
+                    $statement->bindParam(":pedido_id", $lineaPedido->pedido_id);
+                    $statement->bindParam(":producto_id", $lineaPedido->producto_id);
+                    $statement->bindParam(":unidades", $lineaPedido->unidades);
+
+                    $statement->execute();
+                    parent::$connection->commit();
+                } else {
+                    $this->errors = 'No tenemos el suficiente stock para realizar este pedido';
+                    parent::$connection->rollBack();
+                }
             } catch (Exception $ex) {
                 $this->errors = $ex->getMessage();
                 $result = false;

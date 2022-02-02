@@ -8,6 +8,8 @@ class LineasPedidos {
     public int $producto_id;
     public int $unidades;
 
+    public string $nombreProducto;
+
     public Productos $producto;
 
     public function __construct() {

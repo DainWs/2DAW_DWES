@@ -26,7 +26,7 @@ class SessionManager {
      * @param Usuarios $data the user data array
      * @return void
      */
-    public function addSession(Usuarios $data): void {
+    public function addSession(?Usuarios $data): void {
         if (!$this->hasSession()) {
             $token = session_id();
             $_SESSION[$token]['user'] = $data;

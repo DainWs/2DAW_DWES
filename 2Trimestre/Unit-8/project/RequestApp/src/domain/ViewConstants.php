@@ -18,4 +18,5 @@ class ViewConstants {
     const LIST_MODEL_USUARIOS = 'listaUsuarios';
     const LIST_MODEL_PRODUCTOS = 'listaProductos';
     const LIST_MODEL_CATEGORIAS = 'listaCategorias';
+    const LIST_MODEL_PEDIDOS = 'listaPedidos';
 }
