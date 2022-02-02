@@ -7,6 +7,11 @@ use Exception;
 use PDO;
 use src\models\Usuarios;
 
+/**
+ * Esta clase representa la tabla Usuarios de la base de datos,
+ * hay que resaltar que algunos metodos no tendran comentarios dado 
+ * que ya los heredan de los metodos del padre.
+ */
 class DBTableUsuarios extends DBTable {
 
     public function query(String $name = "", String $order = 'id', String $orderType = SQL_ORDER_ASC): array|false {
@@ -30,6 +35,8 @@ class DBTableUsuarios extends DBTable {
 
     /**
      * Found user in db by email
+     * @param $value the user email
+     * @return array|false array if all was success, otherwise false
      */
     public function queryWhereEmail($value): array|false {
         return $this->queryWhere('usuarios', 'email', $value, Usuarios::class);

@@ -19,7 +19,6 @@ use src\services\db\DBTableProductos;
 class CarritoController extends PostController {
 
     public function doBuyRequest() {
-        $this->logger->log('[Carrito] Buy request received.');
         $session = SessionManager::getInstance()->getSession();
         $pedido = SessionManager::getInstance()->getCarritoSession();
         $provincia = $_POST['provincia'] ?? '';
@@ -71,7 +70,7 @@ class CarritoController extends PostController {
                     foreach ($pedido->getLineas() as $linea) {
                         $result = $result && $lineasPedidoTable->insert($linea);
                     }
-
+                    
                     if (isset($lineasPedidoTable->errors)) {
                         $errors['others'] = $lineasPedidoTable->errors;
                         $result = false;

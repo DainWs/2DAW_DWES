@@ -7,9 +7,13 @@ use Exception;
 use PDO;
 use src\models\Categorias;
 
+/**
+ * Esta clase representa la tabla Categorias de la base de datos,
+ * hay que resaltar que algunos metodos no tendran comentarios dado 
+ * que ya los heredan de los metodos del padre.
+ */
 class DBTableCategorias extends DBTable {
 
-    //TODO change this methods for security reasons
     public function query(String $name = "", String $order = 'id', String $orderType = SQL_ORDER_ASC): array|false {
         $result = [];
         try {
@@ -31,6 +35,8 @@ class DBTableCategorias extends DBTable {
 
     /**
      * Found category in db by name
+     * @param $value the category name
+     * @return array|false array if all was success, otherwise false
      */
     public function queryWhereName($value): array|false {
         return $this->queryWhere('categorias', 'nombre', $value, Categorias::class);

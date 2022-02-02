@@ -11,7 +11,12 @@ SET NAMES UTF8;
 CREATE DATABASE IF NOT EXISTS tienda;
 USE tienda;
 
+DROP TABLE IF EXISTS lineas_pedidos;
+DROP TABLE IF EXISTS pedidos;
+DROP TABLE IF EXISTS productos;
+DROP TABLE IF EXISTS categorias;
 DROP TABLE IF EXISTS usuarios;
+
 CREATE TABLE IF NOT EXISTS usuarios( 
 id              int(255) auto_increment not null,
 nombre          varchar(100) not null,
@@ -23,16 +28,12 @@ CONSTRAINT pk_usuarios PRIMARY KEY(id),
 CONSTRAINT uq_email UNIQUE(email)  
 )ENGINE=InnoDb DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-
-DROP TABLE IF EXISTS categorias;
 CREATE TABLE IF NOT EXISTS categorias(
 id              int(255) auto_increment not null,
 nombre          varchar(100) not null,
 CONSTRAINT pk_categorias PRIMARY KEY(id) 
 )ENGINE=InnoDb DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-
-DROP TABLE IF EXISTS productos;
 CREATE TABLE IF NOT EXISTS productos(
 id              int(255) auto_increment not null,
 categoria_id    int(255) not null,
@@ -43,11 +44,11 @@ stock           int(255) not null,
 oferta          varchar(2),
 fecha           date not null,
 imagen          varchar(255),
+enventa          boolean,
 CONSTRAINT pk_categorias PRIMARY KEY(id),
 CONSTRAINT fk_producto_categoria FOREIGN KEY(categoria_id) REFERENCES categorias(id)
 )ENGINE=InnoDb DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-DROP TABLE IF EXISTS pedidos;
 CREATE TABLE IF NOT EXISTS pedidos(
 id              int(255) auto_increment not null,
 usuario_id      int(255) not null,
@@ -62,7 +63,6 @@ CONSTRAINT pk_pedidos PRIMARY KEY(id),
 CONSTRAINT fk_pedido_usuario FOREIGN KEY(usuario_id) REFERENCES usuarios(id)
 )ENGINE=InnoDb DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-DROP TABLE IF EXISTS lineas_pedidos;
 CREATE TABLE IF NOT EXISTS lineas_pedidos(
 id              int(255) auto_increment not null,
 pedido_id       int(255) not null,

@@ -7,6 +7,11 @@ use Exception;
 use PDO;
 use src\models\LineasPedidos;
 
+/**
+ * Esta clase representa la tabla Lineas_Pedidos de la base de datos,
+ * hay que resaltar que algunos metodos no tendran comentarios dado 
+ * que ya los heredan de los metodos del padre.
+ */
 class DBTableLineasPedidos extends DBTable {
     
     public function query(String $name = "", String $order = 'id', String $orderType = SQL_ORDER_ASC): array|false {

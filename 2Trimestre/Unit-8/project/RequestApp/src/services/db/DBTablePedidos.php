@@ -5,8 +5,14 @@ namespace src\services\db;
 use DBTable;
 use Exception;
 use PDO;
+use src\models\LineasPedidos;
 use src\models\Pedidos;
 
+/**
+ * Esta clase representa la tabla Pedidos de la base de datos,
+ * hay que resaltar que algunos metodos no tendran comentarios dado 
+ * que ya los heredan de los metodos del padre.
+ */
 class DBTablePedidos extends DBTable {
 
     public function query(String $name = "", String $order = 'id', String $orderType = SQL_ORDER_ASC): array|false {
@@ -38,6 +44,11 @@ class DBTablePedidos extends DBTable {
         return $result;
     }
 
+    /**
+     * Used for search the most recently pedido
+     * @param $pedido the pedido object that represent
+     * @return array|false array si se realizo de forma correcta, y false en caso contrario
+     */
     public function queryRecently(Pedidos $pedido): array|false {
         $result = [];
         try {
@@ -58,24 +69,32 @@ class DBTablePedidos extends DBTable {
         return $result;
     }
 
-    public function queryOf($userId): Pedidos|false {
-        $pedido = false;
+    /**
+     * Used for user query of pedido, with all its lines
+     * @param $userID the user id
+     * @return array|false array si se realizo de forma correcta, y false en caso contrario
+     */
+    public function queryCompleteOf($userId): Array|false {
+        $pedidos = [];
         try {
-            $statement = parent::$connection->prepare("SELECT * FROM pedidos WHERE usuario_id=:usuario_id");
+            $statement = parent::$connection->prepare("SELECT * FROM pedidos WHERE usuario_id= :usuario_id");
             $statement->bindParam(':usuario_id', $userId);
             $statement->execute();
-            $pedido = $statement->fetchAll(PDO::FETCH_CLASS, Pedidos::class)[0];
-
-            $statement = parent::$connection->prepare("SELECT L.*, P.nombre AS 'nombreProducto' FROM lineas_pedidos L, productos P WHERE L.usuario_id=:usuario_id");
-            $statement->bindParam(':id', $id);
-            $statement->execute();
-            $lineas = $statement->fetchAll(PDO::FETCH_CLASS, LineasPedidos::class);
-            $pedido->lineas = $lineas;
+            $pedidos = $statement->fetchAll(PDO::FETCH_CLASS, Pedidos::class);
+            foreach ($pedidos as $key => $pedido) {
+                $statement = parent::$connection->prepare("SELECT L.* , P.nombre AS 'nombreProducto' FROM lineas_pedidos L, productos P WHERE L.pedido_id = :pedido_id AND P.id = L.producto_id");
+                $statement->bindParam(':pedido_id', $pedido->id);
+                $statement->execute();
+                $pedidos[$key]->lineas = $statement->fetchAll(PDO::FETCH_CLASS, LineasPedidos::class);
+            }
+            
         } catch(Exception $ex) {
             $this->errors = $ex->getMessage();
-            $pedido = false;
+            echo $ex->getMessage();
+            exit;
+            $pedidos = false;
         }
-        return $pedido;
+        return $pedidos;
     }
 
     public function insert($pedido): bool {

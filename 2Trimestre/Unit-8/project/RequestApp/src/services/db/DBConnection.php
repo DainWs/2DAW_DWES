@@ -4,11 +4,17 @@ namespace src\services\db;
 
 use PDO;
 
-class DBConnection {
+/**
+ * Esta clase se encarga de crear la conexion singleton con la base de datos
+ */
+abstract class DBConnection {
 
     //PDO singleton instance
     protected static PDO $connection;
 
+    /**
+     * Constructor por defecto, crea la base de datos
+     */
     public function __construct() {
         if (!isset($this::$connection)) {
             $dbDomain = ($_SERVER['DB_DOMAIN'] ?? DB_DEFAULT_DOMAIN);

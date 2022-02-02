@@ -7,10 +7,10 @@
     SetEnv DB_NAME 'tienda'
 
     #The user of the database
-    SetEnv DB_USER 'root'
+    SetEnv DB_USER 'tienda'
 
     #The password of the database
-    SetEnv DB_PASSWORD ''
+    SetEnv DB_PASSWORD 'tienda'
 </IfModule>
 
 # Rute rule rewrite

@@ -4,6 +4,7 @@ namespace src\domain;
 
 use src\domain\packages\HomePackager;
 use src\domain\packages\CarritoPackager;
+use src\domain\packages\PedidoPackager;
 use src\domain\packages\ProductPackager;
 use src\domain\packages\ProfilePackager;
 use src\domain\packages\UsuarioPackager;
@@ -12,6 +13,7 @@ class Views {
     static $HOME;
     static $CARRITO;
     static $PROFILE;
+    static $PEDIDOS;
     static $PRODUCTO;
     static $NEWUSER;
     static $EDITUSER;
@@ -60,6 +62,7 @@ class Views {
 Views::$HOME = new Views('home.php', Roles::$UNDEFINED, HomePackager::class);
 Views::$CARRITO = new Views('carrito.php', Roles::$UNDEFINED, CarritoPackager::class);
 Views::$PROFILE = new Views('profile.php', Roles::$CLIENTE, ProfilePackager::class);
+Views::$PEDIDOS = new Views('pedidos.php', Roles::$CLIENTE, PedidoPackager::class);
 Views::$PRODUCTO = new Views('productos.php', Roles::$PROVEEDOR, ProductPackager::class);
 Views::$NEWUSER = new Views('newUser.php', Roles::$ADMIN, UsuarioPackager::class);
 Views::$EDITUSER = new Views('editUser.php', Roles::$ADMIN, UsuarioPackager::class);

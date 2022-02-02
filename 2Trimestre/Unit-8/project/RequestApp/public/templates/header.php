@@ -43,6 +43,7 @@
                     <a href="<?= $_SERVER['APP_BASE_URL'] . '/moveTo/profile.php'; ?>"><?= $DATA[ViewConstants::SESSION_USER]->nombre ?></a>
                     <ul>
                         <li><a href="<?= $_SERVER['APP_BASE_URL'] . '/moveTo/carrito.php'; ?>">Carrito</a></li>
+                        <li><a href="<?= $_SERVER['APP_BASE_URL'] . '/moveTo/pedidos.php'; ?>">Mis pedidos</a></li>
                         <li><a href="<?= $_SERVER['APP_BASE_URL'] . '/moveTo/profile.php'; ?>">Edit profile</a></li>
                         <li>
                             <form action="<?= $_SERVER['APP_BASE_URL'] . '/SessionController/doLogoutPost'; ?>" method="POST">

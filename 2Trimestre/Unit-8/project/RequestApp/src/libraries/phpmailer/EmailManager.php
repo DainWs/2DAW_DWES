@@ -7,6 +7,9 @@ use Monolog\Logger;
 use PHPMailer\PHPMailer\PHPMailer;
 use src\models\Pedidos;
 
+/**
+ * This class manage the send email task
+ */
 class EmailManager {
     private const SMTP_HOST = 'smtp.gmail.com';
     private const SMTP_PORT = 465;
@@ -19,6 +22,9 @@ class EmailManager {
     private LogManager $logger;
     private PHPMailer $mailer;
 
+    /**
+     * In the constructor we prepare the configuration for PHPMailer
+     */
     public function __construct() {
         $this->logger = new LogManager('EmailManager');
         $this->mailer = new PHPMailer(true);
@@ -34,7 +40,11 @@ class EmailManager {
         $this->mailer->setFrom(SELF::USER_EMAIL, SELF::USER_NAME);
     }
 
-    public function send(Pedidos $pedido)  {
+    /**
+     * Send a email to the user specified by the pedido
+     * @param $pedido the pedido that is wanted to send via email
+     */
+    public function send(Pedidos $pedido): void  {
         try {
             $cliente = $pedido->getUsuario();
             $this->logger->log("Send email to $cliente->email for her buy request.");
@@ -77,7 +87,6 @@ class EmailManager {
             $this->mailer->send();
         } catch(Exception $ex) {
             $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
-            exit;
         }
     }
 }

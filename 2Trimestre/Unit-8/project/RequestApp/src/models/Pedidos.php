@@ -2,16 +2,26 @@
 
 namespace src\models;
 
+/**
+ * El modelo Pedidos representa una tupla de la tabla Pedidos en la base de datos
+ * ¡¡¡Importante!!!
+ * - En estas clases, no se especifican tipos de datos a las variables, para evitar algunos problemas con base de datos y demás
+ * - En estas clases, las propiedades son publicas para poder serializar la maxima cantidad de datos, y poder guardarlos mas facilmente en $_SESSION
+ * - Dadas las anteriores situaciones, no se han generado setter o getters para estos modelos, ya que no son necesarios.
+ * 
+ * la primera y tercera especificacion no se aplica a la variable $usuario y $lineas, dado que esta no tiene que ver con la base de datos
+ */
 class Pedidos {
     public $id;
     public $usuario_id;
-    public string $provincia;
-    public string $localidad;
-    public string $direccion;
+    public $provincia;
+    public $localidad;
+    public $direccion;
     public $coste;
     public $estado;
     public $fecha;
     public $hora;
+    public $enventa;
 
     public ?Usuarios $usuario = null;
     public Array $lineas = [];
@@ -51,6 +61,7 @@ class Pedidos {
             $linea->pedido_id = $this->id;
         }
         $this->lineas = $lineas;
+        $this->calcCoste();
     }
 
     public function getUsuario(): ?Usuarios {

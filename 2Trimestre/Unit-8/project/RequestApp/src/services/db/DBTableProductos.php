@@ -7,12 +7,17 @@ use Exception;
 use PDO;
 use src\models\Productos;
 
+/**
+ * Esta clase representa la tabla Productos de la base de datos,
+ * hay que resaltar que algunos metodos no tendran comentarios dado 
+ * que ya los heredan de los metodos del padre.
+ */
 class DBTableProductos extends DBTable {
 
     public function query(String $name = "", String $order = 'id', String $orderType = SQL_ORDER_ASC): array|false {
         $result = [];
         try {
-            $statement = parent::$connection->prepare("SELECT * FROM productos WHERE nombre LIKE '%$name%' ORDER BY :fieldOrder :orderType");
+            $statement = parent::$connection->prepare("SELECT * FROM productos WHERE enventa == 1 AND nombre LIKE '%$name%' ORDER BY :fieldOrder :orderType");
             $statement->bindParam(":fieldOrder", $order);
             $statement->bindParam(":orderType", $orderType);
             $statement->execute();
@@ -28,12 +33,20 @@ class DBTableProductos extends DBTable {
         return $this->queryWhere('productos', 'id', $id, Productos::class);
     }
 
+    /**
+     * Return a 'page' of limited object for a ajax request
+     * @param $pageNum num of page
+     * @param $limit limit of object for page
+     * @param $order the column to sort by
+     * @param $orderType the type of order, SQL_ORDER_ASC or SQL_ORDER_DES
+     * @return array|false array si se realizo de forma correcta, y false en caso contrario
+     */
     public function queryPage(int $pageNum = 0, int $limit = 10, String $order = 'id', String $orderType = SQL_ORDER_ASC): array|false {
         $result = [];
         $fromRownum = $pageNum * $limit;
         if ($fromRownum >= 0) {
             try {
-                $statement = parent::$connection->prepare("SELECT * FROM productos ORDER BY :fieldOrder :orderType LIMIT $limit OFFSET $fromRownum");
+                $statement = parent::$connection->prepare("SELECT * FROM productos WHERE enventa = 1 ORDER BY :fieldOrder :orderType LIMIT $limit OFFSET $fromRownum");
                 $statement->bindParam(":fieldOrder", $order);
                 $statement->bindParam(":orderType", $orderType);
                 $statement->execute();
@@ -192,7 +205,7 @@ class DBTableProductos extends DBTable {
     public function delete($id): bool {
         $result = true;
         try {
-            $statement = parent::$connection->prepare("DELETE FROM productos WHERE id=:id");
+            $statement = parent::$connection->prepare("UPDATE productos SET enventa = 0 WHERE id= :id");
             $statement->bindParam(":id", $id);
             parent::$connection->beginTransaction();
             $statement->execute();
