@@ -10,14 +10,43 @@ namespace src\models;
  * - Dadas las anteriores situaciones, no se han generado setter o getters para estos modelos, ya que no son necesarios.
  */
 class LineasPedidos {
+    /**
+     * This property is a id that represents this lineaPedido
+     * @var int $id
+     */
     public $id;
+
+    /**
+     * This property is a id that represents a Pedido
+     * @link \src\models\Pedidos for more model information
+     * @var int $pedido_id
+     */
     public $pedido_id;
+
+    /**
+     * This property is a id that represents a Producto
+     * @link \src\models\Productos for more model information
+     * @var int $producto_id
+     */
     public $producto_id;
+
+    /**
+     * This property is the unit count for the product
+     * @var int $unidades
+     */
     public $unidades;
 
+    /**
+     * This property represent the product name from $producto_id
+     * @var string $nombreProducto
+     */
     public $nombreProducto;
 
-    public Productos $producto;
+    /**
+     * This property represent the product object, only avaible sometimes
+     * @link \src\models\Productos for more model information
+     */
+    public ?Productos $producto;
 
     public function __construct() {
         $this->id = 0;
@@ -26,10 +55,18 @@ class LineasPedidos {
         $this->unidades = 1;
     }
 
-    public function getProducto(): Productos {
+    /**
+     * Get the product from this LineaPedido
+     * @return ?Productos the product object for this LineaPedidos
+     */
+    public function getProducto(): ?Productos {
         return $this->producto;
     }
 
+    /**
+     * Set the product from this LineaPedido
+     * @param Productos $producto the product object for this LineaPedidos
+     */
     public function setProducto(Productos $producto): void {
         $this->producto = $producto;
         $this->producto_id = $producto->id;

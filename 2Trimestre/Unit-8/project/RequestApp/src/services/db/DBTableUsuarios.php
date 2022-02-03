@@ -4,6 +4,7 @@ namespace src\services\db;
 
 use DBTable;
 use Exception;
+use Monolog\Logger;
 use PDO;
 use src\models\Usuarios;
 
@@ -24,6 +25,7 @@ class DBTableUsuarios extends DBTable {
             $result = $statement->fetchAll(PDO::FETCH_CLASS, Usuarios::class);
         } catch(Exception $ex) {
             $this->errors = $ex->getMessage();
+            $this->logger->log( $ex->getMessage(), Logger::WARNING);
             $result = false;
         }
         return $result;
@@ -61,6 +63,7 @@ class DBTableUsuarios extends DBTable {
                 parent::$connection->commit();
             } catch (Exception $ex) {
                 $this->errors = $ex->getMessage();
+                $this->logger->log( $ex->getMessage(), Logger::WARNING);
                 $result = false;
             }
         }
@@ -140,6 +143,7 @@ class DBTableUsuarios extends DBTable {
                 parent::$connection->commit();
             } catch (Exception $ex) {
                 $this->errors = $ex->getMessage();
+                $this->logger->log( $ex->getMessage(), Logger::WARNING);
                 $result = false;
             }
         }
@@ -159,6 +163,7 @@ class DBTableUsuarios extends DBTable {
             parent::$connection->commit();
         } catch(Exception $ex) {
             $this->errors = $ex->getMessage();
+            $this->logger->log( $ex->getMessage(), Logger::WARNING);
             $result = false;
         }
         return $result;

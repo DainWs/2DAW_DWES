@@ -9,6 +9,12 @@ use src\domain\packages\ProductPackager;
 use src\domain\packages\ProfilePackager;
 use src\domain\packages\UsuarioPackager;
 
+/**
+ * This is an ENUM class, each object from this enum contains the route for the View,
+ * the Roles and the Packager.
+ * @link \src\domain\Roles
+ * @link \src\domain\packages\*
+ */
 class Views {
     static $HOME;
     static $CARRITO;
@@ -52,6 +58,11 @@ class Views {
         return new ($this->packager);
     }
 
+    /**
+     * Return a Views object that match the route string
+     * @param String $route the route for of the View
+     * @return ?Views the view enum or null if none were found
+     */
     public static function getViewByRoute(String $route): ?Views {
         preg_match('/(?:[^\/]*\/)?([^\/\.]+)\.php/', $route, $routeId);
         $searchedRoute = $routeId[1];

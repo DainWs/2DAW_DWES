@@ -20,20 +20,26 @@ SetEnv DB_USER '<tu usuario va aqui>'
 #The password of the database
 SetEnv DB_PASSWORD '<la contraseña va aqui>'
 ```
-
  3. despues de esto ya deberias poder comenzar.
+
+## Contraseñas
+Las contraseñas de todos los usuarios de la base de datos insertados en `SQLInserts.sql` es `prueba`.
+
+## Libraries
+The used libraries of this project are:
+- monolog/monolog (2.3.5)
+- phpmailer/phpmailer (^6.5)
 
 ## Lo pedido
 Se desea crear una aplicación para el Departamento de pedidos de la empresa XXXXX.
-
 La aplicación debe permitir:
-- Consultar categorías 
-- Crear categorías para usuarios administradores
-- Consultar productos
-- Crear, editar y borrar productos para usuarios administradores
-- Añadir una o más unidades de un producto al pedido
-- Consultar el pedido del carrito y eliminar productos de este.
-- Realizar el pedido, introduciéndolo en la base de datos y enviando correo.
+- [X] Consultar categorías 
+- [X] Crear categorías para usuarios administradores
+- [X] Consultar productos
+- [X] Crear, editar y borrar productos para usuarios administradores
+- [X] Añadir una o más unidades de un producto al pedido
+- [X] Consultar el pedido del carrito y eliminar productos de este.
+- [X] Realizar el pedido, introduciéndolo en la base de datos y enviando correo.
 
 Para acceder a la aplicación será necesario autentificarse.
 De cada categoría se guarda su código y su nombre. 
@@ -45,7 +51,7 @@ De los pedidos se conoce su código, la dirección, provincia, localidad, coste,
 pedido constará de una o varias líneas de pedido. De cada una de ellas se almacena un identificador, las 
 unidades, el código del producto y el código del pedido
 
-## Project Structure
+### Project Structure
 The project structure that i used for this project:
 | Type          | Folder            |
 |---------------|-------------------|
@@ -56,14 +62,22 @@ The project structure that i used for this project:
 | Database      | sql/              |
 
 css, js, and images are saved in **public/assets**
-## Objectives
+
+#### Project URL structure
+The url structure followed for requests:
+| Url                                | Action                               |
+|------------------------------------|--------------------------------------|
+| /moveTo/*                          | show a view of public/               |
+| /controllerName/method?params      | call a controller method with params |
+
+### Objectives
 - [X] Crear una aplicación de pedidos
 - [X] Cargar dinámicamente categorías y productos disponibles
 - [X] Almacenar pedidos en una base de datos
 - [X] Controlar el acceso con una tabla de usuarios
 - [X] Enviar correo de confirmación
 
-## Pasos
+### Pasos
 - [X] Diseña y crea la base de datos
 - [X] Estructura de directorios para implementar el MVC
 - [X] Crear el archivo autoload.php
@@ -86,5 +100,5 @@ css, js, and images are saved in **public/assets**
 - [X] Mis pedidos
 - [X] Envío de correo
 
-### Faltan
+#### Faltan
 - [ ] Algunos comentarios

@@ -4,6 +4,7 @@ namespace src\services\db;
 
 use DBTable;
 use Exception;
+use Monolog\Logger;
 use PDO;
 use src\models\Categorias;
 
@@ -24,6 +25,7 @@ class DBTableCategorias extends DBTable {
             $result = $statement->fetchAll(PDO::FETCH_CLASS, Categorias::class);
         } catch(Exception $ex) {
             $this->errors = $ex->getMessage();
+            $this->logger->log( $ex->getMessage(), Logger::WARNING);
             $result = false;
         }
         return $result;
@@ -55,6 +57,7 @@ class DBTableCategorias extends DBTable {
                 parent::$connection->commit();
             } catch (Exception $ex) {
                 $this->errors = $ex->getMessage();
+                $this->logger->log( $ex->getMessage(), Logger::WARNING);
                 $result = false;
             }
         }
@@ -74,6 +77,7 @@ class DBTableCategorias extends DBTable {
                 parent::$connection->commit();
             } catch (Exception $ex) {
                 $this->errors = $ex->getMessage();
+                $this->logger->log( $ex->getMessage(), Logger::WARNING);
                 $result = false;
             }
         }
@@ -90,6 +94,7 @@ class DBTableCategorias extends DBTable {
             parent::$connection->commit();
         } catch(Exception $ex) {
             $this->errors = $ex->getMessage();
+            $this->logger->log( $ex->getMessage(), Logger::WARNING);
             $result = false;
         }
         return $result;

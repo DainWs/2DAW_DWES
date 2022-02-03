@@ -1,5 +1,6 @@
 <?php
 
+use src\libraries\LogManager;
 use src\services\db\DBConnection;
 
 /**
@@ -8,6 +9,13 @@ use src\services\db\DBConnection;
  */
 abstract class DBTable extends DBConnection {
     
+    protected LogManager $logger;
+
+    public function __construct() {
+        parent::__construct();
+        $this->logger = new LogManager('DBTable');
+    }
+
     /**
      * Only for internal use. (this method only used by this class)
      * @param $table the table name that is target of this query

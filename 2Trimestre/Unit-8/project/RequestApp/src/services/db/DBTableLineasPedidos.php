@@ -4,6 +4,7 @@ namespace src\services\db;
 
 use DBTable;
 use Exception;
+use Monolog\Logger;
 use PDO;
 use src\models\LineasPedidos;
 
@@ -24,6 +25,7 @@ class DBTableLineasPedidos extends DBTable {
             $result = $statement->fetchAll(PDO::FETCH_CLASS, LineasPedidos::class);
         } catch(Exception $ex) {
             $this->errors = $ex->getMessage();
+                $this->logger->log( $ex->getMessage(), Logger::WARNING);
             $result = false;
         }
         return $result;
@@ -38,6 +40,7 @@ class DBTableLineasPedidos extends DBTable {
             $result = $statement->fetchAll(PDO::FETCH_CLASS, LineasPedidos::class);
         } catch(Exception $ex) {
             $this->errors = $ex->getMessage();
+            $this->logger->log( $ex->getMessage(), Logger::WARNING);
             $result = false;
         }
         return $result;
@@ -73,6 +76,7 @@ class DBTableLineasPedidos extends DBTable {
                 }
             } catch (Exception $ex) {
                 $this->errors = $ex->getMessage();
+                $this->logger->log( $ex->getMessage(), Logger::WARNING);
                 $result = false;
             }
         }
@@ -116,6 +120,7 @@ class DBTableLineasPedidos extends DBTable {
                 parent::$connection->commit();
             } catch (Exception $ex) {
                 $this->errors = $ex->getMessage();
+                $this->logger->log( $ex->getMessage(), Logger::WARNING);
                 $result = false;
             }
         }
@@ -132,6 +137,7 @@ class DBTableLineasPedidos extends DBTable {
             parent::$connection->commit();
         } catch(Exception $ex) {
             $this->errors = $ex->getMessage();
+            $this->logger->log( $ex->getMessage(), Logger::WARNING);
             $result = false;
         }
         return $result;
@@ -147,6 +153,7 @@ class DBTableLineasPedidos extends DBTable {
             parent::$connection->commit();
         } catch(Exception $ex) {
             $this->errors = $ex->getMessage();
+            $this->logger->log( $ex->getMessage(), Logger::WARNING);
             $result = false;
         }
         return $result;

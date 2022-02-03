@@ -4,6 +4,10 @@ namespace src\domain;
 
 use ReflectionClass;
 
+/**
+ * This is an ENUM class, each object from this enum 
+ * contains Roles of users levels privileges.
+ */
 class Roles {
     static Roles $ADMIN;
     static Roles $PROVEEDOR;

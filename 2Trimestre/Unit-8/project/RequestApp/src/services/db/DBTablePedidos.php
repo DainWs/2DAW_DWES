@@ -4,6 +4,7 @@ namespace src\services\db;
 
 use DBTable;
 use Exception;
+use Monolog\Logger;
 use PDO;
 use src\models\LineasPedidos;
 use src\models\Pedidos;
@@ -25,6 +26,7 @@ class DBTablePedidos extends DBTable {
             $result = $statement->fetchAll(PDO::FETCH_CLASS, Pedidos::class);
         } catch(Exception $ex) {
             $this->errors = $ex->getMessage();
+                $this->logger->log( $ex->getMessage(), Logger::WARNING);
             $result = false;
         }
         return $result;
@@ -39,6 +41,7 @@ class DBTablePedidos extends DBTable {
             $result = $statement->fetchAll(PDO::FETCH_CLASS, Pedidos::class);
         } catch(Exception $ex) {
             $this->errors = $ex->getMessage();
+                $this->logger->log( $ex->getMessage(), Logger::WARNING);
             $result = false;
         }
         return $result;
@@ -63,7 +66,7 @@ class DBTablePedidos extends DBTable {
             $result = $statement->fetchAll(PDO::FETCH_CLASS, Pedidos::class);
         } catch(Exception $ex) {
             $this->errors = $ex->getMessage();
-            var_dump($ex);
+            $this->logger->log( $ex->getMessage(), Logger::WARNING);
             $result = false;
         }
         return $result;
@@ -90,8 +93,7 @@ class DBTablePedidos extends DBTable {
             
         } catch(Exception $ex) {
             $this->errors = $ex->getMessage();
-            echo $ex->getMessage();
-            exit;
+            $this->logger->log( $ex->getMessage(), Logger::WARNING);
             $pedidos = false;
         }
         return $pedidos;
@@ -120,6 +122,7 @@ class DBTablePedidos extends DBTable {
                 parent::$connection->commit();
             } catch (Exception $ex) {
                 $this->errors = $ex->getMessage();
+                $this->logger->log( $ex->getMessage(), Logger::WARNING);
                 $result = false;
             }
         }
@@ -223,6 +226,7 @@ class DBTablePedidos extends DBTable {
                 parent::$connection->commit();
             } catch (Exception $ex) {
                 $this->errors = $ex->getMessage();
+                $this->logger->log( $ex->getMessage(), Logger::WARNING);
                 $result = false;
             }
         }
@@ -242,6 +246,7 @@ class DBTablePedidos extends DBTable {
             parent::$connection->commit();
         } catch(Exception $ex) {
             $this->errors = $ex->getMessage();
+            $this->logger->log( $ex->getMessage(), Logger::WARNING);
             $result = false;
         }
         return $result;
@@ -267,6 +272,7 @@ class DBTablePedidos extends DBTable {
             parent::$connection->commit();
         } catch(Exception $ex) {
             $this->errors = $ex->getMessage();
+            $this->logger->log( $ex->getMessage(), Logger::WARNING);
             $result = false;
         }
         return $result;

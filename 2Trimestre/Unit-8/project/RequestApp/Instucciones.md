@@ -20,5 +20,7 @@ SetEnv DB_USER '<tu usuario va aqui>'
 #The password of the database
 SetEnv DB_PASSWORD '<la contraseña va aqui>'
 ```
-
  3. despues de esto ya deberias poder comenzar.
+
+## Contraseñas
+Las contraseñas de todos los usuarios de la base de datos insertados en `SQLInserts.sql` es `prueba`.

@@ -2,7 +2,10 @@
 
 namespace src\domain;
 
-class ViewConstants {
+/**
+ * This is a 'static' class that contains some constants for Views usage
+ */
+abstract class ViewConstants {
     const URL = 'url';
 
     const FORM_ERRORS = 'errors';

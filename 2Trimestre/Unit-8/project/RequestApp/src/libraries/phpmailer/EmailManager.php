@@ -42,7 +42,7 @@ class EmailManager {
 
     /**
      * Send a email to the user specified by the pedido
-     * @param $pedido the pedido that is wanted to send via email
+     * @param Pedidos $pedido the pedido that is wanted to send via email
      */
     public function send(Pedidos $pedido): void  {
         try {

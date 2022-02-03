@@ -10,6 +10,15 @@ namespace src\models;
  * - Dadas las anteriores situaciones, no se han generado setter o getters para estos modelos, ya que no son necesarios.
  */
 class Categorias {
+    /**
+     * This property is a id that represents this category
+     * @var int $id
+     */
     public $id;
+
+    /**
+     * This property is the name of this category
+     * @var string $id
+     */
     public $nombre;
 }

@@ -4,6 +4,7 @@ namespace src\services\db;
 
 use DBTable;
 use Exception;
+use Monolog\Logger;
 use PDO;
 use src\models\Productos;
 
@@ -24,6 +25,7 @@ class DBTableProductos extends DBTable {
             $result = $statement->fetchAll(PDO::FETCH_CLASS, Productos::class);
         } catch(Exception $ex) {
             $this->errors = $ex->getMessage();
+            $this->logger->log( $ex->getMessage(), Logger::WARNING);
             $result = false;
         }
         return $result;
@@ -53,6 +55,7 @@ class DBTableProductos extends DBTable {
                 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             } catch(Exception $ex) {
                 $this->errors = $ex->getMessage();
+                $this->logger->log( $ex->getMessage(), Logger::WARNING);
                 $result = false;
             }
         }
@@ -81,6 +84,7 @@ class DBTableProductos extends DBTable {
                 parent::$connection->commit();
             } catch (Exception $ex) {
                 $this->errors = $ex->getMessage();
+                $this->logger->log( $ex->getMessage(), Logger::WARNING);
                 $result = false;
             }
         }
@@ -196,6 +200,7 @@ class DBTableProductos extends DBTable {
                 parent::$connection->commit();
             } catch (Exception $ex) {
                 $this->errors = $ex->getMessage();
+                $this->logger->log( $ex->getMessage(), Logger::WARNING);
                 $result = false;
             }
         }
@@ -212,6 +217,7 @@ class DBTableProductos extends DBTable {
             parent::$connection->commit();
         } catch(Exception $ex) {
             $this->errors = $ex->getMessage();
+            $this->logger->log( $ex->getMessage(), Logger::WARNING);
             $result = false;
         }
         return $result;

@@ -6,6 +6,11 @@ use src\controllers\NavigationController;
 use src\models\Pedidos;
 use src\models\Usuarios;
 
+/**
+ * This is the session main manager maked
+ * to store the current view of for the user, 
+ * the user data and the carrito/shopping car
+ */
 class SessionManager {
 
     private static SessionManager $instance;
