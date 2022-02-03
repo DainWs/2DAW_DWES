@@ -43,14 +43,21 @@ class DBTableProductos extends DBTable {
      * @param $orderType the type of order, SQL_ORDER_ASC or SQL_ORDER_DES
      * @return array|false array si se realizo de forma correcta, y false en caso contrario
      */
-    public function queryPage(int $pageNum = 0, int $limit = 10, String $order = 'id', String $orderType = SQL_ORDER_ASC): array|false {
+    public function queryPage(int $pageNum = 0, int $limit = 10, $category = -1, String $order = 'id', String $orderType = SQL_ORDER_ASC): array|false {
         $result = [];
         $fromRownum = $pageNum * $limit;
+        $useCategory = ($category >= 0);
         if ($fromRownum >= 0) {
             try {
-                $statement = parent::$connection->prepare("SELECT * FROM productos WHERE enventa = 1 ORDER BY :fieldOrder :orderType LIMIT $limit OFFSET $fromRownum");
+                $sql = "SELECT * FROM productos WHERE enventa = 1";
+                $sql .= ($useCategory) ? " AND categoria_id = :categoryId" : '' ;
+                $sql .= " ORDER BY :fieldOrder :orderType LIMIT $limit OFFSET $fromRownum";
+                $statement = parent::$connection->prepare($sql);
                 $statement->bindParam(":fieldOrder", $order);
                 $statement->bindParam(":orderType", $orderType);
+                if ($useCategory) {
+                    $statement->bindParam(":categoryId", $category);
+                }
                 $statement->execute();
                 $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             } catch(Exception $ex) {
@@ -69,7 +76,7 @@ class DBTableProductos extends DBTable {
             try {
                 $fecha = date($producto->fecha->format('Y-m-d'));
 
-                $statement = parent::$connection->prepare("INSERT INTO productos VALUES (:id, :categoria_id, :nombre, :descripcion, :precio, :stock, :oferta, :fecha, :imagen)");
+                $statement = parent::$connection->prepare("INSERT INTO productos VALUES (:id, :categoria_id, :nombre, :descripcion, :precio, :stock, :oferta, :fecha, :imagen, :enventa)");
                 $statement->bindParam(":id", $producto->id);
                 $statement->bindParam(":categoria_id", $producto->categoria_id);
                 $statement->bindParam(":nombre", $producto->nombre);
@@ -79,6 +86,7 @@ class DBTableProductos extends DBTable {
                 $statement->bindParam(":oferta", $producto->oferta);
                 $statement->bindParam(":fecha", $fecha);
                 $statement->bindParam(":imagen", $producto->imagen);
+                $statement->bindParam(":enventa", $producto->enventa);
                 parent::$connection->beginTransaction();
                 $statement->execute();
                 parent::$connection->commit();

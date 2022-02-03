@@ -96,8 +96,9 @@ class CarritoController extends PostController {
                         $emailSender = new EmailManager();
                         $emailSender->send($pedido);
 
-                        (new NavigationController())->moveTo('home.php');
                         SessionManager::getInstance()->updateCarritoSession(new Pedidos());
+                        header("Location: ".$_SERVER["APP_BASE_URL"]."/moveTo/home.php");
+                        exit();
                     } catch(Exception $ex) {
                         $this->logger->log("[Error] ".$ex->getMessage(), Logger::WARNING);
                         $errors['others']= 'An unknown error was success, please try it again more later.';

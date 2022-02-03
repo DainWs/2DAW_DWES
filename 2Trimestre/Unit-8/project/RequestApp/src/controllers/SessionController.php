@@ -9,6 +9,7 @@ use src\domain\SessionManager;
 use src\domain\validators\FormValidator;
 use src\models\Usuarios;
 use src\services\db\DBTableUsuarios;
+use Usuario;
 
 /**
  * This is the controller for the session post requests
@@ -121,7 +122,6 @@ class SessionController extends PostController {
                 $result = false;
             } 
             finally {
-                var_dump($result);
                 if ($result instanceof Usuarios) {
                     SessionManager::getInstance()->addSession($result);
                     NavigationController::home();
@@ -153,7 +153,7 @@ class SessionController extends PostController {
         $dbUsers = $table->queryWhereEmail($email);
         $result = false;
         if (is_array($dbUsers)) {
-            $dbUser = $dbUsers[array_keys($dbUsers)[0]];
+            $dbUser = $dbUsers[array_keys($dbUsers)[0] ?? 0] ?? new Usuarios();
             if ($dbUser->password == md5($password)) {
                 $result = $dbUser;
             }

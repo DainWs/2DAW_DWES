@@ -19,12 +19,14 @@ use src\domain\ViewConstants;
             <article class="user-outer">
                 <main>
                     <form class="grid-div " action="<?= $_SERVER['APP_BASE_URL'] . '/UsuariosController/doAddUserPost'; ?>" enctype="application/x-www-form-urlencoded" method="POST" autocomplete="off">
+                        <?php $ERRORS = $DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS] ?? []; ?>
+
                         <div class="grid-name">
                             <label for="user-name">Name: </label><br />
                             <input id="user-name" type="text" name="name" value="<?= $_POST['name'] ?? '' ?>" autocomplete="new-name"/><br />
 
-                            <?php if(isset($DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS]['name'])): ?>
-                                <p class="error"><?= $DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS]['name'] ?? '' ?></p>
+                            <?php if(isset($ERRORS['name'])): ?>
+                                <p class="error"><?= $ERRORS['name'] ?? '' ?></p>
                             <?php endif; ?>
                         </div>
                         
@@ -37,20 +39,20 @@ use src\domain\ViewConstants;
                             <label for="user-email">Email:</label><br />
                             <input id="user-password" type="text" name="email" value="<?= $_POST['email'] ?? '' ?>" autocomplete="new-email"/><br />
                             
-                            <?php if(isset($DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS]['email'])): ?>
-                                <p class="error"><?= $DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS]['email'] ?? '' ?></p>
+                            <?php if(isset($ERRORS['email'])): ?>
+                                <p class="error"><?= $ERRORS['email'] ?? '' ?></p>
                             <?php endif; ?>
                         </div>
-
+                        
                         <div class="grid-rol">
                             <label for="user-rol">Rol:</label><br />
                             <select id="user-rol" name="rol">
                                 <?php foreach(Roles::getRoles() as $rol): ?>
-                                    <option value="<?= $rol->getId() ?>" <?= ($rol->getId() == ($_POST['rol']->getId() ?? Roles::$CLIENTE->getId()) ) ? 'selected' : '' ?>><?= $rol->getId() ?></option>
+                                    <option value="<?= $rol->getId() ?>" <?= ($rol->getId() == (Roles::getById($_POST['rol']) ?? Roles::$CLIENTE)->getId() ) ? 'selected' : '' ?>><?= $rol->getId() ?></option>
                                 <?php endforeach; ?>
                             </select>
-                            <?php if(isset($DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS]['rol'])): ?>
-                                <p class="error"><?= $DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS]['rol'] ?? '' ?></p>
+                            <?php if(isset($ERRORS['rol'])): ?>
+                                <p class="error"><?= $ERRORS['rol'] ?? '' ?></p>
                             <?php endif; ?>
                         </div>
 
@@ -58,14 +60,14 @@ use src\domain\ViewConstants;
                             <label for="user-password">Password:</label><br />
                             <input id="user-password" type="password" name="password" value="<?= $_POST['password'] ?? '' ?>" autocomplete="new-password"/><br />
 
-                            <?php if(isset($DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS]['password'])): ?>
-                                <p class="error"><?= $DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS]['password'] ?? '' ?></p>
+                            <?php if(isset($ERRORS['password'])): ?>
+                                <p class="error"><?= $ERRORS['password'] ?? '' ?></p>
                             <?php endif; ?>
                         </div>
 
                         <div class="grid-others">
-                            <?php if(isset($DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS]['others'])): ?>
-                                <p class="error"><?= $DATA[ViewConstants::FORM_ERRORS][CONTROLLER_USUARIOS]['others'] ?? '' ?></p>
+                            <?php if(isset($ERRORS['others'])): ?>
+                                <p class="error"><?= $ERRORS['others'] ?? '' ?></p>
                             <?php endif; ?>
                         </div>
                         

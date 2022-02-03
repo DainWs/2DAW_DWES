@@ -56,7 +56,8 @@ class CategoriasController extends PostController {
             }
             finally {
                 if ($result) {
-                   NavigationController::home();
+                    header("Location: ".$_SERVER["APP_BASE_URL"]."/moveTo/home.php");
+                    exit();
                 } else {
                     $errors['others']= 'An unknown error was success, please try it again more later.';
                 }

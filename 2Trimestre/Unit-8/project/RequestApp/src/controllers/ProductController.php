@@ -85,6 +85,7 @@ class ProductController extends PostController {
                 $producto->oferta = $oferta;
                 $producto->fecha = new DateTime(date('Y-m-d'));
                 $producto->imagen = $image;
+                $producto->enventa = true;
 
                 $table = new DBTableProductos();
                 $result = $table->insert($producto);

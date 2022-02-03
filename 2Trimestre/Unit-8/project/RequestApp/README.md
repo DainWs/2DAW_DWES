@@ -33,13 +33,13 @@ The used libraries of this project are:
 ## Lo pedido
 Se desea crear una aplicación para el Departamento de pedidos de la empresa XXXXX.
 La aplicación debe permitir:
-- [X] Consultar categorías 
-- [X] Crear categorías para usuarios administradores
-- [X] Consultar productos
-- [X] Crear, editar y borrar productos para usuarios administradores
-- [X] Añadir una o más unidades de un producto al pedido
-- [X] Consultar el pedido del carrito y eliminar productos de este.
-- [X] Realizar el pedido, introduciéndolo en la base de datos y enviando correo.
+- [x] Consultar categorías 
+- [x] Crear categorías para usuarios administradores
+- [x] Consultar productos
+- [x] Crear, editar y borrar productos para usuarios administradores
+- [x] Añadir una o más unidades de un producto al pedido
+- [x] Consultar el pedido del carrito y eliminar productos de este.
+- [x] Realizar el pedido, introduciéndolo en la base de datos y enviando correo.
 
 Para acceder a la aplicación será necesario autentificarse.
 De cada categoría se guarda su código y su nombre. 

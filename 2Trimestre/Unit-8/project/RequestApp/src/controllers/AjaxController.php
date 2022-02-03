@@ -2,6 +2,7 @@
 
 namespace src\controllers;
 
+use src\domain\SessionManager;
 use src\services\db\DBTableCategorias;
 use src\services\db\DBTablePedidos;
 use src\services\db\DBTableProductos;
@@ -19,9 +20,10 @@ class AjaxController extends PostController {
         $limit = $_POST['limit'] ?? 10;
         $order = $_POST['order'] ?? 'id';
         $orderType = $_POST['orderType'] ?? SQL_ORDER_ASC;
+        $category = SessionManager::getInstance()->getSessionLocation()['args']['category'] ?? -1;
 
         $table = new DBTableProductos();
-        $products = $table->queryPage($page, $limit, $order, $orderType);
+        $products = $table->queryPage($page, $limit, $category, $order, $orderType);
         echo json_encode($products);
         exit(0);
     }

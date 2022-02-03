@@ -61,7 +61,6 @@ class Roles {
     public static function getRoles(): Array {
         $class = new ReflectionClass(Roles::class);
         $arr = $class->getStaticProperties();
-        var_dump($arr);
         return $arr;
     }
 }

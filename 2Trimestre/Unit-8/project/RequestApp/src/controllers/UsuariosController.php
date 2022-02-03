@@ -74,7 +74,10 @@ class UsuariosController extends PostController {
                 $result = false;
             } 
             finally {
-                if (!$result) {
+                if ($result) {
+                    header("Location: ".$_SERVER["APP_BASE_URL"]."/moveTo/home.php");
+                    exit();
+                } else {
                     $errors['other'] = 'Review email and password.';
                 }
             }
@@ -152,6 +155,8 @@ class UsuariosController extends PostController {
                         $table = new DBTableUsuarios();
                         $currentUser = $table->queryWith($id)[0];
                         SessionManager::getInstance()->updateSession($currentUser);
+                        header("Location: ".$_SERVER["APP_BASE_URL"]."/moveTo/home.php");
+                        exit();
                     }
                 } else {
                     $errors['other'] = 'An unknown error was success, please try it again more later.';
