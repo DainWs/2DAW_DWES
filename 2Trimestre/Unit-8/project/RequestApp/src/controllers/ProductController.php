@@ -6,14 +6,13 @@ use DateTime;
 use Exception;
 use Monolog\Logger;
 use src\domain\ResourceManager;
-use src\domain\Roles;
-use src\domain\SessionManager;
 use src\domain\validators\FormValidator;
 use src\models\Productos;
-use src\models\Usuarios;
 use src\services\db\DBTableProductos;
-use src\services\db\DBTableUsuarios;
 
+/**
+ * This is the controller for the products post requests
+ */
 class ProductController extends PostController {
 
     /**
@@ -109,7 +108,7 @@ class ProductController extends PostController {
     }
 
     /**
-     * Do all actions for a edit user post type
+     * Do all actions for a edit product post type
      * @return true if was successfully complete
      * @return false if has errors
      */

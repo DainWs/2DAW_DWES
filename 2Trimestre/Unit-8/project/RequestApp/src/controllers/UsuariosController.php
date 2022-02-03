@@ -10,6 +10,9 @@ use src\domain\validators\FormValidator;
 use src\models\Usuarios;
 use src\services\db\DBTableUsuarios;
 
+/**
+ * This is the controller for the usuarios post requests
+ */
 class UsuariosController extends PostController {
 
     /**

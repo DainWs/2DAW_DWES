@@ -10,10 +10,13 @@ use src\domain\validators\FormValidator;
 use src\models\Usuarios;
 use src\services\db\DBTableUsuarios;
 
+/**
+ * This is the controller for the session post requests
+ */
 class SessionController extends PostController {
     
     /**
-     * Do all actions for a login post type
+     * Do all actions for a signin post type
      * @return true if was successfully complete
      * @return false if has errors
      */
@@ -131,6 +134,9 @@ class SessionController extends PostController {
         return (count($errors) <= 0);
     }
 
+    /**
+     * Do all actions for a logout post type
+     */
     public function doLogoutPost(): void {
         SessionManager::getInstance()->clearSession();
     }

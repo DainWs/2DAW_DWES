@@ -6,9 +6,11 @@ use Exception;
 use src\domain\SessionManager;
 use src\domain\ViewConstants;
 use src\models\Productos;
-use src\services\db\DBTableCategorias;
 use src\services\db\DBTableProductos;
 
+/**
+ * This class is used to build an Array of data that will be used in Product View.
+ */
 class ProductPackager extends DataPackager {
 
     public function getData(): Array {
@@ -24,6 +26,10 @@ class ProductPackager extends DataPackager {
         return $this->data;
     }
 
+    /**
+     * Return a url for a future post request, this url is builded according to some conditions
+     * @return string the usl as string
+     */
     private function getPostControllerURL($product): String {
         $method = ($product) ? 'doEditProductPost' : 'doAddProductPost';
         $controller = 'ProductController';

@@ -6,6 +6,9 @@ use src\domain\ViewConstants;
 use src\models\Usuarios;
 use src\services\db\DBTableUsuarios;
 
+/**
+ * This class is used to build an Array of data that will be used in Usuario View.
+ */
 class UsuarioPackager extends DataPackager {
     public function getData(): Array {
         $usuario = new Usuarios();
@@ -19,10 +22,18 @@ class UsuarioPackager extends DataPackager {
         return $this->data;
     }
 
+    /**
+     * @param int $id is the id for the searched usuario
+     * @return ?Usuarios make a query to the db to retrieve de user defined by id
+     */
     private function getUsuarioWithID($id): ?Usuarios {
         return (new DBTableUsuarios())->queryWith($id)[0];
     }
 
+    /**
+     * Return a url for a future post request, this url is builded according to some conditions
+     * @return string the usl as string
+     */
     private function getPostControllerURL($usuario): String {
         $method = ($usuario) ? 'doEditUserPost' : 'doAddUserPost';
         $controller = 'UsuariosController';

@@ -14,11 +14,17 @@ use src\services\db\DBTablePedidos;
 use src\services\db\DBTableProductos;
 
 /**
+ * This is the controller for the Carritos post requests
  * Some methods are used for ajax too
  */
 class CarritoController extends PostController {
 
-    public function doBuyRequest() {
+    /**
+     * Do all actions for a buy post type
+     * @return true if was successfully complete
+     * @return false if has errors
+     */
+    public function doBuyRequest(): bool {
         $session = SessionManager::getInstance()->getSession();
         $pedido = SessionManager::getInstance()->getCarritoSession();
         $provincia = $_POST['provincia'] ?? '';
@@ -108,7 +114,10 @@ class CarritoController extends PostController {
         return (count($errors) > 0);
     }
 
-    public function add() {
+    /**
+     * Do all actions for a add product to carrito post type
+     */
+    public function add(): void {
         $this->logger->log('[Carrito] Buy request received.');
         $pedido = SessionManager::getInstance()->getCarritoSession();
         $id = $_GET['productID'] ?? '';
@@ -127,13 +136,20 @@ class CarritoController extends PostController {
         return;
     }
 
-    public function get() {
+    /**
+     * Do all actions for a get pedido post type
+     * return the pedido as JSON format
+     */
+    public function get(): void {
         $pedido = SessionManager::getInstance()->getCarritoSession();
         echo json_encode($pedido, JSON_FORCE_OBJECT);
         exit;
     }
 
-    public function set() {
+    /**
+     * Do all actions for a change product units in carrito post type
+     */
+    public function set(): void {
         $pedido = SessionManager::getInstance()->getCarritoSession();
         $id = $_POST['productID'] ?? '';
         $cantidad = $_POST['cantidad'] ?? 1;
@@ -144,6 +160,9 @@ class CarritoController extends PostController {
         exit;
     }
 
+    /**
+     * Do all actions for a remove product from carrito post type
+     */
     public function remove() {
         $pedido = SessionManager::getInstance()->getCarritoSession();
         $id = $_POST['productID'] ?? '';

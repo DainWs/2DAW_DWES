@@ -9,6 +9,9 @@ use src\domain\validators\FormValidator;
 use src\models\Categorias;
 use src\services\db\DBTableCategorias;
 
+/**
+ * This is the controller for the categories post requests
+ */
 class CategoriasController extends PostController {
 
     /**

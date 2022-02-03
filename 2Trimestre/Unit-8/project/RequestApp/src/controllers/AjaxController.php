@@ -6,9 +6,15 @@ use src\services\db\DBTableCategorias;
 use src\services\db\DBTablePedidos;
 use src\services\db\DBTableProductos;
 
+/**
+ * This is the controller of Ajax requests
+ */
 class AjaxController extends PostController {
 
-    public function getProducts() {
+    /**
+     * Return a page of limited product objects in JSON format
+     */
+    public function getProducts(): void {
         $page = $_POST['page'] ?? 0;
         $limit = $_POST['limit'] ?? 10;
         $order = $_POST['order'] ?? 'id';
@@ -20,7 +26,10 @@ class AjaxController extends PostController {
         exit(0);
     }
 
-    public function getCategorias() {
+    /**
+     * Return all categories in JSON format
+     */
+    public function getCategorias(): void {
         $table = new DBTableCategorias();
         $categories = $table->query();
 
@@ -28,7 +37,10 @@ class AjaxController extends PostController {
         exit(0);
     }
 
-    public function getPedidos() {
+    /**
+     * Return all pedidos for the logged user in JSON format
+     */
+    public function getPedidos(): void {
         $table = new DBTablePedidos();
         $categories = $table->query();
 

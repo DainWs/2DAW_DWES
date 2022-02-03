@@ -99,6 +99,3 @@ The url structure followed for requests:
 - [X] Procesamiento del pedido
 - [X] Mis pedidos
 - [X] Envío de correo
-
-#### Faltan
-- [ ] Algunos comentarios
