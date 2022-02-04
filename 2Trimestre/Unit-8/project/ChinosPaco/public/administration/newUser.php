@@ -48,7 +48,7 @@ use src\domain\ViewConstants;
                             <label for="user-rol">Rol:</label><br />
                             <select id="user-rol" name="rol">
                                 <?php foreach(Roles::getRoles() as $rol): ?>
-                                    <option value="<?= $rol->getId() ?>" <?= ($rol->getId() == (Roles::getById($_POST['rol']) ?? Roles::$CLIENTE)->getId() ) ? 'selected' : '' ?>><?= $rol->getId() ?></option>
+                                    <option value="<?= $rol->getId() ?>" <?= ($rol->getId() == (Roles::getById($_POST['rol'] ?? Roles::$CLIENTE->getId()))->getId() ) ? 'selected' : '' ?>><?= $rol->getId() ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <?php if(isset($ERRORS['rol'])): ?>
