@@ -169,7 +169,7 @@ class Pedidos {
         foreach ($this->lineas as $linea) {
             $product = $linea->getProducto();
             $oferta = $product->oferta/100;
-            $precio = $product->precio*$oferta;
+            $precio = $product->precio - ($product->precio*$oferta);
             $costeCarrito += $precio*$linea->unidades;
         }
         $this->coste = $costeCarrito;
