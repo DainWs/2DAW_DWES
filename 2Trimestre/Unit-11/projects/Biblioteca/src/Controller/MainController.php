@@ -16,7 +16,7 @@ class MainController extends AbstractController
     public function index(ManagerRegistry $doctrine): Response
     {
         $packager = ViewDataPackager::pakageDataFor('/home');
-        $packager->
+        
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
         ]);
