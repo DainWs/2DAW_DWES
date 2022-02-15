@@ -2,21 +2,21 @@
 
 namespace App\Controller;
 
+use App\domain\ViewDataPackager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Usuario;
 use App\Entity\Usuarios;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 class MainController extends AbstractController
 {
     
-    #[Route('/main', name: 'main')]
-    public function index(): Response
+    #[Route(['', '/home'], name: 'home')]
+    public function index(ManagerRegistry $doctrine): Response
     {
+        $packager = ViewDataPackager::pakageDataFor('/home');
+        $packager->
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
         ]);
@@ -25,7 +25,7 @@ class MainController extends AbstractController
     #[Route('/newUsuario', name: 'newUsuario')]
     public function newUsuario(): Response
     {
-        return $this->render('main/forms/usuario.html.twig', [
+        return $this->render('forms/usuario.html.twig', [
             'controller_name' => 'MainController',
         ]);
     }
@@ -47,7 +47,7 @@ class MainController extends AbstractController
         $entityManager->persist($usuario);
         $entityManager->flush();
 
-        return $this->render('main/forms/usuario.html.twig', [
+        return $this->render('forms/usuario.html.twig', [
             'controller_name' => 'MainController',
         ]);
     }

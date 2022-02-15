@@ -1,20 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/DWES/2Trimestre/Unit-11/projects/Biblioteca/src/Controller/MainController.php'|file_link(0) }}">src/Controller/MainController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/DWES/2Trimestre/Unit-11/projects/Biblioteca/templates/main/index.html.twig'|file_link(0) }}">templates/main/index.html.twig</a></code></li>
-    </ul>
+<div class="latest-products">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <h2>Latest Books</h2>
+                    <a href="/books">view all books <i class="fa fa-angle-right"></i></a>
+                </div>
+            </div>
+            {% for i in 0..6 %}
+                <div class="col-md-4">
+                    <div class="product-item">
+                        <div class="down-content">
+                            <a href="#/book/{% books[i].id %}"><h4>{% books[i].titulo %}</h4></a>
+                            <h6>{% books[i].precio %}</h6>
+                            <p>Autor: {% books[i].autor %}<br/>Editorial: {% books[i].editorial %}</p>
+                            <span>{% books[i].genero %}</span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 </div>
 {% endblock %}

@@ -10,9 +10,13 @@
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
+        "start": "symfony server:start -d | symfony open:local",
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
+    },
+    "dependencies": {
+        "encore": "^0.0.30-beta"
     }
 }
