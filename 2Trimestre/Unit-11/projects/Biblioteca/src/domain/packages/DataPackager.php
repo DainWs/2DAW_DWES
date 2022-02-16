@@ -1,6 +1,8 @@
 <?php
 
-namespace src\domain\packages;
+namespace App\domain\packages;
+
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * This class is used to build an Array of data that will be used in Views.
@@ -14,6 +16,10 @@ abstract class DataPackager {
 
     public function __construct() {
         $this->data = [];
+    }
+
+    public function setRegistry(ManagerRegistry $doctrine): void {
+        $this->doctrine = $doctrine;
     }
 
     /**

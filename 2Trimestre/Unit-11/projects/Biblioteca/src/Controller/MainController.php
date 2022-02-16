@@ -16,10 +16,9 @@ class MainController extends AbstractController
     public function index(ManagerRegistry $doctrine): Response
     {
         $packager = ViewDataPackager::pakageDataFor('/home');
-        
-        return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
-        ]);
+        $packager->setRegistry($doctrine);        
+        var_dump($packager->getData());
+        return $this->render('main/index.html.twig', []);
     }
 
     #[Route('/newUsuario', name: 'newUsuario')]

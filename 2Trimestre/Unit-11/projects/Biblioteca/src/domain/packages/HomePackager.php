@@ -1,15 +1,17 @@
 <?php
 
-namespace src\domain\packages;
+namespace App\domain\packages;
 
-use App\Repository\LibrosRepository;
+use App\Entity\Libros;
 
 /**
  * This class is used to build an Array of data that will be used in Home View.
  */
 class HomePackager extends DataPackager {
     public function getData(): Array {
+        $repository = $this->doctrine->getRepository(Libros::class);
         
-        return [];
+        $this->add('books', $repository->queryAll());
+        return $this->getData();
     }
 }

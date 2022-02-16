@@ -2,8 +2,8 @@
 
 namespace App\domain;
 
-use src\domain\packages\DataPackager;
-use src\domain\packages\HomePackager;
+use App\domain\packages\DataPackager;
+use App\domain\packages\HomePackager;
 
 /**
  * This is an ENUM class, each object from this enum contains the route for the View,

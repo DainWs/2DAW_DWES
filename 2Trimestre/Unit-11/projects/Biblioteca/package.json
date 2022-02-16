@@ -10,7 +10,7 @@
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
-        "start": "symfony server:start -d | symfony open:local",
+        "start": "symfony server:start -d",
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",

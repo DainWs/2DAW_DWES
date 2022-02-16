@@ -19,6 +19,15 @@ class LibrosRepository extends ServiceEntityRepository
         parent::__construct($registry, Libros::class);
     }
 
+    public function queryAll()
+    {
+        return parent::createQueryBuilder('l')
+            ->orderBy('l.id', 'ASC')
+            ->setMaxResults(50)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Libros[] Returns an array of Libros objects
     //  */
