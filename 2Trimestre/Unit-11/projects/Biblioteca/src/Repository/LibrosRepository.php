@@ -23,7 +23,6 @@ class LibrosRepository extends ServiceEntityRepository
     {
         return parent::createQueryBuilder('l')
             ->orderBy('l.id', 'ASC')
-            ->setMaxResults(50)
             ->getQuery()
             ->getResult();
     }

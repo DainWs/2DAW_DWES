@@ -1,0 +1,20 @@
+<?php
+
+namespace App\domain\packages;
+
+use App\Entity\Libros;
+use App\Entity\Usuarios;
+
+/**
+ * This class is used to build an Array of data that will be used in Home View.
+ */
+class PrestamoPackager extends DataPackager {
+    public function getData(): Array {
+        $repository = $this->doctrine->getRepository(Libros::class);
+        $this->add('books', $repository->queryAll());
+
+        $repository = $this->doctrine->getRepository(Usuarios::class);
+        $this->add('users', $repository->queryAll());
+        return $this->getData();
+    }
+}

@@ -18,7 +18,24 @@ class UsuariosRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Usuarios::class);
     }
+    
+    public function queryAll()
+    {
+        return parent::createQueryBuilder('u')
+            ->orderBy('u.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
+    public function find($id): Usuarios {
+        return parent::createQueryBuilder('u')
+            ->andWhere('u.id = :val')
+            ->setParameter('val', $id)
+            ->orderBy('u.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     // /**
     //  * @return Usuarios[] Returns an array of Usuarios objects
     //  */

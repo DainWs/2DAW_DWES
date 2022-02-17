@@ -1,18 +1,88 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="container">
+        <form class="well form-horizontal" action=" " method="post" id="contact_form">
+            <fieldset>
+                <!-- Form Name -->
+                <legend>
+                    <center>
+                        <h2>
+                            <b>Prestamo</b>
+                        </h2>
+                    </center>
+                </legend><br>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+                <!-- Text input-->
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/DWES/2Trimestre/Unit-11/projects/Biblioteca/src/Controller/MainController.php'|file_link(0) }}">src/Controller/MainController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/DWES/2Trimestre/Unit-11/projects/Biblioteca/templates/main/index.html.twig'|file_link(0) }}">templates/main/index.html.twig</a></code></li>
-    </ul>
-</div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Usuario:</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-user"></i>
+                            </span>
+                            <select name="user_id">
+                                {% for user in users %}
+                                    <option value="{% user.id %}">{% user.nombre %} {% user.apellidos %}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text input-->
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Libro:</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <select name="book_id">
+                                {% for book in books %}
+                                    <option value="{% book.id %}">{% book.titulo %}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text input-->
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Fecha de entrega:</label>
+                    <div class="col-md-4 inputGroupContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-user"></i>
+                            </span>
+                            <input name="returnDate" placeholder="Last Name" class="form-control" type="date">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Date input-->
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Fecha maxima de entrega:</label>
+                    <div class="col-md-4 selectContainer">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <i class="glyphicon glyphicon-user"></i>
+                            </span>
+                            <input name="maxDelayDate" placeholder="01/01/2002" class="form-control" type="date">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label"></label>
+                    <div class="col-md-4"><br>
+                        <button type="submit" class="btn btn-warning">SUBMIT</button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
 {% endblock %}

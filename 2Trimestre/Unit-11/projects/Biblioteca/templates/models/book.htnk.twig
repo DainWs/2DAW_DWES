@@ -1,18 +1,38 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/DWES/2Trimestre/Unit-11/projects/Biblioteca/src/Controller/MainController.php'|file_link(0) }}">src/Controller/MainController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/DWES/2Trimestre/Unit-11/projects/Biblioteca/templates/main/index.html.twig'|file_link(0) }}">templates/main/index.html.twig</a></code></li>
-    </ul>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <p>Titule: <span>{% book.titulo %}</span></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p>Editorial: <span>{% book.editorial %}</span></p>
+        </div>
+        <div class="col-md-6">
+            <p>Genero: <span>{% book.genero %}</span></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <p>Autor: <span>{% book.autor %}</span></p>
+        </div>
+        <div class="col-md-2">
+            <p>A&ntilde;o: <span>{% book.year %}</span></p>
+        </div>
+        <div class="col-md-2">
+            <p>Pais: <span>{% book.pais %}</span></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <p>Num paginas: <span>{% book.nPaginas %}</span></p>
+        </div>
+        <div class="col-md-6">
+            <p>Precio: <span>{% book.precio %}</span></p>
+        </div>
+    </div>
 </div>
 {% endblock %}

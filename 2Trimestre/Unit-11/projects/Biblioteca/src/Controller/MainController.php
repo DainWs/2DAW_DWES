@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\domain\ViewDataPackager;
+use App\Entity\Prestamos;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Usuarios;
+use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 
 class MainController extends AbstractController
@@ -47,6 +49,34 @@ class MainController extends AbstractController
         $entityManager->flush();
 
         return $this->render('forms/usuario.html.twig', [
+            'controller_name' => 'MainController',
+        ]);
+    }
+
+    #[Route('/newPrestamo', name: 'newPrestamo')]
+    public function newPrestamo(): Response
+    {
+        return $this->render('forms/prestamo.html.twig', [
+            'controller_name' => 'MainController',
+        ]);
+    }
+
+    #[Route('/newPrestamo/add', name: 'newPrestamo')]
+    public function addPrestamo(ManagerRegistry $doctrine): Response
+    {
+        $entityManager = $doctrine->getManager();
+
+        $prestamo = new Prestamos();
+        $prestamo->setLibroId($_REQUEST['libro_id']);
+        $prestamo->setUsuarioId($_REQUEST['user_id']);
+        $prestamo->setMaxDelayDate($_REQUEST['maxDelayDate']);
+        $prestamo->setCompletionDate(new DateTime());
+        $prestamo->setReturnDate($_REQUEST['returnDate']);
+
+        $entityManager->persist($prestamo);
+        $entityManager->flush();
+
+        return $this->render('forms/prestamo.html.twig', [
             'controller_name' => 'MainController',
         ]);
     }

@@ -19,6 +19,14 @@ class PrestamosRepository extends ServiceEntityRepository
         parent::__construct($registry, Prestamos::class);
     }
 
+    public function queryAll()
+    {
+        return parent::createQueryBuilder('p')
+            ->orderBy('p.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Prestamos[] Returns an array of Prestamos objects
     //  */
