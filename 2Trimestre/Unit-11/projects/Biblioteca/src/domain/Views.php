@@ -5,6 +5,8 @@ namespace App\domain;
 use App\domain\packages\BookPackager;
 use App\domain\packages\DataPackager;
 use App\domain\packages\HomePackager;
+use App\domain\packages\PrestamoPackager;
+use App\domain\packages\UserPackager;
 
 /**
  * This is an ENUM class, each object from this enum contains the route for the View,
@@ -15,6 +17,8 @@ use App\domain\packages\HomePackager;
 class Views {
     static $HOME;
     static $BOOK;
+    static $USER;
+    static $PRESTAMO;
 
     private String $route;
     private Roles $minLevel;
@@ -63,3 +67,5 @@ class Views {
 
 Views::$HOME = new Views('/home', Roles::$UNDEFINED, HomePackager::class);
 Views::$BOOK = new Views('/book', Roles::$UNDEFINED, BookPackager::class);
+Views::$USER = new Views('/user', Roles::$UNDEFINED, UserPackager::class);
+Views::$PRESTAMO = new Views('/prestamo', Roles::$UNDEFINED, PrestamoPackager::class);

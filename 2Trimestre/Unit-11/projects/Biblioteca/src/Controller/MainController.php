@@ -10,7 +10,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Usuarios;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
-use Psr\Log\LoggerInterface;
 
 class MainController extends AbstractController
 {
@@ -20,7 +19,7 @@ class MainController extends AbstractController
     {
         $packager = ViewDataPackager::pakageDataFor('/home');
         $packager->setRegistry($doctrine);
-        return $this->render('main/index.html.twig', $packager->getData());//$packager->getData());
+        return $this->render('main/index.html.twig', $packager->getData());
     }
 
     #[Route('/book/{id}', name: 'book')]
@@ -28,15 +27,15 @@ class MainController extends AbstractController
     {
         $packager = ViewDataPackager::pakageDataFor('/book');
         $packager->setRegistry($doctrine);
-        return $this->render('models/book.html.twig', $packager->getData($id));//$packager->getData());
+        return $this->render('models/book.html.twig', $packager->getData($id));
     }
 
     #[Route('/newUsuario', name: 'newUsuario')]
-    public function newUsuario(): Response
+    public function newUsuario(ManagerRegistry $doctrine): Response
     {
-        return $this->render('forms/usuario.html.twig', [
-            'controller_name' => 'MainController',
-        ]);
+        $packager = ViewDataPackager::pakageDataFor('/user');
+        $packager->setRegistry($doctrine);
+        return $this->render('forms/usuario.html.twig', $packager->getData());
     }
 
     #[Route('/newUsuario/add', name: 'newUsuario')]
@@ -56,17 +55,15 @@ class MainController extends AbstractController
         $entityManager->persist($usuario);
         $entityManager->flush();
 
-        return $this->render('forms/usuario.html.twig', [
-            'controller_name' => 'MainController',
-        ]);
+        return $this->redirectToRoute('/home');
     }
 
     #[Route('/newPrestamo', name: 'newPrestamo')]
-    public function newPrestamo(): Response
+    public function newPrestamo(ManagerRegistry $doctrine): Response
     {
-        return $this->render('forms/prestamo.html.twig', [
-            'controller_name' => 'MainController',
-        ]);
+        $packager = ViewDataPackager::pakageDataFor('/prestamo');
+        $packager->setRegistry($doctrine);
+        return $this->render('forms/prestamo.html.twig', $packager->getData());
     }
 
     #[Route('/newPrestamo/add', name: 'newPrestamo')]
@@ -84,8 +81,6 @@ class MainController extends AbstractController
         $entityManager->persist($prestamo);
         $entityManager->flush();
 
-        return $this->render('forms/prestamo.html.twig', [
-            'controller_name' => 'MainController',
-        ]);
+        return $this->redirectToRoute('/home');
     }
 }
