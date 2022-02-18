@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Usuarios;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
+use Psr\Log\LoggerInterface;
 
 class MainController extends AbstractController
 {
@@ -18,9 +19,16 @@ class MainController extends AbstractController
     public function index(ManagerRegistry $doctrine): Response
     {
         $packager = ViewDataPackager::pakageDataFor('/home');
-        $packager->setRegistry($doctrine);        
-        var_dump($packager->getData());
-        return $this->render('main/index.html.twig', []);
+        $packager->setRegistry($doctrine);
+        return $this->render('main/index.html.twig', $packager->getData());//$packager->getData());
+    }
+
+    #[Route('/book/{id}', name: 'book')]
+    public function book(String $id, ManagerRegistry $doctrine): Response
+    {
+        $packager = ViewDataPackager::pakageDataFor('/book');
+        $packager->setRegistry($doctrine);
+        return $this->render('models/book.html.twig', $packager->getData($id));//$packager->getData());
     }
 
     #[Route('/newUsuario', name: 'newUsuario')]

@@ -23,6 +23,7 @@ class PrestamosRepository extends ServiceEntityRepository
     {
         return parent::createQueryBuilder('p')
             ->orderBy('p.id', 'ASC')
+            ->setMaxResults(10)
             ->getQuery()
             ->getResult();
     }

@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="latest-products">
+<div>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -10,14 +10,14 @@
                     <a href="/books">view all books <i class="fa fa-angle-right"></i></a>
                 </div>
             </div>
-            {% for i in 0..6 %}
+            {% for book in books|slice(0, 6) %}
                 <div class="col-md-4">
                     <div class="product-item">
                         <div class="down-content">
-                            <a href="#/book/{% books[i].id %}"><h4>{% books[i].titulo %}</h4></a>
-                            <h6>{% books[i].precio %}</h6>
-                            <p>Autor: {% books[i].autor %}<br/>Editorial: {% books[i].editorial %}</p>
-                            <span>{% books[i].genero %}</span>
+                            <a href="/book/{{ book.id }}"><h4>{{ book.titulo }}</h4></a>
+                            <h6>{{ book.precio }}&euro;</h6>
+                            <p>Autor: {{ book.autor }}<br/>Editorial: {{ book.editorial }}</p>
+                            <span>{{ book.genero }}</span>
                         </div>
                     </div>
                 </div>

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Libros;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 
 /**
  * @method Libros|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,12 +20,19 @@ class LibrosRepository extends ServiceEntityRepository
         parent::__construct($registry, Libros::class);
     }
 
-    public function queryAll()
-    {
-        return parent::createQueryBuilder('l')
-            ->orderBy('l.id', 'ASC')
-            ->getQuery()
-            ->getResult();
+    public function queryAll() {
+        $result = [];
+        try {
+            $result = parent::createQueryBuilder('l')
+                ->orderBy('l.id', 'ASC')
+                ->setMaxResults(10)
+                ->getQuery()
+                ->getResult();
+        } catch (Exception $ex) {
+            echo "error";
+            echo $ex->getMessage();
+        }
+        return $result;
     }
 
     // /**

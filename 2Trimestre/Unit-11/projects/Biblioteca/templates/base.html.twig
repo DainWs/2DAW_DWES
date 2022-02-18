@@ -7,18 +7,16 @@
         <meta name="author" content="">
         <title>Biblioteca virtual Pedro</title>
         <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="assets/css/fontawesome.css">
-        <link rel="stylesheet" href="assets/css/templatemo-sixteen.css">
-        <link rel="stylesheet" href="assets/css/owl.css">
+        {{ encore_entry_link_tags('app') }}
+        {{ encore_entry_link_tags('bootstrap') }}
         {% block stylesheets %}
         {% endblock %}
-
+        
         {% block javascripts %}
         {% endblock %}
     </head>
     <body>
-        <!-- ***** Preloader Start ***** -->
+        <!-- ***** Preloader Start ***** 
         <div id="preloader">
             <div class="jumper">
                 <div></div>

@@ -35,5 +35,5 @@ abstract class DataPackager {
      * Package and build the array of data
      * @return Array get the data
      */
-    public abstract function getData(): Array;
+    public abstract function getData($args = null): Array;
 }

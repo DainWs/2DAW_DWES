@@ -23,19 +23,11 @@ class UsuariosRepository extends ServiceEntityRepository
     {
         return parent::createQueryBuilder('u')
             ->orderBy('u.id', 'ASC')
+            ->setMaxResults(10)
             ->getQuery()
             ->getResult();
     }
 
-    public function find($id): Usuarios {
-        return parent::createQueryBuilder('u')
-            ->andWhere('u.id = :val')
-            ->setParameter('val', $id)
-            ->orderBy('u.id', 'ASC')
-            ->getQuery()
-            ->getResult()
-        ;
-    }
     // /**
     //  * @return Usuarios[] Returns an array of Usuarios objects
     //  */

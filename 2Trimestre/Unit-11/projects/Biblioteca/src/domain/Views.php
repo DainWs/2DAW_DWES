@@ -2,6 +2,7 @@
 
 namespace App\domain;
 
+use App\domain\packages\BookPackager;
 use App\domain\packages\DataPackager;
 use App\domain\packages\HomePackager;
 
@@ -13,6 +14,7 @@ use App\domain\packages\HomePackager;
  */
 class Views {
     static $HOME;
+    static $BOOK;
 
     private String $route;
     private Roles $minLevel;
@@ -60,3 +62,4 @@ class Views {
 }
 
 Views::$HOME = new Views('/home', Roles::$UNDEFINED, HomePackager::class);
+Views::$BOOK = new Views('/book', Roles::$UNDEFINED, BookPackager::class);
