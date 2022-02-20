@@ -1,0 +1,73 @@
+aside .widget {
+    margin: 5px;
+}
+
+.widget {
+    padding: 10px;
+    /*box-shadow: 0px 0px 10px -3px;*/
+}
+
+.widget .title {
+    color: #666;
+    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+aside .title {
+	border-left: 3px solid #aaa;
+	padding-left: 8px;
+}
+
+/* Comentarios */
+.comments ol {
+	padding: 0;
+}
+.comment-content {
+	padding-left: 40px; /* 30px de imagen + 10px de margin-right */
+}
+.comment-header {
+	/* Alinear al medio con la imangen */
+	line-height: 30px;
+}
+.avatar-image-container img {
+	/* Reducir la imagen y separarla 10px a la derecha */
+	width: 30px;
+	margin-right: 10px;
+}
+.avatar-image-container {
+	float: left;
+}
+
+.widget form {
+	margin: 0 10px 0;
+}
+
+.widget input,
+.widget button {
+    font-size: 11pt;
+} 
+
+.widget input:not([type=radio]),
+.widget input:not([type=checkbox]) {
+    width: 100%;
+}
+  
+body > section input[type=button]:hover,
+.widget input[type=button]:hover,
+.widget input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.widget .on-book-readed {
+    visibility: hidden;
+}
+
+.widget #form-book-isreaded:checked ~ .on-book-readed {
+    visibility: visible;
+}
+
+footer .widget div ul,
+footer .widget div li {
+    text-align: left;
+    margin: 0;
+}

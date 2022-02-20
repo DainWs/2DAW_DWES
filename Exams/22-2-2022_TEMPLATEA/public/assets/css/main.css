@@ -1,0 +1,356 @@
+:root {
+    --primary-color: gainsboro;
+	--light-primary-color: #eee;
+	--shadow-primary-color: rgba(0,0,0,.5);
+
+    --secondary-color: white;
+
+	--three-color: gray;
+
+    --four-color: rgb(46, 46, 46);
+
+    --primary-text-color: black;
+	--light-primary-text-color: #333;
+    --secondary-text-color: white;
+
+	--error-color: red;
+
+    --aside-width: 300px;
+}
+
+html {
+	height: 100vh;
+}
+
+.tachado {
+	color: red;
+	text-decoration:line-through;
+}
+
+.message {
+	border: 2px solid var(--three-color);
+	border-radius: 5px;
+}
+
+body {
+	min-height: 100%;
+	margin: 0;
+	background: var(--light-primary-color);
+	color: var(--light-primary-text-color);
+	font-family: Arial, Helvetica, sans-serif;
+
+	display: flex;
+	flex-flow: column;
+}
+
+	body > header > h1 { padding: 20px 0 10px 10px; }
+
+	body > section, body > footer {
+		width: 90%;
+		height: 100%;
+		margin: 0 auto;
+		background: var(--secondary-color);
+		box-shadow: 5px 5px 5px var(--shadow-primary-color);
+	}
+
+	body > section {
+		display: flex;
+		flex-grow: 1;
+	}
+
+		body > section > article {
+			flex-grow: 1;
+			padding: 5px 0 5px 5px;
+		}
+		
+			body > section > article > header {
+				padding: 15px 0 10px 0;
+				text-align: center;
+				border-bottom: 2px solid var(--three-color);
+			}
+
+			body > section > article > header ~ section {
+				box-shadow: inset 0px 0px 6px -2px;
+			}
+
+			body > section > article > section {
+				padding: 15px;
+			}
+
+		body > section > aside {
+			min-width: 300px;
+			max-width: 300px;
+		}
+
+	body > footer {
+		box-shadow: 0px -6px 5px -5px;
+		margin-top: 20px;
+		padding-bottom: 25px;
+	}
+	
+		body > footer .title,
+		body > footer .widget {
+			text-align: center;
+			flex-grow: 1;
+		}
+
+		body > footer .title {
+			padding-top: 8px;
+		}
+		
+		body > footer .widget {
+			max-width: 33%;
+		}
+
+			body > footer .widget .title {
+				margin: 0;
+				padding: 0;
+			}
+
+			body > footer .widget > div {
+				text-overflow: clip;
+				text-align: left;
+			}
+
+		body > footer > section {
+			display: flex;
+			justify-content: space-around;
+		}
+
+/* Links */
+a {
+	opacity: .9;
+	color: #32A1CC;
+	text-decoration: none;
+}
+
+/* Encabezados */
+h1 {
+    margin: 0;
+}
+
+h1 { 
+    font-size: 20pt; 
+}
+
+/* Classes */
+.site-title {
+	text-align: center;
+	line-height: 2;
+	margin: 0;
+}
+
+.description {
+	display: none;
+}
+
+.site-header {
+	border-bottom: 1px dashed var(--primary-color);
+	margin-bottom: 1em;
+}
+
+/* Errors */
+.error {
+	margin-top: 0;
+    color: var(--error-color);
+    font-size: 10pt;
+}
+
+	.error::before {
+		content: "*";
+	}
+
+/* Products */
+#products {
+	display: flex;
+    flex-direction: column;
+}
+
+	#products > #products-list {
+		display: flex;
+		flex-wrap: wrap;
+		align-content: flex-start;
+		justify-content: center;
+	}
+
+	#products > #products-navigation {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	#products > #products-navigation button { width: 6rem;	}
+	#products > #products-navigation span { margin: auto;	}
+
+.product--item {
+	box-sizing: border-box;
+	flex: 1 1 30%;
+
+	position: relative;
+}
+
+	.product--item__content {		
+		overflow: hidden;
+		
+		border: 2px solid transparent;
+		padding: 5px;
+		margin: 0;
+
+		display: flex;
+	}
+
+	.product--item:hover {
+		border-color: var(--four-color);
+		background-color: var(--primary-color);
+		cursor: pointer;
+	}
+
+		.product--item figure,
+		.product--item img {
+			margin: 0;
+			height: 100%;
+		}
+
+		.product--item img {
+			box-sizing: border-box;
+			padding: 5px;
+		}
+
+		.product--item__description,
+		.product--item__prices {
+			height: 100%;
+
+			display: flex;
+			flex-direction: column;
+		}
+
+		.product--item__prices {
+			flex: 0 1 7rem;
+		}
+		
+		.product--item__prices span{
+			text-align: right;
+		}
+
+		.product--item__prices > div {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.product--item__description {		
+			flex-grow: 1;
+			overflow: hidden;
+		}
+
+		.product--item__description h3 {
+			margin: 0;
+			overflow-x: hidden;
+			text-overflow: ellipsis;
+			white-space: pre;
+		}
+
+		.product--item__description span {
+			overflow-y: hidden;
+			text-overflow: ellipsis;
+		}
+
+		.product--item figure:hover figcaption {
+			color: var(--light-primary-color);
+			border-color: var(--four-color);
+			background-color: var(--four-color);
+		}
+
+		.product--item__actions {
+			margin: 0 1rem;
+			width: 4rem;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		
+		.product--item__actions:hover {
+			color: var(--light-primary-color);
+			background-color: var(--three-color);
+		}
+
+			.product--item__actions span {
+				font-size: 2rem;
+			}
+		  
+	.product__actions {
+		z-index: 1;
+		display: none;
+		position: absolute;
+		right: 0;
+
+		box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		margin: 0;
+		padding: 0;
+		min-width: 160px;
+		
+		overflow: auto;
+		background-color: var(--light-primary-color);
+	}
+	
+	.product--item:hover .product__actions{
+		display: block;
+	}
+
+		.product__actions li {
+			list-style: none;
+		}
+		
+		.product__actions li.title {
+			display: flex;
+			background-color: var(--four-color);
+		}
+
+		.product__actions a {
+			color: black;
+			padding: 12px 16px;
+			text-decoration: none;
+			display: block;
+		}
+
+		.product__actions span {
+			cursor: context-menu;
+
+			padding: 3px 10px;
+			width: 100%;
+
+			color: var(--secondary-text-color);
+
+			text-decoration: none;
+			font-size: 0.7rem;
+		}
+		  
+		.product__actions a:hover {background-color: var(--primary-color);}
+		  
+
+/* Forms */
+input:not([type=radio]),
+input:not([type=checkbox]),
+button {
+	box-sizing: border-box;
+	display: inline-block;
+		
+	border: 1px solid var(--primary-color);
+	border-radius: 4px;
+	margin: 8px 0;
+	padding: 6px 12px;	
+}
+
+input[type=button]:hover,
+input[type=submit]:hover,
+button:hover {
+	color: var(--secondary-text-color);
+	background-color: var(--three-color);
+}
+
+input[type=button]:active,
+input[type=submit]:active,
+button:active {
+	color: var(--secondary-text-color);
+	background-color: var(--four-color);
+}
