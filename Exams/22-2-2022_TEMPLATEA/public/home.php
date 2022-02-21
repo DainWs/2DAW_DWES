@@ -20,7 +20,6 @@ use exam\src\domain\ViewConstants;
             <aside>
                 <?php if ($DATA[ViewConstants::HAS_SESSION]): ?>
                 <?php else: ?>
-                    <?php include('templates/widgets/forms/signinWidget.php'); ?>
                     <?php include('templates/widgets/forms/loginWidget.php'); ?>
                 <?php endif ?>
             </aside>
