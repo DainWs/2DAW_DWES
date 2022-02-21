@@ -6,6 +6,8 @@ use App\domain\packages\BookPackager;
 use App\domain\packages\DataPackager;
 use App\domain\packages\HomePackager;
 use App\domain\packages\PrestamoPackager;
+use App\domain\packages\UserListPackager;
+use App\domain\packages\UserNewPackager;
 use App\domain\packages\UserPackager;
 
 /**
@@ -16,6 +18,10 @@ use App\domain\packages\UserPackager;
  */
 class Views {
     static $HOME;
+    static $BOOKS;
+    static $USERNEW;
+    static $USERLIST;
+
     static $BOOK;
     static $USER;
     static $PRESTAMO;
@@ -50,7 +56,9 @@ class Views {
      * Get the value of packager
      */
     public function getPackager(): DataPackager {
-        return new ($this->packager);
+        $packager = new ($this->packager);
+        $packager->add('location', $this->route);
+        return $packager;
     }
 
     /**
@@ -66,6 +74,10 @@ class Views {
 }
 
 Views::$HOME = new Views('/home', Roles::$UNDEFINED, HomePackager::class);
+Views::$BOOKS = new Views('/books', Roles::$UNDEFINED, HomePackager::class);
+Views::$USERNEW = new Views('/usernew', Roles::$UNDEFINED, UserNewPackager::class);
+Views::$USERLIST = new Views('/userlist', Roles::$UNDEFINED, UserListPackager::class);
+
 Views::$BOOK = new Views('/book', Roles::$UNDEFINED, BookPackager::class);
 Views::$USER = new Views('/user', Roles::$UNDEFINED, UserPackager::class);
 Views::$PRESTAMO = new Views('/prestamo', Roles::$UNDEFINED, PrestamoPackager::class);

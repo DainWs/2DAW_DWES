@@ -34,17 +34,20 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+                            <li class="{{ location=='/home' ? 'nav-item active' : 'nav-item' }}">
+                                <a class="nav-link" href="/home">Home</a>
                             </li> 
-                            <li class="nav-item">
+                            <li class="{{ location=='/books' ? 'nav-item active' : 'nav-item' }}">
                                 <a class="nav-link" href="/books">Libros</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/newPrestamo">Realizar Prestamo</a>
+                            <li class="{{ (location=='/user' or location=='/user/list') ? 'nav-item active' : 'nav-item' }}">
+                                <a class="nav-link" href="/user">Usuarios</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/newUsuario">Nuevo Usuario</a>
+                            <li class="{{ location=='/prestamo' ? 'nav-item active' : 'nav-item' }}">
+                                <a class="nav-link" href="/prestamo/new">Realizar Prestamo</a>
+                            </li>
+                            <li class="{{ location=='/usuario' ? 'nav-item active' : 'nav-item' }}">
+                                <a class="nav-link" href="/usuario/new">Nuevo Usuario</a>
                             </li>
                         </ul>
                     </div>

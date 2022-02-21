@@ -20,37 +20,19 @@ class LibrosRepository extends ServiceEntityRepository
         parent::__construct($registry, Libros::class);
     }
 
-    public function queryAll() {
-        $result = [];
-        try {
-            $result = parent::createQueryBuilder('l')
-                ->orderBy('l.id', 'ASC')
-                ->setMaxResults(10)
-                ->getQuery()
-                ->getResult();
-        } catch (Exception $ex) {
-            echo "error";
-            echo $ex->getMessage();
-        }
-        return $result;
-    }
-
     // /**
     //  * @return Libros[] Returns an array of Libros objects
     //  */
-    /*
-    public function findByExampleField($value)
+    public function findById($id)
     {
         return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('l.id = :id')
+            ->setParameter('id', $id)
+            ->setMaxResults(1)
             ->getQuery()
-            ->getResult()
+            ->getResult()[0]
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?Libros

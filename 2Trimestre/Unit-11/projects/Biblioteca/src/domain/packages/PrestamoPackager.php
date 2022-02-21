@@ -11,10 +11,10 @@ use App\Entity\Usuarios;
 class PrestamoPackager extends DataPackager {
     public function getData($args = null): Array {
         $repository = $this->doctrine->getRepository(Libros::class);
-        $this->add('books', $repository->queryAll());
+        $this->add('books', $repository->findAll());
 
         $repository = $this->doctrine->getRepository(Usuarios::class);
-        $this->add('users', $repository->queryAll());
+        $this->add('users', $repository->findAll());
         return $this->data;
     }
 }

@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="container">
-        <form class="well form-horizontal" action="/newPrestamo/add" method="post" id="contact_form">
+        <form class="well form-horizontal" action="/prestamo/add" method="post" id="contact_form">
             <fieldset>
                 <!-- Form Name -->
                 <legend>
@@ -24,7 +24,7 @@
                             </span>
                             <select name="user_id">
                                 {% for user in users %}
-                                    <option value="{% user.id %}">{% user.nombre %} {% user.apellidos %}</option>
+                                    <option value="{{ user.id }}">{{ user.nombre }} {{ user.apellidos }}</option>
                                 {% endfor %}
                             </select>
                         </div>
@@ -39,7 +39,7 @@
                         <div class="input-group">
                             <select name="book_id">
                                 {% for book in books %}
-                                    <option value="{% book.id %}">{% book.titulo %}</option>
+                                    <option value="{{ book.id }}">{{ book.titulo }}</option>
                                 {% endfor %}
                             </select>
                         </div>

@@ -19,13 +19,15 @@ class UsuariosRepository extends ServiceEntityRepository
         parent::__construct($registry, Usuarios::class);
     }
     
-    public function queryAll()
+    public function findById($id)
     {
-        return parent::createQueryBuilder('u')
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.id = :id')
+            ->setParameter('id', $id)
+            ->setMaxResults(1)
             ->getQuery()
-            ->getResult();
+            ->getResult()[0]
+        ;
     }
 
     // /**

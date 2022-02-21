@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-heading">
+                    <h2>Books</h2>
+                </div>
+            </div>
+            {% for book in books %}
+                <div class="col-md-4">
+                    <div class="product-item">
+                        <div class="down-content">
+                            <a href="/book/{{ book.id }}"><h4>{{ book.titulo }}</h4></a>
+                            <h6>{{ book.precio }}&euro;</h6>
+                            <p>Autor: {{ book.autor }}<br/>Editorial: {{ book.editorial }}</p>
+                            <span>{{ book.genero }}</span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

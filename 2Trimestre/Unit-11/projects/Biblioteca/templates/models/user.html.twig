@@ -1,32 +1,36 @@
-{% extends 'base.html.twig' %}
+{% extends 'main/users.html.twig' %}
 
-{% block body %}
+{% block content %}
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <p>Nombre completo: <span>{% user.nombre %} {% user.apellidos %}</span></p>
+            <p><strong>Nombre completo:</strong> <span>{{ user.nombre }} {{ user.apellidos }}</span></p>
         </div>
     </div>
     <div class="row">
         <div class="col-md-8">
-            <p>DNI: <span>{% user.dni %}</span></p>
+            <p><strong>DNI:</strong> <span>{{ user.dni }}</span></p>
         </div>
         <div class="col-md-4">
-            <p>Facha de nacimiento: <span>{% user.birthday %}</span></p>
+            <p><strong>Fecha de nacimiento:</strong> <span>{{ user.birthday|date('Y-m-d') }}</span></p>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <p>Direcci&oacute;n: <span>{% user.provincia %}, {% user.poblacion %}, {% user.domicilio %}</span></p>
+            <p><strong>Direcci&oacute;n:</strong> <span>{{ user.provincia }}, {{ user.poblacion }}, {{ user.domicilio }}</span></p>
         </div>
     </div>
     <div class="row">
         {% for prestamo in user.prestamos %}
-            <div class="col-md-12">
-                <p>Libro prestado: <span>{% books[prestamo.libro_id].titulo %}</span></p>
-                <p>Fecha de devoluci&oacute;n: <span>{% prestamo.returnDate %}</span></p>
-                <p>Fecha en la que se presto el libro: <span>{% prestamo.completionDate %}</span></p>
-                <p>Fecha maxima de devoluci&oacute;n: <span>{% prestamo.maxDelayDate %}</span></p>
+            <div class="col-md-6">
+                <div class="product-item">
+                    <div class="down-content">
+                        <a href="/book/{{ prestamo.libroId.id }}"><h4>{{prestamo.libroId.titulo}}</h4></a>
+                        <p>Fecha de devoluci&oacute;n: <strong>{{ prestamo.returnDate|date('Y-m-d') }}</strong></p>
+                        <p>Fecha en la que se presto el libro: <strong>{{ prestamo.completionDate|date('Y-m-d') }}</strong></p>
+                        <p>Fecha maxima de devoluci&oacute;n: <strong>{{ prestamo.maxDelayDate|date('Y-m-d') }}</strong></p>
+                    </div>
+                </div>
             </div>
         {% endfor %}
     </div>

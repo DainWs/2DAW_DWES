@@ -27,7 +27,7 @@ abstract class DataPackager {
      * @param $key is the identifier for the valua
      * @param $value the value that you want to save in the array
      */
-    protected function add($key, $value): void {
+    public function add($key, $value): void {
         $this->data[$key] = $value;
     }
 
