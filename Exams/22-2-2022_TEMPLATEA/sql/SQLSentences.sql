@@ -6,10 +6,10 @@
  * If you want to have a specific user for this database, 
  * you can execute SQLMyUser.sql after this
  */
-/* DROP DATABASE exam_20-02-2022_JoseDuarte; */
+/* DROP DATABASE exam_20022022_JoseDuarte; */
 SET NAMES UTF8;
-CREATE DATABASE IF NOT EXISTS exam_20-02-2022_JoseDuarte;
-USE exam_20-02-2022_JoseDuarte;
+CREATE DATABASE IF NOT EXISTS exam_20022022_JoseDuarte;
+USE exam_20022022_JoseDuarte;
 
 DROP TABLE IF EXISTS usuarios;
 
