@@ -1,0 +1,61 @@
+# App Enviroment Variables
+<IfModule mod_env.c>
+    #The domain/IP of the database
+    SetEnv DB_DOMAIN 'localhost'
+
+    #The name of the Database that we will use
+    SetEnv DB_NAME 'exam_20022022_JoseDuarte'
+
+    #The user of the database
+    SetEnv DB_USER 'root'
+
+    #The password of the database
+    SetEnv DB_PASSWORD ''
+
+    ## == EMAIL CONFIGURATION == ##
+    #The user name of the phpmailer account
+    SetEnv PHPMAILER_USER_NAME 'Chinos Paco'
+
+    #The user email of the phpmailer account
+    SetEnv PHPMAILER_USER_EMAIL 'chinospac453@gmail.com'
+
+    #The user password of the phpmailer account
+    SetEnv PHPMAILER_USER_PASSWORD 'C41n0sP4c0'
+</IfModule>
+
+# Rute rule rewrite
+<IfModule mod_rewrite.c>
+    # Activar mod_rewrite  
+    RewriteEngine on
+
+    # Images and assets requests rule
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !^.*\.(jpg|png|jpeg|css|js)$
+    RewriteRule ^(.*)\.(jpg|png|jpeg|css|js)$ ./public/$1.$2 [L]
+
+    # If the image is not found then return not-found.png
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} ^.*\.(jpg|png|jpeg)$
+    RewriteRule ^(.*)\.(jpg|png|jpeg)$ ./public/assets/images/not-found.png [L]
+
+    # For view navigation
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_URL} !^.*moveTo/.*\.php.*$
+    RewriteRule ^.*moveTo/(.*)$ ./index.php?moveTo=$1 [QSA] [L]
+
+    # Controllers access
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/([^\.\?]*)(?:\.php)?$ ./index.php?controller=$1&action=$2 [QSA] [L]
+
+    # Default rewrite rule
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^.*/.*$ ./index.php?moveTo=home.php
+</IfModule>
+
+# On File not found specify the not-found image
+<FilesMatch ".*\.(jpg|png|jpeg)$">
+    ErrorDocument 404 "./public/assets/not-found.png"
+</FilesMatch>
