@@ -1,0 +1,116 @@
+#pedidos {
+    padding-bottom: 5vh;
+    flex-direction: column;
+
+    background-color: transparent;
+}
+
+    .pedidos__pedido {
+        padding: 0;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+        .pedido__content {
+            border-bottom: 1pt solid var(--four-color);
+            padding: 2rem;
+
+            background-color: white;
+
+            display: flex;
+        }
+
+            .pedido__content > div {
+                flex-grow: 1;
+                display: grid;
+                grid-template-columns: repeat(2, 50%);
+            }
+
+                .pedido__content i {
+                    color: rgb(84, 194, 157);
+                }
+
+                .pedido__content--fecha,
+                .pedido__content--coste {
+                    text-align: right;
+                }
+
+            .active .pedido__content {
+                background-color: var(--nav-background);
+            }
+
+            .pedido__content:hover {
+                background-color: var(--nav-background);
+                cursor: pointer;
+            }
+
+                .pedido__lineas--nombre {
+                    flex-grow: 1;
+                }
+
+            .pedido__content li {
+                margin-left: 20px;
+                margin-right: 20px;
+                list-style-type: none;
+
+                transform: translateY(10px);
+            }
+
+            .active .pedido__content li {
+                transform: translateY(-10px);
+            }
+
+                *:not(.active) .pedido__content li > i {
+                    transform: rotate(-135deg);
+                    -webkit-transform: rotate(-135deg);
+                }
+
+                .active .pedido__content li > i {
+                    transform: rotate(45deg);
+                    -webkit-transform: rotate(45deg);
+                }
+
+                    .pedido__content i {
+                        margin-left: 15px;
+                        margin-right: 15px;
+                        width: 30px;
+                        height: 30px;
+                    }
+
+                    .arrow {
+                        border: solid black;
+                        border-width: 0 3px 3px 0;
+                        display: inline-block;
+                        padding: 3px;
+                    }
+
+    .pedidos__pedido ul {
+        margin: 0;
+        margin-left: 10%;
+        margin-right: 5%;
+        padding: 0;
+        background-color: white;
+    }
+
+        .show {
+            display: block;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .pedidos__pedido ul li {
+            list-style-type: none;
+
+            display: flex;
+        }
+
+            .pedidos__pedido ul li span {
+                box-sizing: border-box;
+                padding: 15px;
+                width: 50px;
+                height: 50px;
+            }
+            

@@ -22,7 +22,7 @@
                             <span class="input-group-addon">
                                 <i class="glyphicon glyphicon-user"></i>
                             </span>
-                            <select name="user_id">
+                            <select name="user_id" class="form-control">
                                 {% for user in users %}
                                     <option value="{{ user.id }}">{{ user.nombre }} {{ user.apellidos }}</option>
                                 {% endfor %}
@@ -37,7 +37,7 @@
                     <label class="col-md-4 control-label">Libro:</label>
                     <div class="col-md-4 inputGroupContainer">
                         <div class="input-group">
-                            <select name="book_id">
+                            <select name="book_id" class="form-control">
                                 {% for book in books %}
                                     <option value="{{ book.id }}">{{ book.titulo }}</option>
                                 {% endfor %}

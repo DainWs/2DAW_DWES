@@ -1,0 +1,173 @@
+.product-outer {
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+}
+.product-outer header,
+.product-outer.model {
+	padding: 1em;
+}
+
+.product-outer header {
+    box-shadow: 0px 6px 5px -5px;
+}
+
+.product-outer.model {
+    box-shadow: 6px 6px 5px -5px;
+}
+
+.product-outer header h2,
+.product-outer.model h2 { margin: 0; }
+
+.product-outer header span,
+.product-outer.model span { 
+    font-size: 10pt; 
+    color: gray; 
+}
+
+.product-outer main{ padding: 1em 2em; }
+.product-outer footer{ 
+    margin-bottom: 1em;
+    border-top: 1px solid gray;
+    padding: 1em;
+}
+
+.product-outer.model:not(.compressed):hover {
+    background-color: #eee;
+}
+
+.product-outer.model:not(.compressed):hover,
+.product-outer.model:not(.compressed) * {
+    cursor: pointer;
+}
+
+.product-outer.model.compressed {
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.product-outer > main,
+.product-outer > main >  {
+    height: 100%;
+}
+    .grid-div {
+        display: grid;
+        grid-template-areas:
+            "name category image"
+            "description description image"
+            "price stock oferta"
+            "other other other"
+            "button button button";
+        grid-template-rows: minmax(auto, 1fr) minmax(auto, 1fr) minmax(auto, 1fr)  minmax(auto, 50%) minmax(auto, 1fr);
+        grid-auto-columns: minmax(30%, auto) minmax(30%, auto) minmax(30%, auto);
+    }
+
+    .grid-div > div {
+        display: flex;
+        flex-direction: column;
+
+        padding: 0 5px;
+    }
+
+    .grid-div > div img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .grid-div > .grid-imagen {
+        border: 1px solid gray;
+
+        align-items: center;
+        justify-content: center;
+    }
+
+    .grid-div > div.grid-button {
+        justify-content: flex-end;
+        align-items: flex-start;
+    }
+
+    .grid-div > .grid-name { grid-area: name; }
+    .grid-div > .grid-category { grid-area: category; }
+    .grid-div > .grid-image { grid-area: image; }
+    .grid-div > .grid-description { grid-area: description; }
+    .grid-div > .grid-price { grid-area: price; }
+    .grid-div > .grid-stock { grid-area: stock; }
+    .grid-div > .grid-imagen { grid-area: imagen; }
+    .grid-div > .grid-oferta { grid-area: oferta; }
+    .grid-div > .grid-other { grid-area: other; }
+    .grid-div > .grid-button { grid-area: button; }
+
+.product-outer select,
+.product-outer textarea,
+.product-outer input {
+    font-size: 11pt;
+} 
+
+.product-outer .flex-grow {
+    flex-grow: 1;
+}
+
+.product-outer .textarea-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-outer textarea {
+    flex-grow: 1;
+    resize: none;
+}
+
+.product-outer select,
+.product-outer textarea,
+.product-outer input:not([type=radio]) {
+    width: 100%;
+    padding: 6px 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid var(--nav-background);
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.product-outer input[type=submit]:hover {
+    cursor: pointer;
+	color: var(--nav-hover-color);
+	background-color: var(--nav-hover-background);
+}
+
+.product-outer input[type=submit]:active {
+	color: var(--nav-hover-color);
+	background-color: var(--nav-active-background);
+}
+
+.product-outer .save-buttom input[type=submit]:hover,
+.product-outer .save-buttom input[type=button]:hover {
+    background-color: #45a049;
+}
+
+.product-outer .delete-buttom {
+    border: 1px solid #ca1c1c;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #ca1c1c2a;
+}
+
+.product-outer .delete-buttom input[type=submit],
+.product-outer .delete-buttom input[type=button] {
+    color: white;
+    background-color: #f549499d;
+}
+
+.product-outer .delete-buttom input[type=submit]:hover,
+.product-outer .delete-buttom input[type=button]:hover {
+    background-color: #ca1c1c;
+}
+
+.grid-div > div > span ~ p {
+    margin-top: 5px;
+}
+
+.product-outer .delete-buttom {
+    margin-top: 10px;
+}
