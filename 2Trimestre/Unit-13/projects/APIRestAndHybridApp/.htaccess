@@ -1,0 +1,17 @@
+# Rute rule rewrite
+<IfModule mod_rewrite.c>
+    # Activar mod_rewrite  
+    RewriteEngine on
+
+    # For Api support
+    RewriteCond %{REQUEST_URL} !^.*Api/.*$
+    RewriteRule ^.*Api/(.*)$ ./Api/$1 [QSA] [L]
+
+    # For App support
+    RewriteCond %{REQUEST_URL} !^.*App/.*$
+    RewriteRule ^.*App/(.*)$ ./App/$1 [QSA] [L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ ./App/$1 [QSA] [L]
+</IfModule>
